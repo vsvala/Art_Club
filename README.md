@@ -18,7 +18,7 @@ ArtClub website is the plattform where users can apply memberships for the club 
 
 [Testing]( )
 
-[Timesheet](https://github.com/vsvala/ArtClub/blob/master/documentation/timesheet.md)
+[Timesheet](https://github.com/vsvala/Art_Club/blob/master/documentation/timesheet.md)
 
 ## License
 

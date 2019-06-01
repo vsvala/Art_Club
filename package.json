@@ -11,6 +11,7 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.0.1",
+    "codecov": "^3.5.0",
     "eslint-plugin-jest": "^22.6.4",
     "json-server": "^0.15.0"
   },

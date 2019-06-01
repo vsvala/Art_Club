@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 // import logo from './logo.svg';
-import './App.css';
+import './App.css'
 
 class App extends Component {
   render() {
@@ -15,8 +15,8 @@ class App extends Component {
          "link"
         </p>
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App

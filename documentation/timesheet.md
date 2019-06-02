@@ -6,6 +6,6 @@
 | 1.6.  | 3    | Planning project, configuring lint, configuring codecov, adding back to Heroku |
 | 2.6.  | 6    | Backend: Studying and Setting up MongoDB Atlas, installin Mongoose and dotenv library, creating database connections, creating schema and database table for artwork |
 | 3.6.  |     |  |
-| total |  8    |    |
+| total |  14    |    |
 
 

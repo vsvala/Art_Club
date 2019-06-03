@@ -6,6 +6,6 @@
 | 1.6.  | 4    | Planning project, configuring lint, configuring codecov, adding back to Heroku |
 | 2.6.  | 7    | Backend: Studying and Setting up MongoDB Atlas, installin Mongoose and dotenv library, creating database connections, creating schema and database table for artwork |
 | 3.6.  | 6    | Installing redux, connect, redux-thunk and react-bootsrap libraries, setting up store, creating artwork reducer, actions, service and components. Creating artwork form. |
-| total |  16    |    |
+| total |  22    |    |
 
 

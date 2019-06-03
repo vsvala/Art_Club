@@ -1,0 +1,21 @@
+{
+  "artworks" : [
+  {
+    "image": "sleebybear.jpg",
+    "artist":" Virva Svala",
+    "name": "Sleepy bear",
+    "year": 2017,
+    "size": "20x30cm",
+    "medium":"aquarelle"
+  },
+  {
+    "image": "dog.jpg",
+    "artist": "Virva Svala",
+    "name": "Dog",
+    "year": "2000",
+    "size": "20x30cm",
+    "medium":"oil"
+  }
+
+]
+}

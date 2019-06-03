@@ -1,10 +1,23 @@
-import React, { Component } from 'react'
+//import React, { Component } from 'react'
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
 // import logo from './logo.svg';
 import './App.css'
 
-class App extends Component {
-  render() {
-    return (
+
+// Components
+import ArtworkForm from './components/ArtworkForm'
+//import ArtworkList from './components/ArtworkList'
+
+const App = (props) => {
+
+  useEffect(() => {
+  }, [])
+
+
+
+  return (
+    <div className="container">
       <div className="App">
         <div className="App-header">
           {/* <img src={logo} className="App-logo" alt="logo" /> */}
@@ -12,11 +25,18 @@ class App extends Component {
         </div>
         <p className="Ap-intro">
          Apply club membership by registering to the service
-         "link"
+         link
         </p>
       </div>
-    )
-  }
+      <ArtworkForm></ArtworkForm>
+      {/* <ArtworkList></ArtworkList> */}
+    </div>
+  )
 }
 
-export default App
+
+export default connect(
+  null,
+  { }
+)(App)
+

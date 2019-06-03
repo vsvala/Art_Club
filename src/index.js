@@ -8,7 +8,7 @@ import App from './App'
 //App is a child of Provider to make connect to work and store is Providers attribute
 ReactDOM.render(
   <Provider store={store}>
-   <App />
+    <App />
   </Provider>,
   document.getElementById('root')
 )

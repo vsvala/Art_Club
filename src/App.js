@@ -9,7 +9,7 @@ import './App.css'
 import ArtworkForm from './components/ArtworkForm'
 //import ArtworkList from './components/ArtworkList'
 
-const App = (props) => {
+const App = () => {  //props
 
   useEffect(() => {
   }, [])

@@ -24,7 +24,7 @@ Axios
 
 State management:
 [Redux-thunk](https://github.com/reduxjs/redux-thunk)		
-'npm install --save redux-thunk'
+```npm install --save redux-thunk'```
 
 Redux:
 'npm install --save react-redux'

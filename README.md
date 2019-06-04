@@ -22,14 +22,16 @@ Eslint
 
 dotenv
 
-JSon server:
+Browser and server connections:
+[Axios](https://github.com/axios/axios)
+```npm install axios --save ```
+
+dev server:
+[JSON server](https://github.com/typicode/json-server)
 
 ```npm install json-server --save-dev```
 
-Browser and db connections:
 
-[Axios]()
-```npm install axios --save ```
 
 
 State management:

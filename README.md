@@ -18,14 +18,17 @@ Database: MongoDB, MongoDB Atlas
 Eslint
 dotenv
 JSon server:
+
 ```npm install json-server --save-dev```
 
 Browser and db connections:
+
 [Axios]()
 ```npm install axios --save ```
 
 
 State management:
+
 [Redux-thunk](https://github.com/reduxjs/redux-thunk)		
 ```npm install --save redux-thunk```
 
@@ -33,23 +36,29 @@ Redux:
 ```npm install --save react-redux```
 
 Navigation:
+
 [React router](https://github.com/ReactTraining/react-router)   
 ```npm install --save react-router-dom```
 
-Tyylit: [react-bootsrap](https://react-bootstrap.github.io/) 		
+Tyylit:
+
+[react-bootsrap](https://react-bootstrap.github.io/) 		
 ```npm install --save react-bootstrap```	
 
 Tets:
+
 [jest-dom](https://www.npmjs.com/package/jest-dom)   
 ```npm install --save-dev react-testing-library jest-dom```
 
 [enzyme](https://github.com/airbnb/enzyme) 
 ```npm install --save-dev enzyme enzyme-adapter-react-16```
 
-End to en testing:
+End to end testing:
+
 [cypress]()
 ```npm install --save-dev cypress```
 
+Tools:
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 ```npm install --save redux-devtools-extension```
 
@@ -62,11 +71,13 @@ npm install cors --save
 
 
 Database:
+
 [Mongoose]()
 ```npm install mongoose --save```
 
 
 Enviromental variables:
+
 Dotenv
 ```npm install dotenv --save```
 

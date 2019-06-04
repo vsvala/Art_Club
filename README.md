@@ -12,7 +12,7 @@ Frontend: React, JSX(Javascript)
 
 Backend: NodeJS 
 
-Database: MongoDB, MongoDB Atlas
+Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
 
 
 
@@ -77,9 +77,8 @@ npm install cors --save
 
 Database:
 
-[Mongoose]()
+[Mongoose](https://mongoosejs.com/index.html)
 ```npm install mongoose --save```
-
 
 Enviromental variables:
 

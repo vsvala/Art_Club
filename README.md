@@ -8,15 +8,20 @@ ArtClub website is the plattform where users can apply memberships for the club 
 
 ## Technologies
 
-Frontend: React, JSX(Javascript) 
+Frontend: React, JSX(Javascript)
+
 Backend: NodeJS 
+
 Database: MongoDB, MongoDB Atlas
+
 
 
 ### Used libraries frontend
 
 Eslint
+
 dotenv
+
 JSon server:
 
 ```npm install json-server --save-dev```

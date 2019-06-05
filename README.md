@@ -71,12 +71,17 @@ Tools:
 
 ### Used libraries backend
 
-framework for Node.js
+Framework for Node.js
 [Express](http://expressjs.com/)
 ```npm install express --save ```
 
-npm install --save-dev nodemon
-npm install cors --save
+automatically restarts applicatio nafter changes'. 
+[Nodemon](https://github.com/remy/nodemon)
+```npm install --save-dev nodemon```
+
+Middleware which allows request from other origins:
+[Cors](https://github.com/expressjs/cors)
+```npm install cors --save```
 
 
 Database:

@@ -20,8 +20,6 @@ Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
 
 Eslint
 
-dotenv
-
 Browser and server connections:
 [Axios](https://github.com/axios/axios)
 ```npm install axios --save ```
@@ -89,11 +87,9 @@ Database:
 [Mongoose](https://mongoosejs.com/index.html)
 ```npm install mongoose --save```
 
-Enviromental variables:
-
-Dotenv
+Enviromental variables:loads environment variables from a .env file into process.env
+[Dotenv](https://github.com/motdotla/dotenv#readme)
 ```npm install dotenv --save```
-
 
 Passwordhashing:
 [bcrypt](https://github.com/kelektiv/node.bcrypt.js)

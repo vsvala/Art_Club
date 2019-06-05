@@ -32,8 +32,6 @@ dev server:
 ```npm install json-server --save-dev```
 
 
-
-
 State management:
 
 [Redux-thunk](https://github.com/reduxjs/redux-thunk)		
@@ -46,6 +44,7 @@ Navigation:
 
 [React router](https://github.com/ReactTraining/react-router)   
 ```npm install --save react-router-dom```
+
 
 Tyylit:
 
@@ -72,7 +71,10 @@ Tools:
 
 ### Used libraries backend
 
-npm install express --save
+framework for Node.js
+[Express](http://expressjs.com/)
+```npm install express --save ```
+
 npm install --save-dev nodemon
 npm install cors --save
 
@@ -86,6 +88,15 @@ Enviromental variables:
 
 Dotenv
 ```npm install dotenv --save```
+
+
+Passwordhashing:
+[bcrypt](https://github.com/kelektiv/node.bcrypt.js)
+
+Validating unique values:
+[mongoose-unique-validator](ttps://www.npmjs.com/package/mongoose-unique-validator)
+```npm install --save mongoose-unique-validator```
+
 
 
 ## Travis / Codecov

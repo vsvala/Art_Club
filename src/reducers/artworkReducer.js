@@ -14,6 +14,16 @@ const artworkReducer = (state = initialState, action) => {
     }
   }
 
+  case 'CREATE_ARTWORK': {
+    return {
+      ...state,
+      artworks: [],
+      loadingartworks: true
+    }
+  }
+
+
+
   case 'ARTWORK_FETCH': {
     return {
       ...state,

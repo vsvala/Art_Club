@@ -1,21 +1,49 @@
 {
-  "artworks" : [
-  {
-    "image": "sleebybear.jpg",
-    "artist":" Virva Svala",
-    "name": "Sleepy bear",
-    "year": 2017,
-    "size": "20x30cm",
-    "medium":"aquarelle"
-  },
-  {
-    "image": "dog.jpg",
-    "artist": "Virva Svala",
-    "name": "Dog",
-    "year": "2000",
-    "size": "20x30cm",
-    "medium":"oil"
-  }
-
-]
+  "artworks": [
+    {
+      "id": 1,
+      "image": "sleebybear.jpg",
+      "artist": " Virva Svala",
+      "name": "Sleepy bear",
+      "year": 2017,
+      "size": "20x30cm",
+      "medium": "aquarelle"
+    },
+    {
+      "id": 2,
+      "image": "dog.jpg",
+      "artist": "Virva Svala",
+      "name": "Dog",
+      "year": "2000",
+      "size": "20x30cm",
+      "medium": "oil"
+    },
+    {
+      "image": "image.jp",
+      "artist": "vsvala",
+      "name": "uusi",
+      "year": "2017",
+      "size": "20x60 cm",
+      "medium": "oil on canvas",
+      "id": 3
+    },
+    {
+      "image": "image.jp",
+      "artist": "vsvala",
+      "name": "neljäs",
+      "year": "2000",
+      "size": "20x30 cm",
+      "medium": "aquarelle",
+      "id": 4
+    },
+    {
+      "image": "kuva",
+      "artist": "minä",
+      "name": "Otsikko",
+      "year": "2001",
+      "size": "20x60 cm",
+      "medium": "ink",
+      "id": 5
+    }
+  ]
 }

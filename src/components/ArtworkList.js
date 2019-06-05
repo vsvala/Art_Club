@@ -4,12 +4,12 @@ import { initializeArtworks } from '../reducers/actionCreators/artworkActions'
 import { Table } from 'react-bootstrap'
 import Artwork from './Artwork'
 
-export const ArtworkList = (artworks, initializeArtworks) => {
-
+export const ArtworkList = ({ artworkList, initializeArtworks }) => {
   useEffect(() => {
-    if (artworks.length === 0) {
-      initializeArtworks()
-    }
+    // if (artworks.length === 0) {
+    console.log('initialiList')
+    initializeArtworks()
+    // }
   }, [])
 
   return (
@@ -19,20 +19,22 @@ export const ArtworkList = (artworks, initializeArtworks) => {
       <Table bordered hover>
         <thead>
           <tr>
+            <th>image</th>
             <th>Artist</th>
             <th>Name</th>
-            <th className='centerColumn' >Year</th>
-            <th className='centerColumn' >Size</th>
+            <th>Year</th>
+            <th >Size</th>
             <th className='centerColumn' >Medium</th>
-            <th></th>
+         
           </tr>
         </thead>
         <tbody>
-          {artworks
+          {console.log('artworks..hhh',artworkList)}
+          {artworkList
             .map(artwork =>
               <Artwork
                 artwork={artwork}
-                key={artwork.artwork_id}
+                key={artwork.id}//artwork_id
               />
             )}
         </tbody>
@@ -43,8 +45,10 @@ export const ArtworkList = (artworks, initializeArtworks) => {
 }
 
 const mapStateToProps = (state) => {
+  console.log('state', state.artworks.artworks)
+
   return {
-    artworks: state.artwork.artworks
+    artworkList: state.artworks.artworks
   }
 }
 

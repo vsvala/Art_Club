@@ -1,38 +1,42 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
-//import { updateLoggedUser } from '../../reducers/actionCreators/loginActions'
+import { createArtwork } from '../reducers/actionCreators/artworkActions'
 //import { notify } from '../../reducers/actionCreators/notificationActions'
 import { Form, Button } from 'react-bootstrap'
 //import studentActions from '../../reducers/actionCreators/studentActions'
 
+
 export const ArtworkForm = (
-  // eslint-disable-next-line no-empty-pattern
   {
-  //updateLoggedUser,
+    createArtwork
   // id,
-  // //notify,
+    //notify,
   }
 ) => {
+
+  const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', })
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     const formContent = {
       image: event.target.image.value, //take this later from picture
-      artist: event.target.artits.value,
+      artist: event.target.artist.value,
       name: event.target.name.value,
       year: event.target.year.value,
       size: event.target.size.value,
       medium:event.target.medium.value
     }
-    console.log(formContent)
+    console.log('submit', formContent)
+
+    createArtwork(formContent)
   }
 
   const handleChange = (event) => {
-    // const newInput = {
-    //   ...input,
-    //   [event.target.name]: event.target.value
-    // }
-    // setInput(newInput)
+    const newInput = {
+      ...input,
+      [event.target.name]: event.target.value
+    }
+    setInput(newInput)
     console.log(event)
   }
 
@@ -92,5 +96,5 @@ export const ArtworkForm = (
 
 export default connect(
   null,
-  // { notify }
+  { createArtwork }
 )( ArtworkForm )

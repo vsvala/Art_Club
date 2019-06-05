@@ -5,10 +5,46 @@ import artworkService from '../../services/artworks'
 export const initializeArtworks = () => {
   return async (dispatch) => {
     const content = await artworkService.getAll()
+    console.log('actions init content:', content )
     dispatch({
       type: 'INIT_ARTWORKS',
       data: content
     })
   }
 }
-export default { initializeArtworks }
+
+// creates new artwork
+export const createArtwork=(content) => {
+  return async (dispatch)  => {
+    console.log('createArtworkaction', content)
+    const artwork = await artworkService.create(content)
+    console.log(artwork,'uuusArtwork')
+    if (artwork.error || artwork === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Saving failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+
+      dispatch({
+        type:'CREATE_ARTWORK',
+        data:artwork
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Information updated'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
+export default { initializeArtworks, createArtwork }

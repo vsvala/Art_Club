@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 // import logo from './logo.simport {
-import { BrowserRouter as Router, Route, Link, Redirect, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link, } from 'react-router-dom'  //Redirect, withRouter
 import './App.css'
 
 
@@ -51,7 +51,6 @@ const App = () => {  //props
 
           </div>
         </Router>
-        
       </div>
     </div>
   )

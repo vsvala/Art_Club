@@ -25,7 +25,6 @@ export const ArtworkList = ({ artworkList, initializeArtworks }) => {
             <th>Year</th>
             <th >Size</th>
             <th className='centerColumn' >Medium</th>
-         
           </tr>
         </thead>
         <tbody>

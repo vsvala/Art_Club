@@ -1,8 +1,10 @@
 import axios from 'axios'
 //import url from './config'
 
+const baseUrl =  'http://localhost:3001/api/artworks'
+
 //const baseUrl = url + 'api/artworks/'
-const baseUrl = 'http://localhost:3001/artworks'
+//const baseUrl = 'http://localhost:3001/artworks'  //json server
 
 
 const getAll = async () => {

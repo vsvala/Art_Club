@@ -24,7 +24,8 @@ export const ArtworkForm = (
       name: event.target.name.value,
       year: event.target.year.value,
       size: event.target.size.value,
-      medium:event.target.medium.value
+      medium:event.target.medium.value,
+      userId:'5cf94f1a65a6b76cfd2052f8'
     }
     console.log('submit', formContent)
 

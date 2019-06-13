@@ -5,6 +5,11 @@ ArtClub website is the plattform where users can apply memberships for the club 
 
 [Link to backend](https://github.com/vsvala/Art_Club_back )
 
+## Travis / Codecov
+
+[![Build Status](https://travis-ci.org/vsvala/Art_Club.svg?branch=master)](https://travis-ci.org/vsvala/Art_Club) [![codecov](https://codecov.io/gh/vsvala/Art_Club/branch/master/graph/badge.svg)](https://codecov.io/gh/vsvala/Art_Club)
+
+
 
 ## Technologies
 
@@ -13,11 +18,6 @@ Frontend: React, JSX(Javascript)
 Backend: NodeJS 
 
 Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
-
-## Travis / Codecov
-
-[![Build Status](https://travis-ci.org/vsvala/Art_Club.svg?branch=master)](https://travis-ci.org/vsvala/Art_Club) [![codecov](https://codecov.io/gh/vsvala/Art_Club/branch/master/graph/badge.svg)](https://codecov.io/gh/vsvala/Art_Club)
-
 
 ### Used libraries frontend
 

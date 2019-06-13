@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
-import { createArtwork } from '../reducers/actionCreators/artworkActions'
+import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 //import { notify } from '../../reducers/actionCreators/notificationActions'
 import { Form, Button } from 'react-bootstrap'
 //import studentActions from '../../reducers/actionCreators/studentActions'

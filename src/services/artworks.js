@@ -5,8 +5,18 @@ const baseUrl =  'http://localhost:3001/api/artworks'
 
 //const baseUrl = url + 'api/artworks/'
 //const baseUrl = 'http://localhost:3001/artworks'  //json server
+let token = null
 
 
+const setToken = newToken => {
+  token = `bearer ${newToken}`
+}
+
+const getConfig = () => {
+  return{
+    headers: { 'Authorization': token }
+  }
+}
 const getAll = async () => {
   try {
     const response = await axios.get(baseUrl)
@@ -23,7 +33,7 @@ const create = async (artwork) => {
   console.log('servise create',artwork)
 
   try {
-    const response = await axios.post(baseUrl, artwork)
+    const response = await axios.post(baseUrl, artwork, getConfig())
     return response.data
   } catch (error) {
     const status = error.response.status
@@ -39,5 +49,14 @@ const create = async (artwork) => {
   }
 }
 
+const update = async(content, id) => {
+  try {
+    const response = await axios.put(`${ baseUrl } /${id}`,content, getConfig())
+    return response.data
+  } catch (error) {
+    return { error: 'Could not update artwork' }
+  }
+}
 
-export default { getAll, create }
+
+export default { getAll, create, update, setToken }

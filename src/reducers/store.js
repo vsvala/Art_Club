@@ -2,19 +2,19 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 
 //import notificationReducer from './notificationReducer'
-//import  //memberReducer from './memberReducer'
+import userReducer from './userReducer'
 import artworkReducer from './artworkReducer'
 //import singleArtworkReducer from './singleArtworkReducer'
-//import loginReducer from './loginReducer'
+import loginReducer from './loginReducer'
 //import filterReducer from './filterReducer'
 //import singleMemberReducer from './singleMemberReducer'
 
 const reducer = combineReducers({
   //notification: notificationReducer,
-  //member: memberReducer,
-  artworks: artworkReducer
+  user: userReducer,
+  artworks: artworkReducer,
   // singleArtrwork: singleArtworkReducer,
-  // loggedUser: loginReducer,
+  loggedUser: loginReducer
   // filter: filterReducer,
   // singleMember: singleMemberReducer,
 })

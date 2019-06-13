@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { initializeArtworks } from '../reducers/actionCreators/artworkActions'
+import { initializeArtworks } from '../../reducers/actionCreators/artworkActions'
 import { Table } from 'react-bootstrap'
 import Artwork from './Artwork'
 

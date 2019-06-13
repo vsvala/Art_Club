@@ -7,8 +7,10 @@ import './App.css'
 
 
 // Components
-import ArtworkForm from './components/ArtworkForm'
-import ArtworkList from './components/ArtworkList'
+import ArtworkForm from './components/artwork/ArtworkForm'
+import ArtworkList from './components/artwork/ArtworkList'
+import RegisterUserForm from './components/login/RegisterUserForm'
+import LoginForm from './components/login/LoginForm'
 
 const App = () => {  //props
 
@@ -37,14 +39,16 @@ const App = () => {  //props
               <Link to="/artworks">Gallery</Link> &nbsp;
               <Link to="/events">Events</Link>  &nbsp;
               <Link to="/artwork">MyPage</Link>  &nbsp;
-              <Link to="/members">Users</Link> &nbsp;
-              <Link to="/members">Register</Link> &nbsp;
-              <Link to="/members">Login</Link> &nbsp;
+              <Link to="/users">Users</Link> &nbsp;
+              <Link to="/register">register</Link> &nbsp;
+              <Link to="login">Login</Link> &nbsp;
               {/* <Link style={padding} to="/members">users</Link> */}
             </div>
             {/* <Route exact path="/" render={() => <Home />} /> */}
-            <Route path="/artworks" render={() => <ArtworkList />} />
-            <Route path="/artwork" render={() => <ArtworkForm /> } />
+            <Route exact path="/artworks" render={() => <ArtworkList />} />
+            <Route exact path="/artwork" render={() => <ArtworkForm /> } />
+            <Route exact path="/login" render={() => <LoginForm /> } />
+            <Route exact path="/register" render={() => <RegisterUserForm /> } />
             {/* <Route path="/events" render={() => <Events />} />
           <Route path="/members" render={() => <Members />} />
           <Route path="/members" render={() => <Login />} /> */}

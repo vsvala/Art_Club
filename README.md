@@ -7,9 +7,7 @@ ArtClub website is the plattform where users can apply memberships for the club 
 
 ## Travis / Codecov
 
-[![Build Status](https://travis-ci.org/vsvala/Art_Club.svg?branch=master)](https://travis-ci.org/vsvala/Art_Club)
-
-[![codecov](https://codecov.io/gh/vsvala/Art_Club/branch/master/graph/badge.svg)](https://codecov.io/gh/vsvala/Art_Club)
+[![Build Status](https://travis-ci.org/vsvala/Art_Club.svg?branch=master)](https://travis-ci.org/vsvala/Art_Club) [![codecov](https://codecov.io/gh/vsvala/Art_Club/branch/master/graph/badge.svg)](https://codecov.io/gh/vsvala/Art_Club)
 
 
 ## Technologies

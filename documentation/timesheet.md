@@ -8,11 +8,11 @@
 | ma 3.6.  | 6    | Frontend: Installing redux, connect, redux-thunk and react-bootsrap libraries, setting up store, creating artwork reducer, actions, service and components. Creating artwork form. Setting up jsonserver with some data" |
 | ti 4.6.  | 7    | Frontend: Installing test libraries,fixing test. Posting and getting artworks with JSON server. Writing dokumentation.|
 | ke 5.6.  | 5    | Frontend:Installing React.router and starting navigation. Backend: installing bcrypt, creating userschema and usercontrollers adding artworkcontrollers|
-| to 6.6.  | ?    | Frontend: Deleting artworks and updating artworks.Navigation. Dokumentation.|
-| ma 10.6.  | ?    | Frontend: Deleting artworks and updating artworks.Navigation.. Dokumentation.|
-| ti 11.6.  | ?    | Frontend: Deleting artworks and updating artworks.Navigation.. Dokumentation.|
+| to 6.6.  | 6    | Backend:refactoring. Back front integration.|
+| ma 10.6.  | ?    | Tests, Registeration, login|
+| ti 11.6.  | ?    | Frontend: Deleting artworks and updating artworks... Dokumentation.|
 
 
-| total |  34/175    |    |
+| total |  40/175    |    |
 
 

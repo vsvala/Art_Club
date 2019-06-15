@@ -10,13 +10,12 @@
 | ke 5.6.  | 5    | Frontend:Installing React.router and starting navigation. Backend: installing bcrypt, creating userschema and usercontrollers adding artworkcontrollers|
 | to 6.6.  | 6    | Backend:refactoring. Back-front (artwork) integration.|
 | to 13.6. | 7    | Frontend: Registeration and login forms, reducers,actions and services|
+| pe 14.6. | 7    | Frontend: Registeration and login integration with backend, userpage and getting all users to show |
 
-
-| pe 14.6. | ?    | Frontend: Registeration and login integration with backend|
 | ma 17.6. | ?    | Frontend: Deleting artworks and updating artworks... Dokumentation|
 | ti 18.6. | ?    | Tests Dokumentation|
 
 
-| total |  47/175    |    |
+| total |  54/175    |    |
 
 

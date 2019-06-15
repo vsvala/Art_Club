@@ -84,6 +84,8 @@ Middleware which allows request from other origins:
 [Cors](https://github.com/expressjs/cors)
 ```npm install cors --save```
 
+[Jsonwebtoken-kirjasto](https://github.com/auth0/node-jsonwebtoken), jonka avulla koodi pystyy generoimaan JSON web token -muotoisia tokeneja.
+```npm install jsonwebtoken --save```
 
 Database:
 

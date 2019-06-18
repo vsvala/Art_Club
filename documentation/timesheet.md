@@ -12,10 +12,12 @@
 | to 13.6. | 7    | Frontend: Registeration and login forms, reducers,actions and services|
 | pe 14.6. | 7    | Frontend: Registeration and login integration with backend, userpage and getting all users to show |
 
-| ma 17.6. | ?    | Frontend: Deleting artworks and updating artworks... Dokumentation|
-| ti 18.6. | ?    | Tests Dokumentation|
+| ti 18.6. | 2    | Backend: Login and token authentication for posting artworks|
+|  .6. |     |Front: Login|
+|  .6. | ?    | Frontend: Deleting artworks and updating artworks... Dokumentation|
+| .6. | ?    | Tests Dokumentation|
 
 
-| total |  54/175    |    |
+| total |  56/175    |    |
 
 

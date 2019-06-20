@@ -11,7 +11,7 @@ import loginReducer from './loginReducer'
 
 const reducer = combineReducers({
   //notification: notificationReducer,
-  user: userReducer,
+  users: userReducer,
   artworks: artworkReducer,
   // singleArtrwork: singleArtworkReducer,
   loggedUser: loginReducer

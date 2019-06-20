@@ -6,14 +6,21 @@ import { Form, Button } from 'react-bootstrap'
 //import { emailValid } from '../../utils/validations'
 import { createUser } from '../../reducers/actionCreators/userActions'
 //import { notification } from '../../reducers/notificationReducer'
+//TODO ohjaus ja se että virheen sattuessa kentät ei tyhjenny
 
 
-const RegisterUserForm = () => {
+
+
+export const RegisterUserForm = ( {
+  createUser
+// id,
+  //notify,
+}) => {
 
   const handleSubmit = async(event) => {
     event.preventDefault()
 
-    const userObject = {
+    const user = {
       name:event.target.name.value,
       email:event.target.email.value,
       username:event.target.username.value,
@@ -23,7 +30,13 @@ const RegisterUserForm = () => {
     // if (!emailValid(userObject.email)) {
     //   notify('Please check your email', 5)
     // } else {
-    createUser(userObject)
+
+    console.log('registering',user )
+    //super(props);
+
+    //}
+
+    createUser(user)
     //notification(`user ${userObject.username} created`, 5)
 
     //}
@@ -45,6 +58,7 @@ const RegisterUserForm = () => {
 
   return(
 
+    //TODO? first name laste name
     <div>
       <h2>Apply membership</h2>
 
@@ -77,16 +91,15 @@ const RegisterUserForm = () => {
           />
 
           <br></br>
-          <Button bsStyle="success" type="submit">Apply</Button>
+          <Button className="btnLogin" variant="dark" type="submit">Apply</Button>
         </Form.Group>
 
       </form>
 
-
     </div>
   )
-
 }
+
 export default connect(
   null,
   { createUser } // notification,

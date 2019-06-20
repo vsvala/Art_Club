@@ -4,11 +4,11 @@ import { initializeArtworks } from '../../reducers/actionCreators/artworkActions
 import { Table } from 'react-bootstrap'
 import Artwork from './Artwork'
 
-export const ArtworkList = ({ artworkList, initializeArtworks }) => {
+export const ArtworkList = (props) => { //({ artworkList, initializeArtworks }) => {
   useEffect(() => {
     // if (artworks.length === 0) {
     console.log('initialiList')
-    initializeArtworks()
+    props.initializeArtworks()
     // }
   }, [])
 
@@ -28,8 +28,8 @@ export const ArtworkList = ({ artworkList, initializeArtworks }) => {
           </tr>
         </thead>
         <tbody>
-          {console.log('artworks..hhh',artworkList)}
-          {artworkList
+          {console.log('artworks..hhh',props.artworkList)}
+          {props.artworkList
             .map(artwork =>
               <Artwork
                 artwork={artwork}

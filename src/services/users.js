@@ -6,10 +6,13 @@ const baseUrl =  'http://localhost:3001/api/users'
 //TODO  get config
 
 //gets all users
-const getAllUsers =async () => {
+const getAll = async () => {
   try{
-    const response = axios.get(baseUrl)
+    console.log('servise getallusers')
+    const response =await axios.get(baseUrl)
+    console.log('response from service',response.data)
     return response.data
+
   }catch(error)
   {
     if (error === 400) {
@@ -33,8 +36,8 @@ const getUser = async (id) => {
 }
 
 //create new user
-const createUser = async (user) => {
-  console.log('servise create',user)
+const create = async (user) => {
+  console.log('servise create', user)
   try {
     const response = await axios.post(baseUrl, user)
     return response.data
@@ -75,4 +78,4 @@ const deleteUser = async(id) => {
 }
 
 
-export default { getAllUsers, getUser, updateUser, createUser, deleteUser }
+export default { updateUser, create, deleteUser, getAll, getUser }

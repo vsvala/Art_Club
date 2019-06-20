@@ -4,13 +4,15 @@ import { connect } from 'react-redux'
 import { BrowserRouter as Router, Route, Link, } from 'react-router-dom'  //Redirect, withRouter
 import './App.css'
 
-
+// Actions
+import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
 // Components
 import ArtworkForm from './components/artwork/ArtworkForm'
 import ArtworkList from './components/artwork/ArtworkList'
 import RegisterUserForm from './components/login/RegisterUserForm'
 import LoginForm from './components/login/LoginForm'
+import UserList from './components/user/UserList'
 
 const App = () => {  //props
 
@@ -49,6 +51,8 @@ const App = () => {  //props
             <Route exact path="/artwork" render={() => <ArtworkForm /> } />
             <Route exact path="/login" render={() => <LoginForm /> } />
             <Route exact path="/register" render={() => <RegisterUserForm /> } />
+            <Route exact path="/users" render={() => <UserList />} />
+
             {/* <Route path="/events" render={() => <Events />} />
           <Route path="/members" render={() => <Members />} />
           <Route path="/members" render={() => <Login />} /> */}
@@ -59,10 +63,16 @@ const App = () => {  //props
     </div>
   )
 }
+const mapStateToProps = (state) => {
+  console.log('state:APP', state)
+  return {
+    loggedUser: state.loggedUser.loggedUser
+  }
+}
 
 
 export default connect(
-  null,
-  { }
+  mapStateToProps,
+  { logout, initLoggedUser }
 )(App)
 

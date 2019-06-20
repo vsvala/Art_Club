@@ -21,7 +21,7 @@ export const createArtwork=(content) => {
     console.log(artwork,'uuusArtwork')
     if (artwork.error || artwork === undefined) {
       dispatch({
-        type: 'NOTIFY',
+        type: 'NOTIFICATION',
         data: 'Saving failed!'
       })
       setTimeout(() => {
@@ -36,7 +36,7 @@ export const createArtwork=(content) => {
         data:artwork
       })
       dispatch({
-        type: 'NOTIFY',
+        type: 'NOTIFICATION',
         data: 'Information updated'
       })
       setTimeout(() => {

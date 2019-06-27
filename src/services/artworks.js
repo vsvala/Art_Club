@@ -1,6 +1,5 @@
 import axios from 'axios'
 //import url from './config'
-
 const baseUrl =  'http://localhost:3001/api/artworks'
 
 //const baseUrl = url + 'api/artworks/'

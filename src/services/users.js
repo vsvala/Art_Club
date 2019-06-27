@@ -5,11 +5,23 @@ const baseUrl =  'http://localhost:3001/api/users'
 
 //TODO  get config
 
+let token = null
+
+const setToken = (newToken) => {
+  token = `bearer ${newToken}`
+}
+
+const getConfig = () => {
+  return {
+    headers: { 'Authorization': token }
+  }
+}
+
 //gets all users
 const getAll = async () => {
-  try{
+  try {
     console.log('servise getallusers')
-    const response =await axios.get(baseUrl)
+    const response =await axios.get(baseUrl, getConfig())
     console.log('response from service',response.data)
     return response.data
 
@@ -23,7 +35,7 @@ const getAll = async () => {
 //gets a single user by id
 const getUser = async (id) => {
   try {
-    const response = await axios.get(baseUrl + `/${id}`)
+    const response = await axios.get(baseUrl + `/${id}`, getConfig())
     return response.data
   } catch (error) {
     if (error === 400) {
@@ -59,7 +71,7 @@ const create = async (user) => {
 //update user
 const updateUser = async (content, id) => {
   try{
-    const response = await axios.put(`${baseUrl}/${id}`, content)
+    const response = await axios.put(`${baseUrl}/${id}`, content, getConfig())
     return response.data
   }catch(error){
     return { error: 'User could not be updated' }
@@ -70,7 +82,7 @@ const updateUser = async (content, id) => {
 //delete user
 const deleteUser = async(id) => {
   try {
-    const response= await axios.delete(`${baseUrl}/${id}`)
+    const response= await axios.delete(`${baseUrl}/${id}`, getConfig())
     return response.data
   } catch (error) {
     return { error: 'User with userid "' + id + '" not found!' }
@@ -78,4 +90,4 @@ const deleteUser = async(id) => {
 }
 
 
-export default { updateUser, create, deleteUser, getAll, getUser }
+export default { getAll, getUser, updateUser, create, deleteUser, setToken }

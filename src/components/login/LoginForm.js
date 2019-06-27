@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
-import { login } from '../../reducers/actionCreators/loginActions'
+import  { login } from '../../reducers/actionCreators/loginActions'
 import { Form, Button, Col, Container, Row } from 'react-bootstrap'
 
 export const LoginForm = ({ login }) => {

@@ -4,15 +4,17 @@ const initialState = {
 }
 
 const loginReducer = (state = initialState, action) => {
+  console.log('loginreducer')
   switch (action.type) {
-  /*   case 'INIT_USER': {
+
+  case 'INIT_USER': {
     return {
       ...state,
       loggedUser: action.data,
       // loadingUser: false
     }
   }
- */
+
   case 'LOGIN': {
     return {
       ...state,

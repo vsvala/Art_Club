@@ -2,4 +2,18 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  color: #696969;
+}
+
+/*h2{
+ color: #bebcbc;
+}
+ adjust nlinks */
+
+a{
+  color: #fd7945;
+}
+a:hover{
+  color: rgb(252, 227, 207);
+  text-decoration: none;
 }

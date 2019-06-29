@@ -11,6 +11,9 @@ export const ArtworkList = (props) => { //({ artworkList, initializeArtworks }) 
     props.initializeArtworks()
     // }
   }, [])
+  //little thumbernail pictures
+  //TODO search by artist or by artwork...order alphabetically by ainting and artist
+
 
   return (
     <div className="artworkList">
@@ -24,6 +27,7 @@ export const ArtworkList = (props) => { //({ artworkList, initializeArtworks }) 
             <th>Name</th>
             <th>Year</th>
             <th >Size</th>
+
             <th className='centerColumn' >Medium</th>
           </tr>
         </thead>

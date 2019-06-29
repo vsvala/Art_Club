@@ -34,7 +34,6 @@ export const LoginForm = ({ login }) => {
         <Row>
           <Col>
             <div className='logHeader'>
-      
               <h3>Sign In</h3>
             </div>
           </Col>
@@ -63,7 +62,7 @@ export const LoginForm = ({ login }) => {
               <Button className="btnLogin" variant="dark" type="submit" >
                 Login
               </Button>
-              <h5>Not login details yet,<Link to='/register' className='register'>Register</Link> and apply membership</h5>         
+              <h5>Not login details yet,<Link to='/register' className='register'>Register</Link> and apply membership</h5>
               <h5>TODO muotoilu ja  label tekstit esitäytetyiksi kenttiin</h5>
               <h1>Art Club</h1>
               <img

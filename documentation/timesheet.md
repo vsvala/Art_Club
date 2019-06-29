@@ -14,10 +14,13 @@
 | ti 18.6. | 2    | Backend: Login and token authentication for posting artworks |
 | ke 26.6. | 3    | Frontend: Login, tokens and authorisation |
 | to 27.6. | 5,5  | Frontend: Navigation and authorisation |
-|  .6. | ?    | Frontend: Deleting artworks and updating artworks... Dokumentation |
-| .6. | ?    | Tests Dokumentation |
+| pe 28.6. | 3    | Frontend: Design: logo and picture |
+| la 29.6. | 5    | Frontend: Design: Googlefonts and colours |
+| .6. | ?    |Deleting artworks and updating artworks... Dokumentation |
+| .6. | ?    | Tests... Dokumentation |
+| .6. | ?   | Adding/loading pictures |
 
-| total |  64,5/175    |    |
+| total |  72,5/175    |    |
 
 
  

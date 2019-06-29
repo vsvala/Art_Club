@@ -2,7 +2,8 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 // import logo from './logo.simport {
-// import logo from '../../Images/hy-logo.png'
+import logo from './images/tripleblue.png'
+import picture from './images/pict.png'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'  //Redirect, withRouter
 import './App.css'
 
@@ -61,10 +62,10 @@ const App = (props) => {
             <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
               <Navbar.Brand>
                 <img
-                  // src={logo}
-                  width='60'
-                  height='60'
-                  className='d-inline-block align-top'
+                  src={logo}
+                  width='70'
+                  height='40'
+                  /*  className='d-inline-block align-top' */
                   alt='Art club LOGO'
                 />
               </Navbar.Brand>
@@ -91,43 +92,57 @@ const App = (props) => {
                     <Link to="/events">Exhibitions</Link>  &nbsp;
                     {/* <Link to="/register">Register</Link> &nbsp; */}
                   </Nav.Link>
-                  <Nav.Link href='#' as='span'>
+
+
+
+                  <Nav.Link href='#' as='spana'>
                     {isMember | isAdmin
-                      ? <Link to="/artwork">MyPage/Profile</Link>
+                      ? <Link to="/member/addArtwork" className='member'>Add artwork</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
                     { isMember | isAdmin
-                      ? <Link to="/events">Events</Link>
+                      ? <Link to="/events"  className='member'>Events</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
+                    {isMember | isAdmin
+                      ? <Link to="/member/myPage"  className='member'>MyPage</Link>
+                      : <em></em>} &nbsp;
+                  </Nav.Link>
+
+
+                  <Nav.Link href='#' as='span'>
                     { isAdmin
-                      ? <Link to='/admin/users'>Users</Link>
+                      ? <Link to='/admin/users'  className='admin'>Users</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
                     {  isAdmin
-                      ? <Link to="/addEevent">Add event</Link>
+                      ? <Link to="/addEevent"  className='admin'>Add event</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
+
                 </Nav>
 
                 <Nav.Link href='#' as='span'>
                   { isAdmin
-                    ? <Link to='/admin'>Change password</Link>
+                    ? <Link to='/admin' className='admin'>Change password</Link>
                     : <em></em>} &nbsp;
                 </Nav.Link>
+
+
 
                 {loggedUser
                   ? <Button
                     className='loginbutton'
                     onClick={props.logout}
                     variant='outline-secondary'
-                    type='button' > Logout
+                    type='button'>
+                    <Link to="logout">Logout</Link>
                   </Button>
                   : <Button
                     className='loginbutton'
@@ -170,8 +185,8 @@ const App = (props) => {
 
 
               {/* TODOOOOOOOOOOOOOOOOOOOO   THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/member" */}
-              <PrivateRoute path="/addArtwork" redirectPath="/login" condition={loggedUser}>
-                <Route exact path="/addArtwork" render={() => <ArtworkForm /> } />
+              <PrivateRoute path="/member" redirectPath="/login" condition={loggedUser}>
+                <Route exact path="/member/addArtwork" render={() => <ArtworkForm /> } />
 
               </PrivateRoute>
 
@@ -196,6 +211,15 @@ const App = (props) => {
           </div>
         </React.Fragment>
       </Router>
+
+
+      <img src={picture}
+        width='200'
+        height='400'
+        className='picture'
+        alt='Art club LOGO'
+      />
+
     </div>
     // </div>
   )

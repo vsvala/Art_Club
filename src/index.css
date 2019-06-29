@@ -1,19 +1,122 @@
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope|Poiret+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Handlee|Poiret+One&display=swap');
+
+@import url('https://fonts.googleapis.com/css?family=Pacifico&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+
+  /* TODOO POSTA TURHAT IMPORTIT fontit ja värit.. */
+
+
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #696969;
+  color: #696969;  
+
+
+}
+.navbar-light .navbar-brand {
+  /* color: rgb(5, 5, 5, 0.9); */
+  font-size: 2.5em;
+  font-weight: 400;
+  /*   color: #2fc2cc; 
+font-family: 'Megrim', cursive; */
+
+  font-family: 'Poiret One', cursive;
+  font-family: 'Pacifico', cursive;
+  font-family: 'Amatic SC', cursive;
+
 }
 
-/*h2{
+h2{
+margin-top: 30px;
+color: #338ad3;
  color: #bebcbc;
+ font-family: 'Leckerli One', cursive;
+
 }
- adjust nlinks */
+
+h3{
+  margin-top: 30px;
+  color: #338ad3;
+   color: #bebcbc;
+  
+  
+   font-family: 'Leckerli One', cursive;
+  
+  }
+
+  h1{
+    margin-top: 30px;
+    color: #251147;
+     font-family: 'Amatic SC', cursive;
+
+    
+    }
+/* adjust nlinks */
 
 a{
-  color: #fd7945;
+
+ font-family: 'Leckerli One', cursive;
+  color: #fd7945; 
+  /*  color: #0eaaa2;
+    color: #389ca3;*/ 
+    color: #251147;
+  color: #ff1476;
+  color: #482d7c;
+  color: #338ad3;
+ 
+
+
+ 
 }
 a:hover{
-  color: rgb(252, 227, 207);
+  color: #f1ab8f;
+  color: #251147;
+  color: #ff1476;
+  color: #bebcbc;
+  /*  color: #389ca3;
+ color: rgb(36, 172, 177); */
   text-decoration: none;
+}
+
+.picture{
+  /* float:left; */
+  margin: 0;
+  padding: 0;
+  opacity: 0.2;
+  filter: alpha(opacity=20);/* For IE8 and earlier */
+  position: absolute;
+  top: 90px;
+  left: 16px;
+  z-index:-1;
+}
+.adminNav{
+ font-family: 'Leckerli One', cursive;
+ color: #ff1476;
+
+}
+
+/* TODO navigation colours acccordinto sign in..??*/
+a:active{
+  color: #ff1476;
+}
+/* TODOSelected pink*/
+.member{
+
+  color: #fd7945; 
+  color: #ff1476; 
+   color: #251147;
+}
+
+.admin{
+  color: #bebcbc;
+  color: #fd7945;   
+  color: #251147;
+  color: #ff1476; 
+
 }

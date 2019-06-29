@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+import logo from '../../images/tripleblue.png'
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
 import  { login } from '../../reducers/actionCreators/loginActions'
 import { Form, Button, Col, Container, Row } from 'react-bootstrap'
@@ -32,8 +34,7 @@ export const LoginForm = ({ login }) => {
         <Row>
           <Col>
             <div className='logHeader'>
-              <h1>Art Club</h1>
-              <h3>TODO Logo tähän ja TODO label tekstit esitäytetyiksi kenttiin </h3>
+      
               <h3>Sign In</h3>
             </div>
           </Col>
@@ -62,7 +63,16 @@ export const LoginForm = ({ login }) => {
               <Button className="btnLogin" variant="dark" type="submit" >
                 Login
               </Button>
-              <h5>TODO link: Register</h5>
+              <h5>Not login details yet,<Link to='/register' className='register'>Register</Link> and apply membership</h5>         
+              <h5>TODO muotoilu ja  label tekstit esitäytetyiksi kenttiin</h5>
+              <h1>Art Club</h1>
+              <img
+                src={logo}
+                width='100'
+                height='60'
+                alt='Art club LOGO'
+              />
+
             </Form>
           </Col>
         </Row>

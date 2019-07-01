@@ -17,6 +17,7 @@ import ArtworkList from './components/artwork/ArtworkList'
 
 import Home from './components/Home'
 import RegisterUserForm from './components/login/RegisterUserForm'
+
 import LoginForm from './components/login/LoginForm'
 import UserList from './components/user/UserList'
 import PrivateRoute from './components/common/PrivateRoute'
@@ -94,8 +95,15 @@ const App = (props) => {
                   </Nav.Link>
 
 
+                  <Nav.Link href='#' as='span'>
+                    <Link to="/addArtwork">add</Link>  &nbsp;
+                    {/* <Link to="/register">Register</Link> &nbsp; */}
+                  </Nav.Link>
 
-                  <Nav.Link href='#' as='spana'>
+
+
+
+                  <Nav.Link href='#' as='span'>
                     {isMember | isAdmin
                       ? <Link to="/member/addArtwork" className='member'>Add artwork</Link>
                       : <em></em>} &nbsp;
@@ -183,7 +191,6 @@ const App = (props) => {
                 render={() => <LoginForm />}
               />
 
-
               {/* TODOOOOOOOOOOOOOOOOOOOO   THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/member" */}
               <PrivateRoute path="/member" redirectPath="/login" condition={loggedUser}>
                 <Route exact path="/member/addArtwork" render={() => <ArtworkForm /> } />
@@ -195,7 +202,8 @@ const App = (props) => {
 
               <Route exact path="/" render={() => <Home />} />
               <Route exact path="/artworks" render={() => <ArtworkList />} />
-              <Route exact path="/artwork" render={() => <ArtworkForm /> } />
+              <Route exact path="/addArtwork" render={() => <ArtworkForm /> } />
+
               {/* <Route exact path="/artworks/:id"
               render={({ match }) => <SingleArtwork artworkId={match.params.id} />} /> */}
               <Route exact path="/login" render={() => <LoginForm /> } />
@@ -217,7 +225,7 @@ const App = (props) => {
         width='200'
         height='400'
         className='picture'
-        alt='Art club LOGO'
+        alt='background'
       />
 
     </div>

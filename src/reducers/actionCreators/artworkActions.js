@@ -14,10 +14,10 @@ export const initializeArtworks = () => {
 }
 
 // creates new artwork
-export const createArtwork=(content) => {
+export const createArtwork=(content,data) => {
   return async (dispatch)  => {
     console.log('createArtworkaction', content)
-    const artwork = await artworkService.create(content)
+    const artwork = await artworkService.create(content,data)
     console.log(artwork,'uuusArtwork')
     if (artwork.error || artwork === undefined) {
       dispatch({

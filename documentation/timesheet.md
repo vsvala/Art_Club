@@ -16,11 +16,11 @@
 | to 27.6. | 5,5  | Frontend: Navigation and authorisation |
 | pe 28.6. | 3    | Frontend: Design: logo and picture |
 | la 29.6. | 5    | Frontend: Design: Googlefonts and colours |
-| .6. | ?    |Deleting artworks and updating artworks... Dokumentation |
-| .6. | ?    | Tests... Dokumentation |
-| .6. | ?   | Adding/loading pictures |
+| su 30.6. | 3    | Frontend: picture uploading, DataFormat, studing uploading pictures |
+| ma 1.7   | 7    | Backend: saving uploded pictures, installing multer, studing |
+| .6. | ?   |  Tests... Dokumentation |Adding/loading pictures | |Deleting artworks and updating artworks... Dokumentation |
 
-| total |  72,5/175    |    |
+| total |  82,5/175    |    |
 
 
  

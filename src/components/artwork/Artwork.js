@@ -19,12 +19,11 @@ const Artwork = ({ artwork }) => {
         alt='image'
       /> */}
       {/* <img src={process.env.PUBLIC_URL + '{ artwork.galleryImage }'} /> */}
-      <td className="artist"> { artwork.artist }</td>
       <td className="name"> { artwork.name} </td>
       <td className="year"> { artwork.year }</td>
       <td className="size"> { artwork.size }</td>
       <td className="medium"> { artwork.medium }</td>
-
+      <td className="artist"> { artwork.artist }</td>
 
     </tr>
 

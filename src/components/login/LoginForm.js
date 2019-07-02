@@ -30,40 +30,49 @@ export const LoginForm = ({ login }) => {
 
   return (
     <div className='loginForm'>
+      <br/>
       <Container>
         <Row>
-          <Col>
+          <Col md={{ span: 5, offset: 3 }}>
+
             <div className='logHeader'>
               <h3>Sign In</h3>
             </div>
           </Col>
         </Row>
+        <br/>
         <Row>
-          <Col md={{ span: 6, offset: 3 }}>
+          <Col md={{ span: 5, offset: 3 }}>
             <Form onSubmit={handleLogin}>
               <Form.Group>
-                <Form.Label>username</Form.Label>
+                {/* <Form.Label>username</Form.Label> */}
                 <Form.Control
                   type="text"
+                  Placeholder='Username'
                   name="username"
                   value={input.username}
                   onChange={handleChange}
                   autoFocus
                 />
+                <br/>
 
-                <Form.Label>password </Form.Label>
+                {/* <Form.Label>password </Form.Label> */}
                 <Form.Control
                   type="password"
                   name="password"
+                  Placeholder='Password'
                   value={input.password}
                   onChange={handleChange}
                 />
+                <div className="grayInfoText">
+                  <p>No login details: <Link to='/register' className='register'>Register</Link> and apply membership</p>
+                </div>
               </Form.Group>
-              <Button className="btnLogin" variant="dark" type="submit" >
+
+              <Button className="button" variant="light" type="submit" >
                 Login
               </Button>
-              <h5>Not login details yet,<Link to='/register' className='register'>Register</Link> and apply membership</h5>
-              <h5>TODO muotoilu ja  label tekstit esitäytetyiksi kenttiin</h5>
+              <br/>
               <h1>Art Club</h1>
               <img
                 src={logo}
@@ -71,7 +80,6 @@ export const LoginForm = ({ login }) => {
                 height='60'
                 alt='Art club LOGO'
               />
-
             </Form>
           </Col>
         </Row>

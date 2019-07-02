@@ -22,13 +22,12 @@ export const ArtworkList = (props) => { //({ artworkList, initializeArtworks }) 
       <Table bordered hover>
         <thead>
           <tr>
-            <th>image path</th>
-            <th>Artist</th>
+            <th>Image</th>
             <th>Name</th>
             <th>Year</th>
             <th >Size</th>
-
-            <th className='centerColumn' >Medium</th>
+            <th>Medium</th>
+            <th>Artist</th>
           </tr>
         </thead>
         <tbody>

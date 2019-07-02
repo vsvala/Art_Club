@@ -25,9 +25,9 @@ body {
   font-weight: 400;
   /*   color: #2fc2cc; 
 font-family: 'Megrim', cursive; */
-
+/* 
   font-family: 'Poiret One', cursive;
-  font-family: 'Pacifico', cursive;
+  font-family: 'Pacifico', cursive; */
   font-family: 'Amatic SC', cursive;
 
 }
@@ -100,9 +100,9 @@ a:hover{
 }
 
 /* TODO navigation colours acccordinto sign in..??*/
-a:active{
+/* a:active{
   color: #ff1476;
-}
+} */
 /* TODOSelected pink*/
 .member{
 
@@ -117,4 +117,33 @@ a:active{
   color: #251147;
   color: #ff1476; 
 
+}
+.btn{
+  /* margin: 0px;
+  margin: 0px 0px 0px 15px; */
+  float:right;
+  box-shadow: none !important;
+}
+.button {
+  color: #338ad3;
+  background-color: white;
+  border-color: #6c757d;
+  font-family: 'Leckerli One', cursive;
+  
+}
+
+.btn:hover {
+  color: #bebcbc;
+  border-color: #6c757d;
+  background-color:white; 
+}
+
+.fileUploader{
+  float:left;
+}
+
+.grayInfoText {
+  color:  #6c757d;
+  font-size: 90%;
+  /* float:left; */
 }

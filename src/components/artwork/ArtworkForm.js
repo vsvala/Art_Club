@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 //import { notify } from '../../reducers/actionCreators/notificationActions'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 //import studentActions from '../../reducers/actionCreators/studentActions'
 import artworkService from '../../services/artworks'
 import FormData from 'form-data'
@@ -76,24 +76,18 @@ export const ArtworkForm = (
   // saveFile(file)//lähetä kansioon..
 
   // }
-  const fileUploadHandler=(event) => {
+/*   const fileUploadHandler=(event) => {
     console.log('file',galleryImage, galleryImage.galleryImage.name)
     const data=new FormData()
     // console.log('file',selectedFile, selectedFile.imagedata.name)
-    //data.append('file',selectedFile.imagedata)
-    //data.append('name',selectedFile.image.name)
     data.append('imageName',galleryImage.galleryImage.name)
     data.append('galleryImage',galleryImage.galleryImage)
 
-
     console.log('event', event)
     console.log('image', galleryImage.galleryImage)
-    // artworkService.send(selectedFile)
-    // console.log('data', data)
     artworkService.send(data)
-    // saveFile(file)//lähetä kansioon..
   }
-
+ */
   // const uploadImage=(e) => {
   //   let imageFromObj=new FormData()
   //   imageFromObj.append('imageName', 'multi-image-' + Date.now())
@@ -110,20 +104,10 @@ export const ArtworkForm = (
       {galleryImage.name}
       <h2>Add artwork</h2>
 
-      <input type='file' name='galleryImage' onChange={fileSelectedHandler}/>
-      <Button onClick={fileUploadHandler}>Upload</Button>
-
-
-      {/*    <input type="file" className='upload-btn' onChange={(e) => uploadImage(e)} />
-     <img src={this.StaticRange.multerImage} alt='upload' className='process_image'/>
-
-      <fileBase type='file' multiple={false} onDone={this.getBaseFile.bind(this)}/>*/}
-
-
-
-      <Form onSubmit={handleSubmit}>
-        <Form.Group>
-{/*           <Form.Label>Image: </Form.Label>
+      <Col md={{ span: 8, offset: 2 }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            {/*           <Form.Label>Image: </Form.Label>
           <Form.Control
             type='text'
             name='image'
@@ -131,40 +115,55 @@ export const ArtworkForm = (
             onChange={handleChange}
             autoFocus
           /> */}
-          <Form.Label>Artist: </Form.Label>
-          <Form.Control
-            type='text'
-            name='artist'
-            onChange={handleChange}
-          />
-          <Form.Label>Name of artwork: </Form.Label>
-          <Form.Control
-            type='text'
-            name='name'
-            onChange={handleChange}
-          />
-          <Form.Label>Year: </Form.Label>
-          <Form.Control
-            type='text'
-            name='year'
-            onChange={handleChange}
-          />
-          <Form.Label>Size (width x hight) in cm: </Form.Label>
-          <Form.Control
-            type='text'
-            name='size'
-            onChange={handleChange}
-          />
-          <Form.Label>Medium: </Form.Label>
-          <Form.Control
-            type='text'
-            name='medium'
-            onChange={handleChange}
-          />
+            <br/>
+            {/* <Form.Label>Artist: </Form.Label> */}
+            <Form.Control
+              type='text'
+              Placeholder='artist'
+              name='Artist'
+              onChange={handleChange}
+            />
+            <br/>
+            {/* <Form.Label>Name of artwork: </Form.Label> */}
+            <Form.Control
+              type='text'
+              Placeholder='Name of artwork'
+              name='name'
+              onChange={handleChange}
+            />
+            <br/>
+            {/* <Form.Label>Year: </Form.Label> */}
+            <Form.Control
+              type='text'
+              Placeholder='Year'
+              name='year'
+              onChange={handleChange}
+            />
+            <br/>
+            {/* <Form.Label>Size (width x hight) in cm: </Form.Label> */}
+            <Form.Control
+              type='text'
+              Placeholder='Size (width x hight) cm'
+              name='size'
+              onChange={handleChange}
+            />
+            <br/>
+            {/* <Form.Label>Medium: </Form.Label> */}
+            <Form.Control
+              type='text'
+              Placeholder='Medium'
+              name='medium'
+              onChange={handleChange}
+            />
+            <br/>
+            {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11!!!!!!!!TODO tähän muotoilu choose buttonille !!!!!!!!!!!!!!!!!!!!!!!!*/}
+            <input type='file'className='fileUploader' name='galleryImage' onChange={fileSelectedHandler}/>
+            {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
+            <Button className='button' type='submit' variant="light">Send</Button>
+          </Form.Group>
 
-        </Form.Group>
-        <Button className='button' type='submit'>send</Button>
-      </Form>
+        </Form>
+      </Col>
     </div>
   )
 }

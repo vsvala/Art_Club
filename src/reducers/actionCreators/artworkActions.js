@@ -47,4 +47,40 @@ export const createArtwork=(content,data) => {
     }
   }
 }
-export default { initializeArtworks, createArtwork }
+
+// delete artwork
+export const deleteArtwork = (artwork_id) => {
+  return async (dispatch) => {
+    const response = await artworkService.deleteArtwork(artwork_id)
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Delete failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      dispatch({
+        type: 'DELETE_ARTWORK',
+        data: { id: artwork_id }
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'ARTWORK deleted'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
+
+
+
+
+export default { initializeArtworks, createArtwork, deleteArtwork }

@@ -36,7 +36,7 @@ const artworkReducer = (state = initialState, action) => {
   case 'DELETE_ARTWORK': {
     return {
       ...state,
-      artworks: state.artworks.filter(c => c.course_id !== action.data.id)
+      artworks: state.artworks.filter(artwork => artwork.id !== action.data.id)
     }
   }
 

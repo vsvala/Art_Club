@@ -8,11 +8,11 @@ import artworkService from '../../services/artworks'
 import FormData from 'form-data'
 
 export const ArtworkForm = (
-  {
+/*   {
     createArtwork,
     // id,
     //notify,
-  }
+  } */
 ) => {
 
   const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
@@ -76,7 +76,7 @@ export const ArtworkForm = (
   // saveFile(file)//lähetä kansioon..
 
   // }
-/*   const fileUploadHandler=(event) => {
+  /*   const fileUploadHandler=(event) => {
     console.log('file',galleryImage, galleryImage.galleryImage.name)
     const data=new FormData()
     // console.log('file',selectedFile, selectedFile.imagedata.name)
@@ -119,8 +119,8 @@ export const ArtworkForm = (
             {/* <Form.Label>Artist: </Form.Label> */}
             <Form.Control
               type='text'
-              Placeholder='artist'
-              name='Artist'
+              Placeholder='Artist'
+              name='artist'
               onChange={handleChange}
             />
             <br/>

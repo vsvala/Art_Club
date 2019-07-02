@@ -13,7 +13,7 @@ import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 // Components
 import ArtworkForm from './components/artwork/ArtworkForm'
 import ArtworkList from './components/artwork/ArtworkList'
-//import SingleArtwork from './components/admin/SingleArtwork'
+import SingleArtwork from './components/artwork/SingleArtwork'
 
 import Home from './components/Home'
 import RegisterUserForm from './components/login/RegisterUserForm'
@@ -146,15 +146,15 @@ const App = (props) => {
 
                 {loggedUser
                   ? <Button
-                    className='loginbutton'
+                    className='button'
                     onClick={props.logout}
-                    variant='outline-secondary'
+                    variant='light'
                     type='button'>
                     <Link to="logout">Logout</Link>
                   </Button>
                   : <Button
-                    className='loginbutton'
-                    variant='outline-secondary'
+                    className='button'
+                    variant='light'
                     type='button' >
                     <Link to="login">Login</Link>
                   </Button>} &nbsp;
@@ -202,10 +202,9 @@ const App = (props) => {
 
               <Route exact path="/" render={() => <Home />} />
               <Route exact path="/artworks" render={() => <ArtworkList />} />
+              <Route exact path="/artworks/:id"
+                render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
               <Route exact path="/addArtwork" render={() => <ArtworkForm /> } />
-
-              {/* <Route exact path="/artworks/:id"
-              render={({ match }) => <SingleArtwork artworkId={match.params.id} />} /> */}
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={() => <RegisterUserForm /> } />
 

@@ -17,6 +17,7 @@ const getConfig = () => {
     headers: { 'Authorization': token }
   }
 }
+
 const getAll = async () => {
   try {
     const response = await axios.get(baseUrl)
@@ -26,6 +27,22 @@ const getAll = async () => {
 
   } catch (error) {
     return { error: 'Could not get artworks from db' }
+  }
+}
+
+const getSingleArtwork= async (id) => {
+  console.log('service get singleartwork')
+
+  try {
+    const response = await axios.get(baseUrl + `/${id}`)
+    return response.data
+  } catch (error) {
+    if (error === 400) {
+      return { error: 'Could not getartwork from db' }
+    }
+    if (error === 500) {
+      return { error: 'Internal server error' }
+    }
   }
 }
 
@@ -91,5 +108,15 @@ const update = async(content, id) => {
   }
 }
 
+//Deletes a student from database by student number. Only for admin!
+const deleteArtwork = async (id) => {
+  try {
+    const response = await axios.delete(baseUrl + `/${id}`)//, getConfig())
+    return response.data
+  } catch (error) {
+    return { error: 'Student with student number "' + id + '" not found!' }
+  }
+}
 
-export default { getAll, create, update, setToken, send }
+
+export default { getAll, getSingleArtwork, create, update, setToken, send, deleteArtwork }

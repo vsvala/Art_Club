@@ -14,8 +14,8 @@ const Artwork = ({ artwork,  onClick }) => {
     <tr className="artwork">
       {/* <img src='http://localhost:3001/uploads/1562020795260download.jpg'/> */}
 
-      <td className="image"> { artwork.galleryImage }</td>
-      {/* <img
+      {/* <td className="image"> { artwork.galleryImage }</td> */}
+      <img
         src={`http://localhost:3001/${ artwork.galleryImage }`}
         //'assets/{ artwork.galleryImage }'
         // <img src={process.env.PUBLIC_URL + '{ artwork.galleryImage }'} />
@@ -23,7 +23,7 @@ const Artwork = ({ artwork,  onClick }) => {
         height='200'
         className='galleryPicture'
         alt='img'
-      /> */}
+      />
       <td> <Link to={`/artworks/${artwork.id}`}> {artwork.name} </Link></td>
       <td className="year"> { artwork.year }</td>
       <td className="size"> { artwork.size }</td>

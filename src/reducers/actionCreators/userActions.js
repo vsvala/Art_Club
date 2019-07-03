@@ -67,4 +67,52 @@ export const getUsers = () => {
   }
 }
 
-export default { createUser, getUsers }
+// delete user
+export const deleteUser = (user_id) => {
+  return async (dispatch) => {
+    const response = await userService.deleteUser(user_id)
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Delete failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      dispatch({
+        type: 'DELETE_USER',
+        data: { id: user_id }
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'User deleted'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
+
+export const updateRole = (id, role) => {
+  return async (dispatch) => {
+    console.log('updateRole_ACTION')
+    const newrole = await userService.update(id, role)
+    console.log('update',id, newrole)
+    dispatch({
+      type: 'UPADATE_ROLE',
+      data:{
+        id,
+        newrole
+      }
+    })
+  }
+}
+
+
+export default { createUser, getUsers, deleteUser, updateRole }

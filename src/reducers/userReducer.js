@@ -30,7 +30,18 @@ const userReducer = (state =initialState, action) => {
   case 'DELETE_USER': {
     return {
       ...state,
-      users: state.users.filter(u => u.user_id !== action.data.id)
+      users: state.users.filter(user => user.id !== action.data.id)
+    }
+  }
+
+  case 'UPDATE_ROLE': {
+    return {
+      ...state,
+      users:state.users.map(u =>
+        u.id === action.data.id
+          ?{ ...u, role:action.data.newrole }
+          : u
+      )
     }
   }
   default:

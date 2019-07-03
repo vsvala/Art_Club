@@ -48,7 +48,7 @@ export const LoginForm = ({ login }) => {
                 {/* <Form.Label>username</Form.Label> */}
                 <Form.Control
                   type="text"
-                  Placeholder='Username'
+                  placeholder='Username'
                   name="username"
                   value={input.username}
                   onChange={handleChange}
@@ -60,7 +60,7 @@ export const LoginForm = ({ login }) => {
                 <Form.Control
                   type="password"
                   name="password"
-                  Placeholder='Password'
+                  placeholder='Password'
                   value={input.password}
                   onChange={handleChange}
                 />

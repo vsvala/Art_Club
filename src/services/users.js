@@ -69,9 +69,9 @@ const create = async (user) => {
 
 
 //update user
-const updateUser = async (content, id) => {
+const update = async (id, role) => {
   try{
-    const response = await axios.put(`${baseUrl}/${id}`, content, getConfig())
+    const response = await axios.put(`${baseUrl}/${id}`, role, getConfig())
     return response.data
   }catch(error){
     return { error: 'User could not be updated' }
@@ -90,4 +90,4 @@ const deleteUser = async(id) => {
 }
 
 
-export default { getAll, getUser, updateUser, create, deleteUser, setToken }
+export default { getAll, getUser, update, create, deleteUser, setToken }

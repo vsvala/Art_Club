@@ -19,9 +19,10 @@
 | su 30.6. | 3    | Frontend: picture uploading, DataFormat, studying uploading pictures |
 | ma 1.7   | 7    | Backend: saving uploded pictures, installing multer, studying |
 | ti 2.7.  | 8    | Frontend: Designing buttons and forms, starting singleArtwork page and deleting artwork |
-| ke 3.7.  | ?    | Frontend: refining gallerypage, refining singleArtwork page and deleting user |
-|  .7.  | ?       | Tests... Dokumentation, updating artworks... Dokumentation |
-| total |  90,5/175    |  
+| ke 3.7.  | 6    | Frontend: Deleting user, selecting and changing users roles |
+| to 4.7.  | ?    | Backend: Updating user |
+|  .7.  | ?       | Frontend: refining gallerypage, refining singleArtwork page Tests... Dokumentation, updating artworks... Dokumentation |
+| total |  96,5/175    |  
 
 
  

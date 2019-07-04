@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getUsers, deleteUser } from '../../reducers/actionCreators/userActions'
 
+//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!alkuun  listanonmembers jotka täytyy hyväksyä,??värikodi?? loppuun hyväksytyt
+
 
 export const UserList = ({ userArray, getUsers, deleteUser }) => {
   useEffect(() => {

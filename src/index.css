@@ -147,3 +147,9 @@ a:hover{
   font-size: 90%;
   /* float:left; */
 }
+
+.fileUploader{
+  color: #338ad3;
+  font-family: 'Leckerli One', cursive;
+  
+}

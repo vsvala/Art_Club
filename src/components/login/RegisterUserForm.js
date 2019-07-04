@@ -1,14 +1,16 @@
 import React from'react'
 import { connect } from 'react-redux'
 //import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
-import { Form, Button } from 'react-bootstrap'
+import { Form, Button, Col } from 'react-bootstrap'
 
 //import { emailValid } from '../../utils/validations'
 import { createUser } from '../../reducers/actionCreators/userActions'
 //import { notification } from '../../reducers/notificationReducer'
-//TODO ohjaus ja se että virheen sattuessa kentät ei tyhjenny
 
 
+//TODO notifikaatio että sähköposti kun member...
+//ja se että virheen sattuessa kentät ei tyhjenny ??
+//Notifications
 
 
 export const RegisterUserForm = ( {
@@ -61,41 +63,40 @@ export const RegisterUserForm = ( {
     //TODO? first name laste name
     <div>
       <h2>Apply membership</h2>
-
-      <form onSubmit={handleSubmit}>
-        <Form.Group>
-
-          <Form.Label>Name:</Form.Label>
-          <Form.Control
-            type="text"
-            name="name"
-          />
-
-          <Form.Label>Email: </Form.Label>
-          <Form.Control
-            type='email'
-            name='email'
+      <br/>
+      <Col md={{ span: 8, offset: 2 }}>
+        <Form onSubmit={handleSubmit}>
+          <Form.Group>
+            <Form.Control
+              type="text"
+              name="name"
+              placeholder="Name"
+            />
+            <br/>
+            <Form.Control
+              type='email'
+              name='email'
+              placeholder="Email"
             // onChange={(e) => updateEmail(e.target.value)}
-          />
+            />
+            <br/>
+            <Form.Control
+              type="text"
+              name="username"
+              placeholder="Username"
+            />
+            <br/>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Password"
+            />
 
-          <Form.Label>Username:</Form.Label>
-          <Form.Control
-            type="text"
-            name="username"
-          />
-
-          <Form.Label>Password:</Form.Label>
-          <Form.Control
-            type="password"
-            name="password"
-          />
-
-          <br></br>
-          <Button className="btnLogin" variant="dark" type="submit">Apply</Button>
-        </Form.Group>
-
-      </form>
-
+            <br></br>
+            <Button className="button" variant="light" type="submit">Apply</Button>
+          </Form.Group>
+        </Form>
+      </Col>
     </div>
   )
 }

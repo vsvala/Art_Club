@@ -33,7 +33,7 @@ const getAll = async () => {
   }
 }
 //gets a single user by id
-const getUser = async (id) => {
+const getSingleUser = async (id) => {
   try {
     const response = await axios.get(baseUrl + `/${id}`, getConfig())
     return response.data
@@ -69,9 +69,11 @@ const create = async (user) => {
 
 
 //update user
-const update = async (id, role) => {
+const update = async (content) => {
+  console.log('service update',content)
   try{
-    const response = await axios.put(`${baseUrl}/${id}`, role, getConfig())
+    const response = await axios.put(baseUrl + '/admin', content, getConfig())// `/admin/${id}`,
+    console.log('response data', response.data)
     return response.data
   }catch(error){
     return { error: 'User could not be updated' }
@@ -90,4 +92,4 @@ const deleteUser = async(id) => {
 }
 
 
-export default { getAll, getUser, update, create, deleteUser, setToken }
+export default { getAll, getSingleUser, update, create, deleteUser, setToken }

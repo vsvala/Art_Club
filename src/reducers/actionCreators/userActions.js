@@ -28,7 +28,7 @@ export const createUser=(content) => {
     console.log(user,'uuusUser')
     if (user.error || user === undefined) {
       dispatch({
-        type: 'NOTIFICATION',
+        type: 'NOTIFY',
         data: 'Creating user failed!'
       })
       setTimeout(() => {
@@ -43,8 +43,8 @@ export const createUser=(content) => {
         data:user
       })
       dispatch({
-        type: 'NOTIFICATION',
-        data: 'User created'
+        type: 'NOTIFY',
+        data: 'User Registered'
       })
       setTimeout(() => {
         dispatch({
@@ -99,20 +99,58 @@ export const deleteUser = (user_id) => {
   }
 }
 
-export const updateRole = (id, role) => {
+export const updateRole = (content) => {
+  console.log('updateRole_ACTION', content)
   return async (dispatch) => {
-    console.log('updateRole_ACTION')
-    const newrole = await userService.update(id, role)
-    console.log('update',id, newrole)
+    const response = await userService.update(content)
+    console.log('response from update', response)
+
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Update failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      console.log('updatedispatch succes')
+      const  id=content.id
+      const role=content.role
+      dispatch({
+        type: 'UPDATE_ROLE',
+
+        data:{
+          id,
+          role
+        }
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'User updated'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
+// tells userservice to get specific user by id from database
+export const initializeSingleUser = (userId) => {
+  console.log('initializeSingleUser')
+  return async (dispatch) => {
+    const content = await userService.getSingleUser(userId)
     dispatch({
-      type: 'UPADATE_ROLE',
-      data:{
-        id,
-        newrole
-      }
+      type: 'INIT_SINGLE_USER',
+      data: content
     })
   }
 }
 
 
-export default { createUser, getUsers, deleteUser, updateRole }
+
+export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser }

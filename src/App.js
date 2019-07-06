@@ -21,8 +21,8 @@ import RegisterUserForm from './components/login/RegisterUserForm'
 import LoginForm from './components/login/LoginForm'
 import UserList from './components/user/UserList'
 import PrivateRoute from './components/common/PrivateRoute'
-//import SingleUser from './components/admin/SingleUser'
-
+import Notification from './components/common/Notification'
+import SingleUser from './components/user/SingleUser'
 
 const App = (props) => {
 
@@ -117,14 +117,14 @@ const App = (props) => {
 
                   <Nav.Link href='#' as='span'>
                     {isMember | isAdmin
-                      ? <Link to="/member/myPage"  className='member'>MyPage</Link>
+                      ? <Link to="/users/:id/myPage"  className='member'>MyPage</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
 
                   <Nav.Link href='#' as='span'>
                     { isAdmin
-                      ? <Link to='/admin/users'  className='admin'>Users</Link>
+                      ? <Link to='/users/admin'  className='admin'>Users</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
@@ -163,7 +163,7 @@ const App = (props) => {
             </Navbar>
           </div>
 
-          {/* <Notification />        */}
+          <Notification />
           <div className="container">
 
             {/* Works like a typical switch statement; it checks for matches and
@@ -172,16 +172,23 @@ const App = (props) => {
 
               {/* THIS ROUTE PROTECTS ALL ROUTES UNDER "/admin" */}
               <PrivateRoute
-                path="/admin"
+                path="/users/admin"
                 redirectPath="/login"
                 condition={loggedUser && isAdmin}
               >
-                <Route exact path="/admin/users" render={() => <UserList />} />
+                <Route exact path="/users/admin" render={() => <UserList />} />
+                <Route exact path="/users/admin/:id"
+                  render={({ match }) => <SingleUser userId={match.params.id} />} />
+
+                {/* <Route exact path="/users/admin/:id"
+                  render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
+                {/* <Route exact path="/users/admin/:id" render={() => <SingleUser />} /> */}
+
                 {/*     <Route exact path="/admin/addEvent" render={() => <EventForm />} />
                 <Route exact path="/admin/userDelete" render={() => <UserDelete />} />
-                <Route exact path="/admin/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} />
-                <Route exact path="/admin" render={() => <UpdatePasswordForm />} />  */}
+                                <Route exact path="/admin/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} />
 
+                <Route exact path="/admin" render={() => <UpdatePasswordForm />} />  */}
               </PrivateRoute>
 
               <PrivateRoute
@@ -190,10 +197,16 @@ const App = (props) => {
                 condition={loggedUser === null}
                 render={() => <LoginForm />}
               />
-
+            
               {/* TODOOOOOOOOOOOOOOOOOOOO   THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/member" */}
-              <PrivateRoute path="/member" redirectPath="/login" condition={loggedUser}>
-                <Route exact path="/member/addArtwork" render={() => <ArtworkForm /> } />
+              <PrivateRoute
+                path="/users"
+                redirectPath="/login"
+                condition={loggedUser}
+              >
+                <Route exact path="/users/:id/myPage"
+                  render={() => <SingleUser userId={loggedUser.id} />} />
+                {/* <Route exact path="/users/addArtwork" render={() => <ArtworkForm /> } /> */}
 
               </PrivateRoute>
 
@@ -204,6 +217,8 @@ const App = (props) => {
               <Route exact path="/artworks" render={() => <ArtworkList />} />
               <Route exact path="/artworks/:id"
                 render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
+              {/*          <Route exact path="/users/:id"
+                render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
               <Route exact path="/addArtwork" render={() => <ArtworkForm /> } />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={() => <RegisterUserForm /> } />

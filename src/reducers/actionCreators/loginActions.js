@@ -64,7 +64,7 @@ export const login = (username, password) => {
     const response = await loginService.login({ username: username, password: password })
     if (response.error) {
       dispatch({
-        type: 'NOTIFICATION',
+        type: 'NOTIFY',
         data: response.error
       })
       setTimeout(() => {
@@ -84,7 +84,7 @@ export const login = (username, password) => {
         data: { ...response }
       })
       dispatch({
-        type: 'NOTIFICATION',
+        type: 'NOTIFY',
         data: 'Logged in succesfully!'
       })
 

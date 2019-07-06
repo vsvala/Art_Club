@@ -15,13 +15,15 @@ export const initializeArtworks = () => {
 
 // creates new artwork
 export const createArtwork=(content,data) => {
+  console.log('actions create:', content )
+
   return async (dispatch)  => {
     console.log('createArtworkaction', content)
     const artwork = await artworkService.create(content,data)
     console.log(artwork,'uuusArtwork')
     if (artwork.error || artwork === undefined) {
       dispatch({
-        type: 'NOTIFICATION',
+        type: 'NOTIFY',
         data: 'Saving failed!'
       })
       setTimeout(() => {
@@ -36,7 +38,7 @@ export const createArtwork=(content,data) => {
         data:artwork
       })
       dispatch({
-        type: 'NOTIFICATION',
+        type: 'NOTIFY',
         data: 'Information updated'
       })
       setTimeout(() => {

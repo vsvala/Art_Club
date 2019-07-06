@@ -35,15 +35,23 @@ const userReducer = (state =initialState, action) => {
   }
 
   case 'UPDATE_ROLE': {
+    console.log('reducer id ja role', action.data.id, action.data.role)
     return {
       ...state,
       users:state.users.map(u =>
         u.id === action.data.id
-          ?{ ...u, role:action.data.newrole }
+          ?{ ...u, role:action.data.role }
           : u
-      )
+      ) }
+  }
+
+  case 'INIT_SINGLE_USER': {
+    return {
+      ...state,
+      singleUser: action.data
     }
   }
+
   default:
     return state
   }

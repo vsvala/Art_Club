@@ -21,9 +21,10 @@
 | ti 2.7.  | 8    | Frontend: Designing buttons and forms, starting singleArtwork page and deleting artwork |
 | ke 3.7.  | 6    | Frontend: Deleting user, selecting and changing users roles |
 | to 4.7.  | 2    | Frontend: Registerform and fileupload design |
-| pe 4.7.  | ?    | Backend: Updating user |
-|  .7.  | ?       | Frontend: refining gallerypage, refining singleArtwork page Tests... Dokumentation, updating artworks... Dokumentation |
-| total |  96,5/175    |  
+| pe 4.7.  | 8    | Backend: Updating user and geting singleuser routes, Frontend: Notifications, starting ingleUser/Mypage |
+| la.5.7   | ?    | Frontend: |
+| su.5.7   | ?    |Frontend: refining gallerypage, refining singleArtwork page Tests... Dokumentation, updating artworks... Dokumentation |
+| total |  104,5/175    |  
 
 
  

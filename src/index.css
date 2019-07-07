@@ -153,3 +153,12 @@ a:hover{
   font-family: 'Leckerli One', cursive;
   
 }
+.artworkGallery{
+float:left;
+  
+}
+.artworkThumb{
+  float:left;  
+}
+  
+

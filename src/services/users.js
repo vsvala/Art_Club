@@ -32,6 +32,7 @@ const getAll = async () => {
     }
   }
 }
+
 //gets a single user by id
 const getSingleUser = async (id) => {
   try {

@@ -152,5 +152,4 @@ export const initializeSingleUser = (userId) => {
 }
 
 
-
 export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser }

@@ -1,23 +1,41 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { createArtwork } from '../../reducers/actionCreators/artworkActions'
-//import { notify } from '../../reducers/actionCreators/notificationActions'
+import { createArtwork, deleteArtwork  } from '../../reducers/actionCreators/artworkActions'
 import { Form, Button, Col } from 'react-bootstrap'
-//import studentActions from '../../reducers/actionCreators/studentActions'
+import { getUsers } from '../../reducers/actionCreators/userActions'
 import artworkService from '../../services/artworks'
 import FormData from 'form-data'
+import ArtworkThumb from './ArtworkThumb'
+
+
 export const ArtworkForm = (
-/*   {
-    createArtwork,
-    // id,
-    //notify,
-  } */
+  {
+  // deleteArtwork,
+    getUsers,
+    users,
+    id
+  }
 ) => {
+  useEffect(() => {
+    console.log('id')
+    getUsers()
+  }, [])
+
+  const userToShow =users.find(u => u.id===id)
+
+
+
+  //event handler for deleting specific  artworkn
+  const removeArtwork = (artworkId) => {
+    return () => {
+      if (window.confirm('Do you want to delete this artwork?')) {
+        deleteArtwork(artworkId)//, loggedUser.user.user_id
+      }
+    }
+  }
 
   const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
-  const [galleryImage, setFile] = useState({ }) //[]
-  // const [multerImage, setImage] = useState([])
-
+  const [galleryImage, setFile] = useState({ })
 
 
   const handleSubmit = async (event) => {
@@ -31,21 +49,20 @@ export const ArtworkForm = (
     data.append('year', event.target.year.value)
     data.append('size', event.target.size.value)
     data.append('medium',event.target.medium.value)
-    data.append('userId','5cf94f1a65a6b76cfd2052f8') //TODOOOO
+    data.append('userId',id)
 
     const formContent = {
-      // galleryImage: data, //take this later from picture
       artist: event.target.artist.value,
       name: event.target.name.value,
       year: event.target.year.value,
       size: event.target.size.value,
       medium:event.target.medium.value,
-      userId:'5cf94f1a65a6b76cfd2052f8' //TODOOOO
+      userId:id
     }
     console.log('submit', formContent)
     console.log('submitdata', data)
 
-    // createArtwork(formContent)
+    //TODOOOO...tämä actioncreatoreiden kautta.. createArtwork(formContent)
     artworkService.create(data)
   }
 
@@ -96,7 +113,15 @@ export const ArtworkForm = (
 
   //   artworkService.send(imageFromObj)
   // }
-
+  // if (userArtworks){
+  //   const artworkList=userArtworks
+  //     .map(artwork =>
+  //       <ArtworkThumb
+  //         artwork={artwork}
+  //         key={artwork.id}//artwork_id
+  //         onClick={removeArtwork}
+  //       />
+  //     )}
 
   return (
     <div className='artworkForm'>
@@ -147,8 +172,6 @@ export const ArtworkForm = (
               onChange={handleChange}
             />
             <br/>
-            {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!>!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!11!!!!!!!!TODO tähän muotoilu choose buttonille !!!!!!!!!!!!!!!!!!!!!!!!*/}
-
 
             <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
 
@@ -158,12 +181,41 @@ export const ArtworkForm = (
 
           </Form.Group>
         </Form>
+
+        <br/>
+        <br/>
+        {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1<h4>TODO  EROTA FORMI kehyksillä taipiilota added..</h4> */}
+        <h2>Added artworks { userToShow && userToShow.artworks.length}/10 </h2>
+        <h4>You can add 10 images to the gallery. TODO RAJOITE.</h4>
+        <br/>
+        <div className='addedArt'>
+          { userToShow &&  userToShow
+            .artworks
+            .map(a =>
+              <ArtworkThumb
+                key={a.id}
+                artwork={a}
+                onClick={removeArtwork}
+              />
+            )}
+        </div>
       </Col>
     </div>
+
   )
 }
 
+const mapStateToProps = (state, id) => {
+  console.log('stateeeeeeeeeeeee', state.users.users)
+  return {
+    users: state.users.users
+    //.find(u => u.id===id)
+  }
+}
+
 export default connect(
-  null,
-  { createArtwork }
+  mapStateToProps,
+  { createArtwork, getUsers }
 )( ArtworkForm )
+
+

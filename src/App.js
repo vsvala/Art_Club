@@ -197,7 +197,7 @@ const App = (props) => {
                 condition={loggedUser === null}
                 render={() => <LoginForm />}
               />
-            
+
               {/* TODOOOOOOOOOOOOOOOOOOOO   THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/member" */}
               <PrivateRoute
                 path="/users"
@@ -206,7 +206,7 @@ const App = (props) => {
               >
                 <Route exact path="/users/:id/myPage"
                   render={() => <SingleUser userId={loggedUser.id} />} />
-                {/* <Route exact path="/users/addArtwork" render={() => <ArtworkForm /> } /> */}
+                {/* <Route exact path="/users/addArtwork" render={() => <ArtworkForm />  id={loggedUser.user.user_id}} /> */}
 
               </PrivateRoute>
 
@@ -216,10 +216,10 @@ const App = (props) => {
               <Route exact path="/" render={() => <Home />} />
               <Route exact path="/artworks" render={() => <ArtworkList />} />
               <Route exact path="/artworks/:id"
-                render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
+                render={({ match }) => <SingleArtwork artworkId={match.params.id } />} />
               {/*          <Route exact path="/users/:id"
                 render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
-              <Route exact path="/addArtwork" render={() => <ArtworkForm /> } />
+              <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={() => <RegisterUserForm /> } />
 
@@ -247,7 +247,7 @@ const App = (props) => {
   )
 }
 const mapStateToProps = (state) => {
-  console.log('state:APP', state)
+  console.log('state from APP', state)
   return {
     loggedUser: state.loggedUser.loggedUser
   }

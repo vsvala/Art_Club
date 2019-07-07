@@ -38,7 +38,7 @@ const User = ({ user, onClick, updateRole }) => {
         </Form>
       </td>
       <td> {user.email}</td>
-      <td> {user.artworks}</td>
+      <td> {user.artworks.length}</td>
       <td className="delete"><DeleteButton id={user.id} onClick={onClick} /></td>
     </tr>
   )

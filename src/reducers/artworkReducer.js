@@ -1,5 +1,5 @@
 const initialState = {
-  artworkLoading: false,
+  // artworkLoading: false,
   artworks: []
 }
 
@@ -10,7 +10,7 @@ const artworkReducer = (state = initialState, action) => {
     return {
       ...state,
       artworks: action.data,
-      loadingartworks: false
+      // loadingartworks: false
     }
   }
 
@@ -18,7 +18,7 @@ const artworkReducer = (state = initialState, action) => {
     return {
       ...state,
       artworks: [],
-      loadingartworks: true
+      // loadingartworks: true
     }
   }
 
@@ -28,7 +28,7 @@ const artworkReducer = (state = initialState, action) => {
     return {
       ...state,
       artworks: [],
-      loadingartworks: true
+      //loadingartworks: true
     }
   }
 

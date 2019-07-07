@@ -84,5 +84,4 @@ export const deleteArtwork = (artwork_id) => {
 
 
 
-
 export default { initializeArtworks, createArtwork, deleteArtwork }

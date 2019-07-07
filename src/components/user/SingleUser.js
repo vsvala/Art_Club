@@ -27,6 +27,12 @@ export const SingleUser = ({
             <h2>{user.name} {user.username}</h2>
             <ul>
               <li>{user.role}</li>
+              <li>{user.artworks
+                // .map(a =>
+                //   <div key={a.id}>
+                //     {a.name}
+                //   </div>)
+              }</li>
             </ul>
           </div>
         }

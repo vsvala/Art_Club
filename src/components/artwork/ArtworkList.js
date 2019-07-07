@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreators/artworkActions'
-import { Table } from 'react-bootstrap'
+//import { Table } from 'react-bootstrap'
 import Artwork from './Artwork'
 
 export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworkList }) => { // => {
@@ -11,7 +11,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworkList }) 
     initializeArtworks()
     // }
   }, [])
-  //little thumbernail pictures
+
   //TODO search by artist or by artwork...order alphabetically by ainting and artist
   //event handler for deleting specific course application, tells studentactions to deleteApliedCourse
   const removeArtwork = (id) => {
@@ -26,6 +26,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworkList }) 
     <div className="artworkList">
       <h2>Gallery</h2>
       <br/>
+      {/* <br/>
       <Table bordered hover>
         <thead>
           <tr>
@@ -37,18 +38,18 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworkList }) 
             <th>Artist</th>
           </tr>
         </thead>
-        <tbody>
-          {console.log('artworks..hhh',artworkList)}
-          {artworkList
-            .map(artwork =>
-              <Artwork
-                artwork={artwork}
-                key={artwork.id}//artwork_id
-                onClick={removeArtwork}
-              />
-            )}
-        </tbody>
-      </Table>
+        <tbody> */}
+      {console.log('artworks..hhh',artworkList)}
+      {artworkList
+        .map(artwork =>
+          <Artwork
+            artwork={artwork}
+            key={artwork.id}//artwork_id
+            onClick={removeArtwork}
+          />
+        )}
+      {/* </tbody>
+      </Table> */}
     </div>
 
   )

@@ -205,7 +205,7 @@ export const ArtworkForm = (
   )
 }
 
-const mapStateToProps = (state, id) => {
+const mapStateToProps = (state) => {
   console.log('stateeeeeeeeeeeee', state.users.users)
   return {
     users: state.users.users

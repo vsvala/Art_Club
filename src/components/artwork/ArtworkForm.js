@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createArtwork } from '../../reducers/actionCreators/artworkActions'
-import { Form, Button, Col } from 'react-bootstrap'
+import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { getUsers } from '../../reducers/actionCreators/userActions'
 import artworkService from '../../services/artworks'
 import FormData from 'form-data'
@@ -115,80 +115,91 @@ export const ArtworkForm = (
 
   return (
     <div className='artworkForm'>
-      {galleryImage.name}
-      <h2>Add artwork</h2>
-
-      <Col md={{ span: 8, offset: 2 }}>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            {/* <Form.Label>Artist: </Form.Label> */}
-            <Form.Control
-              type='text'
-              placeholder='Artist'
-              name='artist'
-              onChange={handleChange}
-              autoFocus
-            />
-            <br/>
-            {/* <Form.Label>Name of artwork: </Form.Label> */}
-            <Form.Control
-              type='text'
-              placeholder='Name of artwork'
-              name='name'
-              onChange={handleChange}
-            />
-            <br/>
-            {/* <Form.Label>Year: </Form.Label> */}
-            <Form.Control
-              type='text'
-              placeholder='Year'
-              name='year'
-              onChange={handleChange}
-            />
-            <br/>
-            {/* <Form.Label>Size (width x hight) in cm: </Form.Label> */}
-            <Form.Control
-              type='text'
-              placeholder='Size (width x hight) cm'
-              name='size'
-              onChange={handleChange}
-            />
-            <br/>
-            {/* <Form.Label>Medium: </Form.Label> */}
-            <Form.Control
-              type='text'
-              placeholder='Medium'
-              name='medium'
-              onChange={handleChange}
-            />
-            <br/>
-
-            <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
-
-            {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
-
-            <Button className='button' type='submit' variant="light">Send</Button>
-
-          </Form.Group>
-        </Form>
-
+      <Container>
+        <Row>
+          <Col md={{ span: 10, offset: 1 }}>
+            <div className='artworkHeader'>
+              <h3>Add artwork</h3>
+            </div>
+          </Col>
+        </Row>
         <br/>
-        <br/>
-        {/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!1<h4>TODO  EROTA FORMI kehyksillä taipiilota added..</h4> */}
-        <h2>Added artworks { userToShow && userToShow.artworks.length}/10 </h2>
-        <h4>You can add 10 images to the gallery. TODO RAJOITE.</h4>
-        <br/>
-        <div className='addedArt'>
-          { userToShow &&  userToShow
-            .artworks
-            .map(a =>
-              <ArtworkThumb
-                key={a.id}
-                artwork={a}
+        <Col md={{ span: 10, offset: 1 }}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              {/* <Form.Label>Artist: </Form.Label> */}
+              <Form.Control
+                type='text'
+                placeholder='Artist'
+                name='artist'
+                onChange={handleChange}
+                autoFocus
               />
-            )}
-        </div>
-      </Col>
+              <br/>
+              {/* <Form.Label>Name of artwork: </Form.Label> */}
+              <Form.Control
+                type='text'
+                placeholder='Name of artwork'
+                name='name'
+                onChange={handleChange}
+              />
+              <br/>
+              {/* <Form.Label>Year: </Form.Label> */}
+              <Form.Control
+                type='text'
+                placeholder='Year'
+                name='year'
+                onChange={handleChange}
+              />
+              <br/>
+              {/* <Form.Label>Size (width x hight) in cm: </Form.Label> */}
+              <Form.Control
+                type='text'
+                placeholder='Size (width x hight) cm'
+                name='size'
+                onChange={handleChange}
+              />
+              <br/>
+              {/* <Form.Label>Medium: </Form.Label> */}
+              <Form.Control
+                type='text'
+                placeholder='Medium'
+                name='medium'
+                onChange={handleChange}
+              />
+              <div className="grayInfoText">
+                <p>You can add 10 images to the gallery.TODO RAJOITE.</p>
+              </div>
+              <br/>
+              <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
+
+              {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
+
+              <Button className='button' type='submit' variant="light">Send</Button>
+
+            </Form.Group>
+          </Form>
+        </Col>
+        <Col md={{ span: 10, offset: 1 }}>
+
+          <br/>
+          <br/>
+          <div className='addedArt'>
+            <h3>Added artworks { userToShow && userToShow.artworks.length}/10 </h3>
+            <br/>
+            <div className='addedArtworks'>
+              { userToShow &&  userToShow
+                .artworks
+                .map(a =>
+                  <ArtworkThumb
+                    key={a.id}
+                    artwork={a}
+                  />
+                )}
+            </div>
+          </div>
+        </Col>
+      </Container>
     </div>
 
   )

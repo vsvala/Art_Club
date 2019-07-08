@@ -30,19 +30,21 @@ export const LoginForm = ({ login }) => {
 
   return (
     <div className='loginForm'>
-      <br/>
       <Container>
         <Row>
-          <Col md={{ span: 5, offset: 3 }}>
+          <Col md={{ span: 12 }}>
+            {/* <Col md={{ span: 5, offset: 3 }}> */}
 
             <div className='logHeader'>
               <h3>Sign In</h3>
             </div>
+
           </Col>
         </Row>
         <br/>
         <Row>
-          <Col md={{ span: 5, offset: 3 }}>
+          <Col md={{ span: 10, offset: 1 }}>
+            {/* <Col md={{ span: 5, offset: 3 }}> */}
             <Form onSubmit={handleLogin}>
               <Form.Group>
                 {/* <Form.Label>username</Form.Label> */}
@@ -67,19 +69,22 @@ export const LoginForm = ({ login }) => {
                 <div className="grayInfoText">
                   <p>No login details: <Link to='/register' className='register'>Register</Link> and apply membership</p>
                 </div>
-              </Form.Group>
-
-              <Button className="button" variant="light" type="submit" >
+                <br/>
+                <Button className="button" variant="light" type="submit" >
                 Login
-              </Button>
-              <br/>
-              <h1>Art Club</h1>
-              <img
-                src={logo}
-                width='100'
-                height='60'
-                alt='Art club LOGO'
-              />
+                </Button>
+
+              </Form.Group>
+              <div className="logoHeader">
+                <h1>Art Club</h1>
+                <img
+                  src={logo}
+                  width='100'
+                  height='60'
+                  className='logLogo'
+                  alt='Art club LOGO'
+                />
+              </div>
             </Form>
           </Col>
         </Row>

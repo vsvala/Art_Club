@@ -7,12 +7,12 @@ const Home = () => (
     <h2>Art club</h2>
 
     TODO...
-    ABOUT INFO...
-    IMPORT PITURE/
-    SLIDESHOW ...featuring picture of a month...
-    loginform?
+    IMPORT PITURE/ORSLIDESHOW ...featuring picture of a month..???.
     <div className="home">
-      <p> <Link to='/login' className='login'>Login</Link> or <Link to='/register' className='register'>Register</Link> and apply membership</p>
+
+      <h2>About</h2>
+      <p>Wellcome to join Art club. Ass a member you can add  10 pictures to main gallery and have your own artist page where you can add paictures and short introduction of yourself. You will also find Art clubs newest happenings and subscribe to our email-list.  </p>
+      <p> <Link to='/login' className='login'>Login</Link> or <Link to='/register' className='register'>Register</Link> to apply membership</p>
     </div>
   </div>
 )

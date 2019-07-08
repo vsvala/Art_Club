@@ -1,8 +1,8 @@
 import React from'react'
 import { connect } from 'react-redux'
 //import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
-import { Form, Button, Col } from 'react-bootstrap'
-
+import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { Link } from 'react-router-dom'
 //import { emailValid } from '../../utils/validations'
 import { createUser } from '../../reducers/actionCreators/userActions'
 //import { notification } from '../../reducers/notificationReducer'
@@ -11,6 +11,7 @@ import { createUser } from '../../reducers/actionCreators/userActions'
 //TODO notifikaatio että sähköposti kun member...
 //ja se että virheen sattuessa kentät ei tyhjenny ??
 //Notifications
+//TODO GPR acceptin and email...
 
 
 export const RegisterUserForm = ( {
@@ -61,42 +62,53 @@ export const RegisterUserForm = ( {
   return(
 
     //TODO? first name laste name
-    <div>
-      <h2>Apply membership</h2>
-      <br/>
-      <Col md={{ span: 8, offset: 2 }}>
-        <Form onSubmit={handleSubmit}>
-          <Form.Group>
-            <Form.Control
-              type="text"
-              name="name"
-              placeholder="Name"
-            />
-            <br/>
-            <Form.Control
-              type='email'
-              name='email'
-              placeholder="Email"
-            // onChange={(e) => updateEmail(e.target.value)}
-            />
-            <br/>
-            <Form.Control
-              type="text"
-              name="username"
-              placeholder="Username"
-            />
-            <br/>
-            <Form.Control
-              type="password"
-              name="password"
-              placeholder="Password"
-            />
-
-            <br></br>
-            <Button className="button" variant="light" type="submit">Apply</Button>
-          </Form.Group>
-        </Form>
-      </Col>
+    <div className='registerForm'>
+      <Container>
+        <Row>
+          <Col md={{ span: 10, offset: 1 }}>
+            <div className='regHeader'>
+              <h3>Apply membership</h3>
+            </div>
+          </Col>
+        </Row>
+        <br/>
+        <Col md={{ span: 10, offset: 1 }}>
+          <Form onSubmit={handleSubmit}>
+            <Form.Group>
+              <Form.Control
+                type="text"
+                name="name"
+                placeholder="Name"
+              />
+              <br/>
+              <Form.Control
+                type='email'
+                name='email'
+                placeholder="Email"
+                // onChange={(e) => updateEmail(e.target.value)}
+              />
+              <br/>
+              <Form.Control
+                type="text"
+                name="username"
+                placeholder="Username"
+              />
+              <br/>
+              <Form.Control
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <div className='grayInfoText'>
+                <p>I accept terms of use 	&amp; <Link to='/register' className='gpr'>Privacy Policy</Link></p>
+              </div>
+              <br/>
+              <Button className="button" variant="light" type="submit">Apply</Button>
+              <br/>
+            </Form.Group>
+          </Form>
+        </Col>
+      </Container>
     </div>
   )
 }

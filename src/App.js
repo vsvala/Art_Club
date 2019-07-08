@@ -134,11 +134,19 @@ const App = (props) => {
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
+
+
+                  <Nav.Link href='#' as='span'>
+                    { isAdmin
+                      ? <Link to='/admin' className='admin'>Change password</Link>
+                      : <em></em>} &nbsp;
+                  </Nav.Link>
+
                 </Nav>
 
                 <Nav.Link href='#' as='span'>
-                  { isAdmin
-                    ? <Link to='/admin' className='admin'>Change password</Link>
+                  {!loggedUser
+                    ? <Link to='/register'>Register</Link>
                     : <em></em>} &nbsp;
                 </Nav.Link>
 

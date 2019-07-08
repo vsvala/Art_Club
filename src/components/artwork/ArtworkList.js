@@ -4,9 +4,10 @@ import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreator
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
-{ /* eslint-disable */}
+
+/* eslint-disable */
 const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
-{ /* eslint-enable */}
+/* eslint-enable */
 
 //import Artwork from './Artwork'
 

@@ -155,10 +155,17 @@ a:hover{
 }
 .artworkGallery{
 float:left;
-  
 }
+.ulList{
+  float:left;
+  list-style-type:none; 
+  }
 .artworkThumb{
   float:left;  
 }
-  
+.galleryPicture{
+  max-width:300px;
+  max-height:300px;
+}
+   
 

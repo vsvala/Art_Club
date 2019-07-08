@@ -144,6 +144,8 @@ export const initializeSingleUser = (userId) => {
   console.log('initializeSingleUser')
   return async (dispatch) => {
     const content = await userService.getSingleUser(userId)
+    console.log('contentfromsigleACTION', content)
+
     dispatch({
       type: 'INIT_SINGLE_USER',
       data: content

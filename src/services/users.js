@@ -36,7 +36,7 @@ const getAll = async () => {
 //gets a single user by id
 const getSingleUser = async (id) => {
   try {
-    const response = await axios.get(baseUrl + `/${id}`, getConfig())
+    const response = await axios.get(baseUrl + `/admin/${id}`, getConfig())
     return response.data
   } catch (error) {
     if (error === 400) {

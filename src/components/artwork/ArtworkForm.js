@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
-import { createArtwork, deleteArtwork  } from '../../reducers/actionCreators/artworkActions'
+import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Form, Button, Col } from 'react-bootstrap'
 import { getUsers } from '../../reducers/actionCreators/userActions'
 import artworkService from '../../services/artworks'
@@ -17,22 +17,12 @@ export const ArtworkForm = (
   }
 ) => {
   useEffect(() => {
-    console.log('id')
+    console.log('id',id)
     getUsers()
   }, [])
 
-  const userToShow =users.find(u => u.id===id)
+  const userToShow=users.find(u => u.id===id)
 
-
-
-  //event handler for deleting specific  artworkn
-  const removeArtwork = (artworkId) => {
-    return () => {
-      if (window.confirm('Do you want to delete this artwork?')) {
-        deleteArtwork(artworkId)//, loggedUser.user.user_id
-      }
-    }
-  }
 
   const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
   const [galleryImage, setFile] = useState({ })
@@ -195,7 +185,6 @@ export const ArtworkForm = (
               <ArtworkThumb
                 key={a.id}
                 artwork={a}
-                onClick={removeArtwork}
               />
             )}
         </div>
@@ -205,7 +194,7 @@ export const ArtworkForm = (
   )
 }
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) => { //id
   console.log('stateeeeeeeeeeeee', state.users.users)
   return {
     users: state.users.users

@@ -50,16 +50,16 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
           { userArray&&userArray.map(user =>
             <User  user={user}
               key={user.id}
+              artworks={user.artworks}
               onClick={removeUser}/>
           )}
         </tbody>
       </Table>
     </div>
-  )
-}
+  )}
 
 const mapStateToProps = (state) => {
-  console.log('state', state.users.users)
+  console.log('statefromUSerList userarray', state.users.users)
 
   return {
     userArray: state.users.users

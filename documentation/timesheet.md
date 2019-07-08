@@ -24,9 +24,9 @@
 | pe 5.7.  | 8    | Backend: Updating user and geting singleuser routes, Frontend: Notifications, starting singleUser/Mypage |
 | la.6.7   | 4    | Frontend: refining Gallerypage and singleArtwork page |
 | su.7.7   | 5    | Frontend: Getting added artworks and count to show on addArtworkpage , Backend:populating get requests |
-| ma.8.7   | ?    |  Frontend: , Tests... Dokumentation, updating artworks... Dokumentation |
-| ma.8.7   | ?    |  Frontend: , Tests... Dokumentation, updating artworks... Dokumentation |
-| total |  113,5/175    |  
+| ma.8.7   | 5,5  | Frontend: Starting Mypage/singleUserPage, Backend:populating get singleUser request |
+| ti.9.7   | ?    | Testing build, Fixing bugs, Frontend: Finalizing Mypage, Tests... Dokumentation, updating artworks... Dokumentation |
+| total |  119/175  |  
 
 
  

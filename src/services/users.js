@@ -1,9 +1,8 @@
 import axios from 'axios'
-//import url from './config'
+import url from './config'
 
-const baseUrl =  'http://localhost:3001/api/users'
+const baseUrl = url + 'api/users'
 
-//TODO  get config
 
 let token = null
 

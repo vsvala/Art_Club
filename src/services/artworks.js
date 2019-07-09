@@ -1,10 +1,8 @@
 import axios from 'axios'
-//import url from './config'
-const baseUrl =  'http://localhost:3001/api/artworks'
+import url from './config'
 
+const baseUrl = url + 'api/artworks/'
 
-//const baseUrl = url + 'api/artworks/'
-//const baseUrl = 'http://localhost:3001/artworks'  //json server
 let token = null
 
 
@@ -71,33 +69,33 @@ const create = async (data) => {
   }
 }
 
-const send = async (galleryImage) => {
-  console.log('servise create', galleryImage)
+// const send = async (galleryImage) => {
+//   console.log('servise create', galleryImage)
 
-  try {
-    const response = await axios.post('http://localhost:3001/api/images', galleryImage)/* , {
-      headers: {
-        // 'accept': 'application/json',
-        // 'Accept-Language': 'en-US,en;q=0.8',
-        'Content-Type': 'multipart/form-data'
-      }, */
-    // })
-    console.log('response')
-    console.log(response.statusText)
-    return response.data
-  } catch (error) {
-    const status = error.response.status
-    if (status === 500) {
-      return { error: 'Unable to connect to server.' }
-    } else if (status === 400) {
-      return { error: 'artwork missing.' }
-    } else if (status === 401) {
-      return { error: 'Username or password is incorrect.' }
-    } else {
-      return { error: 'Unable to connect to server.' }
-    }
-  }
-}
+//   try {
+//     const response = await axios.post('http://localhost:3001/api/images', galleryImage)/* , {
+//       headers: {
+//         // 'accept': 'application/json',
+//         // 'Accept-Language': 'en-US,en;q=0.8',
+//         'Content-Type': 'multipart/form-data'
+//       }, */
+//     // })
+//     console.log('response')
+//     console.log(response.statusText)
+//     return response.data
+//   } catch (error) {
+//     const status = error.response.status
+//     if (status === 500) {
+//       return { error: 'Unable to connect to server.' }
+//     } else if (status === 400) {
+//       return { error: 'artwork missing.' }
+//     } else if (status === 401) {
+//       return { error: 'Username or password is incorrect.' }
+//     } else {
+//       return { error: 'Unable to connect to server.' }
+//     }
+//   }
+// }
 
 const update = async(content, id) => {
   try {
@@ -119,4 +117,4 @@ const deleteArtwork = async (id) => {
 }
 
 
-export default { getAll, getSingleArtwork, create, update, setToken, send, deleteArtwork }
+export default { getAll, getSingleArtwork, create, update, setToken, deleteArtwork }

@@ -1,8 +1,7 @@
 import axios from 'axios'
-//import url from './config'
+import url from './config'
 
-//const baseUrl = url + 'api/login'
-const baseUrl =  'http://localhost:3001/api/login'
+const baseUrl = url + 'api/login'
 
 
 const login = async (credentials) => {

@@ -4,9 +4,12 @@ import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreator
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
+import url from '../../services/config'
+
+const baseUrl = url + 'public/'
 
 /* eslint-disable */
-const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
+//const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
 /* eslint-enable */
 
 //import Artwork from './Artwork'
@@ -42,7 +45,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
           .map(a =>
             <ul key={a.id}  className='ulList'>
               <li><img
-                src={ BASE_URL+`${ a.galleryImage }`}
+                src={ baseUrl+`${ a.galleryImage }`}
                 // width='300'
                 // height='auto'
                 className='galleryPicture'

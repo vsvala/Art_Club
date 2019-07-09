@@ -96,5 +96,5 @@ export const LoginForm = ({ login }) => {
 
 export default connect(
   null,
-  { login } //notification, setError,
+  { login }
 )(LoginForm)

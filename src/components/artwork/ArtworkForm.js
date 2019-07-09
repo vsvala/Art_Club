@@ -124,8 +124,9 @@ export const ArtworkForm = (
           </Col>
         </Row>
         <br/>
-        <Col md={{ span: 10, offset: 1 }}>
-          <Form onSubmit={handleSubmit}>
+
+        <Form onSubmit={handleSubmit}>
+          <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
               {/* <Form.Label>Artist: </Form.Label> */}
               <Form.Control
@@ -171,17 +172,17 @@ export const ArtworkForm = (
                 <p>You can add 10 images to the gallery.TODO RAJOITE.</p>
               </div>
               <br/>
-              <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
-
-              {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
-
               <Button className='button' type='submit' variant="light">Send</Button>
-
             </Form.Group>
-          </Form>
-        </Col>
-        <Col md={{ span: 10, offset: 1 }}>
+          </Col>
+        </Form>
 
+        <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
+
+        {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
+
+
+        <Col md={{ span: 10, offset: 1 }}>
           <br/>
           <br/>
           <div className='addedArt'>

@@ -22,21 +22,20 @@ export const Home = ( props) => {
           <p> Once your application is approved, you are informed of your acceptances by email.</p>
         </div>
         :
-
         <div className="home">
           <h1>Wellcome To Art Club!</h1>
           <br/>
           <img
             src={logo}
-            width='700'
-            height='350'
-            className='logLogo'
+            width='600'
+            height='300'
+            className='frontLogo'
             alt='Art club LOGO'
           />
           <br/>
-          {/* <p>   TODO..IMPORT PITURE/ORSLIDESHOW ...featuring picture of a month..???.</p>
-          <h3>About</h3> */}
-          <p>Wellcome to join Art club. Ass a member you can add  10 pictures to main gallery and have your own artist page where you can add paictures and short introduction of yourself. You will also find Art clubs newest happenings and subscribe to our email-list.  </p>
+          <br/>
+          <p>Wellcome to join Art club. Ass a member you can have your own artist page where it is possible to upload max 10 pictures and short introduction about yourself.
+             Added pictures will be displayed on main gallery page. You will also find Art clubs upcoming events and subscribe to our email-list.  </p>
           <p> <Link to='/login' className='login'>Login</Link> or <Link to='/register' className='register'>Register</Link> to apply membership</p>
         </div>
       }

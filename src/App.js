@@ -221,7 +221,7 @@ const App = (props) => {
 
 
 
-              <Route exact path="/" render={() => <Home />} />
+              <Route exact path="/" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id"
                 render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
@@ -229,7 +229,7 @@ const App = (props) => {
                 render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
               <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
-              <Route exact path="/register" render={() => <RegisterUserForm /> } />
+              <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
 
               {/* <Route path="/members" render={() => <Members />} />*/}
 

@@ -15,7 +15,8 @@ import { createUser } from '../../reducers/actionCreators/userActions'
 
 
 export const RegisterUserForm = ( {
-  createUser
+  createUser,
+  history
 // id,
   //notify,
 }) => {
@@ -47,7 +48,7 @@ export const RegisterUserForm = ( {
     event.target.email.value=''
     event.target.username.value = ''
     event.target.password.value=''
-    // history.push('/login')
+    history.push('/login')
   }
 
   //   const handleChange = (event) => {
@@ -67,7 +68,7 @@ export const RegisterUserForm = ( {
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
             <div className='regHeader'>
-              <h3>Apply membership</h3>
+              <h3>Register and apply membership</h3>
             </div>
           </Col>
         </Row>

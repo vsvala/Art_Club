@@ -10,79 +10,84 @@
 
   /* TODOO POSTA TURHAT IMPORTIT fontit ja värit.. */
 
-
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #696969;  
-
-
+  color: #9b9b9b;  
 }
-.navbar-light .navbar-brand {
-  /* color: rgb(5, 5, 5, 0.9); */
-  font-size: 2.5em;
-  font-weight: 400;
-  /*   color: #2fc2cc; 
-font-family: 'Megrim', cursive; */
-/* 
-  font-family: 'Poiret One', cursive;
-  font-family: 'Pacifico', cursive; */
-  font-family: 'Amatic SC', cursive;
-
-}
-
-h2{
-margin-top: 30px;
-color: #338ad3;
- color: #bebcbc;
- font-family: 'Leckerli One', cursive;
-
-}
-
-h3{
-  margin-top: 30px;  
-  color: #ff1476;
-  color: #bebcbc;
-  font-family: 'Leckerli One', cursive;
- 
-  
-  }
 
 h1{
   /* margin-left:65px; */
   padding-top: 40px;
   color: #251147;
   font-family: 'Amatic SC', cursive;
-  text-align: center;
-    
+  text-align: center;   
   }
-/* adjust nlinks */
+h2{
+margin-top: 40px;
+color: #338ad3;
+color: #bebcbc;
+font-family: 'Leckerli One', cursive;
+}
+h3{
+  margin-top: 30px;  
+  color: #ff1476;
+  color: #bebcbc;
+  font-family: 'Leckerli One', cursive;
+  }
+.grayInfoText {
+  color:  #879097;
+  font-size: 80%;
+  float:left;
+  }
 
+  /* NAVBAR & LINKS */
+.navbar-light .navbar-brand {
+  /* color: rgb(5, 5, 5, 0.9); */
+  font-size: 2.5em;
+  font-weight: 400;
+  /*   color: #2fc2cc; 
+font-family: 'Megrim', cursive; */
+/* font-family: 'Poiret One', cursive;
+  font-family: 'Pacifico', cursive; */
+  font-family: 'Amatic SC', cursive;
+}
+.adminNav{
+  font-family: 'Leckerli One', cursive;
+  color: #ff1476;
+ }
+.member{
+  color: #fd7945; 
+  color: #ff1476; 
+   color: #251147;
+}
+.admin{
+  color: #bebcbc;
+  color: #fd7945;   
+  color: #251147;
+  color: #ff1476; 
+}
+
+
+
+/*LINKS*/
 a{
-
  font-family: 'Leckerli One', cursive;
   color: #fd7945; 
-  /*  color: #0eaaa2;
-    color: #389ca3;*/ 
-    color: #251147;
+  color: #251147;
   color: #ff1476;
   color: #482d7c;
   color: #338ad3;
- 
-
-
- 
 }
 a:hover{
   color: #f1ab8f;
   color: #251147;
   color: #ff1476;
   color: #bebcbc;
-  /*  color: #389ca3;
- color: rgb(36, 172, 177); */
   text-decoration: none;
 }
+
 
 .picture{
   /* float:left; */
@@ -95,31 +100,16 @@ a:hover{
   left: 16px;
   z-index:-1;
 }
-.adminNav{
- font-family: 'Leckerli One', cursive;
- color: #ff1476;
 
-}
 
 /* TODO navigation colours acccordinto sign in..??*/
 /* a:active{
   color: #ff1476;
 } */
 /* TODOSelected pink*/
-.member{
 
-  color: #fd7945; 
-  color: #ff1476; 
-   color: #251147;
-}
 
-.admin{
-  color: #bebcbc;
-  color: #fd7945;   
-  color: #251147;
-  color: #ff1476; 
-
-}
+/* BUTTONS*/
 .btn{
   /* margin: 0px;
   margin: 0px 0px 0px 15px; */
@@ -130,25 +120,27 @@ a:hover{
   color: #338ad3;
   background-color: white;
   border-color: #6c757d;
-  font-family: 'Leckerli One', cursive;
-  
+  font-family: 'Leckerli One', cursive; 
 }
-
 .btn:hover {
   color: #bebcbc;
   border-color: #6c757d;
   background-color:white; 
 }
 
+
+
+ /*IMAGE UPPLOADER */
 .fileUploader{
   float:left;
 }
-
 .fileUploader{
   color: #338ad3;
-  font-family: 'Leckerli One', cursive;
-  
+  font-family: 'Leckerli One', cursive; 
 }
+
+
+ /* GALLERY */
 .artworkGallery{
 float:left;
 }
@@ -165,10 +157,7 @@ float:left;
 }
    
 
-
-
  /* LOGINFORM */
-
 .loginForm {
   background: #ffffff;
   height: 500px;
@@ -177,17 +166,12 @@ float:left;
   box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
   margin-top: 60px;
 } 
-
-.grayInfoText {
-  color:  #879097;
-  font-size: 80%;
-  float:left;
-}
 .logHeader h3{
   color: #338ad3;
   margin-bottom: 20px;
   margin-top: 60px;
 }
+
 
   /* REGISTERFORM */
   .registerForm {
@@ -198,11 +182,9 @@ float:left;
     box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
     margin-top: 60px;
   } 
-
   .regHeader {
     margin-top: 60px;
   }
-
   .regHeader h3{
     color: #338ad3;
     margin-bottom: 20px;
@@ -218,16 +200,19 @@ float:left;
     box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
     margin-top: 60px;
   } 
-
-  .artworkHeader {
-
-  }
-
   .artworkHeader h3{
     color: #338ad3;
     margin-bottom: 20px;
   }
-
   .addedArt{
    margin-top: 100px;
   }
+
+   /* HOME */
+  .nonMember h3{
+  color: #ff1476; 
+  margin-top: 40px;
+  }
+  .home h2{
+    color: #338ad3;
+    }

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { getUsers } from '../../reducers/actionCreators/userActions'
-import artworkService from '../../services/artworks'
+//import artworkService from '../../services/artworks'
 import FormData from 'form-data'
 import ArtworkThumb from './ArtworkThumb'
 
@@ -11,6 +11,7 @@ import ArtworkThumb from './ArtworkThumb'
 export const ArtworkForm = (
   {
   // deleteArtwork,
+    createArtwork,
     getUsers,
     users,
     id
@@ -41,19 +42,20 @@ export const ArtworkForm = (
     data.append('medium',event.target.medium.value)
     data.append('userId',id)
 
-    const formContent = {
-      artist: event.target.artist.value,
-      name: event.target.name.value,
-      year: event.target.year.value,
-      size: event.target.size.value,
-      medium:event.target.medium.value,
-      userId:id
-    }
-    console.log('submit', formContent)
+    // const formContent = {
+    //   artist: event.target.artist.value,
+    //   name: event.target.name.value,
+    //   year: event.target.year.value,
+    //   size: event.target.size.value,
+    //   medium:event.target.medium.value,
+    //   userId:id
+    // }
+    // console.log('submit', formContent)
     console.log('submitdata', data)
 
-    //TODOOOO...tämä actioncreatoreiden kautta.. createArtwork(formContent)
-    artworkService.create(data)
+
+    createArtwork(data)
+    //artworkService.create(data)
   }
 
   const handleChange = (event) => {

@@ -1,26 +1,26 @@
-import artworkService from '../../services/artworks'
+import eventService from '../../services/events'
 
-// tells artworkService to get all artworks from database and dispatch them to store
-export const initializeArtworks = () => {
+// tells eventService to get all events from database and dispatch them to store
+export const initializeEvent = () => {
   return async (dispatch) => {
-    const content = await artworkService.getAll()
+    const content = await eventService.getAll()
     console.log('actions init content:', content )
     dispatch({
-      type: 'INIT_ARTWORKS',
+      type: 'INIT_EVENTS',
       data: content
     })
   }
 }
 
-// creates new artwork
-export const createArtwork=(content) => {
+// creates new event
+export const createEvent =(content) => {
   console.log('actions create:', content )
 
   return async (dispatch)  => {
-    console.log('createArtworkaction', content)
-    const artwork = await artworkService.create(content)
-    console.log(artwork,'uuusArtwork')
-    if (artwork.error || artwork === undefined) {
+    console.log('createEventaction', content)
+    const event = await eventService.create(content)
+    console.log(event,'uuusEvent')
+    if (event.error || event === undefined) {
       dispatch({
         type: 'NOTIFY',
         data: 'Saving failed!'
@@ -33,12 +33,12 @@ export const createArtwork=(content) => {
     } else {
 
       dispatch({
-        type:'CREATE_ARTWORK',
-        data:artwork
+        type:'CREATE_EVENT',
+        data:event
       })
       dispatch({
         type: 'NOTIFY',
-        data: 'Artwork added'
+        data: 'Event created'
       })
       setTimeout(() => {
         dispatch({
@@ -49,10 +49,10 @@ export const createArtwork=(content) => {
   }
 }
 
-// delete artwork
-export const deleteArtwork = (artwork_id) => {
+// delete event
+export const deleteEvent = (event_id) => {
   return async (dispatch) => {
-    const response = await artworkService.deleteArtwork(artwork_id)
+    const response = await eventService.deleteArtwork(event_id)
     if (response.error || response === undefined) {
       dispatch({
         type: 'NOTIFY',
@@ -65,12 +65,12 @@ export const deleteArtwork = (artwork_id) => {
       }, 3000)
     } else {
       dispatch({
-        type: 'DELETE_ARTWORK',
-        data: { id: artwork_id }
+        type: 'DELETE_EVENT',
+        data: { id: event_id }
       })
       dispatch({
         type: 'NOTIFY',
-        data: 'artwork deleted'
+        data: 'Event deleted'
       })
       setTimeout(() => {
         dispatch({
@@ -81,4 +81,4 @@ export const deleteArtwork = (artwork_id) => {
   }
 }
 
-export default { initializeArtworks, createArtwork, deleteArtwork }
+export default { initializeEvent, createEvent, deleteEvent }

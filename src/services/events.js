@@ -1,7 +1,8 @@
 import axios from 'axios'
 import url from './config'
 
-const baseUrl = url + 'api/artworks/'
+const baseUrl = url + 'api/events/'
+
 
 
 let token = null
@@ -14,6 +15,7 @@ const getConfig = () => {
   }
 }
 
+
 const getAll = async () => {
   try {
     const response = await axios.get(baseUrl)
@@ -22,19 +24,19 @@ const getAll = async () => {
     return response.data
 
   } catch (error) {
-    return { error: 'Could not get artworks from db' }
+    return { error: 'Could not get events from db' }
   }
 }
 
-const getSingleArtwork= async (id) => {
-  console.log('service get singleartwork')
+const getSingle= async (id) => {
+  console.log('service get single event')
 
   try {
     const response = await axios.get(baseUrl + `/${id}`)
     return response.data
   } catch (error) {
     if (error === 400) {
-      return { error: 'Could not getartwork from db' }
+      return { error: 'Could not get event from db' }
     }
     if (error === 500) {
       return { error: 'Internal server error' }
@@ -58,7 +60,7 @@ const create = async (data) => {
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {
-      return { error: 'artwork missing.' }
+      return { error: 'event missing.' }
     } else if (status === 401) {
       return { error: 'Username or password is incorrect.' }
     } else {
@@ -67,52 +69,25 @@ const create = async (data) => {
   }
 }
 
-// const send = async (galleryImage) => {
-//   console.log('servise create', galleryImage)
-
-//   try {
-//     const response = await axios.post('http://localhost:3001/api/images', galleryImage)/* , {
-//       headers: {
-//         // 'accept': 'application/json',
-//         // 'Accept-Language': 'en-US,en;q=0.8',
-//         'Content-Type': 'multipart/form-data'
-//       }, */
-//     // })
-//     console.log('response')
-//     console.log(response.statusText)
-//     return response.data
-//   } catch (error) {
-//     const status = error.response.status
-//     if (status === 500) {
-//       return { error: 'Unable to connect to server.' }
-//     } else if (status === 400) {
-//       return { error: 'artwork missing.' }
-//     } else if (status === 401) {
-//       return { error: 'Username or password is incorrect.' }
-//     } else {
-//       return { error: 'Unable to connect to server.' }
-//     }
-//   }
-// }
 
 const update = async(content, id) => {
   try {
     const response = await axios.put(`${ baseUrl } /${id}`,content, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'Could not update artwork' }
+    return { error: 'Could not update event' }
   }
 }
 
-//Deletes a artwork from database by artwork id. Only for admin!
-const deleteArtwork = async (id) => {
+//Deletes a event from database by event.id. Only for admin!
+const deleteEvent = async (id) => {
   try {
     const response = await axios.delete(baseUrl + `/${id}`)//, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'Student with student number "' + id + '" not found!' }
+    return { error: 'Event with id "' + id + '" not found!' }
   }
 }
 
 
-export default { getAll, getSingleArtwork, create, update, setToken, deleteArtwork }
+export default { getAll, getSingle, create, update, setToken, deleteEvent }

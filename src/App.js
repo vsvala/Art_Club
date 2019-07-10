@@ -1,29 +1,28 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { Navbar, Nav, Button } from 'react-bootstrap'
-// import logo from './logo.simport {
 import logo from './images/tripleblue.png'
 import picture from './images/pict.png'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'  //Redirect, withRouter
-import './App.css'
+
 
 // Actions
 import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
 // Components
+import Home from './components/Home'
+import RegisterUserForm from './components/login/RegisterUserForm'
+import LoginForm from './components/login/LoginForm'
 import ArtworkForm from './components/artwork/ArtworkForm'
 import ArtworkList from './components/artwork/ArtworkList'
 import SingleArtwork from './components/artwork/SingleArtwork'
-
-import Home from './components/Home'
-import RegisterUserForm from './components/login/RegisterUserForm'
-
-import LoginForm from './components/login/LoginForm'
+import EventForm from './components/event/EventForm'
+//import EventList from './components/event/EventList'
+//import SingleEvent from './components/event/SingleEvent'
 import UserList from './components/user/UserList'
+import SingleUser from './components/user/SingleUser'
 import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
-import SingleUser from './components/user/SingleUser'
-
 const App = (props) => {
 
   useEffect(() => {
@@ -35,18 +34,8 @@ const App = (props) => {
   const isAdmin = loggedUser && loggedUser.role === 'admin'
 
   return (
-    // <div className="container">
+
     <div className="App">
-
-
-      {/*  <div className="App-header">
-         <img src={logo} className="App-logo" alt="logo" />
-        <h2>Welcome to ArtClub</h2>
-      </div>*/}
-      {/* <p className="Ap-intro">
-         Apply club membership by registering to the service
-         link
-        </p> */}
 
       {/* {user === null ?
       loginForm() :
@@ -95,23 +84,12 @@ const App = (props) => {
                   </Nav.Link>
 
 
-                  <Nav.Link href='#' as='span'>
-                    <Link to="/addArtwork">add</Link>  &nbsp;
-                    {/* <Link to="/register">Register</Link> &nbsp; */}
-                  </Nav.Link>
 
-
-
+                  {/* MEMBER LINKS */}
 
                   <Nav.Link href='#' as='span'>
                     {isMember | isAdmin
-                      ? <Link to="/member/addArtwork" className='member'>Add artwork</Link>
-                      : <em></em>} &nbsp;
-                  </Nav.Link>
-
-                  <Nav.Link href='#' as='span'>
-                    { isMember | isAdmin
-                      ? <Link to="/events"  className='member'>Events</Link>
+                      ? <Link to="/users/addArtwork" className='member'>Add artwork</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
@@ -121,36 +99,43 @@ const App = (props) => {
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
-
                   <Nav.Link href='#' as='span'>
-                    { isAdmin
-                      ? <Link to='/users/admin'  className='admin'>Users</Link>
+                    { isMember | isAdmin
+                      ? <Link to="/events"  className='member'>Events</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
+
+
+                  {/* ADMIN LINKS */}
 
                   <Nav.Link href='#' as='span'>
                     {  isAdmin
-                      ? <Link to="/addEevent"  className='admin'>Add event</Link>
+                      ? <Link to="/admin/addEvent"  className='admin'>Add event</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
-
+                  <Nav.Link href='#' as='span'>
+                    { isAdmin
+                      ? <Link to='/admin/users'  className='admin'>Users</Link>
+                      : <em></em>} &nbsp;
+                  </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
                     { isAdmin
                       ? <Link to='/admin' className='admin'>Change password</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
-
                 </Nav>
+
+
+
+
 
                 <Nav.Link href='#' as='span'>
                   {!loggedUser
                     ? <Link to='/register'>Register</Link>
                     : <em></em>} &nbsp;
                 </Nav.Link>
-
-
 
                 {loggedUser
                   ? <Button
@@ -164,7 +149,7 @@ const App = (props) => {
                     className='button'
                     variant='light'
                     type='button' >
-                    <Link to="login">Login</Link>
+                    <Link to="/login">Login</Link>
                   </Button>} &nbsp;
 
               </Navbar.Collapse>
@@ -180,24 +165,18 @@ const App = (props) => {
 
               {/* THIS ROUTE PROTECTS ALL ROUTES UNDER "/admin" */}
               <PrivateRoute
-                path="/users/admin"
+                path="/admin"
                 redirectPath="/login"
                 condition={loggedUser && isAdmin}
               >
-                <Route exact path="/users/admin" render={() => <UserList />} />
-                <Route exact path="/users/admin/:id"
-                  render={({ match }) => <SingleUser userId={match.params.id} />} />
-
-                {/* <Route exact path="/users/admin/:id"
-                  render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
+                <Route exact path="/admin/addEvent" render={() => <EventForm />} />
+                <Route exact path="/admin/users" render={() => <UserList />} />
+                <Route exact path="/admin/users/:id"render={({ match }) => <SingleUser userId={match.params.id} />} />
                 {/* <Route exact path="/users/admin/:id" render={() => <SingleUser />} /> */}
-
-                {/*     <Route exact path="/admin/addEvent" render={() => <EventForm />} />
-                <Route exact path="/admin/userDelete" render={() => <UserDelete />} />
-                                <Route exact path="/admin/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} />
-
+                {/*        <Route exact path="/admin/userDelete" render={() => <UserDelete />} />
                 <Route exact path="/admin" render={() => <UpdatePasswordForm />} />  */}
               </PrivateRoute>
+
 
               <PrivateRoute
                 exact path="/login"
@@ -206,7 +185,7 @@ const App = (props) => {
                 render={() => <LoginForm />}
               />
 
-              {/* TODOOOOOOOOOOOOOOOOOOOO   THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/member" */}
+              {/*  THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/users" */}
               <PrivateRoute
                 path="/users"
                 redirectPath="/login"
@@ -214,17 +193,14 @@ const App = (props) => {
               >
                 <Route exact path="/users/:id/myPage"
                   render={() => <SingleUser userId={loggedUser.id} />} />
-                {/* <Route exact path="/users/addArtwork" render={() => <ArtworkForm />  id={loggedUser.user.user_id}} /> */}
-
+                <Route exact path="/users/addArtwork" render={() => <ArtworkForm  id={loggedUser.id} /> } />
               </PrivateRoute>
-
 
 
 
               <Route exact path="/" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
-              <Route exact path="/artworks/:id"
-                render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
+              <Route exact path="/artworks/:id"render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
               {/*          <Route exact path="/users/:id"
                 render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
               <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
@@ -250,7 +226,6 @@ const App = (props) => {
       />
 
     </div>
-    // </div>
   )
 }
 const mapStateToProps = (state) => {

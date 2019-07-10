@@ -3,8 +3,9 @@ const initialState = {
   artworks: []
 }
 
-// updates the state of the "course application" course list
+// updates the state of the artworkList
 const artworkReducer = (state = initialState, action) => {
+
   switch (action.type) {
   case 'INIT_ARTWORKS': {
     return {

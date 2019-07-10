@@ -76,7 +76,7 @@ Framework for Node.js
 [Express](http://expressjs.com/)
 ```npm install express --save ```
 
-automatically restarts applicatio nafter changes'. 
+Automatic restart of application after changes'. 
 [Nodemon](https://github.com/remy/nodemon)
 ```npm install --save-dev nodemon```
 
@@ -86,6 +86,12 @@ Middleware which allows request from other origins:
 
 [Jsonwebtoken-kirjasto](https://github.com/auth0/node-jsonwebtoken), jonka avulla koodi pystyy generoimaan JSON web token -muotoisia tokeneja.
 ```npm install jsonwebtoken --save```
+
+Body-parser
+```npm install body-parser```
+
+Multer for image data handling
+
 
 Database:
 
@@ -114,10 +120,16 @@ Validating unique values:
 
 [Testing]( )
 
+[Heroku](https://github.com/vsvala/Art_Club/blob/master/documentation/heroku.md)
+
 [Timesheet](https://github.com/vsvala/Art_Club/blob/master/documentation/timesheet.md)
 
 ## License
 
 ## Commandline functionality
 
+### front
 
+### back
+
+```git push heroku master```

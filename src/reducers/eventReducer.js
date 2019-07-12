@@ -16,7 +16,7 @@ const eventReducer = (state = initialState, action) => {
   case 'CREATE_EVENT': {
     return {
       ...state,
-      events: [],
+      events: action.data,
     }
   }
 

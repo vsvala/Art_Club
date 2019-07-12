@@ -4,7 +4,7 @@ import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import FormData from 'form-data'
 
-
+//TODO time fielsd and gettin calender to choose date..tand time.
 
 export const EventForm = (
   {
@@ -14,38 +14,31 @@ export const EventForm = (
 ) => {
 
 
-  const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
+  const [input, setInput] = useState({ image: '', title: '', place: '', startDate: '',endDate: '', startTime: '',endTime: '', description: '', selectedFile:null })
   const [eventImage, setFile] = useState({ })
+
 
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-
     console.log('file',eventImage, eventImage.eventImage.name)
     const data=new FormData()
     data.append('eventImage',eventImage.eventImage)
-    data.append('artist', event.target.artist.value)
-    data.append('name', event.target.name.value)
-    data.append('year', event.target.year.value)
-    data.append('size', event.target.size.value)
-    data.append('medium',event.target.medium.value)
+    data.append('title', event.target.title.value)
+    data.append('place', event.target.place.value)
+    data.append('startDate', event.target.startDate.value)
+    data.append('endDate', event.target.endDate.value)
+    data.append('startTime', event.target.startTime.value)
+    data.append('endTime', event.target.endTime.value)
+    data.append('description',event.target.description.value)
     data.append('userId',id)
 
-    // const formContent = {
-    //   artist: event.target.artist.value,
-    //   name: event.target.name.value,
-    //   year: event.target.year.value,
-    //   size: event.target.size.value,
-    //   medium:event.target.medium.value,
-    //   userId:id
-    // }
-    // console.log('submit', formContent)
     console.log('submitdata', data)
-
-
     createEvent(data)
   }
 
+
+  //eventhandler for changin formField inputs
   const handleChange = (event) => {
     const newInput = {
       ...input,
@@ -56,12 +49,15 @@ export const EventForm = (
   }
 
 
+  // eventhandler for fileInput
   const fileSelectedHandler=event => {
     setFile({ eventImage : event.target.files[0] })
     console.log('event', event.target.files[0])
   }
 
+
   return (
+
     <div className='eventForm'>
       <Container>
         <Row>
@@ -93,26 +89,35 @@ export const EventForm = (
               <br/>
               <Form.Control
                 type='text'
-                placeholder='Date'
-                name='date'
+                placeholder='Start date'
+                name='startDate'
                 onChange={handleChange}
               />
               <br/>
               <Form.Control
                 type='text'
-                placeholder='From'
-                name='from'
+                placeholder='End date'
+                name='endDate'
                 onChange={handleChange}
               />
               <br/>
               <Form.Control
                 type='text'
-                placeholder='To'
-                name='to'
+                placeholder='Start time'
+                name='startTime'
                 onChange={handleChange}
               />
               <br/>
               <Form.Control
+                type='text'
+                placeholder='End time'
+                name='endTime'
+                onChange={handleChange}
+              />
+              <br/>
+              <Form.Control
+                as='textarea'
+                rows='3'
                 type='text'
                 placeholder='Description'
                 name='description'
@@ -126,13 +131,11 @@ export const EventForm = (
             <p>Upload event picture</p>
           </div>
         </Form>
-
         <br/>
         <br/>
         <input type='file'className='fileUploader' name='eventImage' id="file" onChange={fileSelectedHandler}/>
       </Container>
     </div>
-
   )
 }
 

@@ -143,7 +143,7 @@ const App = (props) => {
                     onClick={props.logout}
                     variant='light'
                     type='button'>
-                    <Link to="logout">Logout</Link>
+                    <Link to="#">Logout</Link>
                   </Button>
                   : <Button
                     className='button'
@@ -169,7 +169,7 @@ const App = (props) => {
                 redirectPath="/login"
                 condition={loggedUser && isAdmin}
               >
-                <Route exact path="/admin/addEvent" render={() => <EventForm />} />
+                <Route exact path="/admin/addEvent" render={() => <EventForm id={loggedUser.id}  />} />
                 <Route exact path="/admin/users" render={() => <UserList />} />
                 <Route exact path="/admin/users/:id"render={({ match }) => <SingleUser userId={match.params.id} />} />
                 {/* <Route exact path="/users/admin/:id" render={() => <SingleUser />} /> */}

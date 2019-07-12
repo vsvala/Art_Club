@@ -14,11 +14,11 @@ const baseUrl = url + 'public/'
 
 //import Artwork from './Artwork'
 
-export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser,  initLoggedUser }) => { // => {
+export const EventList = ({ deleteEvent, initializeEvents, events, loggedUser,  initLoggedUser }) => { // => {
   useEffect(() => {
-    // if (artworks.length === 0) {
+    // if (events.length === 0) {
     console.log('initialiList')
-    initializeArtworks() &&
+    initializeEvents() &&
     initLoggedUser()
     // }
   }, [])
@@ -27,35 +27,35 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
   //TODO search by artist or by artwork...order alphabetically by ainting and artist
   //event handler for deleting specific course application, tells studentactions to deleteApliedCourse
-  const removeArtwork = (id) => {
+  const removeEvent = (id) => {
     return () => {
-      if (window.confirm('Do you want to delete this artwork?')) {
-        deleteArtwork(id)//, loggedUser.user.user_id
+      if (window.confirm('Do you want to delete this event')) {
+        deleteEvent(id)//, loggedUser.user.user_id
       }
     }
   }
 
   return (
-    <div className="artworkList">
+    <div className="eventList">
       <h2>Gallery</h2>
       <br/>
-      {console.log('artworks..hhh',artworks)}
+      {console.log('events..hhh',events)}
       <div>
-        { artworks
-          .map(a =>
-            <ul key={a.id}  className='ulList'>
+        { events
+          .map(e =>
+            <ul key={e.id}  className='elList'>
               <li><img
-                src={ baseUrl+`${ a.galleryImage }`}
+                src={ baseUrl+`${ e.eventImage }`}
                 // width='300'
                 // height='auto'
-                className='galleryPicture'
+                className='eventPicture'
                 alt='img'
               /></li>
-              <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link>
-         by { a.artist }, { a.year }, { a.size }, { a.medium }</li>
+              <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li>
+              {/* </Link>/ by { a.artist }, { a.year }, { a.size }, { a.medium } */}
 
               {loggedUser && loggedUser.role==='admin'
-                ? <li className="delete"><DeleteButton id={a.id} onClick={removeArtwork} /></li>
+                ? <li className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></li>
                 : <em></em>}
             </ul>
           )}
@@ -63,8 +63,8 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
     </div>   )
 }
 
-//  {console.log('artworks..hhh',artworkList)}
-//       {artworkList
+//  {console.log('events..hhh',eventList)}
+//       {eventList
 //         .map(artwork =>
 //           <Artwork
 //             artwork={artwork}
@@ -77,10 +77,10 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
 
 const mapStateToProps = (state) => {
-  console.log('state', state.artworks.artworks)
+  console.log('state', state.events.events)
 
   return {
-    artworks: state.artworks.artworks,
+    events: state.evenst.events,
     loggedUser: state.loggedUser.loggedUser
   }
 }
@@ -88,6 +88,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeArtworks, deleteArtwork, initLoggedUser }
-)(ArtworkList)
+  { initializeEvents, deleteEvent, initLoggedUser }
+)(EventList)
 

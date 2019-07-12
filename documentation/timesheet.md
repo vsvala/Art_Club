@@ -26,10 +26,10 @@
 | su 7.7   | 5    | Frontend: Getting added artworks and count to show on addArtworkpage , Backend:populating get requests |
 | ma 8.7   | 8,5  | Frontend: Starting Mypage, form borders and design, Backend:populating get singleUser request |
 | ti 9.7   | 8    | Refactoring, Heroku deployment, travis/heroku fixes,  bublic urls, starting back tests|
-| ke 10.7  |  ?   | Frontend: Finalizing Mypage, Tests... Dokumentation, updating artworks.. |
-| ke 10.7  |  ?   | Frontend:  Tests... Dokumentation, updating artworks.. |
-| ke 10.7  |  ?   | Frontend: Add event, and events page |
-| total |  130/175  |  
+| ke 10.7  | 3    | Frontend: starting addEventPage, heroku fixes/ env configs |
+| to 11.7  |  ?   | Frontend: Add event, and events page Finalizing Mypage,  Tests... Dokumentation, updating artworks.. |
+| ke 12.7  |  ?   | Frontend:  |
+| total |  133/175  |  
 
 
  

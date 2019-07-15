@@ -28,13 +28,13 @@
 | ti 9.7   | 8    | Refactoring, Heroku deployment, travis/heroku fixes,  bublic urls, starting back tests|
 | ke 10.7  | 3    | Frontend: starting addEventPage, heroku fixes/ env configs |
 | pe 12.7  | 5    | Backend: addEvent controller and model, Frontend: AddEvent fixes,  starting events page
-| la .7  |  ?   | Frontend:  events pageMypage Finalizing ,  Tests... Dokumentation, updating artworks.. | 
-| la .7  |  ?   | Frontend: admin/? member change password | 
-| la .7  |  ?   | filterin gallery page | 
-| la .7  |  ?   | exhibitions | 
+| ma 15.7  | 8    | Frontend and Backend: eventPage and pageMypage refining design, artistsPage, Changing password | 
+| ti .7  |  ?   | filterin gallery page, addEvent calender | 
+| ke .7  |  ?   |  Tests... Dokumentation, updating artworks.???. |  |
+| to .7  |  ?   | exhibitions | 
 | la .7  |  ?   | painting weather | 
 
-| total |  138/175  |  
+| total |  146/175  |  
 
 
  

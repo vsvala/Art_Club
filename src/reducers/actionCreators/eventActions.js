@@ -1,7 +1,8 @@
 import eventService from '../../services/events'
 
 // tells eventService to get all events from database and dispatch them to store
-export const initializeEvent = () => {
+export const initializeEvents = () => {
+  console.log('actions init content:' )
   return async (dispatch) => {
     const content = await eventService.getAll()
     console.log('actions init content:', content )
@@ -81,4 +82,4 @@ export const deleteEvent = (event_id) => {
   }
 }
 
-export default { initializeEvent, createEvent, deleteEvent }
+export default { initializeEvents, createEvent, deleteEvent }

@@ -17,6 +17,7 @@ const getConfig = () => {
 
 
 const getAll = async () => {
+  console.log('service get all')
   try {
     const response = await axios.get(baseUrl)
     console.log('service get all', response)

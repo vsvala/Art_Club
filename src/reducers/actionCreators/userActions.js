@@ -67,6 +67,18 @@ export const getUsers = () => {
   }
 }
 
+export const getArtists = () => {
+  return async (dispatch) => {
+    console.log('initinUSers_ACTION')
+    const content = await userService.getAllArtists()
+    console.log('initinUSers_AcTION and content',content)
+    dispatch({
+      type: 'GET_ARTISTS',
+      data:content
+    })
+  }
+}
+
 // delete user
 export const deleteUser = (user_id) => {
   return async (dispatch) => {
@@ -154,4 +166,4 @@ export const initializeSingleUser = (userId) => {
 }
 
 
-export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser }
+export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }

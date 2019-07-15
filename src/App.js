@@ -16,8 +16,10 @@ import LoginForm from './components/login/LoginForm'
 import ArtworkForm from './components/artwork/ArtworkForm'
 import ArtworkList from './components/artwork/ArtworkList'
 import SingleArtwork from './components/artwork/SingleArtwork'
+import ArtistList from './components/artist/ArtistList'
 import EventForm from './components/event/EventForm'
-//import EventList from './components/event/EventList'
+import EventList from './components/event/EventList'
+import UpdatePassword from './components/user/UpdatePassword'
 //import SingleEvent from './components/event/SingleEvent'
 import UserList from './components/user/UserList'
 import SingleUser from './components/user/SingleUser'
@@ -101,10 +103,15 @@ const App = (props) => {
 
                   <Nav.Link href='#' as='span'>
                     { isMember | isAdmin
-                      ? <Link to="/events"  className='member'>Events</Link>
+                      ? <Link to="/users/events"  className='member'>Events</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
+                  <Nav.Link href='#' as='span'>
+                    { isMember
+                      ? <Link to='/users/password' className='member'>Change password</Link>
+                      : <em></em>} &nbsp;
+                  </Nav.Link>
 
                   {/* ADMIN LINKS */}
 
@@ -120,15 +127,8 @@ const App = (props) => {
                       : <em></em>} &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    { isAdmin
-                      ? <Link to='/admin' className='admin'>Change password</Link>
-                      : <em></em>} &nbsp;
-                  </Nav.Link>
+
                 </Nav>
-
-
-
 
 
                 <Nav.Link href='#' as='span'>
@@ -194,6 +194,9 @@ const App = (props) => {
                 <Route exact path="/users/:id/myPage"
                   render={() => <SingleUser userId={loggedUser.id} />} />
                 <Route exact path="/users/addArtwork" render={() => <ArtworkForm  id={loggedUser.id} /> } />
+                <Route exact path="/users/events" render={() => <EventList id={loggedUser.id} /> } />
+                <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
+
               </PrivateRoute>
 
 
@@ -206,8 +209,7 @@ const App = (props) => {
               <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
-
-              {/* <Route path="/members" render={() => <Members />} />*/}
+              <Route exaact path="/artists" render={() => <ArtistList />} />
 
 
 

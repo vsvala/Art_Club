@@ -5,22 +5,38 @@ const baseUrl = url + 'api/users'
 
 
 let token = null
-
 const setToken = (newToken) => {
   token = `bearer ${newToken}`
 }
-
 const getConfig = () => {
   return {
     headers: { 'Authorization': token }
   }
 }
 
+
 //gets all users
 const getAll = async () => {
   try {
     console.log('servise getallusers')
     const response =await axios.get(baseUrl, getConfig())
+    console.log('response from service',response.data)
+    return response.data
+
+  }catch(error)
+  {
+    if (error === 400) {
+      return { error: 'Could not get userlist from db' }
+    }
+  }
+}
+
+
+//gets all users
+const getAllArtists = async () => {
+  try {
+    console.log('servise getallArtists')
+    const response =await axios.get(baseUrl+'/artists', getConfig())
     console.log('response from service',response.data)
     return response.data
 
@@ -91,5 +107,22 @@ const deleteUser = async(id) => {
   }
 }
 
+//update password
+const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
+  console.log('service update password config',getConfig())
+  if (newPassword.length < 8) {
+    return { error: 'Password needs to be at least 8 characters long' }
+  }
+  if (newPassword === confirm) {
+    try {
+      const response = await axios.put(baseUrl+ '/password', { oldPassword, newPassword }, getConfig())
+      return response.data
+    } catch (error) {
+      return { error: 'Old password is incorrect!' }
+    }
+  } else {
+    return { error: 'Make sure the new password and the confirmation match' }
+  }
+}
 
-export default { getAll, getSingleUser, update, create, deleteUser, setToken }
+export default { getAll, getSingleUser, update, create, deleteUser, setToken, updatePassword, getAllArtists }

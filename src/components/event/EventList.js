@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { initializeEvents,  deleteEvent } from '../../reducers/actionCreators/artworkActions'
+import {  initializeEvents,  deleteEvent } from '../../reducers/actionCreators/eventActions'
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
+import { Col, Row, Container } from 'react-bootstrap'
+
 
 const baseUrl = url + 'public/'
 
@@ -13,11 +15,11 @@ const baseUrl = url + 'public/'
 /* eslint-enable */
 
 //import Artwork from './Artwork'
-
-export const EventList = ({ deleteEvent, initializeEvents, events, loggedUser,  initLoggedUser }) => { // => {
+//
+export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  events, loggedUser }) => { // => {
   useEffect(() => {
     // if (events.length === 0) {
-    console.log('initialiList')
+    console.log('initializeEventssss')
     initializeEvents() &&
     initLoggedUser()
     // }
@@ -37,30 +39,38 @@ export const EventList = ({ deleteEvent, initializeEvents, events, loggedUser,  
 
   return (
     <div className="eventList">
-      <h2>Gallery</h2>
+      <h2>Events</h2>
       <br/>
       {console.log('events..hhh',events)}
-      <div>
-        { events
-          .map(e =>
-            <ul key={e.id}  className='elList'>
-              <li><img
-                src={ baseUrl+`${ e.eventImage }`}
-                // width='300'
-                // height='auto'
-                className='eventPicture'
-                alt='img'
-              /></li>
-              <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li>
-              {/* </Link>/ by { a.artist }, { a.year }, { a.size }, { a.medium } */}
+      <Container>
+        <Row>
+          <div>
+            { events
+              .map(e =>
+                <ul key={e.id}  className='elList'>
+                  {/* <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li> */}
+                  <Col>
+                    <li><img
+                      src={ baseUrl+`${ e.eventImage }`}
+                      height='200'
+                      width='200'
+                      className='eventPicture'
+                      alt='img'
+                    /> </li>
+                    <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li>
 
-              {loggedUser && loggedUser.role==='admin'
-                ? <li className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></li>
-                : <em></em>}
-            </ul>
-          )}
-      </div>
-    </div>   )
+                    place: { e.place }, starts: { e.startDate }, ends: { e.endDate }, description: { e.description }
+                    {loggedUser && loggedUser.role==='admin'
+                      ? <li className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></li>
+                      : <em></em>}
+                  </Col>
+                </ul>
+              )}
+          </div>
+        </Row>
+      </Container>
+    </div>
+  )
 }
 
 //  {console.log('events..hhh',eventList)}
@@ -72,7 +82,8 @@ export const EventList = ({ deleteEvent, initializeEvents, events, loggedUser,  
 //             onClick={removeArtwork}
 //           />
 //         )}
-//     </div>
+
+// </div>)}
 
 
 
@@ -80,7 +91,7 @@ const mapStateToProps = (state) => {
   console.log('state', state.events.events)
 
   return {
-    events: state.evenst.events,
+    events: state.events.events,
     loggedUser: state.loggedUser.loggedUser
   }
 }

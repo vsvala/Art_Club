@@ -28,6 +28,14 @@ const userReducer = (state =initialState, action) => {
     //state= action.data //palauttaa taulukon
     }
   }
+  case 'GET_ARTISTS':{
+    console.log(action.data, 'get users from REDUCER ')
+    return {
+      ...state,
+      users:action.data
+    }
+  }
+
   case 'DELETE_USER': {
     return {
       ...state,

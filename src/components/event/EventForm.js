@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import FormData from 'form-data'
-
-//TODO time fielsd and gettin calender to choose date..tand time.
+//import DatePicker from 'react-datepicker'
+//import 'react-datepicker/dist/react-datepicker.css'
 
 export const EventForm = (
   {
@@ -86,6 +86,22 @@ export const EventForm = (
                 name='place'
                 onChange={handleChange}
               />
+              {/* <DatePicker
+                selected={this.state.startDate}
+                selectsStart
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeStart}
+              />
+
+              <DatePicker
+                selected={this.state.endDate}
+                selectsEnd
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
+                onChange={this.handleChangeEnd}
+                minDate={this.state.startDate}
+              /> */}
               <br/>
               <Form.Control
                 type='text'

@@ -27,9 +27,14 @@
 | ma 8.7   | 8,5  | Frontend: Starting Mypage, form borders and design, Backend:populating get singleUser request |
 | ti 9.7   | 8    | Refactoring, Heroku deployment, travis/heroku fixes,  bublic urls, starting back tests|
 | ke 10.7  | 3    | Frontend: starting addEventPage, heroku fixes/ env configs |
-| to 11.7  |  ?   | Frontend: Add event, and events page Finalizing Mypage,  Tests... Dokumentation, updating artworks.. |
-| ke 12.7  |  ?   | Frontend:  |
-| total |  133/175  |  
+| pe 12.7  | 5    | Backend: addEvent controller and model, Frontend: AddEvent fixes,  starting events page
+| la .7  |  ?   | Frontend:  events pageMypage Finalizing ,  Tests... Dokumentation, updating artworks.. | 
+| la .7  |  ?   | Frontend: admin/? member change password | 
+| la .7  |  ?   | filterin gallery page | 
+| la .7  |  ?   | exhibitions | 
+| la .7  |  ?   | painting weather | 
+
+| total |  138/175  |  
 
 
  

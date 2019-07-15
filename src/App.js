@@ -108,7 +108,7 @@ const App = (props) => {
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
-                    { isMember
+                    { isMember | isAdmin
                       ? <Link to='/users/password' className='member'>Change password</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
@@ -209,7 +209,8 @@ const App = (props) => {
               <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
-              <Route exaact path="/artists" render={() => <ArtistList />} />
+              <Route exact path="/artists" render={() => <ArtistList />} />
+              <Route exact path="/artists/:id" render={({ match }) => <SingleUser userId={match.params.id} />} />
 
 
 

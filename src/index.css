@@ -154,6 +154,24 @@ float:left;
     margin-bottom: 20px;
   }
 
+    /*CHANGE PASSWORDFORM */
+    .passwordForm {
+      background: #ffffff;
+      height: 450px;
+      margin: 10px auto 0;
+      width: 650px;
+      box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
+      margin-top: 60px;
+    } 
+    .regHeader {
+      margin-top: 60px;
+    }
+    .regHeader h3{
+      color: #338ad3;
+      margin-bottom: 20px;
+    }
+  
+
 
    /* ARTWORKFORM */
    .artworkForm {
@@ -190,7 +208,6 @@ float:left;
     margin-left: 75px;
   }
 
-
    /* HOME */
   .nonMember h3{
   color: #ff1476; 
@@ -199,3 +216,11 @@ float:left;
   .home h2{
     color: #338ad3;
     }
+
+    .singleUserPicture{
+      float:left;
+      }
+
+      .eList{
+        margin-left: 20%;
+        }

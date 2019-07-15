@@ -5,7 +5,7 @@ import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
-import { Col, Row, Container } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 
 
 const baseUrl = url + 'public/'
@@ -26,7 +26,6 @@ export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  ev
   }, [])
 
 
-
   //TODO search by artist or by artwork...order alphabetically by ainting and artist
   //event handler for deleting specific course application, tells studentactions to deleteApliedCourse
   const removeEvent = (id) => {
@@ -42,33 +41,39 @@ export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  ev
       <h2>Events</h2>
       <br/>
       {console.log('events..hhh',events)}
-      <Container>
-        <Row>
-          <div>
-            { events
-              .map(e =>
-                <ul key={e.id}  className='elList'>
-                  {/* <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li> */}
-                  <Col>
-                    <li><img
+      <Table >
+        <tbody>
+          { events
+            .map(e =>
+              <div key={e.id}  className='eList'>
+                {/* <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li> */}
+
+                <tr>
+                  <td>
+                    <img
                       src={ baseUrl+`${ e.eventImage }`}
                       height='200'
                       width='200'
                       className='eventPicture'
                       alt='img'
-                    /> </li>
-                    <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li>
+                    /> </td>
+                  <br/>
+                  <td className="event">
+                    <h4><Link to={`/events/${e.id}`}> {e.title} </Link></h4>
+                    <p>  Start day: { e.startDate }, End day: { e.endDate }</p>
+                    <p>   Place:  { e.place }</p>
+                    <p>   Description: { e.description }</p>
+                  </td>
+                  {loggedUser && loggedUser.role==='admin'
+                    ?  <td className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></td>
+                    : <em></em>}   </tr>
 
-                    place: { e.place }, starts: { e.startDate }, ends: { e.endDate }, description: { e.description }
-                    {loggedUser && loggedUser.role==='admin'
-                      ? <li className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></li>
-                      : <em></em>}
-                  </Col>
-                </ul>
-              )}
-          </div>
-        </Row>
-      </Container>
+              </div>
+            )}
+
+        </tbody>
+      </Table>
+
     </div>
   )
 }

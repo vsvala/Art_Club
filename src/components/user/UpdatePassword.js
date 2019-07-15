@@ -31,7 +31,7 @@ export const UpdatePassword = ({ notify, setError }) => {
   }
 
   return (
-    <div className='updatePasswordForm'>
+    <div className='passwordForm'>
       <Container>
         <Row>
           <Col>
@@ -40,32 +40,33 @@ export const UpdatePassword = ({ notify, setError }) => {
             </div>
           </Col>
         </Row>
-        <Col md={{ span: 6, offset: 3 }}>
+        <br/>
+        <Col md={{ span:10, offset: 1 }}>
           <Form onSubmit={handlePasswordChange}>
             <Form.Group>
-              <Form.Label>Old Password </Form.Label>
               <Form.Control
                 type="password"
                 name="oldPassword"
+                placeholder="Old Password"
                 value={input.oldPassword}
                 onChange={handleChange}
                 autoFocus />
-
-              <Form.Label>New Password </Form.Label>
+              <br/>
               <Form.Control
                 type="password"
                 name="newPassword"
+                placeholder="New Password"
                 value={input.newPassword}
                 onChange={handleChange} />
-
-              <Form.Label>Confirm Password </Form.Label>
+              <br/>
               <Form.Control
                 type="password"
                 name="confirm"
+                placeholder="Confirm Password"
                 value={input.confirm}
                 onChange={handleChange} />
             </Form.Group>
-
+            <br/>
             <Button className="button btnLogin" type="submit" >
           Update
             </Button>

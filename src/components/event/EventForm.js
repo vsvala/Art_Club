@@ -3,8 +3,8 @@ import { connect } from 'react-redux'
 import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import FormData from 'form-data'
-//import DatePicker from 'react-datepicker'
-//import 'react-datepicker/dist/react-datepicker.css'
+import DatePicker from 'react-datepicker'
+import 'react-datepicker/dist/react-datepicker.css'
 
 export const EventForm = (
   {
@@ -14,23 +14,26 @@ export const EventForm = (
 ) => {
 
 
-  const [input, setInput] = useState({ image: '', title: '', place: '', startDate: '',endDate: '', startTime: '',endTime: '', description: '', selectedFile:null })
+  const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({ })
+  const [state, setState] = useState({
+    startDate: new Date(),
+    endDate:  new Date()
+  })
 
 
 
   const handleSubmit = async (event) => {
     event.preventDefault()
     console.log('file',eventImage, eventImage.eventImage.name)
+    console.log('startend', state.startDate, state.endDate)
     const data=new FormData()
     data.append('eventImage',eventImage.eventImage)
-    data.append('title', event.target.title.value)
-    data.append('place', event.target.place.value)
-    data.append('startDate', event.target.startDate.value)
-    data.append('endDate', event.target.endDate.value)
-    data.append('startTime', event.target.startTime.value)
-    data.append('endTime', event.target.endTime.value)
-    data.append('description',event.target.description.value)
+    data.append('title', input.title)
+    data.append('place', input.place)
+    data.append('start', state.startDate)
+    data.append('end', state.endDate)
+    data.append('description',input.description)
     data.append('userId',id)
 
     console.log('submitdata', data)
@@ -48,6 +51,17 @@ export const EventForm = (
     console.log(event)
   }
 
+  const handleChangeStart=(date) => {
+    setState({
+      startDate: date
+    })
+  }
+  const handleChangeEnd=(date) => {
+    setState({
+      ...state,
+      endDate: date
+    })
+  }
 
   // eventhandler for fileInput
   const fileSelectedHandler=event => {
@@ -80,29 +94,41 @@ export const EventForm = (
                 autoFocus
               />
               <br/>
-              <Form.Control
-                type='text'
-                placeholder='Place'
-                name='place'
-                onChange={handleChange}
-              />
-              {/* <DatePicker
-                selected={this.state.startDate}
+           Starting and ending time :
+              <DatePicker
+                selected={state.startDate}
                 selectsStart
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-                onChange={this.handleChangeStart}
+                startDate={state.startDate}
+                endDate={state.endDate}
+                onChange={handleChangeStart}
+                showTimeSelect
+                showWeekNumbers
+                timeFormat="HH:mm"
+                timeIntervals={30}
+                dateFormat="MMMM d, yyyy h:mm"
+                timeCaption="time"
               />
 
               <DatePicker
-                selected={this.state.endDate}
+                selected={state.endDate}
                 selectsEnd
-                startDate={this.state.startDate}
-                endDate={this.state.endDate}
-                onChange={this.handleChangeEnd}
-                minDate={this.state.startDate}
-              /> */}
+                startDate={state.startDate}
+                endDate={state.endDate}
+                onChange={handleChangeEnd}
+                minDate={state.startDate}
+                showTimeSelect
+                showWeekNumbers
+                timeFormat="HH:mm"
+                timeIntervals={30}
+                dateFormat="MMMM d, yyyy h:mm"
+                timeCaption="time"
+              />
               <br/>
+
+
+
+
+              {/*    <br/>
               <Form.Control
                 type='text'
                 placeholder='Start date'
@@ -115,8 +141,8 @@ export const EventForm = (
                 placeholder='End date'
                 name='endDate'
                 onChange={handleChange}
-              />
-              <br/>
+              /> */}
+              {/*   <br/>
               <Form.Control
                 type='text'
                 placeholder='Start time'
@@ -128,6 +154,13 @@ export const EventForm = (
                 type='text'
                 placeholder='End time'
                 name='endTime'
+                onChange={handleChange}
+              /> */}
+              <br/>
+              <Form.Control
+                type='text'
+                placeholder='Place'
+                name='place'
                 onChange={handleChange}
               />
               <br/>

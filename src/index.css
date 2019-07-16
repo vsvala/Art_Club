@@ -28,6 +28,11 @@ h3{
   color: #bebcbc;
   font-family: 'Leckerli One', cursive;
   }
+  h4{ 
+    margin-bottom: 30px;  
+    color: #338ad3;
+    font-family: 'Leckerli One', cursive;
+    }
 .grayInfoText {
   color:  #879097;
   font-size: 80%;
@@ -221,6 +226,6 @@ float:left;
       float:left;
       }
 
-      .eList{
-        margin-left: 20%;
-        }
+      /* tr.eList{
+        margin-left: 40%;
+        } */

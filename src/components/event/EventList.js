@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {  initializeEvents,  deleteEvent } from '../../reducers/actionCreators/eventActions'
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
-import { Link } from 'react-router-dom'
+//import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
 import { Table } from 'react-bootstrap'
@@ -45,30 +45,30 @@ export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  ev
         <tbody>
           { events
             .map(e =>
-              <div key={e.id}  className='eList'>
+              <tr key={e.id}  className='eList'>
                 {/* <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li> */}
+                <td>
+                  <img
+                    src={ baseUrl+`${ e.eventImage }`}
+                    height='200'
+                    width='300'
+                    className='eventPicture'
+                    alt='img'
+                  /> </td>
 
-                <tr>
-                  <td>
-                    <img
-                      src={ baseUrl+`${ e.eventImage }`}
-                      height='200'
-                      width='200'
-                      className='eventPicture'
-                      alt='img'
-                    /> </td>
-                  <br/>
-                  <td className="event">
-                    <h4><Link to={`/events/${e.id}`}> {e.title} </Link></h4>
-                    <p>  Start day: { e.startDate }, End day: { e.endDate }</p>
-                    <p>   Place:  { e.place }</p>
-                    <p>   Description: { e.description }</p>
-                  </td>
-                  {loggedUser && loggedUser.role==='admin'
-                    ?  <td className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></td>
-                    : <em></em>}   </tr>
+                <td className="event">
+                  {/* <h4><Link to={`/events/${e.id}`}> {e.title} </Link></h4> */}
+                  <h4> {e.title}</h4>
 
-              </div>
+                  <p>Start: { e.start } </p>
+                  <p>End: { e.end }  </p>
+                  <p>Place: { e.place }</p>
+                  <p>Description: { e.description }</p>
+                </td>
+                {loggedUser && loggedUser.role==='admin'
+                  ?  <td className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></td>
+                  : <em></em>}
+              </tr>
             )}
 
         </tbody>

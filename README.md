@@ -69,6 +69,11 @@ Tools:
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd)
 ```npm install --save redux-devtools-extension```
 
+Date picker:
+[React date picker](https://reactdatepicker.com/)
+```npm install react-datepicker --save```
+
+
 
 ### Used libraries backend
 

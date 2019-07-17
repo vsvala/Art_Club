@@ -29,12 +29,14 @@
 | ke 10.7  | 3    | Frontend: starting addEventPage, heroku fixes/ env configs |
 | pe 12.7  | 5    | Backend: addEvent controller and model, Frontend: AddEvent fixes,  starting events page
 | ma 15.7  | 8    | Frontend and Backend: eventPage and pageMypage refining design, artistsPage, Changing password | 
-| ti .7  |  ?   | filterin gallery page, addEvent calender | 
-| ke .7  |  ?   |  Tests... Dokumentation, updating artworks.???. |  |
-| to .7  |  ?   | exhibitions | 
-| la .7  |  ?   | painting weather | 
+| ti 16.7  | 8    | Frontend and Backend: addEvent react datePicker, delete event, refactoring | 
+| ke 17.7  |  ?   | Frontend and Backend: filtering artworks by name and artist, singleArtist page |
+| ke .7  |  ?    |  Deleting artwork or event deletes image from uploads folder too!!|
+| to .7  |  ?    | Tests... Dokumentation, updating artworks.??? |
+| to .7  |  ?    | exhibitions | 
+| la .7  |  ?    | painting weather | 
 
-| total |  146/175  |  
+| total |  154/175  |  
 
 
  

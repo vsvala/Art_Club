@@ -1,7 +1,7 @@
 # ArtClub -Fullstack project
 
 
-ArtClub website is the plattform where users can apply memberships for the club and create art gallery. Then members are able to write their indroduction, load their CV and create their own picturegallery with 20 pictures for everybody to see. All pictures are shown on the maingallery page where users can search artwoks by artists and names. Users can vote artworks by like button and see ten most liked paintings. Main page features every month some of the artwoks. User can see becoming art exhibitions and painting weather from the pages.  Admin can approve memberships, create happenings on website and send e-mails for members.
+ArtClub website is the plattform where users can apply memberships for the club and search artists and artworks. Users can also find links to exhibitions and current painting weather from the link page.  Members  can see art clubs events and they are able to create and update their own MyPage. On Mypage members can write short indroduction about themselves and create their own picturegallery with 10 pictures for everybody to see. All pictures are also shown on the maingallery page. (Users can vote artworks by like button and see ten most liked paintings.)( Main page features every month some of the artwoks.) Admin can list registered users and approve their memberships. Admin can also create events for members to see.
 
 [Link to backend](https://github.com/vsvala/Art_Club_back )
 

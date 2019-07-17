@@ -1,20 +1,22 @@
 import userService from '../../services/users'
 import artworkService from '../../services/artworks'
 import loginService from '../../services/login'
+import eventService from '../../services/events'
 import tokenCheckService from '../../services/tokenCheck'
 
 //get logged user to app page to autorize navigation navigation
 export const initLoggedUser = () => {
   return async (dispatch) => {
     let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-
+    console.log(loggedUser,'userlöytyi localstoresta')
     if (loggedUser) {
       let token = loggedUser.token
       const response = await tokenCheckService.userCheck(token)
       if (response.message === 'success') {
         await artworkService.setToken(loggedUser.token)
         await userService.setToken(loggedUser.token)
-        //await adminService.setToken(loggedUser.token)
+        await eventService.setToken(loggedUser.token)
+        console.log(loggedUser,'userlöytyi localstoresta')
         dispatch({
           type: 'INIT_USER',
           data: loggedUser
@@ -63,6 +65,8 @@ export const login = (username, password) => {
   return async (dispatch) => {
     const response = await loginService.login({ username: username, password: password })
     if (response.error) {
+      console.log('login went wrong')
+      console.log(response,'login REDUCER response from back')
       dispatch({
         type: 'NOTIFY',
         data: response.error
@@ -74,11 +78,11 @@ export const login = (username, password) => {
       }, 3000)
 
     } else {
-      console.log('responce ACTION',response)
+      console.log('responce loginACTION',response)
 
       await userService.setToken(response.token)
       await artworkService.setToken(response.token)
-      // await adminService.setToken(response.token)
+      await eventService.setToken(response.token)
       dispatch({
         type: 'LOGIN',
         data: { ...response }
@@ -104,7 +108,7 @@ export const logout = () => {
     window.localStorage.removeItem('loggedInUser')
     await userService.setToken(null)
     await artworkService.setToken(null)
-    //await adminService.setToken(null)
+    await eventService.setToken(null)
     dispatch({
       type: 'LOGOUT'
     })

@@ -8,6 +8,7 @@ let token = null
 const setToken = (newToken) => {
   token = `bearer ${newToken}`
 }
+
 const getConfig = () => {
   return {
     headers: { 'Authorization': token }
@@ -62,6 +63,22 @@ const getSingleUser = async (id) => {
     }
   }
 }
+
+//gets a single user by id
+const getSingleArtist = async (id) => {
+  try {
+    const response = await axios.get(baseUrl + `/artist/${id}`)
+    return response.data
+  } catch (error) {
+    if (error === 400) {
+      return { error: 'Could not get user from db' }
+    }
+    if (error === 500) {
+      return { error: 'Internal server error' }
+    }
+  }
+}
+
 
 //create new user
 const create = async (user) => {
@@ -125,4 +142,4 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   }
 }
 
-export default { getAll, getSingleUser, update, create, deleteUser, setToken, updatePassword, getAllArtists }
+export default { getAll, getSingleUser, update, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }

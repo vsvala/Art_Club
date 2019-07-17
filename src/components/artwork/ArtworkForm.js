@@ -29,7 +29,7 @@ export const ArtworkForm = (
   const [galleryImage, setFile] = useState({ })
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     console.log('file',galleryImage, galleryImage.galleryImage.name)
@@ -68,7 +68,7 @@ export const ArtworkForm = (
   }
 
 
-  const fileSelectedHandler=event => {
+  const fileSelectedHandler = (event) => {
     setFile({ galleryImage : event.target.files[0] })
     console.log('event', event.target.files[0])
     //   // this.setState({ selectedFile:event.target.files[0]})

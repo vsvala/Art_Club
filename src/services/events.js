@@ -3,7 +3,7 @@ import url from './config'
 
 const baseUrl = url + 'api/events/'
 
-
+//TODO configs
 
 let token = null
 const setToken = newToken => {
@@ -83,7 +83,7 @@ const update = async(content, id) => {
 //Deletes a event from database by event.id. Only for admin!
 const deleteEvent = async (id) => {
   try {
-    const response = await axios.delete(baseUrl + `/${id}`)//, getConfig())
+    const response = await axios.delete(baseUrl + `/${id}`, getConfig())//)
     return response.data
   } catch (error) {
     return { error: 'Event with id "' + id + '" not found!' }

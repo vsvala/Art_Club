@@ -6,6 +6,7 @@ import FormData from 'form-data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
+
 export const EventForm = (
   {
     createEvent,
@@ -23,7 +24,7 @@ export const EventForm = (
 
 
 
-  const handleSubmit = async (event) => {
+  const handleSubmit =async(event) => {
     event.preventDefault()
     console.log('file',eventImage, eventImage.eventImage.name)
     console.log('startend', state.startDate, state.endDate)
@@ -64,7 +65,7 @@ export const EventForm = (
   }
 
   // eventhandler for fileInput
-  const fileSelectedHandler=event => {
+  const fileSelectedHandler = (event) => {
     setFile({ eventImage : event.target.files[0] })
     console.log('event', event.target.files[0])
   }
@@ -86,14 +87,7 @@ export const EventForm = (
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
-              <Form.Control
-                type='text'
-                placeholder='Title'
-                name='title'
-                onChange={handleChange}
-                autoFocus
-              />
-              <br/>
+
            Starting and ending time :
               <DatePicker
                 selected={state.startDate}
@@ -103,9 +97,9 @@ export const EventForm = (
                 onChange={handleChangeStart}
                 showTimeSelect
                 showWeekNumbers
-                timeFormat="HH:mm"
+                timeFormat="H:mm"
                 timeIntervals={30}
-                dateFormat="MMMM d, yyyy h:mm"
+                dateFormat="d.M.yyyy H:mm"
                 timeCaption="time"
               />
 
@@ -118,15 +112,20 @@ export const EventForm = (
                 minDate={state.startDate}
                 showTimeSelect
                 showWeekNumbers
-                timeFormat="HH:mm"
+                timeFormat="H:mm"
                 timeIntervals={30}
-                dateFormat="MMMM d, yyyy h:mm"
+                dateFormat="d.M.yyyy H:mm"
                 timeCaption="time"
               />
               <br/>
-
-
-
+              <br/>
+              <Form.Control
+                type='text'
+                placeholder='Title'
+                name='title'
+                onChange={handleChange}
+                autoFocus
+              />
 
               {/*    <br/>
               <Form.Control

@@ -1,11 +1,11 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {  initializeEvents,  deleteEvent } from '../../reducers/actionCreators/eventActions'
-import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
+//import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 //import { Link } from 'react-router-dom'
-import DeleteButton from '../common/DeleteButton'
+//import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 
 
 const baseUrl = url + 'public/'
@@ -16,12 +16,13 @@ const baseUrl = url + 'public/'
 
 //import Artwork from './Artwork'
 //
-export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  events, loggedUser }) => { // => {
+export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser }) => { // =>  initLoggedUser,{
   useEffect(() => {
     // if (events.length === 0) {
     console.log('initializeEventssss')
-    initializeEvents() &&
-    initLoggedUser()
+    initializeEvents()
+    //&&
+    // initLoggedUser()
     // }
   }, [])
 
@@ -66,7 +67,8 @@ export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  ev
                   <p>Description: { e.description }</p>
                 </td>
                 {loggedUser && loggedUser.role==='admin'
-                  ?  <td className="delete"><DeleteButton id={e.id} onClick={removeEvent} /></td>
+                  ?    <td> <Button className="button buttonDelete" onClick={removeEvent(e.id)} variant="outline-secondary" type="submit" >Delete </Button></td>
+                //  className="delete"><DeleteButton id={e.id} onClick={r} />
                   : <em></em>}
               </tr>
             )}
@@ -77,18 +79,6 @@ export const EventList = ({   initializeEvents, initLoggedUser, deleteEvent,  ev
     </div>
   )
 }
-
-//  {console.log('events..hhh',eventList)}
-//       {eventList
-//         .map(artwork =>
-//           <Artwork
-//             artwork={artwork}
-//             key={artwork.id}//artwork_id
-//             onClick={removeArtwork}
-//           />
-//         )}
-
-// </div>)}
 
 
 
@@ -104,6 +94,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeEvents, deleteEvent, initLoggedUser }
+  { initializeEvents, deleteEvent }//, initLoggedUser
 )(EventList)
 

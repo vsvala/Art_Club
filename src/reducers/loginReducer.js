@@ -10,7 +10,7 @@ const loginReducer = (state = initialState, action) => {
   case 'INIT_USER': {
     return {
       ...state,
-      loggedUser: action.data,
+      loggedUser: action.data
       // loadingUser: false
     }
   }

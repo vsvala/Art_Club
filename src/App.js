@@ -23,6 +23,7 @@ import UpdatePassword from './components/user/UpdatePassword'
 //import SingleEvent from './components/event/SingleEvent'
 import UserList from './components/user/UserList'
 import SingleUser from './components/user/SingleUser'
+import SingleArtist from './components/artist/SingleArtist'
 import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
 const App = (props) => {
@@ -62,7 +63,7 @@ const App = (props) => {
                 />
               </Navbar.Brand>
               <Navbar.Brand>
-        Art club
+                  Art club
               </Navbar.Brand>
 
               <Navbar.Toggle aria-controls='responsive-navbar-nav' />
@@ -126,8 +127,6 @@ const App = (props) => {
                       ? <Link to='/admin/users'  className='admin'>Users</Link>
                       : <em></em>} &nbsp;
                   </Nav.Link>
-
-
                 </Nav>
 
 
@@ -137,21 +136,22 @@ const App = (props) => {
                     : <em></em>} &nbsp;
                 </Nav.Link>
 
-                {loggedUser
-                  ? <Button
-                    className='button'
-                    onClick={props.logout}
-                    variant='light'
-                    type='button'>
-                    <Link to="#">Logout</Link>
-                  </Button>
-                  : <Button
-                    className='button'
-                    variant='light'
-                    type='button' >
-                    <Link to="/login">Login</Link>
-                  </Button>} &nbsp;
-
+                <Nav.Link href='#' as='span'>
+                  {loggedUser
+                    ? <Button
+                      className='button'
+                      onClick={props.logout}
+                      variant='light'
+                      type='button'>
+                      Logout
+                    </Button>
+                    : <Button
+                      className='button'
+                      variant='light'
+                      type='button' >
+                      <Link to="/login">Login</Link>
+                    </Button>}
+                </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
           </div>
@@ -169,21 +169,18 @@ const App = (props) => {
                 redirectPath="/login"
                 condition={loggedUser && isAdmin}
               >
-                <Route exact path="/admin/addEvent" render={() => <EventForm id={loggedUser.id}  />} />
+                <Route exact path="/admin/addEvent" render={() => <EventForm id={loggedUser.id} />} />
                 <Route exact path="/admin/users" render={() => <UserList />} />
                 <Route exact path="/admin/users/:id"render={({ match }) => <SingleUser userId={match.params.id} />} />
-                {/* <Route exact path="/users/admin/:id" render={() => <SingleUser />} /> */}
-                {/*        <Route exact path="/admin/userDelete" render={() => <UserDelete />} />
-                <Route exact path="/admin" render={() => <UpdatePasswordForm />} />  */}
               </PrivateRoute>
-
 
               <PrivateRoute
                 exact path="/login"
                 redirectPath="/"
                 condition={loggedUser === null}
                 render={() => <LoginForm />}
-              />
+              >
+              </PrivateRoute>
 
               {/*  THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/users" */}
               <PrivateRoute
@@ -191,12 +188,10 @@ const App = (props) => {
                 redirectPath="/login"
                 condition={loggedUser}
               >
-                <Route exact path="/users/:id/myPage"
-                  render={() => <SingleUser userId={loggedUser.id} />} />
+                <Route exact path="/users/:id/myPage" render={() => <SingleUser userId={loggedUser.id} />} />
                 <Route exact path="/users/addArtwork" render={() => <ArtworkForm  id={loggedUser.id} /> } />
-                <Route exact path="/users/events" render={() => <EventList id={loggedUser.id} /> } />
+                <Route exact path="/users/events" render={() => <EventList /> } />
                 <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
-
               </PrivateRoute>
 
 
@@ -204,18 +199,14 @@ const App = (props) => {
               <Route exact path="/" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id"render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
-              {/*          <Route exact path="/users/:id"
-                render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
+              {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
               <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
               <Route exact path="/artists" render={() => <ArtistList />} />
-              <Route exact path="/artists/:id" render={({ match }) => <SingleUser userId={match.params.id} />} />
-
-
+              <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
 
             </Switch>
-
           </div>
         </React.Fragment>
       </Router>

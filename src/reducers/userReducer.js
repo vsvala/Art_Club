@@ -2,6 +2,7 @@
 const initialState = {
   users: [],
   singleUser: {},
+  singleArtist: {}
 }
 
 
@@ -60,6 +61,13 @@ const userReducer = (state =initialState, action) => {
       singleUser: action.data
     }
   }
+  case 'INIT_SINGLE_ARTIST': {
+    return {
+      ...state,
+      singleArtist: action.data
+    }
+  }
+
 
   default:
     return state

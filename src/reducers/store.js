@@ -7,7 +7,7 @@ import artworkReducer from './artworkReducer'
 import eventReducer from './eventReducer'
 import singleArtworkReducer from './singleArtworkReducer'
 import loginReducer from './loginReducer'
-//import filterReducer from './filterReducer'
+import filterReducer from './filterReducer'
 
 const reducer = combineReducers({
   notification: notificationReducer,
@@ -16,8 +16,9 @@ const reducer = combineReducers({
   events: eventReducer,
   singleArtwork: singleArtworkReducer,
   loggedUser: loginReducer,
-  // filter: filterReducer,
-  singleUser: userReducer
+  filter: filterReducer,
+  singleUser: userReducer,
+  singleArtist: userReducer
 })
 
 const store = createStore(

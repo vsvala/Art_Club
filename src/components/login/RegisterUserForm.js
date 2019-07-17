@@ -21,7 +21,7 @@ export const RegisterUserForm = ( {
   //notify,
 }) => {
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = (event) => {
     event.preventDefault()
 
     const user = {

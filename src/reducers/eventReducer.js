@@ -9,14 +9,14 @@ const eventReducer = (state = initialState, action) => {
   case 'INIT_EVENTS': {
     return {
       ...state,
-      events: action.data,
+      events: action.data
     }
   }
 
   case 'CREATE_EVENT': {
     return {
       ...state,
-      events: action.data,
+      events:[]
     }
   }
 
@@ -30,7 +30,7 @@ const eventReducer = (state = initialState, action) => {
   case 'DELETE_EVENT': {
     return {
       ...state,
-      event: state.evenst.filter(event => event.id !== action.data.id)
+      events: state.events.filter(event => event.id !== action.data.id)
     }
   }
 

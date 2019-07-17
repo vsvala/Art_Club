@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreators/artworkActions'
+import filterActions from '../../reducers/actionCreators/filterActions'
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
+import { Form } from 'react-bootstrap'
 
 const baseUrl = url + 'public/'
 
@@ -14,7 +16,7 @@ const baseUrl = url + 'public/'
 
 //import Artwork from './Artwork'
 
-export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser,  initLoggedUser }) => { // => {
+export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser,  initLoggedUser, filter,  setArtworkName }) => { // => {
   useEffect(() => {
     // if (artworks.length === 0) {
     console.log('initialiList')
@@ -23,6 +25,10 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
     // }
   }, [])
 
+  const handleArtworkNameChange = (event) => {
+    event.preventDefault()
+    setArtworkName(event.target.value)
+  }
 
 
   //TODO search by artist or by artwork...order alphabetically by ainting and artist
@@ -37,11 +43,27 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
   return (
     <div className="artworkList">
+
+      <div style={{ float: 'right' }}>
+        {/* <div style={{ color: '#6c757d' }}> Filter:</div> */}
+        <Form.Control
+          placeholder='Search by name or artist'
+          className='filterInput'
+          value={filter.name}
+          onChange={handleArtworkNameChange} />
+      </div>
+
+
       <h2>Gallery</h2>
+
       <br/>
       {console.log('artworks..hhh',artworks)}
       <div>
         { artworks
+          .filter(artwork =>
+            artwork.name.toLowerCase().includes(filter.artworkName.toLowerCase())
+          ||   artwork.artist.toLowerCase().includes(filter.artworkName.toLowerCase())
+          )
           .map(a =>
             <ul key={a.id}  className='ulList'>
               <li><img
@@ -81,13 +103,15 @@ const mapStateToProps = (state) => {
 
   return {
     artworks: state.artworks.artworks,
-    loggedUser: state.loggedUser.loggedUser
+    loggedUser: state.loggedUser.loggedUser,
+    filter: {
+      artworkName: state.filter.artworkName
+    }
   }
 }
 
-
 export default connect(
   mapStateToProps,
-  { initializeArtworks, deleteArtwork, initLoggedUser }
+  { initializeArtworks, deleteArtwork, initLoggedUser, ...filterActions  }
 )(ArtworkList)
 

@@ -53,7 +53,7 @@ export const createEvent =(content) => {
 // delete event
 export const deleteEvent = (event_id) => {
   return async (dispatch) => {
-    const response = await eventService.deleteArtwork(event_id)
+    const response = await eventService.deleteEvent(event_id)
     if (response.error || response === undefined) {
       dispatch({
         type: 'NOTIFY',

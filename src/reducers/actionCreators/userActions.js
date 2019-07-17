@@ -165,5 +165,19 @@ export const initializeSingleUser = (userId) => {
   }
 }
 
+// tells userservice to get specific artist/user by id from database
+export const initializeSingleArtist = (userId) => {
+  console.log('initializeSingleUser')
+  return async (dispatch) => {
+    const content = await userService.getSingleArtist(userId)
+    console.log('contentfromsigleACTION', content)
+
+    dispatch({
+      type: 'INIT_SINGLE_ARTIST',
+      data: content
+    })
+  }
+}
+
 
 export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }

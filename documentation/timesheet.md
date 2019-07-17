@@ -30,13 +30,17 @@
 | pe 12.7  | 5    | Backend: addEvent controller and model, Frontend: AddEvent fixes,  starting events page
 | ma 15.7  | 8    | Frontend and Backend: eventPage and pageMypage refining design, artistsPage, Changing password | 
 | ti 16.7  | 8    | Frontend and Backend: addEvent react datePicker, delete event, refactoring | 
-| ke 17.7  |  ?   | Frontend and Backend: filtering artworks by name and artist, singleArtist page |
-| ke .7  |  ?    |  Deleting artwork or event deletes image from uploads folder too!!|
-| to .7  |  ?    | Tests... Dokumentation, updating artworks.??? |
-| to .7  |  ?    | exhibitions | 
-| la .7  |  ?    | painting weather | 
+| ke 17.7  | 5    | Frontend: Filtering artworks by name and artist,  Backend: singleArtist page |
+| to 18.7  |  ?   | Frontend and Backend: Mypage: updating user information, adding Introduction |
+| pe 19.7  |  ?   | Deleting artwork or event deletes image from uploads folder too!!|
+| to .7  |  ?    |   |
+| to .7  |  ?    | Tests... Dokumentation |
+| to .7  |  ?    | Links page: exhibitions links, painting weather  | 
+| la .7  |  ?    | Like | 
 
-| total |  154/175  |  
+| total |  159/175  |  
+
+
 
 
  

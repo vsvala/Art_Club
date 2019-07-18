@@ -1,17 +1,19 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-//import DeleteButton from '../common/DeleteButton'
+//import DeleteButton from '../common/DeleteButton'""My
 
 import { connect } from 'react-redux'
 import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import {  Button } from 'react-bootstrap'
+import url from '../../services/config'
+const baseUrl = url + 'public/'
 
 /* eslint-disable */
-const BASE_URL= 'http://localhost:3001/'
+//const BASE_URL= 'http://localhost:3001/'
 
 const ArtworkDelete = ({ artwork, deleteArtwork }) => {
 
-  
+
   //event handler for deleting specific  artworkn
   const removeArtwork= (id) => {
     return () => {
@@ -26,7 +28,8 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
       <ul Style="list-style-type:none;">
       <li>
         <img
-       src={ BASE_URL +`${ artwork.galleryImage }`}
+       //src={ BASE_URL +`${ artwork.galleryImage }`}
+       src={ baseUrl+`${ a.galleryImage }`}
        width='300'
        height='auto'
        className='singlepicture'

@@ -4,10 +4,8 @@ import {  initializeEvents,  deleteEvent } from '../../reducers/actionCreators/e
 //import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 //import { Link } from 'react-router-dom'
 //import DeleteButton from '../common/DeleteButton'
-import url from '../../services/config'
 import { Table, Button } from 'react-bootstrap'
-
-
+import url from '../../services/config'
 const baseUrl = url + 'public/'
 
 /* eslint-disable */

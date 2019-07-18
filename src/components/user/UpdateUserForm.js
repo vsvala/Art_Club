@@ -13,8 +13,8 @@ import { updateUser } from '../../reducers/actionCreators/userActions'
 export const UpdateUserForm = ( {
   updateUser,
   id,
-  history,
-  loggedUser,
+  //history,
+  //loggedUser,
   singleUser
 
 }) => {

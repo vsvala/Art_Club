@@ -101,7 +101,7 @@ const create = async (user) => {
 }
 
 
-//update user
+//update userrole
 const update = async (content) => {
   console.log('service update',content)
   try{
@@ -109,9 +109,22 @@ const update = async (content) => {
     console.log('response data', response.data)
     return response.data
   }catch(error){
-    return { error: 'User could not be updated' }
+    return { error: 'User role could not be updated' }
   }
 }
+
+//update user information
+const updateUser = async (content) => {
+  console.log('service update info',content)
+  try{
+    const response = await axios.put(baseUrl + '/info', content, getConfig())
+    console.log('response data', response.data)
+    return response.data
+  }catch(error){
+    return { error: 'User info could not be updated' }
+  }
+}
+
 
 
 //delete user
@@ -142,4 +155,4 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   }
 }
 
-export default { getAll, getSingleUser, update, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }
+export default { getAll, getSingleUser, update, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }

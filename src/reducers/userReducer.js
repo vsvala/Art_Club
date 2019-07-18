@@ -2,6 +2,7 @@
 const initialState = {
   users: [],
   singleUser: {},
+  loggedUser: {},
   singleArtist: {}
 }
 
@@ -43,6 +44,16 @@ const userReducer = (state =initialState, action) => {
       users: state.users.filter(user => user.id !== action.data.id)
     }
   }
+
+  case 'UPDATE_USER': {
+    return {
+      ...state,
+      loggedUser: action.data,
+      singleUser: action.data
+    }
+  }
+
+
 
   case 'UPDATE_ROLE': {
     console.log('reducer id ja role', action.data.id, action.data.role)

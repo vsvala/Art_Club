@@ -26,39 +26,39 @@ export const initLoggedUser = () => {
   }
 }
 
-// export const updateLoggedUser = (content, id) => {
-//   return async (dispatch) => {
-//     const response = await studentService.update(content, id)
-//     if (response.error || response === undefined) {
-//       dispatch({
-//         type: 'NOTIFY',
-//         data: 'Saving failed!'
-//       })
-//       setTimeout(() => {
-//         dispatch({
-//           type: 'CLEAR',
-//         })
-//       }, 3000)
-//     } else {
-//       let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-//       loggedUser.user.email = true
-//       window.localStorage.setItem('loggedInUser', JSON.stringify(loggedUser))
-//       dispatch({
-//         type: 'UPDATE_LOGGED_USER',
-//         data: loggedUser
-//       })
-//       dispatch({
-//         type: 'NOTIFY',
-//         data: 'Information updated'
-//       })
-//       setTimeout(() => {
-//         dispatch({
-//           type: 'CLEAR',
-//         })
-//       }, 3000)
-//     }
-//   }
-// }
+/* export const updateLoggedUser = (content, id) => {
+  return async (dispatch) => {
+    const response = await studentService.update(content, id)
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Saving failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
+      loggedUser.user.email = true
+      window.localStorage.setItem('loggedInUser', JSON.stringify(loggedUser))
+      dispatch({
+        type: 'UPDATE_LOGGED_USER',
+        data: loggedUser
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Information updated'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+} */
 
 
 export const login = (username, password) => {

@@ -55,6 +55,37 @@ export const createUser=(content) => {
   }
 }
 
+export const updateUser = (content) => {
+  return async (dispatch) => {
+    const response = await userService.updateUser(content)
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Saving failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      dispatch({
+        type: 'UPDATE_USER',
+        data: response
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Information updated'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
+
 export const getUsers = () => {
   return async (dispatch) => {
     console.log('initinUSers_ACTION')
@@ -180,4 +211,4 @@ export const initializeSingleArtist = (userId) => {
 }
 
 
-export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }
+export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists, initializeSingleArtist }

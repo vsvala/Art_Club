@@ -47,7 +47,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
       <div style={{ float: 'right' }}>
         {/* <div style={{ color: '#6c757d' }}> Filter:</div> */}
         <Form.Control
-          placeholder='Search by name or artist'
+          placeholder='Search artwork or artist'
           className='filterInput'
           value={filter.name}
           onChange={handleArtworkNameChange} />

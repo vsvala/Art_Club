@@ -5,7 +5,6 @@ import logo from './images/tripleblue.png'
 import picture from './images/pict.png'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'  //Redirect, withRouter
 
-
 // Actions
 import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
@@ -20,12 +19,13 @@ import ArtistList from './components/artist/ArtistList'
 import EventForm from './components/event/EventForm'
 import EventList from './components/event/EventList'
 import UpdatePassword from './components/user/UpdatePassword'
-//import SingleEvent from './components/event/SingleEvent'
+import UpdateUserForm from './components/user/UpdateUserForm'
 import UserList from './components/user/UserList'
 import SingleUser from './components/user/SingleUser'
 import SingleArtist from './components/artist/SingleArtist'
 import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
+
 const App = (props) => {
 
   useEffect(() => {
@@ -82,8 +82,7 @@ const App = (props) => {
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
-                    <Link to="/events">Exhibitions</Link>  &nbsp;
-                    {/* <Link to="/register">Register</Link> &nbsp; */}
+                    <Link to="/links">Links</Link>  &nbsp;
                   </Nav.Link>
 
 
@@ -183,6 +182,8 @@ const App = (props) => {
               </PrivateRoute>
 
               {/*  THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/users" */}
+
+
               <PrivateRoute
                 path="/users"
                 redirectPath="/login"
@@ -192,6 +193,8 @@ const App = (props) => {
                 <Route exact path="/users/addArtwork" render={() => <ArtworkForm  id={loggedUser.id} /> } />
                 <Route exact path="/users/events" render={() => <EventList /> } />
                 <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
+                <Route exact path="/users/update" render={({ history }) => <UpdateUserForm id={loggedUser.id} history={history} /> } />
+
               </PrivateRoute>
 
 
@@ -205,7 +208,8 @@ const App = (props) => {
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
               <Route exact path="/artists" render={() => <ArtistList />} />
               <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
-
+              <Route exact path="/links" render={() => <ArtistList />} />
+              {/* TODO links page..and painting weateher */}
             </Switch>
           </div>
         </React.Fragment>

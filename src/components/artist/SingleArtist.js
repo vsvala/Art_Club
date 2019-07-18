@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import {  initializeSingleArtist }  from '../../reducers/actionCreators/userActions'
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
+
 const BASE_URL= 'http://localhost:3001/'
 
 
@@ -11,7 +12,7 @@ export const SingleArtist = ({
   userId,
   initializeSingleArtist,
   initLoggedUser,
-  loggedUser
+  //loggedUser
 }) => {
 
   useEffect(() => {
@@ -29,18 +30,18 @@ export const SingleArtist = ({
           null
           :
           <div>
-            {/* {userToShow&&userToShow} */}
             <h2>{artistToShow.name}</h2>
+            {/* <h2>{artistToShow.introduction}</h2> */}
             <br/>
-            {loggedUser && loggedUser.role==='member' | loggedUser.role==='admin'
-              ? <p>name: {artistToShow.username}, mail: {artistToShow.email}, role: {artistToShow.role}</p>
-              : <em></em>}
-            {/* <h3>Artworks</h3> */}
+                  Hide show Link to add My intoduction text
+                  Here comes introduction text think limit lenght how many charactersMake this mox smaller
+
             {artistToShow.artworks && artistToShow.artworks
               .map(a =>
                 (<ul key={a.id}  className='ulList'>
                   {/* <div className='singleUserPicture'> */}
                   <li>
+                    <br/>
                     <img
                       src={ BASE_URL+`${ a.galleryImage }`}
                       width='300'
@@ -54,8 +55,6 @@ export const SingleArtist = ({
           </div>
         }
       </div>
-      <br/>
-      {/* <h5>TODO  link to add or  update detais?,</h5> */}
     </div>
   )
 }

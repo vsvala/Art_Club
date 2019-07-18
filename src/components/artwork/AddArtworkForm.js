@@ -5,10 +5,10 @@ import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { getUsers } from '../../reducers/actionCreators/userActions'
 //import artworkService from '../../services/artworks'
 import FormData from 'form-data'
-import ArtworkThumb from './ArtworkThumb'
+//import ArtworkDelete from './ArtworkDelete'
 
 
-export const ArtworkForm = (
+export const AddArtworkForm = (
   {
   // deleteArtwork,
     createArtwork,
@@ -183,7 +183,9 @@ export const ArtworkForm = (
 
         {/* <Button onClick={fileUploadHandler}>Upload</Button> */}
 
+        <p>Added artworks { userToShow && userToShow.artworks.length}/10 </p>
 
+        {/*
         <Col md={{ span: 10, offset: 1 }}>
           <br/>
           <br/>
@@ -194,14 +196,15 @@ export const ArtworkForm = (
               { userToShow &&  userToShow
                 .artworks
                 .map(a =>
-                  <ArtworkThumb
+                  <ArtworkDelete
                     key={a.id}
                     artwork={a}
                   />
                 )}
             </div>
           </div>
-        </Col>
+        </Col> */}
+
       </Container>
     </div>
 
@@ -219,6 +222,6 @@ const mapStateToProps = (state) => { //id
 export default connect(
   mapStateToProps,
   { createArtwork, getUsers }
-)( ArtworkForm )
+)( AddArtworkForm )
 
 

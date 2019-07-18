@@ -21,7 +21,7 @@ export const ArtistList = ({ userArray, getArtists }) => {
     <div className="artistList">
       <h2>Artists</h2>
       <br/>
-      <Table bordered hover>
+      <Table hover size='sm'>
         <thead>
           <tr>
             {/* <th>UserId</th> */}

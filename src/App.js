@@ -12,7 +12,7 @@ import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 import Home from './components/Home'
 import RegisterUserForm from './components/login/RegisterUserForm'
 import LoginForm from './components/login/LoginForm'
-import ArtworkForm from './components/artwork/ArtworkForm'
+import AddArtworkForm from './components/artwork/AddArtworkForm'
 import ArtworkList from './components/artwork/ArtworkList'
 import SingleArtwork from './components/artwork/SingleArtwork'
 import ArtistList from './components/artist/ArtistList'
@@ -20,6 +20,7 @@ import EventForm from './components/event/EventForm'
 import EventList from './components/event/EventList'
 import UpdatePassword from './components/user/UpdatePassword'
 import UpdateUserForm from './components/user/UpdateUserForm'
+import UserIntroForm from  './components/user/UserIntroForm'
 import UserList from './components/user/UserList'
 import SingleUser from './components/user/SingleUser'
 import SingleArtist from './components/artist/SingleArtist'
@@ -190,11 +191,11 @@ const App = (props) => {
                 condition={loggedUser}
               >
                 <Route exact path="/users/:id/myPage" render={() => <SingleUser userId={loggedUser.id} />} />
-                <Route exact path="/users/addArtwork" render={() => <ArtworkForm  id={loggedUser.id} /> } />
+                <Route exact path="/users/addArtwork" render={() => <AddArtworkForm  id={loggedUser.id} /> } />
                 <Route exact path="/users/events" render={() => <EventList /> } />
                 <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
                 <Route exact path="/users/update" render={({ history }) => <UpdateUserForm id={loggedUser.id} history={history} /> } />
-
+                <Route exact path="/users/intro" render={() => <UserIntroForm id={loggedUser.id} />}/>
               </PrivateRoute>
 
 
@@ -203,7 +204,7 @@ const App = (props) => {
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id"render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
               {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
-              <Route exact path="/addArtwork" render={() => <ArtworkForm id={loggedUser.id} /> }  />
+              <Route exact path="/addArtwork" render={() => <AddArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
               <Route exact path="/artists" render={() => <ArtistList />} />

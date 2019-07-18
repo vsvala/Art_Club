@@ -1,5 +1,6 @@
 const initialState = {
-  loggedUser: null,
+  loggedUser:{},
+  singleUser:{}
   // loadingUser: true
 }
 
@@ -29,12 +30,13 @@ const loginReducer = (state = initialState, action) => {
     }
   }
 
-  //   case 'UPDATE_LOGGED_USER': {
-  //     return {
-  //       ...state,
-  //       loggedUser: action.data
-  //     }
-  //   }
+  case 'UPDATE_LOGGED_USER': {
+    return {
+      ...state,
+      loggedUser: action.data,
+      //singleUser: action.data
+    }
+  }
 
   default: {
     return state

@@ -3,12 +3,13 @@ import { connect } from 'react-redux'
 import {  initializeSingleArtist }  from '../../reducers/actionCreators/userActions'
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
+import { Link } from 'react-router-dom'
 
 const BASE_URL= 'http://localhost:3001/'
 
 
 export const SingleArtist = ({
-  artistToShow,
+  singleArtist,
   userId,
   initializeSingleArtist,
   initLoggedUser,
@@ -26,17 +27,15 @@ export const SingleArtist = ({
     <div className="singleUser">
       {/* <h2>My page</h2> */}
       <div className="user">
-        {!artistToShow ?
+        {!singleArtist ?
           null
           :
           <div>
-            <h2>{artistToShow.name}</h2>
-            {/* <h2>{artistToShow.introduction}</h2> */}
+            <h2>{singleArtist.name}</h2>
             <br/>
-                  Hide show Link to add My intoduction text
-                  Here comes introduction text think limit lenght how many charactersMake this mox smaller
-
-            {artistToShow.artworks && artistToShow.artworks
+            {singleArtist.intro}
+            <br/>
+            {singleArtist.artworks && singleArtist.artworks
               .map(a =>
                 (<ul key={a.id}  className='ulList'>
                   {/* <div className='singleUserPicture'> */}
@@ -49,7 +48,8 @@ export const SingleArtist = ({
                       className='singlepicture'
                       alt='img'
                     />  </li>
-                  <li>  {a.name}</li>
+                  <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link>
+                     by { a.artist }, { a.year }, { a.size }, { a.medium }</li>
                 </ul> ))
             }
           </div>
@@ -63,7 +63,7 @@ const mapStateToProps = (state) => {
   console.log('state.singlea.singlA', state)
 
   return {
-    artistToShow: state.singleArtist.singleArtist,
+    singleArtist: state.singleArtist.singleArtist,
     loggedUser: state.loggedUser.loggedUser
   }
 }

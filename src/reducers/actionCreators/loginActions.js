@@ -8,7 +8,7 @@ import tokenCheckService from '../../services/tokenCheck'
 export const initLoggedUser = () => {
   return async (dispatch) => {
     let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    console.log(loggedUser,'userlöytyi localstoresta')
+    console.log(loggedUser,'user localstorestaaaaaaaaaaaa')
     if (loggedUser) {
       let token = loggedUser.token
       const response = await tokenCheckService.userCheck(token)
@@ -16,7 +16,7 @@ export const initLoggedUser = () => {
         await artworkService.setToken(loggedUser.token)
         await userService.setToken(loggedUser.token)
         await eventService.setToken(loggedUser.token)
-        console.log(loggedUser,'userlöytyi localstoresta')
+        console.log(loggedUser,'userlöytyi localstoresta.tokenit asetettu')
         dispatch({
           type: 'INIT_USER',
           data: loggedUser
@@ -26,13 +26,13 @@ export const initLoggedUser = () => {
   }
 }
 
-/* export const updateLoggedUser = (content, id) => {
+export const updateLoggedUser = (content, id) => {
   return async (dispatch) => {
-    const response = await studentService.update(content, id)
+    const response = await userService.updateIntro(content, id)
     if (response.error || response === undefined) {
       dispatch({
         type: 'NOTIFY',
-        data: 'Saving failed!'
+        data: 'Saving  introduction failed!'
       })
       setTimeout(() => {
         dispatch({
@@ -40,16 +40,17 @@ export const initLoggedUser = () => {
         })
       }, 3000)
     } else {
-      let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-      loggedUser.user.email = true
-      window.localStorage.setItem('loggedInUser', JSON.stringify(loggedUser))
+      // let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
+      console.log('responseintro action',response.intro)
+      // loggedUser.intro=response.intro
+      // window.localStorage.setItem('loggedInUser', JSON.stringify(loggedUser))
       dispatch({
         type: 'UPDATE_LOGGED_USER',
-        data: loggedUser
+        data: response
       })
       dispatch({
         type: 'NOTIFY',
-        data: 'Information updated'
+        data: 'Introduction text updated!'
       })
       setTimeout(() => {
         dispatch({
@@ -58,7 +59,7 @@ export const initLoggedUser = () => {
       }, 3000)
     }
   }
-} */
+}
 
 
 export const login = (username, password) => {
@@ -114,6 +115,6 @@ export const logout = () => {
     })
   }
 }
-export default { login, logout, initLoggedUser }//updateLoggedUser}
+export default { login, logout, initLoggedUser, updateLoggedUser }
 
 

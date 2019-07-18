@@ -113,6 +113,20 @@ const update = async (content) => {
   }
 }
 
+
+//update user information
+const updateIntro = async (content, id) => {
+  console.log('service update info',content, id)
+  try{
+    const response = await axios.put(baseUrl + `/intro/${id}`, content, getConfig())
+    console.log('response data', response.data)
+    return response.data
+  }catch(error){
+    return { error: 'Users introduction text could not be updated' }
+  }
+}
+
+
 //update user information
 const updateUser = async (content) => {
   console.log('service update info',content)
@@ -155,4 +169,4 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   }
 }
 
-export default { getAll, getSingleUser, update, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }
+export default { getAll, getSingleUser, update, updateIntro, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }

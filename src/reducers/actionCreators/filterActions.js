@@ -6,27 +6,7 @@ export const initializeFilter = () => {
   }
 }
 
-// programmeId, as in 'TKT', 'CSM', 'DATA'
-export const setProgramme = (programmeId) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'SET_PROGRAMME',
-      data: programmeId
-    })
-  }
-}
-
-// period, as in: '1', '2', '3', ...
-export const setPeriod = (period) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'SET_PERIOD',
-      data: period
-    })
-  }
-}
-
-// course names
+// artwork names
 export const setArtworkName = (artworkName) => {
   return async (dispatch) => {
     dispatch({
@@ -36,24 +16,4 @@ export const setArtworkName = (artworkName) => {
   }
 }
 
-// course yearFrom
-export const setYearFrom = (yearFrom) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'SET_COURSE_YEARFROM',
-      data: yearFrom
-    })
-  }
-}
-
-// course yearTo
-export const setYearTo = (yearTo) => {
-  return async (dispatch) => {
-    dispatch({
-      type: 'SET_COURSE_YEARTO',
-      data: yearTo
-    })
-  }
-}
-
-export default { initializeFilter, setProgramme, setPeriod, setArtworkName, setYearFrom, setYearTo }
+export default { initializeFilter, setArtworkName }

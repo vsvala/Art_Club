@@ -1,22 +1,26 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {  initializeSingleUser }  from '../../reducers/actionCreators/userActions'
 import { initLoggedUser, updateLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Link } from 'react-router-dom'
-import { Table, Form, Button } from 'react-bootstrap'
+import { Table } from 'react-bootstrap'
 import { notify } from '../../reducers/actionCreators/notificationActions'
+import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
+import ArtworkDelete from '../artwork/ArtworkDelete'
 
-const BASE_URL= 'http://localhost:3001/'
+//const BASE_URL= 'http://localhost:3001/'
 
 
 export const SingleUser = ({
-  userToShow,
+  singleUser,
   userId,
   initializeSingleUser,
   initLoggedUser,
+  //updateLoggedUser,
   loggedUser,
-  notify
+  //deleteArtwork
+  // notify
 }) => {
 
   useEffect(() => {
@@ -24,139 +28,139 @@ export const SingleUser = ({
     initLoggedUser()
     console.log('initializeSingleUser(userId)')
   }, [])
-  const [intro, setIntro] = useState('kääk')//singleUser.intro
+
+  /*   const removeArtwork= (id) => {
+    return () => {
+      if (window.confirm('Do you want to delete this artwork?')) {
+        deleteArtwork(id)//, loggedUser.user.user_id
+      }
+    }
+  } */
+
+  //const [intro, setIntro] = useState(loggedUser.intro&&loggedUser.intro)
 
   // takes new input values from the form, updates logged user
-  const handleSubmit = (event) => {
-    event.preventDefault()
+  //const handleSubmit = (event) => {
+  //  event.preventDefault()
 
-    const input = {
-      intro: intro
+  // const input = {
+  //   intro: intro
 
-    }
-    // gives error if too long
-    if (input.experience.length > 1000) {
-      notify('Experience maximum length is 1000 characters', 5)
-    } else {
-      updateLoggedUser(input, userId)
-    }
-  }
+  // }
+  // gives error if too long
+  // if (input.intro.length > 1000) {
+  //notify('Experience maximum length is 1000 characters', 5)
+  // } else {
+  // updateLoggedUser(input, userId)
+  //notify('usends', 5)
+  // }
+  // }
 
 
 
   return (
     <div className="singleUser">
       {/* <h2>My page</h2> */}
+
       <div className="user">
-        {!userToShow ?
+
+        {!singleUser ?
           null
           :
           <div>
-            {/* {userToShow&&userToShow.id} */}
-            <h2>{userToShow.name}</h2>
+            {/* {singleUser&&singleUser.id} */}
+            <h2>{singleUser.name}</h2>
             <br/>
+
             {loggedUser && loggedUser.role==='member' | loggedUser.role==='admin'
               ? <div>
-                <Table>
+                <Table bordered>
                   <thead>
                     <tr>
                       <th>name</th>
                       <th>username</th>
                       <th>email</th>
-                      <th>artworks</th>
                       <th>status</th>
+                      <th>artworks</th>
                       <th>update</th>
+                      <th>Write inroduction</th>
                     </tr>
                   </thead>
-
                   <tbody>
                     <tr>
-                      <td>{userToShow.name}</td>
-                      <td>{userToShow.username}</td>
-                      <td>{userToShow.email}</td>
-                      <td>{userToShow.artworks && userToShow.artworks.length}/10</td>
-                      <td>{userToShow.role}</td>
-                      { loggedUser.role==='member' | loggedUser.username===userToShow.username?
-                        <td> <Link to='/users/update' className='member'>Update information</Link></td>
-                        :
-                        null
-                      }
+                      <td>{singleUser.name}</td>
+                      <td>{singleUser.username}</td>
+                      <td>{singleUser.email}</td>
+                      <td>{singleUser.role}</td>
+                      <td>{singleUser.artworks && singleUser.artworks.length}/10
+                        <Link to="/users/addArtwork" className='member'>  Add</Link></td>
+                      <td> <Link to='/users/update' className='member'>Update information</Link></td>
+                      {/* { loggedUser.role==='member' | loggedUser.username===singleUser.username? */}
+                      <td> <Link to='/users/intro' className='member'>Write introduction</Link></td>
+                      {/* : null} */}
                     </tr>
                   </tbody>
                 </Table>
-
-                <Table>
-                  <tbody>
-                    <tr>
-                      { loggedUser.role==='member' | loggedUser.username===userToShow.username?
-                        <div>
-                          {/* <td><h3><Link to='/users/password' className='member'>Write Introduction text</Link></h3></td> */}
-
-                          <Form onSubmit={handleSubmit} className='intro' >
-                            <Form.Group>
-                              <Form.Label>Write Introduction text (remaining characters {1000 - intro.length}):</Form.Label>
-                              <Form.Control
-                                as='textarea'
-                                rows='5'
-                                type='text'
-                                name='intro'
-                                value={intro}
-                                onChange={(e) => setIntro(e.target.value)}
-                              />
-
-                            </Form.Group>
-                            <Button className='button updateButton' type='submit'>Update</Button>
-                          </Form> </div>
-                        :
-                        null
-                      }
-
-                    </tr>
-                  </tbody>
-                  {/* Hide show Link to add My intoduction text  from here... */}
-                </Table>
+                <br/>
+                { singleUser.intro?
+                  <h4>Introduction text</h4>
+                  : null
+                }
               </div>
               : <em></em>}
-            {/* <h3>Artworks</h3> */}
-            Here comes introduction text think limit lenght how many charactersMake this mox smaller
-            <br/>
-            <br/>
-            {userToShow.artworks && userToShow.artworks
-              .map(a =>
-                (<ul key={a.id}  className='ulList'>
-                  {/* <div className='singleUserPicture'> */}
-                  <li>
 
+
+
+            {/*Introdusction text */}
+            {singleUser.intro && singleUser.intro}
+            <br/>
+            <br/>
+          </div>}
+
+
+        {/*Artworks */}
+        <div className='addedArtworks'>
+          {singleUser.artworks && singleUser
+            .artworks
+            .map(a =>
+              <ArtworkDelete
+                key={a.id}
+                artwork={a}
+              />
+            )}
+          <br/>
+        </div>
+        {/*     (<ul key={a.id}  className='ulList'>
+                  <li>
                     <img
-                      src={ BASE_URL+`${ a.galleryImage }`}
+                      src={ BASE_URL +`${ a.galleryImage }`}
                       width='300'
                       height='auto'
                       className='singlepicture'
                       alt='img'
                     />  </li>
-                  <li>  {a.name}</li>
+                  <li>  {a.name}
+                    <Button className="button buttonDelete" onClick={removeArtwork(a.id)} variant="outline-secondary" type="submit" >
+                  Delete
+                    </Button></li>
                 </ul> ))
-            }
-          </div>
-        }
-      </div>
-      <br/>
+  } */}
 
-      {/* <h5>TODO  link to add or  update detais?,</h5> */}
+      </div>
     </div>
   )
 }
 
 const mapStateToProps = (state) => {
-  console.log('state.singleUser', state)
+  console.log('state fromsingleUserPAge', state)
 
   return {
-    userToShow: state.singleUser.singleUser,
+    singleUser: state.singleUser.singleUser,
     loggedUser: state.loggedUser.loggedUser
   }
 }
 
 export default connect(
   mapStateToProps,
-  { notify, ...userActions, initializeSingleUser, initLoggedUser, updateLoggedUser  }
+  { notify, ...userActions, initializeSingleUser, initLoggedUser, updateLoggedUser, deleteArtwork  }
 )(SingleUser)

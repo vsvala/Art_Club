@@ -22,7 +22,7 @@ const TermsOfUse = () => {
       <h4>Picture Gallery</h4>
       <p>Uploading pictures <br></br>
       Image instructions! Recommended: width 600px, height 500px, max_fileSize:1024*1024*5, resolution: 72dpi, format:jpg
-       As amember you can  Recommendated picture sizes.Dont't accept picture sixe over...???
+       As amember you can  Recommendated picture sizes.Dont`&apos;`t accept picture sixe over...???
         Name, username, email. Introduction text is asked to get more information about artist to display with uploaded pictures on the picture gallery . <br></br>
        .</p>
 

@@ -41,6 +41,11 @@ h3{
     color: #338ad3;
     font-family: 'Leckerli One', cursive;
     }
+    h5{ 
+      color: #ff1476;
+      font-family: 'Leckerli One', cursive;
+      font-size: 95%;
+      }
 .grayInfoText {
   color:  #879097;
   font-size: 80%;
@@ -189,7 +194,7 @@ float:left;
    /* ARTWORKFORM */
    .artworkForm {
     background: #ffffff;
-    height: 580px;
+    height: 600px;
     margin: 10px auto 0;
     width: 750px;
     box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
@@ -241,6 +246,15 @@ float:left;
     .singleUserPicture{
       float:left;
       }
+
+      .ImageInfoText{
+        color:  #879097;
+        font-size: 80%;
+        float:left;
+        margin-top: 10px;
+        padding-left:90px;
+      }
+
 
       /* tr.eList{
         margin-left: 40%;

@@ -128,7 +128,6 @@ export const SingleUser = ({
                 artwork={a}
               />
             )}
-          <br/>
         </div>
         {/*     (<ul key={a.id}  className='ulList'>
                   <li>

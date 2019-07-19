@@ -101,7 +101,7 @@ export const RegisterUserForm = ( {
                 placeholder="Password"
               />
               <div className='grayInfoText'>
-                <p>I accept terms of use 	&amp; <Link to='/privacy' className='gpr'>Privacy Policy</Link></p>
+                <p>I accept <Link to='/terms' className='terms'>Terms of use</Link> 	&amp; <Link to='/privacy' className='gpr'>Privacy Policy</Link></p>
               </div>
               <br/>
               <Button className="button" variant="light" type="submit">Apply</Button>

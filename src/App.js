@@ -28,6 +28,7 @@ import SingleArtist from './components/artist/SingleArtist'
 import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
 import GDPRInfo from './components/common/GDPRInfo'
+import TermsOfUse from './components/common/TermsOfUse'
 
 const App = (props) => {
 
@@ -193,7 +194,7 @@ const App = (props) => {
                 condition={loggedUser}
               >
                 <Route exact path="/users/:id/myPage" render={() => <SingleUser userId={loggedUser.id} />} />
-                <Route exact path="/users/addArtwork" render={() => <AddArtworkForm  id={loggedUser.id} /> } />
+                <Route exact path="/users/addArtwork" render={({ history }) => <AddArtworkForm  id={loggedUser.id} history={history} /> } />
                 <Route exact path="/users/events" render={() => <EventList /> } />
                 <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
                 <Route exact path="/users/update" render={({ history }) => <UpdateUserForm id={loggedUser.id} history={history} /> } />
@@ -213,8 +214,7 @@ const App = (props) => {
               <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
               <Route exact path="/links" render={() => <LinksAndWeather />} />
               <Route exact path="/privacy" render={() => <GDPRInfo />} />
-
-      
+              <Route exact path="/terms" render={() => <TermsOfUse />} />
             </Switch>
           </div>
         </React.Fragment>

@@ -40,7 +40,7 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
          by { artwork.artist }</li>
          <li> { artwork.year }, { artwork.size }, { artwork.medium }</li>
          <li>  <Button className="button" onClick={removeArtwork(artwork.id)} variant="outline-secondary" type="submit" >
-      Delete
+            Delete
           </Button></li>   <br/>
         {/*         <li className="delete"><DeleteButton id={artwork.id} onClick={removeArtwork(artwork.id)} /></li>*/}      
         </ul>

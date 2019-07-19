@@ -73,7 +73,9 @@ Date picker:
 [React date picker](https://reactdatepicker.com/)
 ```npm install react-datepicker --save```
 
-
+Read more:
+```npm install --save read-more-react```
+[read-more-react](https://www.npmjs.com/package/read-more-react)
 
 ### Used libraries backend
 

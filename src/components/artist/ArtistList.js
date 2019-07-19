@@ -4,37 +4,32 @@ import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getArtists } from '../../reducers/actionCreators/userActions'
 
-//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!alkuun  listanonmembers jotka täytyy hyväksyä,??värikodi?? loppuun hyväksytyt
-
 
 export const ArtistList = ({ userArray, getArtists }) => {
   useEffect(() => {
-    // if (userList.length===0) {
+    // if (userArray.artworks.length===0) {
     console.log('initialiList')
     getArtists()
     // }
   }, [])
-  //console.log('propsoooooooooooooo', props)
+
+
 
   return (
 
     <div className="artistList">
       <h2>Artists</h2>
-      <br/>
+
       <Table hover size='sm'>
         <thead>
           <tr>
-            {/* <th>UserId</th> */}
             <th>name</th>
             <th>artworks</th>
-            {/* artworks lista vai töiden määrä tuleeko tämä edes tähän?/tarviiko
-            TODO  aprove status..*/}
-
+            {/* artworks lista nimistä vai töiden määrä ?*/}
           </tr>
         </thead>
 
         <tbody>
-
           { userArray&&userArray.map(user =>
             <Artist  user={user}
               key={user.id}

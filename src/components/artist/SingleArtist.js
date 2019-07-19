@@ -4,8 +4,10 @@ import {  initializeSingleArtist }  from '../../reducers/actionCreators/userActi
 import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Link } from 'react-router-dom'
+import url from '../../services/config'
+const baseUrl = url + 'public/'
 
-const BASE_URL= 'http://localhost:3001/'
+//const BASE_URL= 'http://localhost:3001/'
 
 
 export const SingleArtist = ({
@@ -23,6 +25,7 @@ export const SingleArtist = ({
   }, [])
 
 
+
   return (
     <div className="singleUser">
       {/* <h2>My page</h2> */}
@@ -31,9 +34,10 @@ export const SingleArtist = ({
           null
           :
           <div>
-            <h2>{singleArtist.name}</h2>
-            <br/>
+            <div className='singleArtistHeader'>
+              <h3>{singleArtist.name}</h3>  </div>
             {singleArtist.intro}
+
             <br/>
             {singleArtist.artworks && singleArtist.artworks
               .map(a =>
@@ -42,7 +46,8 @@ export const SingleArtist = ({
                   <li>
                     <br/>
                     <img
-                      src={ BASE_URL+`${ a.galleryImage }`}
+                      src={ baseUrl+`${ a.galleryImage }`}
+                      //src={ BASE_URL+`${ a.galleryImage }`}
                       width='300'
                       height='auto'
                       className='singlepicture'

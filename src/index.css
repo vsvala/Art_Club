@@ -16,8 +16,16 @@ h1{
   font-family: 'Amatic SC', cursive;
   text-align: center;   
   }
+  .GDPRInfo h1{
+  padding-top:0;
+  padding-bottom: 20px;
+  color: #251147;
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
+}
 h2{
 margin-top: 40px;
+padding-bottom:30px;
   /* color: #338ad3; */
 color: #bebcbc;
 font-family: 'Leckerli One', cursive;
@@ -121,7 +129,7 @@ float:left;
   float:left;  
 }
 .galleryPicture{
-  width:300px;
+  width:330px;
   height:auto;
 }
    
@@ -222,6 +230,12 @@ float:left;
   }
   .home h2{
     color: #338ad3;
+    }
+
+    .singleArtistHeader h3{
+      color: #338ad3;
+      margin-top: 40px;
+      padding-bottom:20px;
     }
 
     .singleUserPicture{

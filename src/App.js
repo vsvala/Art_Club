@@ -10,6 +10,7 @@ import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
 // Components
 import Home from './components/Home'
+import LinksAndWeather from './components/LinksAndWeather'
 import RegisterUserForm from './components/login/RegisterUserForm'
 import LoginForm from './components/login/LoginForm'
 import AddArtworkForm from './components/artwork/AddArtworkForm'
@@ -26,6 +27,7 @@ import SingleUser from './components/user/SingleUser'
 import SingleArtist from './components/artist/SingleArtist'
 import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
+import GDPRInfo from './components/common/GDPRInfo'
 
 const App = (props) => {
 
@@ -209,8 +211,10 @@ const App = (props) => {
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
               <Route exact path="/artists" render={() => <ArtistList />} />
               <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
-              <Route exact path="/links" render={() => <ArtistList />} />
-              {/* TODO links page..and painting weateher */}
+              <Route exact path="/links" render={() => <LinksAndWeather />} />
+              <Route exact path="/privacy" render={() => <GDPRInfo />} />
+
+      
             </Switch>
           </div>
         </React.Fragment>

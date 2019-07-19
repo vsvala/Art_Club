@@ -9,7 +9,6 @@ import url from '../../services/config'
 import { Form } from 'react-bootstrap'
 
 const baseUrl = url + 'public/'
-
 /* eslint-disable */
 //const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
 /* eslint-enable */
@@ -44,8 +43,9 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
   return (
     <div className="artworkList">
 
+
+      {/* Search form */}
       <div style={{ float: 'right' }}>
-        {/* <div style={{ color: '#6c757d' }}> Filter:</div> */}
         <Form.Control
           placeholder='Search artwork or artist'
           className='filterInput'
@@ -53,10 +53,10 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
           onChange={handleArtworkNameChange} />
       </div>
 
+      <div style={{ marginLeft: '25%' }}>
+        <h2>Gallery</h2>
+      </div>
 
-      <h2>Gallery</h2>
-
-      <br/>
       {console.log('artworks..hhh',artworks)}
       <div>
         { artworks
@@ -73,8 +73,8 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
                 className='galleryPicture'
                 alt='img'
               /></li>
-              <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link>
-         by { a.artist }, { a.year }, { a.size }, { a.medium }</li>
+              <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link> by { a.artist }</li>
+              <li>{ a.year }, { a.size }, { a.medium }</li>
 
               {loggedUser && loggedUser.role==='admin'
                 ? <li className="delete"><DeleteButton id={a.id} onClick={removeArtwork} /></li>

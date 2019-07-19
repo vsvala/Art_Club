@@ -32,13 +32,14 @@
 | ti 16.7  | 8    | Frontend and Backend: addEvent react datePicker, delete event, refactoring | 
 | ke 17.7  | 5    | Frontend: Filtering artworks by name and artist,  Backend: singleArtist page |
 | to 18.7  |  8   | Frontend and Backend: Mypage: updating user information, adding Introduction, getting earlier information to update form deleting pictures |
-| pe 19.7  |  ?   | Deleting artwork or event deletes image from uploads folder too!! Deleting removes picture straightaway, 
+| pe 19.7  | 5    | Frontend:starting LinksAndWeather page, privacy/GDPRinfo and staring Terms of Use page, AddArtworkForm: Image uploading istructions with react-read-more-component and 10 image limitation |
+| pe .7  |  ?   | Deleting artwork or event deletes image from uploads folder too!! Deleting removes picture straightaway, 
 | su .7  |  ?    |  refactoring and cleaning code |
 | ma  .7  |  ?    | Tests... Dokumentation |
 | ti .7  |  ?    | Links page: exhibitions links, painting weather  | 
 | ke .7  |  ?    | Like | 
 
-| total |  167/175  |  
+| total |  172/175  |  
 
 
 

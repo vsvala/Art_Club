@@ -33,13 +33,14 @@
 | ke 17.7  | 5    | Frontend: Filtering artworks by name and artist,  Backend: singleArtist page |
 | to 18.7  |  8   | Frontend and Backend: Mypage: updating user information, adding Introduction, getting earlier information to update form deleting pictures |
 | pe 19.7  | 5    | Frontend:starting LinksAndWeather page, privacy/GDPRinfo and staring Terms of Use page, AddArtworkForm: Image uploading istructions with react-read-more-component and 10 image limitation |
-| ma 22.7  |  ?   | Backend: Deleting artwork and event deletes images from uploads folder too! Rerefactoring and cleaning code |
+| ma 22.7  |  6   | Backend: Deleting artwork and event deletes images from uploads folder too! Rerefactoring and cleaning code |
 
-| total |  172/175  |  
+| total |  178/175  |  
 
 
 
  TODO
+  |  .7  |  ?    | Refactoring |
  |  .7  |  ?    | Backend:Authentications, clean errors |
 |  .7  |  ?    |  form validations, refactoring and cleaning code |
 |   .7  |  ?    | Tests... Dokumentation |

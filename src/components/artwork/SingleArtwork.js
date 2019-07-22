@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'//, { useEffect } 
+import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import singleArtworkActions from '../../reducers/actionCreators/singleArtworkActions'
 import { initializeSingleArtwork }  from '../../reducers/actionCreators/singleArtworkActions'
@@ -43,7 +43,7 @@ export const SingleArtwork = ({
 
 const mapStateToProps = (state) => {
   return {
-    artwork: state.singleArtwork.singleArtwork,
+    artwork: state.singleArtwork.singleArtwork
     //artworks:state.artworks.artworks
   }
 }

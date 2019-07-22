@@ -172,7 +172,7 @@ const App = (props) => {
                 redirectPath="/login"
                 condition={loggedUser && isAdmin}
               >
-                <Route exact path="/admin/addEvent" render={() => <EventForm id={loggedUser.id} />} />
+                <Route exact path="/admin/addEvent" render={({ history }) => <EventForm  history={history} id={loggedUser.id} />} />
                 <Route exact path="/admin/users" render={() => <UserList />} />
                 <Route exact path="/admin/users/:id"render={({ match }) => <SingleUser userId={match.params.id} />} />
               </PrivateRoute>
@@ -186,8 +186,6 @@ const App = (props) => {
               </PrivateRoute>
 
               {/*  THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/users" */}
-
-
               <PrivateRoute
                 path="/users"
                 redirectPath="/login"

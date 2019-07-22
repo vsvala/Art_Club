@@ -10,10 +10,10 @@ import 'react-datepicker/dist/react-datepicker.css'
 export const EventForm = (
   {
     createEvent,
-    id
+    id,
+    //history
   }
 ) => {
-
 
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({ })
@@ -21,7 +21,6 @@ export const EventForm = (
     startDate: new Date(),
     endDate:  new Date()
   })
-
 
 
   const handleSubmit =async(event) => {
@@ -39,6 +38,7 @@ export const EventForm = (
 
     console.log('submitdata', data)
     createEvent(data)
+    //history.push('/users/events')
   }
 
 
@@ -87,8 +87,8 @@ export const EventForm = (
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
-
            Starting and ending time :
+
               <DatePicker
                 selected={state.startDate}
                 selectsStart
@@ -126,35 +126,6 @@ export const EventForm = (
                 onChange={handleChange}
                 autoFocus
               />
-
-              {/*    <br/>
-              <Form.Control
-                type='text'
-                placeholder='Start date'
-                name='startDate'
-                onChange={handleChange}
-              />
-              <br/>
-              <Form.Control
-                type='text'
-                placeholder='End date'
-                name='endDate'
-                onChange={handleChange}
-              /> */}
-              {/*   <br/>
-              <Form.Control
-                type='text'
-                placeholder='Start time'
-                name='startTime'
-                onChange={handleChange}
-              />
-              <br/>
-              <Form.Control
-                type='text'
-                placeholder='End time'
-                name='endTime'
-                onChange={handleChange}
-              /> */}
               <br/>
               <Form.Control
                 type='text'
@@ -171,15 +142,14 @@ export const EventForm = (
                 name='description'
                 onChange={handleChange}
               />
+              <div className="grayInfoText">
+                <p>Upload event picture,  size width:200px, height:300px</p>
+              </div>
               <br/>
               <Button className='button' type='submit' variant="light">Send</Button>
             </Form.Group>
           </Col>
-          <div className="loadEventPictureText">
-            <p>Upload event picture</p>
-          </div>
         </Form>
-        <br/>
         <br/>
         <input type='file'className='fileUploader' name='eventImage' id="file" onChange={fileSelectedHandler}/>
       </Container>

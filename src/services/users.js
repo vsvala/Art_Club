@@ -50,22 +50,22 @@ const getAllArtists = async () => {
 }
 
 //gets a single user by id
-const getSingleUser = async (id) => {
-  try {
-    const response = await axios.get(baseUrl + `/admin/${id}`, getConfig())
-    return response.data
-  } catch (error) {
-    if (error === 400) {
-      return { error: 'Could not get user from db' }
-    }
-    if (error === 500) {
-      return { error: 'Internal server error' }
-    }
-  }
-}
+// const getSingleUser = async (id) => {
+//   try {
+//     const response = await axios.get(baseUrl + `/admin/${id}`, getConfig())
+//     return response.data
+//   } catch (error) {
+//     if (error === 400) {
+//       return { error: 'Could not get user from db' }
+//     }
+//     if (error === 500) {
+//       return { error: 'Internal server error' }
+//     }
+//   }
+// }
 
-//gets a single user by id
-const getSingleArtist = async (id) => {
+//gets a single user/artist by id
+const getSingleUser = async (id) => {
   try {
     const response = await axios.get(baseUrl + `/artist/${id}`)
     return response.data
@@ -78,7 +78,6 @@ const getSingleArtist = async (id) => {
     }
   }
 }
-
 
 //create new user
 const create = async (user) => {
@@ -169,4 +168,4 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   }
 }
 
-export default { getAll, getSingleUser, update, updateIntro, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists, getSingleArtist  }
+export default { getAll, getSingleUser, update, updateIntro, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists }

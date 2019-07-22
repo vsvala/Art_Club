@@ -61,46 +61,49 @@ export const UpdateUserForm = ( {
           </Col>
         </Row>
         <br/>
-        <Col md={{ span: 10, offset: 1 }}>
-          <Form onSubmit={handleSubmit}>
-            <Form.Group>
-              <Form.Label>Name: </Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                value={name}
-                // onChange={handleChange}
-                //placeholder="Name"
-                onChange={(e) => setName(e.target.value)}
 
-              />
-              <Form.Label>Email: </Form.Label>
-              <Form.Control
-                type='email'
-                name='email'
-                value={email}
-                //value={input.email}
-                //placeholder="Email"
-                //onChange={handleChange}
-                onChange={(e) => setEmail(e.target.value)}
-              />
+        <div className='updateInfoLabels'>
+          <Col md={{ span: 10, offset: 1 }}>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group>
+                <Form.Label>Name: </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  value={name}
+                  // onChange={handleChange}
+                  //placeholder="Name"
+                  onChange={(e) => setName(e.target.value)}
 
-              <Form.Label>Username: </Form.Label>
-              <Form.Control
-                type="text"
-                name="username"
-                //placeholder="Username"
-                value={username}
-                //onChange={handleChange}
-                onChange={(e) => setUsername(e.target.value)}
-              />
-              <br/>
-              <Button className="button" variant="light" type="submit">Update
-              </Button>
-              <br/>
-            </Form.Group>
-          </Form>
-        </Col>
+                />
+                <Form.Label>Email: </Form.Label>
+                <Form.Control
+                  type='email'
+                  name='email'
+                  value={email}
+                  //value={input.email}
+                  //placeholder="Email"
+                  //onChange={handleChange}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+
+                <Form.Label>Username: </Form.Label>
+                <Form.Control
+                  type="text"
+                  name="username"
+                  //placeholder="Username"
+                  value={username}
+                  //onChange={handleChange}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+                <br/>
+                <Button className="button" variant="light" type="submit">Update
+                </Button>
+                <br/>
+              </Form.Group>
+            </Form>
+          </Col>
+        </div>
       </Container>
     </div>
   )

@@ -26,21 +26,6 @@ const getAll = async () => {
   }
 }
 
-const getSingleArtwork= async (id) => {
-  console.log('service get singleartwork')
-
-  try {
-    const response = await axios.get(baseUrl + `/${id}`)
-    return response.data
-  } catch (error) {
-    if (error === 400) {
-      return { error: 'Could not getartwork from db' }
-    }
-    if (error === 500) {
-      return { error: 'Internal server error' }
-    }
-  }
-}
 
 const create = async (data) => {
   console.log('servise create',data)
@@ -115,4 +100,4 @@ const deleteArtwork = async (id) => {
 }
 
 
-export default { getAll, getSingleArtwork, create, update, setToken, deleteArtwork }
+export default { getAll, create, update, setToken, deleteArtwork }

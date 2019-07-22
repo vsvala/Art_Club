@@ -8,7 +8,7 @@ import tokenCheckService from '../../services/tokenCheck'
 export const initLoggedUser = () => {
   return async (dispatch) => {
     let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    console.log(loggedUser,'user localstorestaaaaaaaaaaaa')
+    console.log('loginaction init user localstorestaaaaaaaaaaaa',loggedUser)
     if (loggedUser) {
       let token = loggedUser.token
       const response = await tokenCheckService.userCheck(token)
@@ -21,6 +21,9 @@ export const initLoggedUser = () => {
           type: 'INIT_USER',
           data: loggedUser
         })
+      }else{
+        console.log('initloggeduser failed')
+
       }
     }
   }

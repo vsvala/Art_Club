@@ -1,14 +1,14 @@
 import React, { useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { initLoggedUser } from '../reducers/actionCreators/loginActions'
+import { updateLoggedUser } from '../reducers/actionCreators/loginActions'
 import logo from '../images/tripleblue.png'
 
 
 export const Home = ( props) => {
 
   useEffect(() => {
-    initLoggedUser()
+    updateLoggedUser()
   }, [])
 
   return (
@@ -51,5 +51,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initLoggedUser }
+  { updateLoggedUser }
 )( Home )

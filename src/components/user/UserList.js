@@ -4,8 +4,6 @@ import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getUsers, deleteUser } from '../../reducers/actionCreators/userActions'
 
-//TODO!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!alkuun  listanonmembers jotka täytyy hyväksyä,??värikodi?? loppuun hyväksytyt
-
 
 export const UserList = ({ userArray, getUsers, deleteUser }) => {
   useEffect(() => {
@@ -14,12 +12,11 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
     getUsers()
     // }
   }, [])
-  //console.log('propsoooooooooooooo', props)
 
   const removeUser = (id) => {
     return () => {
       if (window.confirm('Do you want to delete this user?')) {
-        deleteUser(id)//, loggedUser.user.user_id
+        deleteUser(id)
       }
     }
   }
@@ -28,25 +25,19 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
 
     <div className="userList">
       <h2>Users</h2>
-      <br/>
-      <Table bordered hover>
+      <Table bordered hover size='sm'>
         <thead>
           <tr>
-            {/* <th>UserId</th> */}
             <th>name</th>
             <th>username</th>
             <th>status</th>
             <th>email</th>
             <th>artworks</th>
             <th>delete</th>
-            {/* artworks lista vai töiden määrä tuleeko tämä edes tähän?/tarviiko
-            TODO  aprove status..*/}
-
           </tr>
         </thead>
 
         <tbody>
-
           { userArray&&userArray.map(user =>
             <User  user={user}
               key={user.id}

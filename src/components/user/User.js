@@ -18,7 +18,7 @@ const User = ({ user, onClick, updateRole }) => {
 
   return (
     <tr>
-      <td><Link to={`/admin/users/${user.id}`}> {<p>{user.name}</p>} </Link></td>
+      <td><Link to={`/artists/${user.id}`}> {<p>{user.name}</p>} </Link></td>
       {/* <td> {user.id} </td> */}
       <td> {user.username}</td>
       {/* <td> {user.role}</td> */}

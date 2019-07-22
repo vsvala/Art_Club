@@ -13,6 +13,9 @@ export const initializeEvents = () => {
   }
 }
 
+
+
+
 // creates new event
 export const createEvent =(content) => {
   console.log('actions create:', content )

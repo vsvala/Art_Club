@@ -25,6 +25,7 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
 
   return (
     <div className="artworkThumb">
+
       <ul Style="list-style-type:none;">
       <li>
         <img

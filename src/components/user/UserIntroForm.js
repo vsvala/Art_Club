@@ -18,7 +18,7 @@ export const UserIntroForm = ( {
 }) => {
 
   const [intro, setIntro] = useState(singleUser.intro)
-
+  const introLenght = singleUser.intro.lenght
   //const [intro, setIntro] = useState(loggedUser.intro&&loggedUser.intro)
 
   // takes new input values from the form, updates logged user
@@ -42,11 +42,13 @@ export const UserIntroForm = ( {
     <Form onSubmit={handleSubmit} className='intro' >
       {/* <td><h3><Link to='/users/password' className='member'>Write Introduction text</Link></h3></td> */}
       <Form.Group>
-        <Form.Label><h4>Write Introduction text (remaining characters):</h4></Form.Label>
-        {/* //(remaining characters {1000 - this.intro.length} */}
+        <br/>
+        <br/>
+        <Form.Label><h4>Write Introduction text (remaining characters {1000 - introLenght}):</h4></Form.Label>
+
         <Form.Control
           as='textarea'
-          rows='3'
+          rows='8'
           type='text'
           name='intro'
           value={intro}

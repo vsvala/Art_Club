@@ -1,36 +1,28 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {  initializeEvents,  deleteEvent } from '../../reducers/actionCreators/eventActions'
-//import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
-//import { Link } from 'react-router-dom'
-//import DeleteButton from '../common/DeleteButton'
+//import { Table } from 'react-bootstrap'
 import { Table, Button } from 'react-bootstrap'
+//import Event from './Event'
 import url from '../../services/config'
 const baseUrl = url + 'public/'
-
 /* eslint-disable */
 //const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
 /* eslint-enable */
 
-//import Artwork from './Artwork'
-//
-export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser }) => { // =>  initLoggedUser,{
+export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser }) => {
   useEffect(() => {
     // if (events.length === 0) {
     console.log('initializeEventssss')
     initializeEvents()
-    //&&
-    // initLoggedUser()
     // }
   }, [])
 
 
-  //TODO search by artist or by artwork...order alphabetically by ainting and artist
-  //event handler for deleting specific course application, tells studentactions to deleteApliedCourse
   const removeEvent = (id) => {
     return () => {
       if (window.confirm('Do you want to delete this event')) {
-        deleteEvent(id)//, loggedUser.user.user_id
+        deleteEvent(id)
       }
     }
   }
@@ -42,10 +34,13 @@ export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser 
       {console.log('events..hhh',events)}
       <Table >
         <tbody>
-          { events
+          { events&&events
             .map(e =>
+            //   <Event  e={e}
+            //     key={e.id}
+            //     loggedUSer={loggedUser} removeEvent={removeEvent} />
+            // )}
               <tr key={e.id}  className='eList'>
-                {/* <li className="event"> <Link to={`/events/${e.id}`}> {e.title} </Link>  </li> */}
                 <td>
                   <img
                     src={ baseUrl+`${ e.eventImage }`}
@@ -53,12 +48,10 @@ export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser 
                     width='300'
                     className='eventPicture'
                     alt='img'
-                  /> </td>
-
+                  />
+                </td>
                 <td className="event">
-                  {/* <h4><Link to={`/events/${e.id}`}> {e.title} </Link></h4> */}
                   <h4> {e.title}</h4>
-
                   <p>Start: { e.start } </p>
                   <p>End: { e.end }  </p>
                   <p>Place: { e.place }</p>
@@ -70,18 +63,15 @@ export const EventList = ({   initializeEvents, deleteEvent, events, loggedUser 
                   : <em></em>}
               </tr>
             )}
-
         </tbody>
       </Table>
-
     </div>
   )
 }
 
 
-
 const mapStateToProps = (state) => {
-  console.log('state', state.events.events)
+  console.log('state events', state.events.events)
 
   return {
     events: state.events.events,
@@ -92,6 +82,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeEvents, deleteEvent }//, initLoggedUser
+  { initializeEvents, deleteEvent }
 )(EventList)
 

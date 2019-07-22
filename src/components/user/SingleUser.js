@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import {  initializeSingleUser }  from '../../reducers/actionCreators/userActions'
-import { initLoggedUser, updateLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Link } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
@@ -16,8 +15,6 @@ export const SingleUser = ({
   singleUser,
   userId,
   initializeSingleUser,
-  initLoggedUser,
-  //updateLoggedUser,
   loggedUser,
   //deleteArtwork
   // notify
@@ -25,7 +22,6 @@ export const SingleUser = ({
 
   useEffect(() => {
     initializeSingleUser(userId) &&
-    initLoggedUser()
     console.log('initializeSingleUser(userId)')
   }, [])
 
@@ -70,7 +66,7 @@ export const SingleUser = ({
           <div>
             {/* {singleUser&&singleUser.id} */}
             <h2>{singleUser.name}</h2>
-            <br/>
+
 
             {loggedUser && loggedUser.role==='member' | loggedUser.role==='admin'
               ? <div>
@@ -111,7 +107,7 @@ export const SingleUser = ({
 
 
 
-            {/*Introdusction text */}
+            {/*Introduction text */}
             {singleUser.intro && singleUser.intro}
             <br/>
             <br/>
@@ -161,5 +157,5 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { notify, ...userActions, initializeSingleUser, initLoggedUser, updateLoggedUser, deleteArtwork  }
+  { notify, ...userActions, initializeSingleUser, deleteArtwork  }
 )(SingleUser)

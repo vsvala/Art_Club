@@ -1,26 +1,24 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {  initializeSingleArtist }  from '../../reducers/actionCreators/userActions'
-import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
+import {  initializeSingleUser }  from '../../reducers/actionCreators/userActions'
+//import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Link } from 'react-router-dom'
 import url from '../../services/config'
 const baseUrl = url + 'public/'
-
 //const BASE_URL= 'http://localhost:3001/'
 
 
-export const SingleArtist = ({
-  singleArtist,
+export const SingleArtist= ({
+  singleUser,
   userId,
-  initializeSingleArtist,
-  initLoggedUser,
+  initializeSingleUser,
+  // getArtists(),
   //loggedUser
 }) => {
 
   useEffect(() => {
-    initializeSingleArtist(userId) &&
-    initLoggedUser()
+    initializeSingleUser(userId)
     console.log('initializeSingleUser(userId)')
   }, [])
 
@@ -28,18 +26,17 @@ export const SingleArtist = ({
 
   return (
     <div className="singleUser">
-      {/* <h2>My page</h2> */}
       <div className="user">
-        {!singleArtist ?
+        {!singleUser?
           null
           :
           <div>
             <div className='singleArtistHeader'>
-              <h3>{singleArtist.name}</h3>  </div>
-            {singleArtist.intro}
+              <h3>{singleUser.name}</h3>  </div>
+            {singleUser.intro}
 
             <br/>
-            {singleArtist.artworks && singleArtist.artworks
+            {singleUser.artworks && singleUser.artworks
               .map(a =>
                 (<ul key={a.id}  className='ulList'>
                   {/* <div className='singleUserPicture'> */}
@@ -53,8 +50,8 @@ export const SingleArtist = ({
                       className='singlepicture'
                       alt='img'
                     />  </li>
-                  <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link>
-                     by { a.artist }, { a.year }, { a.size }, { a.medium }</li>
+                  <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link> by { a.User}</li>
+                  <li>{ a.year }, { a.size }, { a.medium }</li>
                 </ul> ))
             }
           </div>
@@ -65,15 +62,15 @@ export const SingleArtist = ({
 }
 
 const mapStateToProps = (state) => {
-  console.log('state.singlea.singlA', state)
+  console.log('state.singlea.singlu', state)
 
   return {
-    singleArtist: state.singleArtist.singleArtist,
-    loggedUser: state.loggedUser.loggedUser
+    singleUser: state.singleUser.singleUser,
+    //userToShow: state.users.users
   }
 }
 
 export default connect(
   mapStateToProps,
-  { ...userActions, initializeSingleArtist, initLoggedUser  }
+  { ...userActions, initializeSingleUser }
 )(SingleArtist)

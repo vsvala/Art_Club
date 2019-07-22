@@ -6,7 +6,9 @@ const baseUrl = url + 'api/tokenCheck'
 
 const userCheck = async (token) => {
   try {
-    const response = await axios.get(`${baseUrl}/login`, { headers: { 'Authorization': 'Bearer ' + token } })
+    console.log('usercheck servisestä')
+    const response = await axios.get(baseUrl, { headers: { 'Authorization': 'Bearer ' + token } })
+    console.log('usercheck servisestä', response)
     return response.data
   } catch (error) {
     return { error: 'Something went wrong' }

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
-const BASE_URL= 'http://localhost:3001/'
+//const BASE_URL= 'http://localhost:3001/'
+import url from '../../services/config'
+const baseUrl = url + 'public/'
 
 const Artwork = ({ artwork,  onClick }) => {
   // the course version is chosen accordingly to if loggedUser has applied to the course
@@ -38,7 +40,7 @@ const Artwork = ({ artwork,  onClick }) => {
             //'assets/{ artwork.galleryImage }'
             // <img src={process.env.PUBLIC_URL + '{ artwork.galleryImage }'} />
             //src={`http://localhost:3001/${ artwork.galleryImage }`}
-            src={ BASE_URL+`${ artwork.galleryImage }`}
+            src={ baseUrl +`${ artwork.galleryImage }`}
             width='300'
             height='auto'
             className='galleryPicture'

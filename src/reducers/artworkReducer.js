@@ -1,3 +1,4 @@
+
 const initialState = {
   // artworkLoading: false,
   artworks: []

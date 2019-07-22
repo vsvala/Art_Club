@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import filterActions from '../../reducers/actionCreators/filterActions'
-import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import url from '../../services/config'
@@ -15,12 +14,11 @@ const baseUrl = url + 'public/'
 
 //import Artwork from './Artwork'
 
-export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser,  initLoggedUser, filter,  setArtworkName }) => { // => {
+export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser, filter,  setArtworkName }) => { // => {
   useEffect(() => {
     // if (artworks.length === 0) {
     console.log('initialiList')
-    initializeArtworks() &&
-    initLoggedUser()
+    initializeArtworks()
     // }
   }, [])
 
@@ -28,7 +26,6 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
     event.preventDefault()
     setArtworkName(event.target.value)
   }
-
 
   //TODO search by artist or by artwork...order alphabetically by ainting and artist
   //event handler for deleting specific course application, tells studentactions to deleteApliedCourse
@@ -112,6 +109,6 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { initializeArtworks, deleteArtwork, initLoggedUser, ...filterActions  }
+  { initializeArtworks, deleteArtwork, ...filterActions  }
 )(ArtworkList)
 

@@ -33,13 +33,21 @@
 | ke 17.7  | 5    | Frontend: Filtering artworks by name and artist,  Backend: singleArtist page |
 | to 18.7  |  8   | Frontend and Backend: Mypage: updating user information, adding Introduction, getting earlier information to update form deleting pictures |
 | pe 19.7  | 5    | Frontend:starting LinksAndWeather page, privacy/GDPRinfo and staring Terms of Use page, AddArtworkForm: Image uploading istructions with react-read-more-component and 10 image limitation |
-| pe .7  |  ?   | Deleting artwork or event deletes image from uploads folder too!! Deleting removes picture straightaway, 
-| su .7  |  ?    |  refactoring and cleaning code |
-| ma  .7  |  ?    | Tests... Dokumentation |
-| ti .7  |  ?    | Links page: exhibitions links, painting weather  | 
-| ke .7  |  ?    | Like | 
+| ma 22.7  |  ?   | Backend: Deleting artwork and event deletes images from uploads folder too! Rerefactoring and cleaning code |
 
 | total |  172/175  |  
+
+
+
+ TODO
+ 
+|  .7  |  ?    |  form validations, refactoring and cleaning code |
+|   .7  |  ?    | Tests... Dokumentation |
+|  .7  |  ?    | Links page: more exhibitions links, painting weather  | 
+|  .7  |  ?    | Like | 
+|  .7  |  ?    | uploading spinner for images? | 
+|  .7  |  ?    | docker| 
+
 
 
 

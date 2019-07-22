@@ -40,7 +40,7 @@
 
 
  TODO
- 
+ |  .7  |  ?    | Backend:Authentications, clean errors |
 |  .7  |  ?    |  form validations, refactoring and cleaning code |
 |   .7  |  ?    | Tests... Dokumentation |
 |  .7  |  ?    | Links page: more exhibitions links, painting weather  | 

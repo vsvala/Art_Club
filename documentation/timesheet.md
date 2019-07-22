@@ -44,6 +44,7 @@
  |  .7  |  ?    | Backend:Authentications, clean errors |
 |  .7  |  ?    |  form validations, refactoring and cleaning code |
 |   .7  |  ?    | Tests... Dokumentation |
+|   .7  |  ?    | Tests... Cypress tests |
 |  .7  |  ?    | Links page: more exhibitions links, painting weather  | 
 |  .7  |  ?    | Like | 
 |  .7  |  ?    | uploading spinner for images? | 

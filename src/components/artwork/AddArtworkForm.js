@@ -20,7 +20,7 @@ export const AddArtworkForm = (
     getUsers()
   }, [])
 
-  const userToShow=users.find(u => u.id===id)
+  const userToShow=users&&users.find(u => u.id===id)
 
   const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
   const [galleryImage, setFile] = useState({ })

@@ -36,7 +36,7 @@ const create = async (data) => {
   // data.append('config', config.token)
 
   try {
-    const response = await axios.post(baseUrl, data, getConfig)
+    const response = await axios.post(baseUrl, data, getConfig())
     console.log('response')
     console.log(response.statusText)
     return response.data

@@ -21,7 +21,7 @@ export const SingleUser = ({
 }) => {
 
   useEffect(() => {
-    initializeSingleUser(userId) &&
+    initializeSingleUser(userId)
     console.log('initializeSingleUser(userId)')
   }, [])
 

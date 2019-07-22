@@ -64,7 +64,7 @@ const getAllArtists = async () => {
 //   }
 // }
 
-//gets a single user/artist by id
+//gets a single user by id
 const getSingleUser = async (id) => {
   try {
     const response = await axios.get(baseUrl + `/artist/${id}`)
@@ -78,6 +78,7 @@ const getSingleUser = async (id) => {
     }
   }
 }
+
 
 //create new user
 const create = async (user) => {

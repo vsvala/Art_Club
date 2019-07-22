@@ -56,7 +56,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
       {console.log('artworks..hhh',artworks)}
       <div>
-        { artworks
+        { artworks&&artworks
           .filter(artwork =>
             artwork.name.toLowerCase().includes(filter.artworkName.toLowerCase())
           ||   artwork.artist.toLowerCase().includes(filter.artworkName.toLowerCase())

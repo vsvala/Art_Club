@@ -92,7 +92,7 @@ const update = async(content, id) => {
 //Deletes a artwork from database by artwork id. Only for admin!
 const deleteArtwork = async (id) => {
   try {
-    const response = await axios.delete(baseUrl + `/${id}`)//, getConfig())
+    const response = await axios.delete(baseUrl + `${id}`, getConfig())//, getConfig())
     return response.data
   } catch (error) {
     return { error: 'Student with student number "' + id + '" not found!' }
@@ -100,4 +100,4 @@ const deleteArtwork = async (id) => {
 }
 
 
-export default { getAll, create, update, setToken, deleteArtwork }
+export default { getAll,  create, update, setToken, deleteArtwork }

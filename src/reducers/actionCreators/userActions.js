@@ -183,10 +183,10 @@ export const updateRole = (content) => {
   }
 }
 // tells userservice to get specific user by id from database
-export const initializeSingleUser = (userId) => {
+export const initializeSingleUser = (id) => {
   console.log('initializeSingleUser')
   return async (dispatch) => {
-    const content = await userService.getSingleUser(userId)
+    const content = await userService.getSingleUser(id)
     console.log('contentfromsigleACTION', content)
 
     dispatch({

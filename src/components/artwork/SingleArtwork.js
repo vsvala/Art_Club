@@ -1,15 +1,24 @@
-import React from 'react'
+import React, { useEffect } from 'react'//, { useEffect } 
 import { connect } from 'react-redux'
+import singleArtworkActions from '../../reducers/actionCreators/singleArtworkActions'
+import { initializeSingleArtwork }  from '../../reducers/actionCreators/singleArtworkActions'
 import url from '../../services/config'
 const baseUrl = url + 'public/'
 //const BASE_URL= 'http://localhost:3001/'
 
+
 export const SingleArtwork = ({
-  artworks,
+  artwork,
+  initializeSingleArtwork,
   artworkId
 }) => {
 
-  const artwork=artworks.find(a => a.id===artworkId)
+  useEffect(() => {
+    initializeSingleArtwork(artworkId)
+  }, [])
+
+  // const artwork=artworks.find(a => a.id===artworkId)
+
 
   return (
 
@@ -34,11 +43,12 @@ export const SingleArtwork = ({
 
 const mapStateToProps = (state) => {
   return {
-    artworks:state.artworks.artworks
+    artwork: state.singleArtwork.singleArtwork,
+    //artworks:state.artworks.artworks
   }
 }
 
 export default connect(
   mapStateToProps,
-  {  }
+  { ...singleArtworkActions, initializeSingleArtwork }
 )(SingleArtwork)

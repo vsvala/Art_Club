@@ -130,8 +130,9 @@ const updateIntro = async (content, id) => {
 //update user information
 const updateUser = async (content) => {
   console.log('service update info',content)
+  console.log('service update info',content.id)
   try{
-    const response = await axios.put(baseUrl + '/info', content, getConfig())
+    const response = await axios.put(baseUrl + `/info/${content.id}`, content, getConfig())
     console.log('response data', response.data)
     return response.data
   }catch(error){

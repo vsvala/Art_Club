@@ -106,11 +106,15 @@ export const SingleUser = ({
               : <em></em>}
 
 
-
             {/*Introduction text */}
             {singleUser.intro && singleUser.intro}
             <br/>
             <br/>
+            <h4>Artworks</h4>
+            {singleUser.artworks<=0&&singleUser.artworks<=0?
+              <p>No images uploaded yet</ p>
+              :     null
+            }
           </div>}
 
 

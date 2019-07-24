@@ -2,22 +2,22 @@ import React, { useState, useEffect } from 'react'
 import { connect } from 'react-redux'
 import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
-import { getUsers } from '../../reducers/actionCreators/userActions'
+import { getArtists } from '../../reducers/actionCreators/userActions'
 import FormData from 'form-data'
 import ReadMoreReact from 'read-more-react'
 
 export const AddArtworkForm = (
   {
     createArtwork,
-    getUsers,
+    getArtists,
     users,
     id,
-    history
+    //history
   }
 ) => {
   useEffect(() => {
     console.log('id',id)
-    getUsers()
+    getArtists()
   }, [])
 
   const userToShow=users&&users.find(u => u.id===id)
@@ -41,7 +41,7 @@ export const AddArtworkForm = (
 
     console.log('submitdata', data)
     createArtwork(data)
-    history.push('/users/:id/myPage')
+   // history.push('/users/:id/myPage')
   }
 
   const handleChange = (event) => {
@@ -149,7 +149,7 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { createArtwork, getUsers }
+  { createArtwork, getArtists }
 )( AddArtworkForm )
 
 

@@ -86,6 +86,7 @@ export const updateUser = (content) => {
   }
 }
 
+// get all usesrs for loggedUser
 export const getUsers = () => {
   return async (dispatch) => {
     console.log('initinUSers_ACTION')
@@ -98,6 +99,7 @@ export const getUsers = () => {
   }
 }
 
+// gets all artistsList
 export const getArtists = () => {
   return async (dispatch) => {
     console.log('initinUSers_ACTION')

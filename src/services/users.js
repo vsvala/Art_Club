@@ -16,7 +16,7 @@ const getConfig = () => {
 }
 
 
-//gets all users
+//gets all users for loggedUser
 const getAll = async () => {
   try {
     console.log('servise getallusers')
@@ -147,7 +147,7 @@ const deleteUser = async(id) => {
     const response= await axios.delete(`${baseUrl}/${id}`, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'User with userid "' + id + '" not found!' }
+    return { error: 'User with userid ' + id + ' not found!' }
   }
 }
 

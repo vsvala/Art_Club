@@ -18,7 +18,7 @@ export const UserIntroForm = ( {
 }) => {
 
   const [intro, setIntro] = useState(singleUser.intro)
-  const introLenght = singleUser.intro.lenght
+  //const introLenght = singleUser.intro.lenght
   //const [intro, setIntro] = useState(loggedUser.intro&&loggedUser.intro)
 
   // takes new input values from the form, updates logged user
@@ -44,7 +44,8 @@ export const UserIntroForm = ( {
       <Form.Group>
         <br/>
         <br/>
-        <Form.Label><h4>Write Introduction text (remaining characters {1000 - introLenght}):</h4></Form.Label>
+        <Form.Label><h4>Write Introduction text (max 1000 characters):</h4></Form.Label>
+        {/*(remaining characters {1000 - introLenght} )*/}
 
         <Form.Control
           as='textarea'

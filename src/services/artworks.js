@@ -1,7 +1,7 @@
 import axios from 'axios'
 import url from './config'
-
 const baseUrl = url + 'api/artworks/'
+
 
 
 let token = null
@@ -14,22 +14,23 @@ const getConfig = () => {
   }
 }
 
+
+//get all artworks
 const getAll = async () => {
   try {
     const response = await axios.get(baseUrl)
-    console.log('service get all', response)
-    console.log('servic get all data', response.data)
+    //console.log('service get all', response)
+    //console.log('servic get all data', response.data)
     return response.data
-
   } catch (error) {
     return { error: 'Could not get artworks from db' }
   }
 }
 
 
+//get single artwork
 const getSingleArtwork= async (id) => {
   console.log('service get singleartwork')
-
   try {
     const response = await axios.get(baseUrl + `/${id}`)
     return response.data
@@ -44,14 +45,11 @@ const getSingleArtwork= async (id) => {
 }
 
 
+//create new artwork
 const create = async (data) => {
   console.log('servise create',data)
-  // const config=getConfig()
-  // console.log('serviseconfu',config)
-  // data.append('config', config.token)
-
   try {
-    const response = await axios.post(baseUrl, data)
+    const response = await axios.post(baseUrl, data, getConfig())
     console.log('response')
     console.log(response.statusText)
     return response.data
@@ -70,34 +68,7 @@ const create = async (data) => {
 }
 
 
-// const send = async (galleryImage) => {
-//   console.log('servise create', galleryImage)
-
-//   try {
-//     const response = await axios.post('http://localhost:3001/api/images', galleryImage)/* , {
-//       headers: {
-//         // 'accept': 'application/json',
-//         // 'Accept-Language': 'en-US,en;q=0.8',
-//         'Content-Type': 'multipart/form-data'
-//       }, */
-//     // })
-//     console.log('response')
-//     console.log(response.statusText)
-//     return response.data
-//   } catch (error) {
-//     const status = error.response.status
-//     if (status === 500) {
-//       return { error: 'Unable to connect to server.' }
-//     } else if (status === 400) {
-//       return { error: 'artwork missing.' }
-//     } else if (status === 401) {
-//       return { error: 'Username or password is incorrect.' }
-//     } else {
-//       return { error: 'Unable to connect to server.' }
-//     }
-//   }
-// }
-
+// not in use yet
 const update = async(content, id) => {
   try {
     const response = await axios.put(`${ baseUrl } /${id}`,content, getConfig())
@@ -107,13 +78,14 @@ const update = async(content, id) => {
   }
 }
 
-//Deletes a artwork from database by artwork id. Only for admin!
+
+//Deletes a artwork from database by artwork id
 const deleteArtwork = async (id) => {
   try {
-    const response = await axios.delete(baseUrl + `${id}`, getConfig())//, getConfig())
+    const response = await axios.delete(baseUrl + `${id}`, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'Student with student number "' + id + '" not found!' }
+    return { error: 'Artwork with id "' + id + '" not found!' }
   }
 }
 

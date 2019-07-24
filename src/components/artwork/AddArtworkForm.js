@@ -41,7 +41,7 @@ export const AddArtworkForm = (
 
     console.log('submitdata', data)
     createArtwork(data)
-   // history.push('/users/:id/myPage')
+    // history.push('/users/:id/myPage')
   }
 
   const handleChange = (event) => {
@@ -133,7 +133,7 @@ export const AddArtworkForm = (
           min={5}
           ideal={10}
           max={100}
-          readMoreText={<a>Read more</a>}/>
+          readMoreText={'Read more'}/>
       </div>
     </div>
 

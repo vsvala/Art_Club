@@ -139,18 +139,6 @@ const updateUser = async (content) => {
   }
 }
 
-
-
-//delete user
-const deleteUser = async(id) => {
-  try {
-    const response= await axios.delete(`${baseUrl}/${id}`, getConfig())
-    return response.data
-  } catch (error) {
-    return { error: 'User with userid ' + id + ' not found!' }
-  }
-}
-
 //update password
 const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   console.log('service update password config',getConfig())
@@ -168,5 +156,16 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
     return { error: 'Make sure the new password and the confirmation match' }
   }
 }
+
+//delete user
+const deleteUser = async(id) => {
+  try {
+    const response= await axios.delete(`${baseUrl}/${id}`, getConfig())
+    return response.data
+  } catch (error) {
+    return { error: 'User with userid ' + id + ' not found!' }
+  }
+}
+
 
 export default { getAll, getSingleUser, update, updateIntro, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists }

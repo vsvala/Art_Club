@@ -19,7 +19,7 @@ export const Home = ( props) => {
         <div className="nonMember">
           <h2>Art club</h2>
           <h3>Your membership application will be processed soon... </h3>
-          <p> Once your application is approved, you are informed of your acceptances by email.</p>
+          <p> Once your application is approved, you`&apos;`ll get notification by email.</p>
         </div>
         :
         <div className="home">

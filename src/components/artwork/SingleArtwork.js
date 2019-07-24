@@ -34,7 +34,7 @@ export const SingleArtwork = ({
             className='singlePicture'
             alt='img'
           />
-          <p>{artwork.name} by {artwork.artist} year: {artwork.year}, size:{artwork.size}, medium:{artwork.medium} </p>
+          <p>{artwork.name} by {artwork.artist}, year: {artwork.year}, size:{artwork.size}, medium:{artwork.medium} </p>
         </div>
       }
     </div>

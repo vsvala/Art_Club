@@ -31,9 +31,9 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
         <img
        //src={ BASE_URL +`${ artwork.galleryImage }`}
        src={ baseUrl+`${ artwork.galleryImage }`}
-       width='300'
-       height='auto'
-       className='singlepicture'
+       //width='300'
+       //height='auto'
+       className='galleryPicture'
        alt='img'
         /> 
        </li>

@@ -35,22 +35,24 @@
 | pe 19.7  | 5    | Frontend:starting LinksAndWeather page, privacy/GDPRinfo and staring Terms of Use page, AddArtworkForm: Image uploading istructions with react-read-more-component and 10 image limitation |
 | ma 22.7  |  6   | Backend: Deleting artwork and event deletes images from uploads folder too! Rerefactoring and cleaning code |
 | ti 23.7  |  2   | Mypage shows infotext no pictures et or no introtext yet if user doesnt't have any.  Cleaning code, |
-| ke 24.7  |     | Form validations, Cleaning code |
+| ke 24.7  |  2   | Backend: Checking authorisations and error handlings, cleanin code |
+|.7  |     | Form validations |
+|.7  |     | Pictures to Cloudinary |
 
 
-| total |  180/175  |  
+| total |  182/175  |  
 
 
 
  TODO
-  |  .7  |  ?    | Refactoring |
- |  .7  |  ?    | Backend:Authentications, clean errors |
+  |  .7  |  ?    | deleting deletes straight away=removers users artworks reference too |
+ |  .7  |  ?    | pictures via cloudinary|
 |  .7  |  ?    |  refactoring and cleaning code |
 |   .7  |  ?    | Tests... Dokumentation |
 |   .7  |  ?    | Tests... Cypress tests |
 |  .7  |  ?    | Links page: more exhibitions links, painting weather  | 
 |  .7  |  ?    | Like actions and arranging pictures on the gallery by most liked | 
-|  .7  |  ?    | uploading spinner for images? | 
+|  .7  |  ?    | uploading spinner for images?, deletin console logs | 
 |  .7  |  ?    | docker| 
 
 

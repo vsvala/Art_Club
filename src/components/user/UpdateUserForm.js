@@ -4,8 +4,8 @@ import { connect } from 'react-redux'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 //import { emailValid } from '../../utils/validations'
 import { updateUser } from '../../reducers/actionCreators/userActions'
-//import { notification } from '../../reducers/notificationReducer'
-
+import { notify } from '../../reducers/actionCreators/notificationActions'
+import { emailValid } from '../../utils/validations'
 
 //TODO  vALIDOINNIT  kaikissa kentissä jotain.ei tyhjiä
 //ja se että virheen sattuessa kentät ei tyhjenny ??
@@ -13,6 +13,7 @@ import { updateUser } from '../../reducers/actionCreators/userActions'
 export const UpdateUserForm = ( {
   updateUser,
   id,
+  notify,
   //history,
   //loggedUser,
   singleUser
@@ -30,16 +31,25 @@ export const UpdateUserForm = ( {
       id:id,
       name:name,
       email:email,
-      username:username,
+      username:username
       // role:'member'
     }
-    console.log('registering',user )
-    const response=updateUser(user)
-    console.log('resp', response)
-  // history.push('/users/:id/myPage')
-  //Miksi ei updataa TODO korjaa
+    if (!emailValid(user.email)) {
+      notify('Please check your email', 5)
+    }
+    else if (user.name.length < 3) {
+      notify('Name has to have at least 3 characters', 5)
+    }
+    else if (user.username.length < 3) {
+      notify('Username has to have at least 3 characters', 5)
+    } else {
+      console.log('registering',user )
+      const response=updateUser(user)
+      console.log('resp', response)
+      // history.push('/users/:id/myPage')
+      //Miksi ei updataa TODO korjaa
+    }
   }
-
   // const handleChange = (event) => {
   //   const newInput = {
   //     ...input,
@@ -117,5 +127,5 @@ const mapStateToProps = (state) => {
 }
 export default connect(
   mapStateToProps,
-  { updateUser }
+  { updateUser, notify }
 )(UpdateUserForm)

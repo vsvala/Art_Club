@@ -30,6 +30,7 @@ export const initLoggedUser = () => {
 }
 
 export const updateLoggedUser = (content, id) => {
+  console.log('updatinloggedUserAction')
   return async (dispatch) => {
     const response = await userService.updateIntro(content, id)
     if (response.error || response === undefined) {
@@ -83,7 +84,6 @@ export const login = (username, password) => {
 
     } else {
       console.log('responce loginACTION',response)
-
       await userService.setToken(response.token)
       await artworkService.setToken(response.token)
       await eventService.setToken(response.token)
@@ -95,7 +95,6 @@ export const login = (username, password) => {
         type: 'NOTIFY',
         data: 'Logged in succesfully!'
       })
-
       setTimeout(() => {
         dispatch({
           type: 'CLEAR',

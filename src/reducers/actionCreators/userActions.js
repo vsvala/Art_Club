@@ -1,35 +1,17 @@
 import userService from '../../services/users'
 
-// export const createUser=(content) => {
-//   console.log('createuserACTION', content)
-//   return async (dispatch)  => {
-//     const newUser = await userService.create(content)
-//     console.log('newuserTO store from from userservice', newUser)
-//     if (newUser.error || newUser === undefined) {
-//       console.log('virheEEEEEEEEEEE')}
-//     //   dispatch({
-//     //     type: 'NOTIFY',
-//     //     data: 'Saving failed!'
-//     //   })
 
-//     dispatch({
-//       type:'CREATE_USER',
-//       data:newUser
-//     })
-//   }
-// }
-
-// creates new artwork
-
+// Register and creates new user
 export const createUser=(content) => {
   return async (dispatch)  => {
     console.log('createUserACTION', content)
-    const user= await userService.create(content)
-    console.log(user,'uuusUser')
-    if (user.error || user === undefined) {
+    const response= await userService.create(content)
+    console.log(response,'uuusUser')
+    if (response.error || response === undefined) {
       dispatch({
         type: 'NOTIFY',
-        data: 'Creating user failed!'
+        data: response.error
+        //'Registering user failed!'
       })
       setTimeout(() => {
         dispatch({
@@ -40,7 +22,7 @@ export const createUser=(content) => {
 
       dispatch({
         type:'CREATE_USER',
-        data:user
+        data:response
       })
       dispatch({
         type: 'NOTIFY',
@@ -55,13 +37,15 @@ export const createUser=(content) => {
   }
 }
 
+//updating user iformation
 export const updateUser = (content) => {
   return async (dispatch) => {
     const response = await userService.updateUser(content)
     if (response.error || response === undefined) {
       dispatch({
         type: 'NOTIFY',
-        data: 'Saving failed!'
+        data: response.error
+        //'Saving failed!'
       })
       setTimeout(() => {
         dispatch({
@@ -144,6 +128,7 @@ export const deleteUser = (user_id) => {
   }
 }
 
+// Admin can update users role
 export const updateRole = (content) => {
   console.log('updateRole_ACTION', content)
   return async (dispatch) => {
@@ -184,6 +169,7 @@ export const updateRole = (content) => {
     }
   }
 }
+
 // tells userservice to get specific user by id from database
 export const initializeSingleUser = (id) => {
   console.log('initializeSingleUser')
@@ -198,6 +184,11 @@ export const initializeSingleUser = (id) => {
   }
 }
 
+
+
+export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }//, initializeSingleArtist
+
+//NOT NEEDED?
 // tells userservice to get specific artist/user by id from database
 // export const initializeSingleArtist = (userId) => {
 //   console.log('initializeSingleUser')
@@ -211,6 +202,3 @@ export const initializeSingleUser = (id) => {
 //     })
 //   }
 // }
-
-
-export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }//, initializeSingleArtist

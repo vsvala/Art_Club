@@ -10,16 +10,13 @@ import { updateIntro } from '../../reducers/actionCreators/userActions'
 export const UserIntroForm = ( {
   updateLoggedUser,
   id,
-  //history,
-  //updateIntro,
-  // loggedUser,
-  singleUser
+  singleUser,
+  notify
 
 }) => {
 
   const [intro, setIntro] = useState(singleUser.intro)
-  //const introLenght = singleUser.intro.lenght
-  //const [intro, setIntro] = useState(loggedUser.intro&&loggedUser.intro)
+  // (if intro lenght...const introLenght = singleUser.intro.lenght
 
   // takes new input values from the form, updates logged user
   const handleSubmit = (event) => {
@@ -27,25 +24,22 @@ export const UserIntroForm = ( {
     const input = {
       intro: intro
     }
-    // gives error if too long
-    // if (input.intro.length > 1000) {
-    //notify('Experience maximum length is 1000 characters', 5)
-    // } else {
-    // updateIntro(input, id)
-    updateLoggedUser(input, id)
-    notify('usends', 5)
-    // }
+    // gives error if too long introtext
+    if (input.intro.length > 1000) {
+      notify('Text is too long! Experience maximum length is 1000 characters', 5)
+    } else {
+      updateLoggedUser(input, id)
+    }
   }
 
   return(
 
     <Form onSubmit={handleSubmit} className='intro' >
-      {/* <td><h3><Link to='/users/password' className='member'>Write Introduction text</Link></h3></td> */}
       <Form.Group>
         <br/>
         <br/>
         <Form.Label><h4>Write Introduction text (max 1000 characters):</h4></Form.Label>
-        {/*(remaining characters {1000 - introLenght} )*/}
+        {/*(remaining characters {1000 - intro.lenght} )*/}
 
         <Form.Control
           as='textarea'
@@ -63,12 +57,10 @@ export const UserIntroForm = ( {
 }
 const mapStateToProps = (state) => {
   return {
-    loggedUser: state.loggedUser.loggedUser,
     singleUser: state.singleUser.singleUser
-
   }
 }
 export default connect(
   mapStateToProps,
-  { updateLoggedUser, updateIntro }
+  { updateLoggedUser, updateIntro, notify }
 )(UserIntroForm)

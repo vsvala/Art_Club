@@ -5,6 +5,7 @@ import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { getArtists } from '../../reducers/actionCreators/userActions'
 import FormData from 'form-data'
 import ReadMoreReact from 'read-more-react'
+import { notify } from '../../reducers/actionCreators/notificationActions'
 
 export const AddArtworkForm = (
   {
@@ -12,6 +13,7 @@ export const AddArtworkForm = (
     getArtists,
     users,
     id,
+    notify
     //history
   }
 ) => {
@@ -28,20 +30,42 @@ export const AddArtworkForm = (
 
   const handleSubmit = (event) => {
     event.preventDefault()
-    //createsFormdata object
-    console.log('file',galleryImage, galleryImage.galleryImage.name)
-    const data=new FormData()
-    data.append('galleryImage',galleryImage.galleryImage)
-    data.append('artist', event.target.artist.value)
-    data.append('name', event.target.name.value)
-    data.append('year', event.target.year.value)
-    data.append('size', event.target.size.value)
-    data.append('medium',event.target.medium.value)
-    data.append('userId',id)
 
-    console.log('submitdata', data)
-    createArtwork(data)
-    // history.push('/users/:id/myPage')
+    if( galleryImage.galleryImage===undefined){
+      notify('Remember to choose image!', 5)
+    }
+    else if ( event.target.artist.value < 3) {
+      notify('Artist name has to have at least 3 characters', 5)
+    }
+    else if (event.target.name.value < 1) {
+      notify('Artwork name has to have at least 1 characters', 5)
+    }
+    else if (event.target.year.value < 4) {
+      notify('Year field has to have at least 4 numbers', 5)
+    }
+    else if (event.target.size.value < 3) {
+      notify('size field has to have at least 3 characters', 5)
+    }
+    else if (event.target.medium.value < 8) {
+      notify('Medium field has to have at least 3 characters', 5)
+    }
+    else{
+      console.log('file',galleryImage, galleryImage.galleryImage.name)
+      //createsFormdata object
+      const data=new FormData()
+      data.append('galleryImage',galleryImage.galleryImage)
+      data.append('artist', event.target.artist.value)
+      data.append('name', event.target.name.value)
+      data.append('year', event.target.year.value)
+      data.append('size', event.target.size.value)
+      data.append('medium',event.target.medium.value)
+      data.append('userId',id)
+
+      console.log('submitdata', data)
+
+      createArtwork(data)
+      // history.push('/users/:id/myPage')
+    }
   }
 
   const handleChange = (event) => {
@@ -91,7 +115,7 @@ export const AddArtworkForm = (
               />
               <br/>
               <Form.Control
-                type='text'
+                type='number'
                 placeholder='Year'
                 name='year'
                 onChange={handleChange}
@@ -149,7 +173,7 @@ const mapStateToProps = (state) => {
 
 export default connect(
   mapStateToProps,
-  { createArtwork, getArtists }
+  { createArtwork, getArtists, notify }
 )( AddArtworkForm )
 
 

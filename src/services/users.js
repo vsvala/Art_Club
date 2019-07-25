@@ -91,7 +91,7 @@ const create = async (user) => {
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {
-      return { error: 'user missing.' }
+      return { error:'Username must be unique!' }
     } else if (status === 401) {
       return { error: 'Username or password is incorrect.' }
     } else {

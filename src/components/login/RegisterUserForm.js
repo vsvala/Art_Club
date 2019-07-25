@@ -1,24 +1,17 @@
 import React from'react'
 import { connect } from 'react-redux'
-//import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
-//import { emailValid } from '../../utils/validations'
 import { createUser } from '../../reducers/actionCreators/userActions'
-//import { notification } from '../../reducers/notificationReducer'
+import { notify } from '../../reducers/actionCreators/notificationActions'
+import { emailValid } from '../../utils/validations'
 
 
-//TODO notifikaatio että sähköposti kun member...
-//ja se että virheen sattuessa kentät ei tyhjenny ??
-//Notifications
-//TODO GPR acceptin and email...
-
-
-export const RegisterUserForm = ( {
+export const RegisterUserForm = ({
   createUser,
-  history
-// id,
-  //notify,
+  history,
+  // id,
+  notify
 }) => {
 
   const handleSubmit = (event) => {
@@ -31,35 +24,38 @@ export const RegisterUserForm = ( {
       password:event.target.password.value,
       role:'nonMember'
     }
-    // if (!emailValid(userObject.email)) {
-    //   notify('Please check your email', 5)
-    // } else {
 
-    console.log('registering',user )
-    //super(props);
+    if (!emailValid(user.email)) {
+      notify('Please check your email', 5)
+    }
+    else if (user.name.length < 3) {
+      notify('Name has to have at least 3 characters', 5)
+    }
+    else if (user.username.length < 3) {
+      notify('Username has to have at least 3 characters', 5)
+    }
+    else if (user.password.length < 8) {
+      notify('Password has to have at least 8 characters', 5)
+    } else {
+      console.log('registering',user )
+      createUser(user)
+      history.push('/login')
+    }
+    // event.target.name.value=''
+    // event.target.email.value=''
+    // event.target.username.value = ''
+    // event.target.password.value=''
 
-    //}
 
-    createUser(user)
-    //notification(`user ${userObject.username} created`, 5)
+    //   const handleChange = (event) => {
+    //     const newInput = {
+    //       ...input,
+    //       [event.target.name]: event.target.value
+    //     }
+    //     setInput(newInput)
+    //   }
 
-    //}
-    event.target.name.value=''
-    event.target.email.value=''
-    event.target.username.value = ''
-    event.target.password.value=''
-    history.push('/login')
   }
-
-  //   const handleChange = (event) => {
-  //     const newInput = {
-  //       ...input,
-  //       [event.target.name]: event.target.value
-  //     }
-  //     setInput(newInput)
-  //   }
-
-
   return(
 
     //TODO? first name laste name
@@ -116,5 +112,5 @@ export const RegisterUserForm = ( {
 
 export default connect(
   null,
-  { createUser } // notification,
+  { createUser, notify } // notification,
 )(RegisterUserForm)

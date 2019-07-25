@@ -44,14 +44,14 @@
 
 
  TODO
-  |  .7  |  ?    | Refactoring |
- |  .7  |  ?    | Backend:Authentications, clean errors |
+  |  .7  |  ?    | deleting deletes straight away=removers users artworks reference too |
+ |  .7  |  ?    | pictures via cloudinary|
 |  .7  |  ?    |  refactoring and cleaning code |
 |   .7  |  ?    | Tests... Dokumentation |
 |   .7  |  ?    | Tests... Cypress tests |
 |  .7  |  ?    | Links page: more exhibitions links, painting weather  | 
 |  .7  |  ?    | Like actions and arranging pictures on the gallery by most liked | 
-|  .7  |  ?    | uploading spinner for images? | 
+|  .7  |  ?    | uploading spinner for images?, deletin console logs | 
 |  .7  |  ?    | docker| 
 
 

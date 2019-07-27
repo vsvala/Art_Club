@@ -79,7 +79,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
                 alt='img'
               /></li>
               <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link> by { a.artist }</li>
-              <li>{ a.year }, { a.size }, { a.medium }</li>       
+              <li>{ a.year }, { a.size }, { a.medium }</li>
               <p>{a.likes} likes < Button  className="button" onClick={addLike(a)} variant="outline-secondary" >like</Button></p>
               {/* <p>Added by {a.user.name}</p> */}
 

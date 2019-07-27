@@ -36,11 +36,11 @@
 | ma 22.7  |  6   | Backend: Deleting artwork and event deletes images from uploads folder too! Rerefactoring and cleaning code |
 | ti 23.7  |  2   | Mypage shows infotext no pictures et or no introtext yet if user doesnt't have any.  Cleaning code, |
 | ke 24.7  |  2   | Backend: Checking authorisations and error handlings, cleanin code |
-|.7  |     | Form validations |
+| to 25.7  |  3   | Form validations |
 |.7  |     | Pictures to Cloudinary |
 
 
-| total |  182/175  |  
+| total |  185/175  |  
 
 
 

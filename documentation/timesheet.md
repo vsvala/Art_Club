@@ -37,22 +37,22 @@
 | ti 23.7  |  2   | Mypage shows infotext no pictures et or no introtext yet if user doesnt't have any.  Cleaning code, |
 | ke 24.7  |  2   | Backend: Checking authorisations and error handlings, cleanin code |
 | to 25.7  |  3   | Form validations |
+| la 27.7  |  4   | Liking artwork functioality and arranging picturegallery by most liked |
 |.7  |     | Pictures to Cloudinary |
 
 
-| total |  185/175  |  
-
+| total |  189/175  |  
 
 
  TODO
-  |  .7  |  ?    | deleting deletes straight away=removers users artworks reference too |
- |  .7  |  ?    | pictures via cloudinary|
-|  .7  |  ?    |  refactoring and cleaning code |
+|  .7  |  ?    | deleting deletes straight away=removers users artworks reference too |
+|  .7  |  ?    |  refactoring and cleaning code, deletin console logs |
+|   .7  |  ?    | Dokumentation |
 |   .7  |  ?    | Tests... Dokumentation |
 |   .7  |  ?    | Tests... Cypress tests |
 |  .7  |  ?    | Links page: more exhibitions links, painting weather  | 
-|  .7  |  ?    | Like actions and arranging pictures on the gallery by most liked | 
-|  .7  |  ?    | uploading spinner for images?, deletin console logs | 
+|  .7  |  ?    | User could like  same artwork only once | 
+|  .7  |  ?    | Spinner for images uploading? | 
 |  .7  |  ?    | docker| 
 
 

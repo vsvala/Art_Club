@@ -1,15 +1,33 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 import DeleteButton from '../common/DeleteButton'
 //const BASE_URL= 'http://localhost:3001/'
 import url from '../../services/config'
+import { voteArtwork } from '../../reducers/artworkReducer'
+import { notify } from '../../reducers/notificationReducer'
 const baseUrl = url + 'public/'
+//const baseurl=process.env.PUBLIC_URL
 
-const Artwork = ({ artwork,  onClick }) => {
-  // the course version is chosen accordingly to if loggedUser has applied to the course
+const Artwork = ({ artwork,  onClick, notify,  voteArtwork }) => {
 
-  //const baseurl=process.env.PUBLIC_URL
+  const addLike = (artwork) => {
+    console.log(artwork, 'päänestetääänblogi')
+    return () => {
+      // const likedArtwork = artworks.find(n => n.id === blog.id)
+      const artworkObject = { ...artwork, likes: artwork.likes + 1 }
+      console.log(artworkObject, 'päänestetääänuusObject')
+      voteArtwork(artworkObject) //actioncreator kutsu
+      notify(`Artworkn ${artworkObject.title} by ${artwork.artist} like added`, 5)
+      //   })
+      //   .catch(error => {
+      //     this.setState({
+      //       error: `Blogin '${blogObject.title}' likejen päivitys epäonnistui, voit likettää yhtä blogia vain yhden kerran loggautumisesi yhteydessä`,
+      //     // blogs: this.state.blogs.filter(n => n.id !==blog.id)
+      //     })
 
+    }
+  }
   return (
   //TODO muuta listaksi.//kuvagalleriaksi..grid
   //HAku tietyn taiteilijan sivulle..?
@@ -41,8 +59,8 @@ const Artwork = ({ artwork,  onClick }) => {
             // <img src={process.env.PUBLIC_URL + '{ artwork.galleryImage }'} />
             //src={`http://localhost:3001/${ artwork.galleryImage }`}
             src={ baseUrl +`${ artwork.galleryImage }`}
-            width='300'
-            height='auto'
+            //width='300'
+            //height='auto'
             className='galleryPicture'
             alt='img'
           /></li>
@@ -52,11 +70,14 @@ const Artwork = ({ artwork,  onClick }) => {
          <li className="medium"> { artwork.medium }</li>
           <li className="artist"> { artwork.artist }</li> */}
         <li className="artist"> { artwork.galleryImage }</li>
-
+        <p>{artwork.likes}likes < button onClick={addLike(artwork)}>like</button></p>
+        <p>Added by {artwork.user.name}</p>
         <li className="delete"><DeleteButton id={artwork.id} onClick={onClick}  />TODO DELETE hidden vain adminille</li>
       </ul>
     </div>
   )
 }
-
-export default Artwork
+export default connect(
+  null,
+  { notify, voteArtwork,  }
+)(Artwork)

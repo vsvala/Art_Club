@@ -24,8 +24,6 @@ const artworkReducer = (state = initialState, action) => {
     }
   }
 
-
-
   case 'ARTWORK_FETCH': {
     return {
       ...state,
@@ -34,6 +32,14 @@ const artworkReducer = (state = initialState, action) => {
     }
   }
 
+  case 'VOTE':{
+    const old = state.artworks.filter(a => a.id !==action.id)
+    const liked = state.artworks.find(a => a.id === action.id)
+    return {
+      ...state,
+      artworks: [ ...old, { ...liked, likes: liked.likes + 1 } ]
+    }
+  }
 
   case 'DELETE_ARTWORK': {
     return {

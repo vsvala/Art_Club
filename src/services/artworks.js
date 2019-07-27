@@ -68,15 +68,18 @@ const create = async (data) => {
 }
 
 
-// not in use yet
-const update = async(content, id) => {
+// adding likes
+const update = async(id, newObject) => {
+  console.log(id, newObject,'updatefromservice')
   try {
-    const response = await axios.put(`${ baseUrl } /${id}`,content, getConfig())
+    const response = await axios.put(baseUrl + `${id}`,newObject, getConfig())
     return response.data
   } catch (error) {
+    console.log('error updating blog to back')
     return { error: 'Could not update artwork' }
   }
 }
+
 
 
 //Deletes a artwork from database by artwork id

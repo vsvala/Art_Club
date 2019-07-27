@@ -26,7 +26,7 @@ export const UserIntroForm = ( {
     }
     // gives error if too long introtext
     if (input.intro.length > 1000) {
-      notify('Text is too long! Experience maximum length is 1000 characters', 5)
+      notify('Text is too long! Introduction text maximum length is 1000 characters', 5)
     } else {
       updateLoggedUser(input, id)
     }

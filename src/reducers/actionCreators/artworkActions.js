@@ -49,6 +49,36 @@ export const createArtwork=(content) => {
   }
 }
 
+export const voteArtwork = (artwork) => {
+  return async (dispatch) => {
+    const response = await artworkService.update(artwork.id, artwork)
+    if (response.error || response === undefined) {
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Liking failed!'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    } else {
+      dispatch({
+        type: 'VOTE',
+        id: artwork.id
+      })
+      dispatch({
+        type: 'NOTIFY',
+        data: 'Artwork liked'
+      })
+      setTimeout(() => {
+        dispatch({
+          type: 'CLEAR',
+        })
+      }, 3000)
+    }
+  }
+}
 // delete artwork
 export const deleteArtwork = (artwork_id) => {
   return async (dispatch) => {
@@ -81,4 +111,4 @@ export const deleteArtwork = (artwork_id) => {
   }
 }
 
-export default { initializeArtworks, createArtwork, deleteArtwork }
+export default { initializeArtworks, createArtwork, deleteArtwork, voteArtwork }

@@ -1,8 +1,8 @@
 import axios from 'axios'
 import url from './config'
 
-const baseUrl = url + 'api/users'
-
+//const baseUrl = url + 'api/users'
+const baseUrl = url + '/users'
 
 let token = null
 const setToken = (newToken) => {
@@ -48,6 +48,7 @@ const getAllArtists = async () => {
     }
   }
 }
+
 
 //gets a single user by id
 // const getSingleUser = async (id) => {

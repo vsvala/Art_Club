@@ -1,7 +1,9 @@
 import axios from 'axios'
 import url from './config'
-const baseUrl = url + 'api/events/'
+import { initLoggedUser } from '../reducers/actionCreators/loginActions'
 
+//const baseUrl = url + 'api/events/'
+const baseUrl = url + '/events/'
 
 let token = null
 const setToken = newToken => {
@@ -66,31 +68,4 @@ const deleteEvent = async (id) => {
 }
 
 
-export default { getAll, create, setToken, deleteEvent }
-
-
-// for later use??
-
-/* const getSingle= async (id) => {
-  console.log('service get single event')
-  try {
-    const response = await axios.get(baseUrl + `/${id}`)
-    return response.data
-  } catch (error) {
-    if (error === 400) {
-      return { error: 'Could not get event from db' }
-    }
-    if (error === 500) {
-      return { error: 'Internal server error' }
-    }
-  }
-} */
-
-// const update = async(content, id) => {
-//   try {
-//     const response = await axios.put(`${ baseUrl } /${id}`,content, getConfig())
-//     return response.data
-//   } catch (error) {
-//     return { error: 'Could not update event' }
-//   }
-// }
+export default { getAll, create, setToken, deleteEvent, initLoggedUser }

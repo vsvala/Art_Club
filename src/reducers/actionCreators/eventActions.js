@@ -1,9 +1,20 @@
 import eventService from '../../services/events'
+import tokenCheckService from '../../services/tokenCheck'
 
 // tells eventService to get all events from database and dispatch them to store
 export const initializeEvents = () => {
   console.log('actions init content:' )
   return async (dispatch) => {
+    let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
+    console.log('loginaction init user localstorestaaaaaaaaaaaa',loggedUser)
+    if (loggedUser) {
+      let token = loggedUser.token
+      const response = await tokenCheckService.userCheck(token)
+      if (response.message === 'success') {
+        await eventService.setToken(loggedUser.token)
+        console.log(loggedUser,'userlöytyi localstoresta.tokenit asetettu')
+      }
+    }
     const content = await eventService.getAll()
     console.log('actions init content:', content )
     dispatch({
@@ -12,8 +23,6 @@ export const initializeEvents = () => {
     })
   }
 }
-
-
 
 
 // creates new event

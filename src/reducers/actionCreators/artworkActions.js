@@ -1,8 +1,19 @@
 import artworkService from '../../services/artworks'
+import tokenCheckService from '../../services/tokenCheck'
 
 // tells artworkService to get all artworks from database and dispatch them to store
 export const initializeArtworks = () => {
   return async (dispatch) => {
+    let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
+    console.log('loginaction init user localstorestaaaaaaaaaaaa',loggedUser)
+    if (loggedUser) {
+      let token = loggedUser.token
+      const response = await tokenCheckService.userCheck(token)
+      if (response.message === 'success') {
+        await artworkService.setToken(loggedUser.token)
+        console.log(loggedUser,'userlöytyi localstoresta.tokenit asetettu')
+      }
+    }
     const content = await artworkService.getAll()
     console.log('actions init content:', content )
     dispatch({

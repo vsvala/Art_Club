@@ -39,7 +39,7 @@ export const RegisterUserForm = ({
     } else {
       console.log('registering',user )
       createUser(user)
-      history.push('/login')
+      history.push('/nonMember')
     }
     // event.target.name.value=''
     // event.target.email.value=''

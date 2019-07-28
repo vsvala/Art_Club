@@ -10,6 +10,7 @@ import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
 // Components
 import Home from './components/Home'
+import NonMember from './components/NonMember'
 import LinksAndWeather from './components/LinksAndWeather'
 import RegisterUserForm from './components/login/RegisterUserForm'
 import LoginForm from './components/login/LoginForm'
@@ -200,7 +201,6 @@ const App = (props) => {
               </PrivateRoute>
 
 
-
               <Route exact path="/" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
@@ -213,6 +213,8 @@ const App = (props) => {
               <Route exact path="/links" render={() => <LinksAndWeather />} />
               <Route exact path="/privacy" render={() => <GDPRInfo />} />
               <Route exact path="/terms" render={() => <TermsOfUse />} />
+              <Route exact path="/nonMember" render={() => < NonMember/>} />
+
             </Switch>
           </div>
         </React.Fragment>

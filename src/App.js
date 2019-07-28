@@ -83,7 +83,7 @@ const App = (props) => {
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
-                    <Link to='/users/artists'>Artists</Link> &nbsp;
+                    <Link to='/artists'>Artists</Link> &nbsp;
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
@@ -208,7 +208,7 @@ const App = (props) => {
               <Route exact path="/addArtwork" render={() => <AddArtworkForm id={loggedUser.id} /> }  />
               <Route exact path="/login" render={() => <LoginForm /> } />
               <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
-              <Route exact path="/users/artists" render={() => <ArtistList />} />
+              <Route exact path="/artists" render={() => <ArtistList />} />
               <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
               <Route exact path="/links" render={() => <LinksAndWeather />} />
               <Route exact path="/privacy" render={() => <GDPRInfo />} />

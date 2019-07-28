@@ -1,8 +1,8 @@
 import axios from 'axios'
 import url from './config'
 
-const baseUrl = url  + 'api/tokenCheck'
-//const baseUrl = url  + '/tokenCheck'
+//const baseUrl = url  + 'api/tokenCheck'
+const baseUrl = url  + '/tokenCheck'
 
 const userCheck = async (token) => {
   try {

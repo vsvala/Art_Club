@@ -1,7 +1,7 @@
 import axios from 'axios'
 import url from './config'
-const baseUrl = url + 'api/artworks/'
-//const baseUrl = url + '/artworks/'
+//const baseUrl = url + 'api/artworks'
+const baseUrl = url + '/artworks'
 
 
 
@@ -73,7 +73,7 @@ const create = async (data) => {
 const update = async(id, newObject) => {
   console.log(id, newObject,'updatefromservice')
   try {
-    const response = await axios.put(baseUrl + `${id}`,newObject, getConfig())
+    const response = await axios.put(baseUrl + `/${id}`,newObject, getConfig())
     return response.data
   } catch (error) {
     console.log('error updating blog to back')
@@ -86,7 +86,7 @@ const update = async(id, newObject) => {
 //Deletes a artwork from database by artwork id
 const deleteArtwork = async (id) => {
   try {
-    const response = await axios.delete(baseUrl + `${id}`, getConfig())
+    const response = await axios.delete(baseUrl + `/${id}`, getConfig())
     return response.data
   } catch (error) {
     return { error: 'Artwork with id "' + id + '" not found!' }

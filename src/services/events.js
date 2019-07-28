@@ -2,8 +2,8 @@ import axios from 'axios'
 import url from './config'
 import { initLoggedUser } from '../reducers/actionCreators/loginActions'
 
-const baseUrl = url + 'api/events/'
-//const baseUrl = url + '/events/'
+//const baseUrl = url + 'api/events'
+const baseUrl = url + '/events'
 
 let token = null
 const setToken = newToken => {

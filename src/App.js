@@ -83,7 +83,7 @@ const App = (props) => {
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>
-                    <Link to='users/artists'>Artists</Link> &nbsp;
+                    <Link to='/users/artists'>Artists</Link> &nbsp;
                   </Nav.Link>
 
                   <Nav.Link href='#' as='span'>

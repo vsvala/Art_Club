@@ -202,7 +202,7 @@ const App = (props) => {
               </PrivateRoute>
 
 
-              <PrivateRoute path="/" redirectPath="/admin/users" condition={!isAdmin}>
+              <PrivateRoute path="/" redirectPath="/home" condition={loggedUser === null}>
                 <Route path='/'render={() => <Redirect to='/home' />}/>
 
 
@@ -220,7 +220,7 @@ const App = (props) => {
                 <Route exact path="/terms" render={() => <TermsOfUse />} />
                 <Route exact path="/nonMember" render={() => < NonMember/>} />
               </PrivateRoute>
-
+         
 
             </Switch>
           </div>

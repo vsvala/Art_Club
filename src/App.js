@@ -212,6 +212,7 @@ const App = (props) => {
               <Route exact path="/terms" render={() => <TermsOfUse />} />
               <Route exact path="/nonMember" render={() => < NonMember/>} />
 
+
             </Switch>
           </div>
         </React.Fragment>

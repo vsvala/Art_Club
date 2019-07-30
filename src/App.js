@@ -202,7 +202,7 @@ const App = (props) => {
               </PrivateRoute>
 
 
-              <PrivateRoute path="/" redirectPath="/login" condition={loggedUser}>
+              <PrivateRoute path="/" redirectPath="/login" condition={loggedUser===null}>
                 <PrivateRoute path="/" redirectPath="/admin/users" condition={!isAdmin}>
                   <Route exact path='/'render={() => <Redirect to='/home' />}/>
 

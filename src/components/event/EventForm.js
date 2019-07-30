@@ -87,7 +87,7 @@ export const EventForm = (
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
-            <Row>
+              <Row>
               Start and end :
                 <DatePicker
                   selected={state.startDate}

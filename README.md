@@ -3,6 +3,10 @@
 
 ArtClub website is the plattform where users can apply memberships for the club and search artists and artworks. Users can also find links to exhibitions and current painting weather from the link page.  Members  can see art clubs events and they are able to create and update their own MyPage. On Mypage members can write short indroduction about themselves and create their own picturegallery with 10 pictures for everybody to see. All pictures are also shown on the maingallery page. (Users can vote artworks by like button and see ten most liked paintings.)( Main page features every month some of the artwoks.) Admin can list registered users and approve their memberships. Admin can also create events for members to see.
 
+
+[Art Club release in Heroku ](https://artclub-project.herokuapp.com)
+
+
 [Link to backend](https://github.com/vsvala/Art_Club_back )
 
 ## Travis / Codecov
@@ -18,6 +22,8 @@ Frontend: React, JSX(Javascript)
 Backend: NodeJS 
 
 Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
+
+Server: [Heroku](https://www.heroku.com/)
 
 ### Used libraries frontend
 
@@ -131,12 +137,59 @@ Validating unique values:
 
 [Timesheet](https://github.com/vsvala/Art_Club/blob/master/documentation/timesheet.md)
 
-## License
+## [License](https://github.com/vsvala/Art_Club/blob/master/documentation/MIT_license.md)
+
 
 ## Commandline functionality
 
-### front
+### Command line scripts for Front
 
-### back
+You can run these commands in the project directory
+
+```
+npm start
+```
+Runs the application in the development mode. 
+You can use the application in a browser by opening http://localhost:3000 
+The page will reloaded when the code is edited.
+
+```
+npm build
+```
+Builds the application for production
+
+```
+npm test
+```
+Runs tests for the application
+
+```
+npm run test-coverage
+```
+Runs the tests and a report for test coverage
+
+```
+npm run lint
+```
+Checks the code for style deviations
+
+### Command line scripts for Back
+
+```
+npm run watch
+```
+Runs the application in the development mode.
+Uses a local development PostGresql database. 
+
+```
+npm start
+```
+Runs the application in the production mode.
+
+```
+npm test
+```
+
+Pushing application to Heroku server after making new build and  git committing
 
 ```git push heroku master```

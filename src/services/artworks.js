@@ -16,6 +16,7 @@ const getConfig = () => {
 }
 
 
+
 //get all artworks
 const getAll = async () => {
   try {

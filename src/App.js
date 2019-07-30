@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import logo from './images/tripleblue.png'
 import picture from './images/pict.png'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'  //Redirect, withRouter
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom'  //Redirect, withRouter
 
 // Actions
 import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
@@ -76,7 +76,7 @@ const App = (props) => {
                 <Nav className='mr-auto'>
 
                   <Nav.Link href='#' as='span'>
-                    <Link to="/">Home </Link>&nbsp;
+                    <Link to="/home">Home </Link>&nbsp;
                   </Nav.Link>
                   <Nav.Link href='#' as='span'>
                     <Link to="/artworks">Gallery</Link> &nbsp;
@@ -192,6 +192,7 @@ const App = (props) => {
                 redirectPath="/login"
                 condition={loggedUser}
               >
+
                 <Route exact path="/users/:id/myPage" render={() => <SingleUser userId={loggedUser.id} />} />
                 <Route exact path="/users/addArtwork" render={({ history }) => <AddArtworkForm  id={loggedUser.id} history={history} /> } />
                 <Route exact path="/users/events" render={() => <EventList /> } />
@@ -201,19 +202,25 @@ const App = (props) => {
               </PrivateRoute>
 
 
-              <Route exact path="/" render={() => <Home />}/>
-              <Route exact path="/artworks" render={() => <ArtworkList/>} />
-              <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
-              {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
-              <Route exact path="/addArtwork" render={() => <AddArtworkForm id={loggedUser.id} /> }  />
-              <Route exact path="/login" render={() => <LoginForm /> } />
-              <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
-              <Route exact path="/artists" render={() => <ArtistList />} />
-              <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
-              <Route exact path="/links" render={() => <LinksAndWeather />} />
-              <Route exact path="/privacy" render={() => <GDPRInfo />} />
-              <Route exact path="/terms" render={() => <TermsOfUse />} />
-              <Route exact path="/nonMember" render={() => < NonMember/>} />
+              <PrivateRoute path="/" redirectPath="/login" condition={loggedUser}>
+                <PrivateRoute path="/" redirectPath="/admin/users" condition={!isAdmin}>
+                  <Route exact path='/'render={() => <Redirect to='/home' />}/>
+
+                  <Route exact path="/home" render={() => <Home />}/>
+                  <Route exact path="/artworks" render={() => <ArtworkList/>} />
+                  <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
+                  {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
+                  <Route exact path="/addArtwork" render={() => <AddArtworkForm id={loggedUser.id} /> }  />
+                  <Route exact path="/login" render={() => <LoginForm /> } />
+                  <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
+                  <Route exact path="/artists" render={() => <ArtistList />} />
+                  <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
+                  <Route exact path="/links" render={() => <LinksAndWeather />} />
+                  <Route exact path="/privacy" render={() => <GDPRInfo />} />
+                  <Route exact path="/terms" render={() => <TermsOfUse />} />
+                  <Route exact path="/nonMember" render={() => < NonMember/>} />
+                </PrivateRoute>
+              </PrivateRoute>
 
             </Switch>
           </div>

@@ -71,7 +71,7 @@ const App = (props) => {
                 <Nav className='mr-auto'>
 
                   <Nav.Link href='#' as='span'>
-                    <Link to="/home">Home </Link>&nbsp;
+                    <Link to="/">Home </Link>&nbsp;
                   </Nav.Link>
                   <Nav.Link href='#' as='span'>
                     <Link to="/artworks">Gallery</Link> &nbsp;
@@ -198,23 +198,7 @@ const App = (props) => {
 
 
 
-              <PrivateRoute
-                exact path="/"
-                redirectPath="/home"
-                condition={loggedUser === null}
-                render={() => <Home />}
-              >
-              </PrivateRoute>
-
-              <PrivateRoute
-                exact path="/"
-                redirectPath="/artworks"
-                condition={loggedUser === null}
-                render={() => <ArtworkList/>}
-              >
-              </PrivateRoute>
-
-              <Route exact path="/home" render={() => <Home />}/>
+              <Route exact path="/" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
               {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}

@@ -2,7 +2,7 @@ import axios from 'axios'
 //import url from './config'
 
 //const baseUrl = url + 'api/users'
-const baseUrl = '/api/users'
+const baseUrl = '/users'
 
 let token = null
 const setToken = (newToken) => {

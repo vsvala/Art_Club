@@ -1,7 +1,7 @@
 import axios from 'axios'
 //import url from './config'
 //const baseUrl = url + 'api/artworks'
-const baseUrl = '/api/artworks'
+const baseUrl = '/artworks'
 
 
 

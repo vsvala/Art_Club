@@ -2,7 +2,7 @@ import axios from 'axios'
 //import url from './config'
 
 //const baseUrl = url  + 'api/tokenCheck'
-const baseUrl = '/api/tokenCheck'
+const baseUrl = '/tokenCheck'
 
 const userCheck = async (token) => {
   try {

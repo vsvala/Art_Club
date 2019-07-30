@@ -197,7 +197,13 @@ const App = (props) => {
               </PrivateRoute>
 
 
-
+              <PrivateRoute
+                exact path="/"
+                redirectPath="/home"
+                condition={loggedUser === null}
+                render={() => <Home />}
+              >
+              </PrivateRoute>
               <Route exact path="/home" render={() => <Home />}/>
               <Route exact path="/artworks" render={() => <ArtworkList/>} />
               <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />

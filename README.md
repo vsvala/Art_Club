@@ -137,7 +137,7 @@ Validating unique values:
 
 [Timesheet](https://github.com/vsvala/Art_Club/blob/master/documentation/timesheet.md)
 
-## [License]()
+## [License](https://github.com/vsvala/Art_Club/blob/master/documentation/MIT_license.md)
 
 
 ## Commandline functionality

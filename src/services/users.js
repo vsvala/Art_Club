@@ -1,8 +1,8 @@
 import axios from 'axios'
-//import url from './config'
+import url from './config'
 
-//const baseUrl = url + 'api/users'
-const baseUrl = '/users'
+const baseUrl = url + 'api/users'
+//const baseUrl = '/api/users'
 
 let token = null
 const setToken = (newToken) => {

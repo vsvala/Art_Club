@@ -87,37 +87,36 @@ export const EventForm = (
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
-           Start and end time :
-
-              <DatePicker
-                selected={state.startDate}
-                selectsStart
-                startDate={state.startDate}
-                endDate={state.endDate}
-                onChange={handleChangeStart}
-                showTimeSelect
-                showWeekNumbers
-                timeFormat="H:mm"
-                timeIntervals={30}
-                dateFormat="d.M.yyyy H:mm"
-                timeCaption="time"
-              />
-
-              <DatePicker
-                selected={state.endDate}
-                selectsEnd
-                startDate={state.startDate}
-                endDate={state.endDate}
-                onChange={handleChangeEnd}
-                minDate={state.startDate}
-                showTimeSelect
-                showWeekNumbers
-                timeFormat="H:mm"
-                timeIntervals={30}
-                dateFormat="d.M.yyyy H:mm"
-                timeCaption="time"
-              />
-              <br/>
+            <Row>
+              Start and end :
+                <DatePicker
+                  selected={state.startDate}
+                  selectsStart
+                  startDate={state.startDate}
+                  endDate={state.endDate}
+                  onChange={handleChangeStart}
+                  showTimeSelect
+                  showWeekNumbers
+                  timeFormat="H:mm"
+                  timeIntervals={30}
+                  dateFormat="d.M.yyyy H:mm"
+                  timeCaption="time"
+                />
+                <DatePicker
+                  selected={state.endDate}
+                  selectsEnd
+                  startDate={state.startDate}
+                  endDate={state.endDate}
+                  onChange={handleChangeEnd}
+                  minDate={state.startDate}
+                  showTimeSelect
+                  showWeekNumbers
+                  timeFormat="H:mm"
+                  timeIntervals={30}
+                  dateFormat="d.M.yyyy H:mm"
+                  timeCaption="time"
+                />
+              </Row>
               <br/>
               <Form.Control
                 type='text'

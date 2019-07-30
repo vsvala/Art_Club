@@ -10,6 +10,8 @@ import { voteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import {  Button } from 'react-bootstrap'
 const baseUrl = url + 'public/'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+
 /* eslint-disable */
 //const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
 /* eslint-enable */
@@ -46,7 +48,11 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
   }
 
   return (
+
     <div className="artworkList">
+      <Router>
+        <Route exact path="/artworks" render={() => <ArtworkList/>} />
+      </Router>
 
 
       {/* Search form */}

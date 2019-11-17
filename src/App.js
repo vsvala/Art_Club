@@ -40,6 +40,7 @@ const App = (props) => {
   const { loggedUser } = props
   const isMember = loggedUser && loggedUser.role === 'member'
   const isAdmin = loggedUser && loggedUser.role === 'admin'
+  const nonMember = loggedUser && loggedUser.role === 'nonMember'
 
   return (
 
@@ -135,21 +136,29 @@ const App = (props) => {
                     : <em></em>} &nbsp;
                 </Nav.Link>
 
+                {/* <Nav.Link href='#' as='span'>
+                  {!isMember | !isAdmin
+                    ? <Link to='/login'>Login</Link>
+                    : <em></em>} &nbsp;
+                </Nav.Link> */}
+
                 <Nav.Link href='#' as='span'>
-                  {loggedUser
-                    ? <Button
+                  {isMember | isAdmin | nonMember ?
+                    <Button
                       className='button'
                       onClick={props.logout}
                       variant='light'
                       type='button'>
                       Logout
                     </Button>
-                    : <Button
+                    :
+                    <Button
                       className='button'
                       variant='light'
                       type='button' >
                       <Link to="/login">Login</Link>
-                    </Button>}
+                    </Button>
+                  }
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
@@ -176,7 +185,7 @@ const App = (props) => {
               <PrivateRoute
                 exact path="/login"
                 redirectPath="/"
-                condition={loggedUser === null}
+                condition={!isMember && !isAdmin}      //{loggedUser===null}
                 render={() => <LoginForm />}
               >
               </PrivateRoute>

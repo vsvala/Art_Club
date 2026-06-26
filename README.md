@@ -1,6 +1,25 @@
 # ArtClub -Fullstack project
 
+# Full Stack Open – 10 ECTS Software Engineering Project
 
+This repository contains my independent 10 ECTS full stack development project completed as part of the University of Helsinki’s Computer Science studies.
+
+The project is part of the University of Helsinki’s Full Stack Open program and focuses on modern web application development, covering the full stack from frontend to backend and databases.
+
+It emphasizes building scalable, maintainable, and production-style web applications using industry-standard tools and practices.
+
+---
+
+##  Focus Areas
+
+- Modern single-page application development with React  
+- Backend development with Node.js and REST APIs  
+- Database design and integration (SQL / NoSQL)  
+- Authentication and user management  
+- Testing and software quality practices  
+- API design and full stack architecture  
+
+---
 ArtClub website is the plattform where users can apply memberships for the club and search artists and artworks. Users can also find links to exhibitions and current painting weather from the link page.  Members  can see art clubs events and they are able to create and update their own MyPage. On Mypage members can write short indroduction about themselves and create their own picturegallery with 10 pictures for everybody to see. All pictures are also shown on the maingallery page. (Users can vote artworks by like button and see ten most liked paintings.)( Main page features every month some of the artwoks.) Admin can list registered users and approve their memberships. Admin can also create events for members to see.
 
 
@@ -17,13 +36,18 @@ ArtClub website is the plattform where users can apply memberships for the club 
 
 ## Technologies
 
-Frontend: React, JSX(Javascript)
+- Frontend: React, JSX(Javascript)
 
-Backend: NodeJS 
+- Backend: Node.js,  Express , REST APIs  
 
-Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
+- Database: MongoDB, [MongoDB Atlas](https://www.mongodb.com/)
 
-Server: [Heroku](https://www.heroku.com/)
+- Server: [Heroku](https://www.heroku.com/)
+
+- Git & GitHub  
+
+---
+
 
 ### Used libraries frontend
 

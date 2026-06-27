@@ -1,0 +1,43 @@
+{
+  "name": "artclub",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3001",
+  "scripts": {
+    "server": "json-server -p3001 db.json",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "CI=true react-scripts test --env=jsdom",
+    "test-coverage": "CI=true react-scripts test --env=jsdom --coverage",
+    "codecov": "./node_modules/.bin/codecov",
+    "eject": "react-scripts eject",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "axios": "^1.19.0",
+    "form-data": "^2.4.0",
+    "react": "^16.8.6",
+    "react-bootstrap": "^1.0.0-beta.10",
+    "react-datepicker": "^2.8.0",
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.0.3",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "0.9.5",
+    "read-more-react": "^1.0.9",
+    "redux": "^4.0.1",
+    "redux-thunk": "^2.3.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.0.1",
+    "codecov": "^3.5.0",
+    "deep-freeze": "0.0.1",
+    "enzyme": "^3.10.0",
+    "enzyme-adapter-react-16": "^1.14.0",
+    "eslint": "^5.5.0",
+    "eslint-plugin-jest": "^22.6.4",
+    "eslint-plugin-react": "^7.11.1",
+    "jest-dom": "^3.4.0",
+    "json-server": "^0.15.0",
+    "react-testing-library": "^8.0.1"
+  }
+}

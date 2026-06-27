@@ -1,0 +1,53 @@
+# Art Club REST requests
+# json-server running at http://localhost:3001
+
+GET http://localhost:3001/artworks
+###
+
+GET http://localhost:3001/users
+###
+
+GET http://localhost:3001/events
+###
+
+POST http://localhost:3001/users
+Content-type: application/json
+
+{
+  "name": "Test",
+  "email": "virva.svala@gmail.com",
+  "username": "testuser",
+  "password": "testpass"
+}
+###
+
+POST http://localhost:3001/artworks
+Content-type: application/json
+
+{
+  "image": "test.jpg",
+  "artist": "Test Artist",
+  "name": "Test Artwork",
+  "year": 2026,
+  "size": "20x30cm",
+  "medium": "oil"
+}
+###
+
+POST http://localhost:3001/events
+Content-type: application/json
+
+{
+  "name": "Taidenäyttely",
+  "date": "2026-07-01",
+  "description": "Test event"
+}
+###
+
+POST http://localhost:3001/login
+Content-type: application/json
+
+{
+  "username": "anna",
+  "password": "member123"
+}

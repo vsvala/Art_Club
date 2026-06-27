@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {  initializeSingleUser }  from '../../reducers/actionCreators/userActions'
+import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
 import userActions from '../../reducers/actionCreators/userActions'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
@@ -16,14 +16,13 @@ export const SingleUser = ({
   userId,
   initializeSingleUser,
   loggedUser,
-  //deleteArtwork
-  // notify
 }) => {
+  const { id: paramId } = useParams()
+  const resolvedId = userId || paramId
 
   useEffect(() => {
-    initializeSingleUser(userId)
-    console.log('initializeSingleUser(userId)')
-  }, [])
+    initializeSingleUser(resolvedId)
+  }, [resolvedId])
 
   /*   const removeArtwork= (id) => {
     return () => {

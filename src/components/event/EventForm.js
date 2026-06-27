@@ -6,89 +6,81 @@ import FormData from 'form-data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 
-
-export const EventForm = (
-  {
-    createEvent,
-    id,
-    //history
-  }
-) => {
-
+export const EventForm = ({
+  createEvent,
+  id,
+  //history
+}) => {
   const [input, setInput] = useState({ title: '', place: '', description: '' })
-  const [eventImage, setFile] = useState({ })
+  const [eventImage, setFile] = useState({})
   const [state, setState] = useState({
     startDate: new Date(),
-    endDate:  new Date()
+    endDate: new Date(),
   })
 
-
-  const handleSubmit =async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('file',eventImage, eventImage.eventImage.name)
+    console.log('file', eventImage, eventImage.eventImage.name)
     console.log('startend', state.startDate, state.endDate)
-    const data=new FormData()
-    data.append('eventImage',eventImage.eventImage)
+    const data = new FormData()
+    data.append('eventImage', eventImage.eventImage)
     data.append('title', input.title)
     data.append('place', input.place)
     data.append('start', state.startDate)
     data.append('end', state.endDate)
-    data.append('description',input.description)
-    data.append('userId',id)
+    data.append('description', input.description)
+    data.append('userId', id)
 
     console.log('submitdata', data)
     createEvent(data)
     //history.push('/users/events')
   }
 
-
   //eventhandler for changin formField inputs
   const handleChange = (event) => {
     const newInput = {
       ...input,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }
     setInput(newInput)
     console.log(event)
   }
 
-  const handleChangeStart=(date) => {
+  const handleChangeStart = (date) => {
     setState({
-      startDate: date
+      startDate: date,
     })
   }
-  const handleChangeEnd=(date) => {
+  const handleChangeEnd = (date) => {
     setState({
       ...state,
-      endDate: date
+      endDate: date,
     })
   }
 
   // eventhandler for fileInput
   const fileSelectedHandler = (event) => {
-    setFile({ eventImage : event.target.files[0] })
+    setFile({ eventImage: event.target.files[0] })
     console.log('event', event.target.files[0])
   }
 
-
   return (
-
-    <div className='eventForm'>
+    <div className="eventForm">
       <Container>
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
-            <div className='eventHeader'>
+            <div className="eventHeader">
               <h3>Add event</h3>
             </div>
           </Col>
         </Row>
-        <br/>
+        <br />
 
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
               <Row>
-              Start and end :
+                Start and end :
                 <DatePicker
                   selected={state.startDate}
                   selectsStart
@@ -117,49 +109,51 @@ export const EventForm = (
                   timeCaption="time"
                 />
               </Row>
-              <br/>
+              <br />
               <Form.Control
-                type='text'
-                placeholder='Title'
-                name='title'
+                type="text"
+                placeholder="Title"
+                name="title"
                 onChange={handleChange}
                 autoFocus
               />
-              <br/>
+              <br />
               <Form.Control
-                type='text'
-                placeholder='Place'
-                name='place'
+                type="text"
+                placeholder="Place"
+                name="place"
                 onChange={handleChange}
               />
-              <br/>
+              <br />
               <Form.Control
-                as='textarea'
-                rows='3'
-                type='text'
-                placeholder='Description'
-                name='description'
+                as="textarea"
+                rows="3"
+                type="text"
+                placeholder="Description"
+                name="description"
                 onChange={handleChange}
               />
               <div className="grayInfoText">
-                <p>Upload event picture,  size width:200px, height:300px</p>
+                <p>Upload event picture, size width:200px, height:300px</p>
               </div>
-              <br/>
-              <Button className='button' type='submit' variant="light">Send</Button>
+              <br />
+              <Button className="button" type="submit" variant="light">
+                Send
+              </Button>
             </Form.Group>
           </Col>
         </Form>
-        <br/>
-        <input type='file'className='fileUploader' name='eventImage' id="file" onChange={fileSelectedHandler}/>
+        <br />
+        <input
+          type="file"
+          className="fileUploader"
+          name="eventImage"
+          id="file"
+          onChange={fileSelectedHandler}
+        />
       </Container>
     </div>
   )
 }
 
-
-export default connect(
-  null,
-  { createEvent }
-)( EventForm )
-
-
+export default connect(null, { createEvent })(EventForm)

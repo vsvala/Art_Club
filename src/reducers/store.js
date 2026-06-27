@@ -1,6 +1,5 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk'
-
+import { thunk } from 'redux-thunk'
 import notificationReducer from './notificationReducer'
 import userReducer from './userReducer'
 import artworkReducer from './artworkReducer'
@@ -17,13 +16,10 @@ const reducer = combineReducers({
   loggedUser: loginReducer,
   filter: filterReducer,
   singleUser: userReducer,
-  singleArtwork: singleArtworkReducer
+  singleArtwork: singleArtworkReducer,
   //singleArtist: userReducer
 })
 
-const store = createStore(
-  reducer,
-  applyMiddleware(thunk)
-)
+const store = createStore(reducer, applyMiddleware(thunk))
 
 export default store

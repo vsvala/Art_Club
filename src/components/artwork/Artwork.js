@@ -48,7 +48,7 @@ const Artwork = ({ artwork,  onClick, notify,  voteArtwork }) => {
       /> */}
 
       {/* <img src={'%PUBLIC_URL%/uploads/15620743612820ekakesä3f 2 (1).jpg'} alt="logo" className="brand-logo"/> */}
-      <ul Style="list-style-type:none;">
+      <ul style="list-style-type:none;">
         <li>
           <img
           // src=  {`%PUBLIC_URL%${ artwork.galleryImage }`}   <img src={window.location.origin +'/uploads/15620743612820ekakesä3f 2 (1).jpg'} />

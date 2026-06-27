@@ -1,54 +1,50 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import singleArtworkActions from '../../reducers/actionCreators/singleArtworkActions'
-import { initializeSingleArtwork }  from '../../reducers/actionCreators/singleArtworkActions'
-import url from '../../services/config'
-const baseUrl = url + 'public/'
-//const BASE_URL= 'http://localhost:3001/'
-
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { useParams } from "react-router-dom";
+import { initializeSingleArtwork } from "../../reducers/actionCreators/singleArtworkActions";
+import url from "../../services/config";
+const baseUrl = url + "public/";
 
 export const SingleArtwork = ({
   artwork,
   initializeSingleArtwork,
-  artworkId
 }) => {
-
+  const { id } = useParams();
   useEffect(() => {
-    initializeSingleArtwork(artworkId)
-  }, [])
+    initializeSingleArtwork(id);
+  }, [id]);
 
   // const artwork=artworks.find(a => a.id===artworkId)
 
-
   return (
-
     <div className="singleArtwork">
-      {!artwork ?
-        null
-        :
+      {!artwork ? null : (
         <div>
           <img
-            src={ baseUrl +`${ artwork.galleryImage }`}
-            width='700'
-            height='auto' //'550'
-            className='singlePicture'
-            alt='img'
+            src={baseUrl + `${artwork.galleryImage}`}
+            width="700"
+            height="auto" //'550'
+            className="singlePicture"
+            alt="img"
           />
-          <p>{artwork.name} by {artwork.artist}, year: {artwork.year}, size:{artwork.size}, medium:{artwork.medium} </p>
+          <p>
+            {artwork.name} by {artwork.artist}, year: {artwork.year}, size:
+            {artwork.size}, medium:{artwork.medium}{" "}
+          </p>
         </div>
-      }
+      )}
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
-    artwork: state.singleArtwork.singleArtwork
+    artwork: state.singleArtwork.singleArtwork,
     //artworks:state.artworks.artworks
-  }
-}
+  };
+};
 
-export default connect(
-  mapStateToProps,
-  { ...singleArtworkActions, initializeSingleArtwork }
-)(SingleArtwork)
+export default connect(mapStateToProps, {
+  //...singleArtworkActions,
+  initializeSingleArtwork,
+})(SingleArtwork);

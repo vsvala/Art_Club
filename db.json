@@ -1,7 +1,7 @@
 {
   "artworks": [
     {
-      "id": 1,
+      "id": "1",
       "image": "sleebybear.jpg",
       "artist": " Virva Svala",
       "name": "Sleepy bear",
@@ -10,11 +10,11 @@
       "medium": "aquarelle"
     },
     {
-      "id": 2,
+      "id": "2",
       "image": "dog.jpg",
       "artist": "Virva Svala",
       "name": "Dog",
-      "year": "2000",
+      "year": 2000,
       "size": "20x30cm",
       "medium": "oil"
     },
@@ -22,28 +22,67 @@
       "image": "image.jp",
       "artist": "vsvala",
       "name": "uusi",
-      "year": "2017",
+      "year": 2017,
       "size": "20x60 cm",
       "medium": "oil on canvas",
-      "id": 3
+      "id": "3"
     },
     {
       "image": "image.jp",
       "artist": "vsvala",
       "name": "neljäs",
-      "year": "2000",
+      "year": 2000,
       "size": "20x30 cm",
       "medium": "aquarelle",
-      "id": 4
+      "id": "4"
     },
     {
       "image": "kuva",
       "artist": "minä",
       "name": "Otsikko",
-      "year": "2001",
+      "year": 2001,
       "size": "20x60 cm",
       "medium": "ink",
-      "id": 5
+      "id": "5"
+    },
+    {
+      "image": "test.jpg",
+      "artist": "Test Artist",
+      "name": "Test Artwork",
+      "year": 2026,
+      "size": "20x30cm",
+      "medium": "oil",
+      "id": "MbuLNfobf1M"
     }
-  ]
+  ],
+  "users": [
+    {
+      "name": "Test",
+      "email": "virva.svala@gmail.com",
+      "username": "testuser",
+      "password": "testpass",
+      "id": "AUjiLZNbp54"
+    }
+  ],
+  "events": [
+    {
+      "name": "Taidenäyttely",
+      "date": "2026-07-01",
+      "description": "Test event",
+      "id": "gq3nNUGzo4c"
+    }
+  ],
+  "login": [
+    {
+      "username": "testuser",
+      "password": "testpass",
+      "id": "4ZFwoP31p1I"
+    },
+    {
+      "username": "testuser",
+      "password": "testpass",
+      "id": "Q6SY9fu1beo"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

@@ -3,8 +3,7 @@ import { connect } from 'react-redux'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import logo from './images/tripleblue.png'
 import picture from './images/pict.png'
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'  //Redirect, withRouter
-
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 // Actions
 import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
@@ -22,7 +21,7 @@ import EventForm from './components/event/EventForm'
 import EventList from './components/event/EventList'
 import UpdatePassword from './components/user/UpdatePassword'
 import UpdateUserForm from './components/user/UpdateUserForm'
-import UserIntroForm from  './components/user/UserIntroForm'
+import UserIntroForm from './components/user/UserIntroForm'
 import UserList from './components/user/UserList'
 import SingleUser from './components/user/SingleUser'
 import SingleArtist from './components/artist/SingleArtist'
@@ -32,7 +31,6 @@ import GDPRInfo from './components/common/GDPRInfo'
 import TermsOfUse from './components/common/TermsOfUse'
 
 const App = (props) => {
-
   useEffect(() => {
     props.initLoggedUser()
   }, [])
@@ -43,122 +41,143 @@ const App = (props) => {
   const nonMember = loggedUser && loggedUser.role === 'nonMember'
 
   return (
-
     <div className="App">
-
-
-      { /* eslint-disable */}
+      {/* eslint-disable */}
       <Router basename={process.env.PUBLIC_URL}>
-        { /* eslint-enable */}
+        {/* eslint-enable */}
         <React.Fragment>
-
-          <div className='NavBar'>
-            <Navbar collapseOnSelect expand='lg' bg='light' variant='light'>
+          <div className="NavBar">
+            <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
               <Navbar.Brand>
                 <img
                   src={logo}
-                  width='70'
-                  height='40'
+                  width="70"
+                  height="40"
                   /*  className='d-inline-block align-top' */
-                  alt='Art club LOGO'
+                  alt="Art club LOGO"
                 />
               </Navbar.Brand>
-              <Navbar.Brand>
-                  Art club
-              </Navbar.Brand>
+              <Navbar.Brand>Art club</Navbar.Brand>
 
-              <Navbar.Toggle aria-controls='responsive-navbar-nav' />
-              <Navbar.Collapse id='responsive-navbar-nav'>
-                <Nav className='mr-auto'>
-
-                  <Nav.Link href='#' as='span'>
+              <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+              <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="me-auto">
+                  <Nav.Link href="#" as="span">
                     <Link to="/">Home </Link>&nbsp;
                   </Nav.Link>
-                  <Nav.Link href='#' as='span'>
+                  <Nav.Link href="#" as="span">
                     <Link to="/artworks">Gallery</Link> &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    <Link to='/artists'>Artists</Link> &nbsp;
+                  <Nav.Link href="#" as="span">
+                    <Link to="/artists">Artists</Link> &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    <Link to="/links">Links</Link>  &nbsp;
+                  <Nav.Link href="#" as="span">
+                    <Link to="/links">Links</Link> &nbsp;
                   </Nav.Link>
-
-
 
                   {/* MEMBER LINKS */}
 
-                  <Nav.Link href='#' as='span'>
-                    {isMember | isAdmin
-                      ? <Link to="/users/addArtwork" className='member'>Add artwork</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isMember || isAdmin ? (
+                      <Link to="/users/addArtwork" className="member">
+                        Add artwork
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    {isMember | isAdmin
-                      ? <Link to="/users/:id/myPage"  className='member'>MyPage</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isMember || isAdmin ? (
+                      <Link to="/users/:id/myPage" className="member">
+                        MyPage
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    { isMember | isAdmin
-                      ? <Link to="/users/events"  className='member'>Events</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isMember || isAdmin ? (
+                      <Link to="/users/events" className="member">
+                        Events
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    { isMember | isAdmin
-                      ? <Link to='/users/password' className='member'>Change password</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isMember || isAdmin ? (
+                      <Link to="/users/password" className="member">
+                        Change password
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
 
                   {/* ADMIN LINKS */}
 
-                  <Nav.Link href='#' as='span'>
-                    {  isAdmin
-                      ? <Link to="/admin/addEvent"  className='admin'>Add event</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isAdmin ? (
+                      <Link to="/admin/addEvent" className="admin">
+                        Add event
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
 
-                  <Nav.Link href='#' as='span'>
-                    { isAdmin
-                      ? <Link to='/admin/users'  className='admin'>Users</Link>
-                      : <em></em>} &nbsp;
+                  <Nav.Link href="#" as="span">
+                    {isAdmin ? (
+                      <Link to="/admin/users" className="admin">
+                        Users
+                      </Link>
+                    ) : (
+                      <em></em>
+                    )}{' '}
+                    &nbsp;
                   </Nav.Link>
                 </Nav>
 
-
-                <Nav.Link href='#' as='span'>
-                  {!loggedUser
-                    ? <Link to='/register'>Register</Link>
-                    : <em></em>} &nbsp;
+                <Nav.Link href="#" as="span">
+                  {!loggedUser ? (
+                    <Link to="/register">Register</Link>
+                  ) : (
+                    <em></em>
+                  )}{' '}
+                  &nbsp;
                 </Nav.Link>
 
                 {/* <Nav.Link href='#' as='span'>
-                  {!isMember | !isAdmin
+                  {!isMember || !isAdmin
                     ? <Link to='/login'>Login</Link>
                     : <em></em>} &nbsp;
                 </Nav.Link> */}
 
-                <Nav.Link href='#' as='span'>
-                  {isMember | isAdmin | nonMember ?
+                <Nav.Link href="#" as="span">
+                  {isMember || isAdmin || nonMember ? (
                     <Button
-                      className='button'
+                      className="button"
                       onClick={props.logout}
-                      variant='light'
-                      type='button'>
+                      variant="light"
+                      type="button"
+                    >
                       Logout
                     </Button>
-                    :
-                    <Button
-                      className='button'
-                      variant='light'
-                      type='button' >
+                  ) : (
+                    <Button className="button" variant="light" type="button">
                       <Link to="/login">Login</Link>
                     </Button>
-                  }
+                  )}
                 </Nav.Link>
               </Navbar.Collapse>
             </Navbar>
@@ -166,88 +185,62 @@ const App = (props) => {
 
           <Notification />
           <div className="container">
-
             {/* Works like a typical switch statement; it checks for matches and
             runs the first thing matching the requested path*/}
-            <Switch>
+            <Routes>
+              {/* Admin-reittien suojaus */}
+              <Route element={<PrivateRoute condition={loggedUser && isAdmin} redirectPath="/login" />}>
+                <Route path="/admin/addEvent" element={<EventForm id={loggedUser && loggedUser.id} />} />
+                <Route path="/admin/users" element={<UserList />} />
+                <Route path="/admin/users/:id" element={<SingleUser />} />
+              </Route>
 
-              {/* THIS ROUTE PROTECTS ALL ROUTES UNDER "/admin" */}
-              <PrivateRoute
-                path="/admin"
-                redirectPath="/login"
-                condition={loggedUser && isAdmin}
-              >
-                <Route exact path="/admin/addEvent" render={({ history }) => <EventForm  history={history} id={loggedUser.id} />} />
-                <Route exact path="/admin/users" render={() => <UserList />} />
-                <Route exact path="/admin/users/:id"render={({ match }) => <SingleUser userId={match.params.id} />} />
-              </PrivateRoute>
+              {/* Kirjautumissivu — vain kirjautumattomille */}
+              <Route element={<PrivateRoute condition={!isMember && !isAdmin} redirectPath="/" />}>
+                <Route path="/login" element={<LoginForm />} />
+              </Route>
 
-              <PrivateRoute
-                exact path="/login"
-                redirectPath="/"
-                condition={!isMember && !isAdmin}      //{loggedUser===null}
-                render={() => <LoginForm />}
-              >
-              </PrivateRoute>
+              {/* Jäsenten reittien suojaus */}
+              <Route element={<PrivateRoute condition={!!loggedUser} redirectPath="/login" />}>
+                <Route path="/users/:id/myPage" element={<SingleUser userId={loggedUser && loggedUser.id} />} />
+                <Route path="/users/addArtwork" element={<AddArtworkForm id={loggedUser && loggedUser.id} />} />
+                <Route path="/users/events" element={<EventList />} />
+                <Route path="/users/password" element={<UpdatePassword id={loggedUser && loggedUser.id} />} />
+                <Route path="/users/update" element={<UpdateUserForm id={loggedUser && loggedUser.id} />} />
+                <Route path="/users/intro" element={<UserIntroForm id={loggedUser && loggedUser.id} />} />
+              </Route>
 
-              {/*  THIS ROUTE PROTECTS MEMBERS ROUTES UNDER "/users" */}
-              <PrivateRoute
-                path="/users"
-                redirectPath="/login"
-                condition={loggedUser}
-              >
-
-                <Route exact path="/users/:id/myPage" render={() => <SingleUser userId={loggedUser.id} />} />
-                <Route exact path="/users/addArtwork" render={({ history }) => <AddArtworkForm  id={loggedUser.id} history={history} /> } />
-                <Route exact path="/users/events" render={() => <EventList /> } />
-                <Route exact path="/users/password" render={() => <UpdatePassword id={loggedUser.id} /> } />
-                <Route exact path="/users/update" render={({ history }) => <UpdateUserForm id={loggedUser.id} history={history} /> } />
-                <Route exact path="/users/intro" render={() => <UserIntroForm id={loggedUser.id} />}/>
-              </PrivateRoute>
-
-
-
-              <Route exact path="/" render={() => <Home />}/>
-              <Route exact path="/artworks" render={() => <ArtworkList/>} />
-              <Route exact path="/artworks/:id" render={({ match }) => <SingleArtwork artworkId={match.params.id} />} />
-              {/*<Route exact path="/users/:id" render={({ match }) => <SingleUser userId={match.params.id} />} /> */}
-              <Route exact path="/addArtwork" render={() => <AddArtworkForm id={loggedUser.id} /> }  />
-              <Route exact path="/login" render={() => <LoginForm /> } />
-              <Route exact path="/register" render={({ history }) => <RegisterUserForm history={history} /> } />
-              <Route exact path="/artists" render={() => <ArtistList />} />
-              <Route exact path="/artists/:id" render={({ match }) => <SingleArtist userId={match.params.id} />} />
-              <Route exact path="/links" render={() => <LinksAndWeather />} />
-              <Route exact path="/privacy" render={() => <GDPRInfo />} />
-              <Route exact path="/terms" render={() => <TermsOfUse />} />
-              <Route exact path="/nonMember" render={() => < NonMember/>} />
-
-
-            </Switch>
+              {/* Julkiset reitit */}
+              <Route path="/" element={<Home />} />
+              <Route path="/artworks" element={<ArtworkList />} />
+              <Route path="/artworks/:id" element={<SingleArtwork />} />
+              <Route path="/register" element={<RegisterUserForm />} />
+              <Route path="/artists" element={<ArtistList />} />
+              <Route path="/artists/:id" element={<SingleArtist />} />
+              <Route path="/links" element={<LinksAndWeather />} />
+              <Route path="/privacy" element={<GDPRInfo />} />
+              <Route path="/terms" element={<TermsOfUse />} />
+              <Route path="/nonMember" element={<NonMember />} />
+            </Routes>
           </div>
         </React.Fragment>
       </Router>
 
-
-      <img src={picture}
-        width='200'
-        height='400'
-        className='picture'
-        alt='background'
+      <img
+        src={picture}
+        width="200"
+        height="400"
+        className="picture"
+        alt="background"
       />
-
     </div>
   )
 }
 const mapStateToProps = (state) => {
   console.log('state from APP', state)
   return {
-    loggedUser: state.loggedUser.loggedUser
+    loggedUser: state.loggedUser.loggedUser,
   }
 }
 
-
-export default connect(
-  mapStateToProps,
-  { logout, initLoggedUser }
-)(App)
-
+export default connect(mapStateToProps, { logout, initLoggedUser })(App)

@@ -3,11 +3,10 @@ import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../../images/tripleblue.png'
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
-import  { login } from '../../reducers/actionCreators/loginActions'
+import { login } from '../../reducers/actionCreators/loginActions'
 import { Form, Button, Col, Container, Row } from 'react-bootstrap'
 
 export const LoginForm = ({ login }) => {
-
   const [input, setInput] = useState({ username: '', password: '' })
 
   const handleLogin = (event) => {
@@ -23,25 +22,24 @@ export const LoginForm = ({ login }) => {
   const handleChange = (event) => {
     const newInput = {
       ...input,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }
     setInput(newInput)
   }
 
   return (
-    <div className='loginForm'>
+    <div className="loginForm">
       <Container>
         <Row>
           <Col md={{ span: 12 }}>
             {/* <Col md={{ span: 5, offset: 3 }}> */}
 
-            <div className='logHeader'>
+            <div className="logHeader">
               <h3>Sign In</h3>
             </div>
-
           </Col>
         </Row>
-        <br/>
+        <br />
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
             {/* <Col md={{ span: 5, offset: 3 }}> */}
@@ -50,51 +48,52 @@ export const LoginForm = ({ login }) => {
                 {/* <Form.Label>username</Form.Label> */}
                 <Form.Control
                   type="text"
-                  placeholder='Username'
+                  placeholder="Username"
                   name="username"
                   value={input.username}
                   onChange={handleChange}
                   autoFocus
                 />
-                <br/>
+                <br />
 
                 {/* <Form.Label>password </Form.Label> */}
                 <Form.Control
                   type="password"
                   name="password"
-                  placeholder='Password'
+                  placeholder="Password"
                   value={input.password}
                   onChange={handleChange}
                 />
                 <div className="grayInfoText">
-                  <p>No login details: <Link to='/register' className='register'>Register</Link> and apply membership</p>
+                  <p>
+                    No login details:{' '}
+                    <Link to="/register" className="register">
+                      Register
+                    </Link>{' '}
+                    and apply membership
+                  </p>
                 </div>
-                <br/>
-                <Button className="button" variant="light" type="submit" >
-                Login
+                <br />
+                <Button className="button" variant="light" type="submit">
+                  Login
                 </Button>
-
               </Form.Group>
               <div className="logoHeader">
                 <h1>Art Club</h1>
                 <img
                   src={logo}
-                  width='100'
-                  height='60'
-                  className='logLogo'
-                  alt='Art club LOGO'
+                  width="100"
+                  height="60"
+                  className="logLogo"
+                  alt="Art club LOGO"
                 />
               </div>
             </Form>
           </Col>
         </Row>
       </Container>
-    </div >
+    </div>
   )
 }
 
-
-export default connect(
-  null,
-  { login }
-)(LoginForm)
+export default connect(null, { login })(LoginForm)

@@ -7,59 +7,58 @@ import FormData from 'form-data'
 import ReadMoreReact from 'read-more-react'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 
-export const AddArtworkForm = (
-  {
-    createArtwork,
-    getArtists,
-    users,
-    id,
-    notify
-    //history
-  }
-) => {
+export const AddArtworkForm = ({
+  createArtwork,
+  getArtists,
+  users,
+  id,
+  notify,
+  //history
+}) => {
   useEffect(() => {
-    console.log('id',id)
+    console.log('id', id)
     getArtists()
   }, [])
 
-  const userToShow=users&&users.find(u => u.id===id)
+  const userToShow = users && users.find((u) => u.id === id)
 
-  const [input, setInput] = useState({ image: '', artist: '', name: '',year: '',size: '',medium: '', selectedFile:null })
-  const [galleryImage, setFile] = useState({ })
-
+  const [input, setInput] = useState({
+    image: '',
+    artist: '',
+    name: '',
+    year: '',
+    size: '',
+    medium: '',
+    selectedFile: null,
+  })
+  const [galleryImage, setFile] = useState({})
 
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    if( galleryImage.galleryImage===undefined){
+    if (galleryImage.galleryImage === undefined) {
       notify('Remember to choose image!', 5)
-    }
-    else if ( event.target.artist.value < 3) {
+    } else if (event.target.artist.value < 3) {
       notify('Artist name has to have at least 3 characters', 5)
-    }
-    else if (event.target.name.value < 1) {
+    } else if (event.target.name.value < 1) {
       notify('Artwork name has to have at least 1 characters', 5)
-    }
-    else if (event.target.year.value < 4) {
+    } else if (event.target.year.value < 4) {
       notify('Year field has to have at least 4 numbers', 5)
-    }
-    else if (event.target.size.value < 3) {
+    } else if (event.target.size.value < 3) {
       notify('size field has to have at least 3 characters', 5)
-    }
-    else if (event.target.medium.value < 8) {
+    } else if (event.target.medium.value < 8) {
       notify('Medium field has to have at least 3 characters', 5)
-    }
-    else{
-      console.log('file',galleryImage, galleryImage.galleryImage.name)
+    } else {
+      console.log('file', galleryImage, galleryImage.galleryImage.name)
       //createsFormdata object
-      const data=new FormData()
-      data.append('galleryImage',galleryImage.galleryImage)
+      const data = new FormData()
+      data.append('galleryImage', galleryImage.galleryImage)
       data.append('artist', event.target.artist.value)
       data.append('name', event.target.name.value)
       data.append('year', event.target.year.value)
       data.append('size', event.target.size.value)
-      data.append('medium',event.target.medium.value)
-      data.append('userId',id)
+      data.append('medium', event.target.medium.value)
+      data.append('userId', id)
 
       console.log('submitdata', data)
 
@@ -71,109 +70,118 @@ export const AddArtworkForm = (
   const handleChange = (event) => {
     const newInput = {
       ...input,
-      [event.target.name]: event.target.value
+      [event.target.name]: event.target.value,
     }
     setInput(newInput)
     console.log(event)
   }
 
-
   const fileSelectedHandler = (event) => {
-    setFile({ galleryImage : event.target.files[0] })
+    setFile({ galleryImage: event.target.files[0] })
     console.log('event', event.target.files[0])
   }
 
-
   return (
-    <div className='artworkForm'>
+    <div className="artworkForm">
       <Container>
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
-            <div className='artworkHeader'>
+            <div className="artworkHeader">
               <h3>Add artwork</h3>
             </div>
           </Col>
         </Row>
-        <br/>
+        <br />
 
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
               <Form.Control
-                type='text'
-                placeholder='Artist'
-                name='artist'
+                type="text"
+                placeholder="Artist"
+                name="artist"
                 onChange={handleChange}
                 autoFocus
               />
-              <br/>
+              <br />
               <Form.Control
-                type='text'
-                placeholder='Name of artwork'
-                name='name'
+                type="text"
+                placeholder="Name of artwork"
+                name="name"
                 onChange={handleChange}
               />
-              <br/>
+              <br />
               <Form.Control
-                type='number'
-                placeholder='Year'
-                name='year'
+                type="number"
+                placeholder="Year"
+                name="year"
                 onChange={handleChange}
               />
-              <br/>
+              <br />
               <Form.Control
-                type='text'
-                placeholder='Size (width x hight) cm'
-                name='size'
+                type="text"
+                placeholder="Size (width x hight) cm"
+                name="size"
                 onChange={handleChange}
               />
-              <br/>
+              <br />
               <Form.Control
-                type='text'
-                placeholder='Medium'
-                name='medium'
+                type="text"
+                placeholder="Medium"
+                name="medium"
                 onChange={handleChange}
               />
               <div className="grayInfoText">
-                <p>You can upload max 10 images to the gallery. Added artworks { userToShow && userToShow.artworks.length}/10 </p>
+                <p>
+                  You can upload max 10 images to the gallery. Added artworks{' '}
+                  {userToShow && userToShow.artworks.length}/10{' '}
+                </p>
               </div>
-              <br/>
-              { userToShow && userToShow.artworks.length>=10
-                ? <h5>You have reached limit of 10 images. To add new images delete your old images fom MyPage</h5>
-                : <Button className='button' type='submit' variant="light">Send</Button>
-              }
-
+              <br />
+              {userToShow && userToShow.artworks.length >= 10 ? (
+                <h5>
+                  You have reached limit of 10 images. To add new images delete
+                  your old images fom MyPage
+                </h5>
+              ) : (
+                <Button className="button" type="submit" variant="light">
+                  Send
+                </Button>
+              )}
             </Form.Group>
           </Col>
         </Form>
 
-        <input type='file'className='fileUploader' name='galleryImage' id="file" onChange={fileSelectedHandler}/>
-
-
+        <input
+          type="file"
+          className="fileUploader"
+          name="galleryImage"
+          id="file"
+          onChange={fileSelectedHandler}
+        />
       </Container>
       <div className="ImageInfoText">
         <ReadMoreReact
-          text={ 'Image instructions! width 600px, height 500px, max_fileSize:1024*1024*5, resolution: 72dpi, format:jpg '}
+          text={
+            'Image instructions! width 600px, height 500px, max_fileSize:1024*1024*5, resolution: 72dpi, format:jpg '
+          }
           min={5}
           ideal={10}
           max={100}
-          readMoreText={'Read more'}/>
+          readMoreText={'Read more'}
+        />
       </div>
     </div>
-
   )
 }
 
 const mapStateToProps = (state) => {
   console.log('users state frm addArtworFrom', state.users.users)
   return {
-    users: state.users.users
+    users: state.users.users,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { createArtwork, getArtists, notify }
-)( AddArtworkForm )
-
-
+export default connect(mapStateToProps, { createArtwork, getArtists, notify })(
+  AddArtworkForm,
+)

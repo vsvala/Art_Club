@@ -1,4 +1,4 @@
-import React , { useState } from'react'
+import React, { useState } from 'react'
 import { connect } from 'react-redux'
 //import { FormGroup, FormControl, FormLabel, Button } from 'react-bootstrap'
 import { Form, Button, Row, Col, Container } from 'react-bootstrap'
@@ -10,14 +10,13 @@ import { emailValid } from '../../utils/validations'
 //TODO  vALIDOINNIT  kaikissa kentissä jotain.ei tyhjiä
 //ja se että virheen sattuessa kentät ei tyhjenny ??
 
-export const UpdateUserForm = ( {
+export const UpdateUserForm = ({
   updateUser,
   id,
   notify,
   //history,
   //loggedUser,
-  singleUser
-
+  singleUser,
 }) => {
   // const [input, setInput] = useState({ email:loggedUser.email, username:loggedUser.username })
   const [name, setName] = useState(singleUser.name)
@@ -28,23 +27,21 @@ export const UpdateUserForm = ( {
     event.preventDefault()
 
     const user = {
-      id:id,
-      name:name,
-      email:email,
-      username:username
+      id: id,
+      name: name,
+      email: email,
+      username: username,
       // role:'member'
     }
     if (!emailValid(user.email)) {
       notify('Please check your email', 5)
-    }
-    else if (user.name.length < 3) {
+    } else if (user.name.length < 3) {
       notify('Name has to have at least 3 characters', 5)
-    }
-    else if (user.username.length < 3) {
+    } else if (user.username.length < 3) {
       notify('Username has to have at least 3 characters', 5)
     } else {
-      console.log('registering',user )
-      const response=updateUser(user)
+      console.log('registering', user)
+      const response = updateUser(user)
       console.log('resp', response)
       // history.push('/users/:id/myPage')
       //Miksi ei updataa TODO korjaa
@@ -58,21 +55,19 @@ export const UpdateUserForm = ( {
   //   setInput(newInput)
   // }
 
-
-  return(
-
-    <div className='registerForm'>
+  return (
+    <div className="registerForm">
       <Container>
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
-            <div className='regHeader'>
+            <div className="regHeader">
               <h3>Update your information</h3>
             </div>
           </Col>
         </Row>
-        <br/>
+        <br />
 
-        <div className='updateInfoLabels'>
+        <div className="updateInfoLabels">
           <Col md={{ span: 10, offset: 1 }}>
             <Form onSubmit={handleSubmit}>
               <Form.Group>
@@ -84,12 +79,11 @@ export const UpdateUserForm = ( {
                   // onChange={handleChange}
                   //placeholder="Name"
                   onChange={(e) => setName(e.target.value)}
-
                 />
                 <Form.Label>Email: </Form.Label>
                 <Form.Control
-                  type='email'
-                  name='email'
+                  type="email"
+                  name="email"
                   value={email}
                   //value={input.email}
                   //placeholder="Email"
@@ -106,10 +100,11 @@ export const UpdateUserForm = ( {
                   //onChange={handleChange}
                   onChange={(e) => setUsername(e.target.value)}
                 />
-                <br/>
-                <Button className="button" variant="light" type="submit">Update
+                <br />
+                <Button className="button" variant="light" type="submit">
+                  Update
                 </Button>
-                <br/>
+                <br />
               </Form.Group>
             </Form>
           </Col>
@@ -121,11 +116,7 @@ export const UpdateUserForm = ( {
 const mapStateToProps = (state) => {
   return {
     loggedUser: state.loggedUser.loggedUser,
-    singleUser: state.singleUser.singleUser
-
+    singleUser: state.singleUser.singleUser,
   }
 }
-export default connect(
-  mapStateToProps,
-  { updateUser, notify }
-)(UpdateUserForm)
+export default connect(mapStateToProps, { updateUser, notify })(UpdateUserForm)

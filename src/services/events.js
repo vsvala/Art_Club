@@ -1,6 +1,5 @@
 import axios from 'axios'
 import url from './config'
-import { initLoggedUser } from '../reducers/actionCreators/loginActions'
 
 const baseUrl = url + 'api/events'
 //const baseUrl = '/api/events'
@@ -68,4 +67,4 @@ const deleteEvent = async (id) => {
 }
 
 
-export default { getAll, create, setToken, deleteEvent, initLoggedUser }
+export default { getAll, create, setToken, deleteEvent }

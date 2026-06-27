@@ -6,17 +6,20 @@ import { Provider } from 'react-redux'
 import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
-
 configure({ adapter: new Adapter() })
 
 describe('<App /> ', () => {
   let app
   beforeAll(() => {
-    app = mount(<Provider store={store}><App /></Provider>)
+    app = mount(
+      <Provider store={store}>
+        <App />
+      </Provider>,
+    )
   })
 
   afterAll(() => {
-    app.unMount()
+    app.unmount()
   })
 
   it('renders self without crushing', () => {

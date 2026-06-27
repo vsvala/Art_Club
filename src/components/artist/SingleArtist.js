@@ -1,26 +1,21 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import {  initializeSingleUser }  from '../../reducers/actionCreators/userActions'
-//import { initLoggedUser } from '../../reducers/actionCreators/loginActions'
+import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
 import userActions from '../../reducers/actionCreators/userActions'
-import { Link } from 'react-router-dom'
+import { Link, useParams } from 'react-router-dom'
 import url from '../../services/config'
 const baseUrl = url + 'public/'
-//const BASE_URL= 'http://localhost:3001/'
 
 
 export const SingleArtist= ({
   singleUser,
-  userId,
   initializeSingleUser,
-  // getArtists(),
-  //loggedUser
 }) => {
+  const { id } = useParams()
 
   useEffect(() => {
-    initializeSingleUser(userId)
-    console.log('initializeSingleUser(userId)')
-  }, [])
+    initializeSingleUser(id)
+  }, [id])
 
 
 

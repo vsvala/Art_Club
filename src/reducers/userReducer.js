@@ -1,4 +1,3 @@
-
 const initialState = {
   users: [],
   singleUser: {},
@@ -6,42 +5,38 @@ const initialState = {
   //singleArtist: {}
 }
 
-
-
-const userReducer = (state =initialState, action) => {
+const userReducer = (state = initialState, action) => {
   console.log('ACTIONtype:', action)
 
   switch (action.type) {
-
-  case 'CREATE_USER':{
+  case 'CREATE_USER': {
     // console.log(action.content)
-    console.log(action.data, 'create user to store from REDUSER' )
+    console.log(action.data, 'create user to store from REDUSER')
     //return store.concat(action.content)
-    return [...state,  action.data ]
+    return { ...state, users: [...state.users.action.data] }
     //users: action.data //{ content: action.content, id: getId(), votes:0 }]
   }
 
-  case 'GET_USERS':{
+  case 'GET_USERS': {
     console.log(action.data, 'get users from REDUCER ')
     return {
       ...state,
-      users:action.data
-
+      users: action.data,
     }
   }
 
-  case 'GET_ARTISTS':{
+  case 'GET_ARTISTS': {
     console.log(action.data, 'get users from REDUCER ')
     return {
       ...state,
-      users:action.data
+      users: action.data,
     }
   }
 
   case 'DELETE_USER': {
     return {
       ...state,
-      users: state.users.filter(user => user.id !== action.data.id)
+      users: state.users.filter((user) => user.id !== action.data.id),
     }
   }
 
@@ -49,27 +44,24 @@ const userReducer = (state =initialState, action) => {
     return {
       ...state,
       loggedUser: action.data,
-      singleUser: action.data
+      singleUser: action.data,
     }
   }
-
-
 
   case 'UPDATE_ROLE': {
     console.log('reducer id ja role', action.data.id, action.data.role)
     return {
       ...state,
-      users:state.users.map(u =>
-        u.id === action.data.id
-          ?{ ...u, role:action.data.role }
-          : u
-      ) }
+      users: state.users.map((u) =>
+        u.id === action.data.id ? { ...u, role: action.data.role } : u,
+      ),
+    }
   }
 
   case 'INIT_SINGLE_USER': {
     return {
       ...state,
-      singleUser: action.data
+      singleUser: action.data,
     }
   }
   // case 'INIT_SINGLE_ARTIST': {
@@ -78,7 +70,6 @@ const userReducer = (state =initialState, action) => {
   //     singleArtist: action.data
   //   }
   // }
-
 
   default:
     return state

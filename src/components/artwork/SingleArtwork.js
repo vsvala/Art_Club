@@ -12,8 +12,6 @@ export const SingleArtwork = ({
     initializeSingleArtwork(id);
   }, [id]);
 
-  // const artwork=artworks.find(a => a.id===artworkId)
-
   return (
     <div className="singleArtwork">
       {!artwork ? null : (
@@ -21,7 +19,7 @@ export const SingleArtwork = ({
           <img
             src={artwork.galleryImage}
             width="700"
-            height="auto" //'550'
+            height="auto"
             className="singlePicture"
             alt="img"
           />
@@ -38,11 +36,9 @@ export const SingleArtwork = ({
 const mapStateToProps = (state) => {
   return {
     artwork: state.singleArtwork.singleArtwork,
-    //artworks:state.artworks.artworks
   };
 };
 
 export default connect(mapStateToProps, {
-  //...singleArtworkActions,
   initializeSingleArtwork,
 })(SingleArtwork);

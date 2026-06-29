@@ -4,13 +4,9 @@ import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getUsers, deleteUser } from '../../reducers/actionCreators/userActions'
 
-
 export const UserList = ({ userArray, getUsers, deleteUser }) => {
   useEffect(() => {
-    // if (userList.length===0) {
-    console.log('initialiList')
     getUsers()
-    // }
   }, [])
 
   const removeUser = (id) => {
@@ -22,7 +18,6 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
   }
 
   return (
-
     <div className="userList">
       <h2>Users</h2>
       <Table bordered hover size='sm'>
@@ -38,8 +33,8 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
         </thead>
 
         <tbody>
-          { userArray&&userArray.map(user =>
-            <User  user={user}
+          { userArray && userArray.map(user =>
+            <User user={user}
               key={user.id}
               artworks={user.artworks}
               onClick={removeUser}/>
@@ -47,11 +42,10 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
         </tbody>
       </Table>
     </div>
-  )}
+  )
+}
 
 const mapStateToProps = (state) => {
-  console.log('statefromUSerList userarray', state.users.users)
-
   return {
     userArray: state.users.users
   }

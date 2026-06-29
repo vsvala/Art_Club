@@ -3,19 +3,13 @@ import { notify } from "../../reducers/actionCreators/notificationActions";
 import { Form, Button } from "react-bootstrap";
 import { connect } from "react-redux";
 import { updateLoggedUser } from "../../reducers/actionCreators/loginActions";
-//import { updateIntro } from "../../reducers/actionCreators/userActions";
 
 export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
   const [intro, setIntro] = useState(singleUser.intro);
-  // (if intro lenght...const introLenght = singleUser.intro.lenght
 
-  // takes new input values from the form, updates logged user
   const handleSubmit = (event) => {
     event.preventDefault();
-    const input = {
-      intro: intro,
-    };
-    // gives error if too long introtext
+    const input = { intro: intro };
     if (input.intro.length > 1000) {
       notify(
         "Text is too long! Introduction text maximum length is 1000 characters",
@@ -34,8 +28,6 @@ export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
         <Form.Label>
           <h4>Write Introduction text (max 1000 characters):</h4>
         </Form.Label>
-        {/*(remaining characters {1000 - intro.lenght} )*/}
-
         <Form.Control
           as="textarea"
           rows="8"
@@ -51,12 +43,14 @@ export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
     </Form>
   );
 };
+
 const mapStateToProps = (state) => {
   return {
     singleUser: state.singleUser.singleUser,
   };
 };
+
 export default connect(
   mapStateToProps,
-  { updateLoggedUser, notify }, // updateIntro//
+  { updateLoggedUser, notify },
 )(UserIntroForm);

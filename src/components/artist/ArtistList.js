@@ -4,19 +4,12 @@ import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getArtists } from '../../reducers/actionCreators/userActions'
 
-
 export const ArtistList = ({ artistsToShow, getArtists }) => {
   useEffect(() => {
-    // if (artistsToShow.artworks.length===0) {
-    console.log('initialiList')
     getArtists()
-    // }
   }, [])
 
-
-
   return (
-
     <div className="artistList">
       <h2>Artists</h2>
 
@@ -29,8 +22,8 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
         </thead>
 
         <tbody>
-          { artistsToShow&&artistsToShow.map(user =>
-            <Artist  user={user}
+          { artistsToShow && artistsToShow.map(user =>
+            <Artist user={user}
               key={user.id}
               artworks={user.artworks}
             />
@@ -38,11 +31,10 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
         </tbody>
       </Table>
     </div>
-  )}
+  )
+}
 
 const mapStateToProps = (state) => {
-  console.log('statefromUSerList artistsToShow', state.users.users)
-
   return {
     artistsToShow: state.users.users
   }

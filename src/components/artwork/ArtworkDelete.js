@@ -1,50 +1,36 @@
 import React from "react";
 import { Link } from "react-router-dom";
-//import DeleteButton from '../common/DeleteButton'""My
-
 import { connect } from "react-redux";
 import { deleteArtwork } from "../../reducers/actionCreators/artworkActions";
 import { Button } from "react-bootstrap";
-// import url from '../../services/config'
-// const baseUrl = url + 'public/'
-
-/* eslint-disable */
-//const BASE_URL= 'http://localhost:3001/'
 
 const ArtworkDelete = ({ artwork, deleteArtwork }) => {
-  //event handler for deleting specific  artworkn
   const removeArtwork = (id) => {
     return () => {
       if (window.confirm("Do you want to delete this artwork?")) {
-        deleteArtwork(id); //, loggedUser.user.user_id
+        deleteArtwork(id);
       }
     };
   };
 
   return (
     <div className="artworkThumb">
-      <ul Style="list-style-type:none;">
+      <ul style={{ listStyleType: "none" }}>
         <li>
           <img
-            //src={ BASE_URL +`${ artwork.galleryImage }`}
             src={artwork.galleryImage}
-            //width='300'
-            //height='auto'
             className="galleryPicture"
             alt="img"
           />
         </li>
         <li className="artwork">
-          {" "}
           <Link to={`/artworks/${artwork.id}`}> {artwork.name} </Link>
           by {artwork.artist}
         </li>
         <li>
-          {" "}
           {artwork.year}, {artwork.size}, {artwork.medium}
         </li>
         <li>
-          {" "}
           <Button
             className="button"
             onClick={removeArtwork(artwork.id)}
@@ -53,9 +39,8 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
           >
             Delete
           </Button>
-        </li>{" "}
+        </li>
         <br />
-        {/*         <li className="delete"><DeleteButton id={artwork.id} onClick={removeArtwork(artwork.id)} /></li>*/}
       </ul>
     </div>
   );

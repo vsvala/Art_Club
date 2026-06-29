@@ -18,7 +18,6 @@ export const AddArtworkForm = ({
   const navigate = useNavigate()
 
   useEffect(() => {
-    console.log("id", id);
     getArtists();
   }, []);
 
@@ -51,8 +50,6 @@ export const AddArtworkForm = ({
     } else if (event.target.medium.value.length < 8) {
       notify("Medium field has to have at least 3 characters", 5);
     } else {
-      console.log("file", galleryImage, galleryImage.galleryImage.name);
-      //createsFormdata object
       const data = new FormData();
       data.append("galleryImage", galleryImage.galleryImage);
       data.append("artist", event.target.artist.value);
@@ -62,11 +59,8 @@ export const AddArtworkForm = ({
       data.append("medium", event.target.medium.value);
       data.append("userId", id);
 
-      console.log("submitdata", data);
-
       createArtwork(data);
       navigate(`/users/${id}/myPage`)
-    //  navigate('/artworks')
     }
   };
 
@@ -76,12 +70,10 @@ export const AddArtworkForm = ({
       [event.target.name]: event.target.value,
     };
     setInput(newInput);
-    console.log(event);
   };
 
   const fileSelectedHandler = (event) => {
     setFile({ galleryImage: event.target.files[0] });
-    console.log("event", event.target.files[0]);
   };
 
   return (
@@ -179,7 +171,6 @@ export const AddArtworkForm = ({
 };
 
 const mapStateToProps = (state) => {
-  console.log("users state frm addArtworFrom", state.users.users);
   return {
     users: state.users.users,
   };

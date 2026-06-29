@@ -1,39 +1,23 @@
-
 const initialState = {
-  // artworkLoading: false,
   artworks: []
 }
 
-// updates the state of the artworkList
 const artworkReducer = (state = initialState, action) => {
-
   switch (action.type) {
   case 'INIT_ARTWORKS': {
-    return {
-      ...state,
-      artworks: action.data,
-      // loadingartworks: false
-    }
+    return { ...state, artworks: action.data }
   }
 
   case 'CREATE_ARTWORK': {
-    return {
-      ...state,
-      artworks: [],
-      // loadingartworks: true
-    }
+    return { ...state, artworks: [] }
   }
 
   case 'ARTWORK_FETCH': {
-    return {
-      ...state,
-      artworks: [],
-      //loadingartworks: true
-    }
+    return { ...state, artworks: [] }
   }
 
-  case 'VOTE':{
-    const old = state.artworks.filter(a => a.id !==action.id)
+  case 'VOTE': {
+    const old = state.artworks.filter(a => a.id !== action.id)
     const liked = state.artworks.find(a => a.id === action.id)
     return {
       ...state,
@@ -52,6 +36,5 @@ const artworkReducer = (state = initialState, action) => {
     return state
   }
 }
-
 
 export default artworkReducer

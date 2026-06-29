@@ -21,8 +21,6 @@ export const EventForm = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    console.log('file', eventImage, eventImage.eventImage.name)
-    console.log('startend', state.startDate, state.endDate)
     const data = new FormData()
     data.append('eventImage', eventImage.eventImage)
     data.append('title', input.title)
@@ -32,19 +30,16 @@ export const EventForm = ({
     data.append('description', input.description)
     data.append('userId', id)
 
-    console.log('submitdata', data)
     createEvent(data)
     navigate('/users/events')
   }
 
-  //eventhandler for changin formField inputs
   const handleChange = (event) => {
     const newInput = {
       ...input,
       [event.target.name]: event.target.value,
     }
     setInput(newInput)
-    console.log(event)
   }
 
   const handleChangeStart = (date) => {
@@ -52,6 +47,7 @@ export const EventForm = ({
       startDate: date,
     })
   }
+
   const handleChangeEnd = (date) => {
     setState({
       ...state,
@@ -59,10 +55,8 @@ export const EventForm = ({
     })
   }
 
-  // eventhandler for fileInput
   const fileSelectedHandler = (event) => {
     setFile({ eventImage: event.target.files[0] })
-    console.log('event', event.target.files[0])
   }
 
   return (

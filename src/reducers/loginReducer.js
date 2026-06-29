@@ -1,41 +1,24 @@
 const initialState = {
-  loggedUser:{},
-  singleUser:{}
-  // loadingUser: true
+  loggedUser: {},
+  singleUser: {}
 }
 
 const loginReducer = (state = initialState, action) => {
-  console.log('loginreducer')
   switch (action.type) {
-
   case 'INIT_USER': {
-    return {
-      ...state,
-      loggedUser: action.data
-      // loadingUser: false
-    }
+    return { ...state, loggedUser: action.data }
   }
 
   case 'LOGIN': {
-    return {
-      ...state,
-      loggedUser: action.data
-    }
+    return { ...state, loggedUser: action.data }
   }
 
   case 'LOGOUT': {
-    return {
-      ...state,
-      loggedUser: null
-    }
+    return { ...state, loggedUser: null }
   }
 
   case 'UPDATE_LOGGED_USER': {
-    return {
-      ...state,
-      loggedUser: action.data,
-      //singleUser: action.data
-    }
+    return { ...state, loggedUser: action.data }
   }
 
   default: {
@@ -43,6 +26,5 @@ const loginReducer = (state = initialState, action) => {
   }
   }
 }
-
 
 export default loginReducer

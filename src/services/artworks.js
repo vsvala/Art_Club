@@ -5,7 +5,7 @@ const baseUrl = '/api/artworks'
 let token = null
 
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = newToken ? `bearer ${newToken}` : null
 }
 
 const getConfig = () => {

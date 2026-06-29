@@ -22,7 +22,6 @@ export const RegisterUserForm = ({
       email: event.target.email.value,
       username: event.target.username.value,
       password: event.target.password.value,
-      role: 'nonMember',
     }
 
     if (!emailValid(user.email)) {

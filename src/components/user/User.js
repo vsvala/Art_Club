@@ -1,7 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
-//import Checkbox from '../common/Checkbox'
 import { connect } from 'react-redux'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Form } from 'react-bootstrap'
@@ -11,17 +10,15 @@ const User = ({ user, onClick, updateRole }) => {
   const handleRoleChange = (userId) => (event) => {
     const formContent = {
       role: event.target.value,
-      id:userId }
-    console.log('handleRolechange', userId, formContent)
-    updateRole( formContent)
+      id: userId
+    }
+    updateRole(formContent)
   }
 
   return (
     <tr>
-      <td><Link to={`/artists/${user.id}`}> {<p>{user.name}</p>} </Link></td>
-      {/* <td> {user.id} </td> */}
+      <td><Link to={`/artists/${user.id}`}><p>{user.name}</p></Link></td>
       <td> {user.username}</td>
-      {/* <td> {user.role}</td> */}
       <td>
         <Form>
           <Form.Group controlId="exampleForm.ControlSelect1">

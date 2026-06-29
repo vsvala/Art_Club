@@ -16,7 +16,7 @@ const GDPRInfo = () => {
         <br></br>Finland
       </p>
       <p>
-        <b>Register administrator</b> Virva Svala (<a href='mailto:virva.svala@helsinki.fi'>virva.svala@helsinki.fi</a>)
+        <b>Register administrator</b> Virva Svala (<a href='mailto:virva.svala@artclub.com'>virva.svala(at)artclub.com</a>)
       </p>
 
       <h4>Data to be recorded</h4>
@@ -51,16 +51,16 @@ const GDPRInfo = () => {
       <p>The data are not transferred to third parties or outside EU.</p>
 
       <h4>Right of access to personal data</h4>
-      <p>If a member wants to access personal data concerning his/her information, he/she can contact Virva svala (<a href='mailto:virva.svala@helsinki.fi'>virva.svala@helsinki.fi</a>).</p>
+      <p>If a member wants to access personal data concerning his/her information, he/she can contact Virva Svala (<a href='mailto:virva.svala@artclub.com'>virva.svala(at)artclub.com</a>).</p>
 
       <h4>Principles of protecting data</h4>
       <p>The saved data are stored on a server to which only administrators have access rights. Uploaded Images and introduction text is available for all in internet. The personal data can be reached with username and password only. A user has access only to those parts of the registry that he/she needs. The server and the computers are stored in locked premises.</p>
 
       <h4>Correction of incorrect information</h4>
-      <p>Information collected from you: contact <a href='mailto:virva.svala@helsinki.fi'>virva.avala@helsinki.fi</a>.</p>
+      <p>Information collected from you: contact <a href='mailto:virva.svala@artclub.com'>virva.svala(at)artclub.com</a>.</p>
 
       <h4>How do I remove my data from the register?</h4>
-      <p>Inform the register administrator Virva Svala (<a href='mailto:virva.svala@helsinki.fi'>virva.svala@helsinki.fi</a>) that you want your information removed from the register.</p>
+      <p>Inform the register administrator Virva Svala (<a href='mailto:virva.svala@artclub.com'>virva.svala(at)artclub.com</a>) that you want your information removed from the register.</p>
     </div >
   )
 }

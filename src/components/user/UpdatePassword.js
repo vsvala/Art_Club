@@ -13,7 +13,6 @@ export const UpdatePassword = ({ notify, setError }) => {
     event.preventDefault()
     const { oldPassword, newPassword, confirm } = input
     const response = await userService.updatePassword({ oldPassword, newPassword, confirm })
-    console.log('resp', response)
     if (response.error) {
       setError(response.error, 5)
     } else {

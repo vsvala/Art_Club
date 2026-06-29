@@ -5,10 +5,9 @@ const baseUrl = url + 'api/users'
 
 let token = null
 
-const setToken = (newToken) => {
-  token = `bearer ${newToken}`
+const setToken = newToken => {
+  token = newToken ? `bearer ${newToken}` : null
 }
-
 const getConfig = () => {
   return {
     headers: { 'Authorization': token }

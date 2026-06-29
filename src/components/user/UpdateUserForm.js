@@ -6,6 +6,7 @@ import { Form, Button, Row, Col, Container } from 'react-bootstrap'
 import { updateUser } from '../../reducers/actionCreators/userActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { emailValid } from '../../utils/validations'
+import { useNavigate } from 'react-router-dom'
 
 //TODO  vALIDOINNIT  kaikissa kentissä jotain.ei tyhjiä
 //ja se että virheen sattuessa kentät ei tyhjenny ??
@@ -14,10 +15,9 @@ export const UpdateUserForm = ({
   updateUser,
   id,
   notify,
-  //history,
-  //loggedUser,
   singleUser,
 }) => {
+  const navigate = useNavigate()
   // const [input, setInput] = useState({ email:loggedUser.email, username:loggedUser.username })
   const [name, setName] = useState(singleUser.name)
   const [email, setEmail] = useState(singleUser.email)
@@ -43,8 +43,7 @@ export const UpdateUserForm = ({
       console.log('registering', user)
       const response = updateUser(user)
       console.log('resp', response)
-      // history.push('/users/:id/myPage')
-      //Miksi ei updataa TODO korjaa
+      navigate('/')
     }
   }
   // const handleChange = (event) => {

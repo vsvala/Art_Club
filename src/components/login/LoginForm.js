@@ -1,13 +1,21 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import logo from "../../images/tripleblue.svg";
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
 import { login } from "../../reducers/actionCreators/loginActions";
 import { Form, Button, Col, Container, Row } from "react-bootstrap";
+import { useNavigate } from 'react-router-dom'
 
-export const LoginForm = ({ login }) => {
+export const LoginForm = ({ login, loggedUser }) => {
   const [input, setInput] = useState({ username: "", password: "" });
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    if (loggedUser && loggedUser.token) {
+      navigate('/')
+    }
+  }, [loggedUser])
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -96,4 +104,8 @@ export const LoginForm = ({ login }) => {
   );
 };
 
-export default connect(null, { login })(LoginForm);
+const mapStateToProps = (state) => ({
+  loggedUser: state.loggedUser.loggedUser,
+})
+
+export default connect(mapStateToProps, { login })(LoginForm);

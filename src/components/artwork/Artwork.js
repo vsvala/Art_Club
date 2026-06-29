@@ -31,8 +31,8 @@ const Artwork = ({ artwork, onClick, notify, voteArtwork }) => {
     };
   };
   return (
-    //TODO muuta listaksi.//kuvagalleriaksi..grid
-    //HAku tietyn taiteilijan sivulle..?
+  //TODO muuta listaksi.//kuvagalleriaksi..grid
+  //HAku tietyn taiteilijan sivulle..?
 
     <div className="artworkGallery">
       {/* <img src='http://localhost:3001/uploads/1562020795260download.jpg'/> */}

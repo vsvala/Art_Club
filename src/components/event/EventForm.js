@@ -5,12 +5,13 @@ import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import FormData from 'form-data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
+import { useNavigate } from 'react-router-dom'
 
 export const EventForm = ({
   createEvent,
   id,
-  //history
 }) => {
+  const navigate = useNavigate()
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({})
   const [state, setState] = useState({
@@ -33,7 +34,7 @@ export const EventForm = ({
 
     console.log('submitdata', data)
     createEvent(data)
-    //history.push('/users/events')
+    navigate('/users/events')
   }
 
   //eventhandler for changin formField inputs

@@ -13,7 +13,7 @@ const userReducer = (state = initialState, action) => {
     // console.log(action.content)
     console.log(action.data, 'create user to store from REDUSER')
     //return store.concat(action.content)
-    return { ...state, users: [...state.users.action.data] }
+    return { ...state, users: [...state.users, action.data] }
     //users: action.data //{ content: action.content, id: getId(), votes:0 }]
   }
 

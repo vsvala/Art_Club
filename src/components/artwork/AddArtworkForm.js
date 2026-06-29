@@ -6,6 +6,7 @@ import { getArtists } from "../../reducers/actionCreators/userActions";
 import FormData from "form-data";
 import ReadMoreReact from "read-more-react";
 import { notify } from "../../reducers/actionCreators/notificationActions";
+import { useNavigate } from 'react-router-dom'
 
 export const AddArtworkForm = ({
   createArtwork,
@@ -13,8 +14,9 @@ export const AddArtworkForm = ({
   users,
   id,
   notify,
-  //history
 }) => {
+  const navigate = useNavigate()
+
   useEffect(() => {
     console.log("id", id);
     getArtists();
@@ -63,7 +65,8 @@ export const AddArtworkForm = ({
       console.log("submitdata", data);
 
       createArtwork(data);
-      // history.push('/users/:id/myPage')
+      navigate(`/users/${id}/myPage`)
+    //  navigate('/artworks')
     }
   };
 

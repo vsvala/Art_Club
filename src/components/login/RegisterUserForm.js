@@ -33,25 +33,13 @@ export const RegisterUserForm = ({
     } else if (user.password.length < 8) {
       notify('Password has to have at least 8 characters', 5)
     } else {
-      console.log('registering', user)
       createUser(user)
       navigate('/nonMember')
     }
-    // event.target.name.value=''
-    // event.target.email.value=''
-    // event.target.username.value = ''
-    // event.target.password.value=''
 
-    //   const handleChange = (event) => {
-    //     const newInput = {
-    //       ...input,
-    //       [event.target.name]: event.target.value
-    //     }
-    //     setInput(newInput)
-    //   }
   }
   return (
-    //TODO? first name laste name
+    //TODO? first name last name
     <div className="registerForm">
       <Container>
         <Row>
@@ -71,7 +59,6 @@ export const RegisterUserForm = ({
                 type="email"
                 name="email"
                 placeholder="Email"
-                // onChange={(e) => updateEmail(e.target.value)}
               />
               <br />
               <Form.Control

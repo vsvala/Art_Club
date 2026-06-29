@@ -166,6 +166,14 @@ A full list of used libraries with descriptions and links: [documentation/librar
 
 ---
 
+## Roadmap
+- [ ] Update and do more test fo front
+- [ ] CI/CD pipeline with github actions
+- [ ] Real-time weather data from Open-Meteo API to Links page
+- [ ] More curated links for artists (exhibitions, galleries) to Lin nks page
+
+---
+
 ## License
 
 [MIT](https://github.com/vsvala/Art_Club/blob/master/documentation/MIT_license.md)

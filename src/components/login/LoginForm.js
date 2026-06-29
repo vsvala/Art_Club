@@ -21,7 +21,6 @@ export const LoginForm = ({ login, loggedUser }) => {
     event.preventDefault();
 
     const { username, password } = input;
-    console.log("logging in with", username, password);
     login(username, password);
 
     setInput({ username: "", password: "" });

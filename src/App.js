@@ -4,10 +4,8 @@ import { Navbar, Nav, Button } from "react-bootstrap";
 import logo from "./images/tripleblue.svg";
 import picture from "./images/pict.png";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
-// Actions
 import { logout, initLoggedUser } from "./reducers/actionCreators/loginActions";
 
-// Components
 import Home from "./components/Home";
 import NonMember from "./components/NonMember";
 import LinksAndWeather from "./components/LinksAndWeather";
@@ -42,9 +40,7 @@ const App = (props) => {
 
   return (
     <div className="App">
-      {/* eslint-disable */}
       <Router basename={process.env.PUBLIC_URL}>
-        {/* eslint-enable */}
         <React.Fragment>
           <div className="NavBar">
             <Navbar
@@ -77,8 +73,6 @@ const App = (props) => {
                     <Link to="/links">Links</Link> &nbsp;
                   </Nav.Link>
 
-                  {/* MEMBER LINKS */}
-
                   <Nav.Link href="#" as="span">
                     {isMember || isAdmin ? (
                       <Link to="/users/addArtwork" className="member">
@@ -92,7 +86,7 @@ const App = (props) => {
 
                   <Nav.Link href="#" as="span">
                     {isMember || isAdmin ? (
-                      <Link to="/users/:id/myPage" className="member">
+                      <Link to={`/users/${loggedUser.id}/myPage`} className="member">
                         MyPage
                       </Link>
                     ) : (
@@ -122,8 +116,6 @@ const App = (props) => {
                     )}{" "}
                     &nbsp;
                   </Nav.Link>
-
-                  {/* ADMIN LINKS */}
 
                   <Nav.Link href="#" as="span">
                     {isAdmin ? (
@@ -157,12 +149,6 @@ const App = (props) => {
                   &nbsp;
                 </Nav.Link>
 
-                {/* <Nav.Link href='#' as='span'>
-                  {!isMember || !isAdmin
-                    ? <Link to='/login'>Login</Link>
-                    : <em></em>} &nbsp;
-                </Nav.Link> */}
-
                 <Nav.Link href="#" as="span">
                   {isMember || isAdmin || nonMember ? (
                     <Button
@@ -185,10 +171,7 @@ const App = (props) => {
 
           <Notification />
           <div className="container">
-            {/* Works like a typical switch statement; it checks for matches and
-            runs the first thing matching the requested path*/}
             <Routes>
-              {/* Admin-reittien suojaus */}
               <Route
                 element={
                   <PrivateRoute
@@ -205,7 +188,6 @@ const App = (props) => {
                 <Route path="/admin/users/:id" element={<SingleUser />} />
               </Route>
 
-              {/* Kirjautumissivu — vain kirjautumattomille */}
               <Route
                 element={
                   <PrivateRoute
@@ -217,7 +199,6 @@ const App = (props) => {
                 <Route path="/login" element={<LoginForm />} />
               </Route>
 
-              {/* Jäsenten reittien suojaus */}
               <Route
                 element={
                   <PrivateRoute
@@ -249,7 +230,6 @@ const App = (props) => {
                 />
               </Route>
 
-              {/* Julkiset reitit */}
               <Route path="/" element={<Home />} />
               <Route path="/artworks" element={<ArtworkList />} />
               <Route path="/artworks/:id" element={<SingleArtwork />} />
@@ -275,8 +255,8 @@ const App = (props) => {
     </div>
   );
 };
+
 const mapStateToProps = (state) => {
-  console.log("state from APP", state);
   return {
     loggedUser: state.loggedUser.loggedUser,
   };

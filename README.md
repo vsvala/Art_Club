@@ -156,6 +156,16 @@ A full list of used libraries with descriptions and links: [documentation/librar
 
 ---
 
+## Documentation
+
+- [Manual](documentation/manual.md)
+- [Software Requirements Specification](documentation/software_requirements_specification.md)
+- [Design Architecture](documentation/design_architecture.md)
+- [Testing](documentation/testing.md)
+- [Render.com Deployment](documentation/render_deployment.md)
+
+---
+
 ## License
 
 [MIT](https://github.com/vsvala/Art_Club/blob/master/documentation/MIT_license.md)

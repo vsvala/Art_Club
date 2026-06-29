@@ -1,44 +1,44 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import { Navbar, Nav, Button } from 'react-bootstrap'
-import logo from './images/tripleblue.png'
-import picture from './images/pict.png'
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Navbar, Nav, Button } from "react-bootstrap";
+import logo from "./images/tripleblue.svg";
+import picture from "./images/pict.png";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 // Actions
-import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
+import { logout, initLoggedUser } from "./reducers/actionCreators/loginActions";
 
 // Components
-import Home from './components/Home'
-import NonMember from './components/NonMember'
-import LinksAndWeather from './components/LinksAndWeather'
-import RegisterUserForm from './components/login/RegisterUserForm'
-import LoginForm from './components/login/LoginForm'
-import AddArtworkForm from './components/artwork/AddArtworkForm'
-import ArtworkList from './components/artwork/ArtworkList'
-import SingleArtwork from './components/artwork/SingleArtwork'
-import ArtistList from './components/artist/ArtistList'
-import EventForm from './components/event/EventForm'
-import EventList from './components/event/EventList'
-import UpdatePassword from './components/user/UpdatePassword'
-import UpdateUserForm from './components/user/UpdateUserForm'
-import UserIntroForm from './components/user/UserIntroForm'
-import UserList from './components/user/UserList'
-import SingleUser from './components/user/SingleUser'
-import SingleArtist from './components/artist/SingleArtist'
-import PrivateRoute from './components/common/PrivateRoute'
-import Notification from './components/common/Notification'
-import GDPRInfo from './components/common/GDPRInfo'
-import TermsOfUse from './components/common/TermsOfUse'
+import Home from "./components/Home";
+import NonMember from "./components/NonMember";
+import LinksAndWeather from "./components/LinksAndWeather";
+import RegisterUserForm from "./components/login/RegisterUserForm";
+import LoginForm from "./components/login/LoginForm";
+import AddArtworkForm from "./components/artwork/AddArtworkForm";
+import ArtworkList from "./components/artwork/ArtworkList";
+import SingleArtwork from "./components/artwork/SingleArtwork";
+import ArtistList from "./components/artist/ArtistList";
+import EventForm from "./components/event/EventForm";
+import EventList from "./components/event/EventList";
+import UpdatePassword from "./components/user/UpdatePassword";
+import UpdateUserForm from "./components/user/UpdateUserForm";
+import UserIntroForm from "./components/user/UserIntroForm";
+import UserList from "./components/user/UserList";
+import SingleUser from "./components/user/SingleUser";
+import SingleArtist from "./components/artist/SingleArtist";
+import PrivateRoute from "./components/common/PrivateRoute";
+import Notification from "./components/common/Notification";
+import GDPRInfo from "./components/common/GDPRInfo";
+import TermsOfUse from "./components/common/TermsOfUse";
 
 const App = (props) => {
   useEffect(() => {
-    props.initLoggedUser()
-  }, [])
+    props.initLoggedUser();
+  }, []);
 
-  const { loggedUser } = props
-  const isMember = loggedUser && loggedUser.role === 'member'
-  const isAdmin = loggedUser && loggedUser.role === 'admin'
-  const nonMember = loggedUser && loggedUser.role === 'nonMember'
+  const { loggedUser } = props;
+  const isMember = loggedUser && loggedUser.role === "member";
+  const isAdmin = loggedUser && loggedUser.role === "admin";
+  const nonMember = loggedUser && loggedUser.role === "nonMember";
 
   return (
     <div className="App">
@@ -47,15 +47,15 @@ const App = (props) => {
         {/* eslint-enable */}
         <React.Fragment>
           <div className="NavBar">
-            <Navbar collapseOnSelect expand="lg" bg="light" variant="light">
+            <Navbar
+              collapseOnSelect
+              expand="lg"
+              bg="light"
+              variant="light"
+              style={{ paddingLeft: "20px", paddingRight: "20px" }}
+            >
               <Navbar.Brand>
-                <img
-                  src={logo}
-                  width="70"
-                  height="40"
-                  /*  className='d-inline-block align-top' */
-                  alt="Art club LOGO"
-                />
+                <img src={logo} className="nav-logo" alt="Art club LOGO" />
               </Navbar.Brand>
               <Navbar.Brand>Art club</Navbar.Brand>
 
@@ -86,7 +86,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
 
@@ -97,7 +97,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
 
@@ -108,7 +108,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
 
@@ -119,7 +119,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
 
@@ -132,7 +132,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
 
@@ -143,7 +143,7 @@ const App = (props) => {
                       </Link>
                     ) : (
                       <em></em>
-                    )}{' '}
+                    )}{" "}
                     &nbsp;
                   </Nav.Link>
                 </Nav>
@@ -153,7 +153,7 @@ const App = (props) => {
                     <Link to="/register">Register</Link>
                   ) : (
                     <em></em>
-                  )}{' '}
+                  )}{" "}
                   &nbsp;
                 </Nav.Link>
 
@@ -189,25 +189,64 @@ const App = (props) => {
             runs the first thing matching the requested path*/}
             <Routes>
               {/* Admin-reittien suojaus */}
-              <Route element={<PrivateRoute condition={loggedUser && isAdmin} redirectPath="/login" />}>
-                <Route path="/admin/addEvent" element={<EventForm id={loggedUser && loggedUser.id} />} />
+              <Route
+                element={
+                  <PrivateRoute
+                    condition={loggedUser && isAdmin}
+                    redirectPath="/login"
+                  />
+                }
+              >
+                <Route
+                  path="/admin/addEvent"
+                  element={<EventForm id={loggedUser && loggedUser.id} />}
+                />
                 <Route path="/admin/users" element={<UserList />} />
                 <Route path="/admin/users/:id" element={<SingleUser />} />
               </Route>
 
               {/* Kirjautumissivu — vain kirjautumattomille */}
-              <Route element={<PrivateRoute condition={!isMember && !isAdmin} redirectPath="/" />}>
+              <Route
+                element={
+                  <PrivateRoute
+                    condition={!isMember && !isAdmin}
+                    redirectPath="/"
+                  />
+                }
+              >
                 <Route path="/login" element={<LoginForm />} />
               </Route>
 
               {/* Jäsenten reittien suojaus */}
-              <Route element={<PrivateRoute condition={!!loggedUser} redirectPath="/login" />}>
-                <Route path="/users/:id/myPage" element={<SingleUser userId={loggedUser && loggedUser.id} />} />
-                <Route path="/users/addArtwork" element={<AddArtworkForm id={loggedUser && loggedUser.id} />} />
+              <Route
+                element={
+                  <PrivateRoute
+                    condition={!!loggedUser}
+                    redirectPath="/login"
+                  />
+                }
+              >
+                <Route
+                  path="/users/:id/myPage"
+                  element={<SingleUser userId={loggedUser && loggedUser.id} />}
+                />
+                <Route
+                  path="/users/addArtwork"
+                  element={<AddArtworkForm id={loggedUser && loggedUser.id} />}
+                />
                 <Route path="/users/events" element={<EventList />} />
-                <Route path="/users/password" element={<UpdatePassword id={loggedUser && loggedUser.id} />} />
-                <Route path="/users/update" element={<UpdateUserForm id={loggedUser && loggedUser.id} />} />
-                <Route path="/users/intro" element={<UserIntroForm id={loggedUser && loggedUser.id} />} />
+                <Route
+                  path="/users/password"
+                  element={<UpdatePassword id={loggedUser && loggedUser.id} />}
+                />
+                <Route
+                  path="/users/update"
+                  element={<UpdateUserForm id={loggedUser && loggedUser.id} />}
+                />
+                <Route
+                  path="/users/intro"
+                  element={<UserIntroForm id={loggedUser && loggedUser.id} />}
+                />
               </Route>
 
               {/* Julkiset reitit */}
@@ -228,19 +267,19 @@ const App = (props) => {
 
       <img
         src={picture}
-        width="200"
+        width="auto"
         height="400"
         className="picture"
         alt="background"
       />
     </div>
-  )
-}
+  );
+};
 const mapStateToProps = (state) => {
-  console.log('state from APP', state)
+  console.log("state from APP", state);
   return {
     loggedUser: state.loggedUser.loggedUser,
-  }
-}
+  };
+};
 
-export default connect(mapStateToProps, { logout, initLoggedUser })(App)
+export default connect(mapStateToProps, { logout, initLoggedUser })(App);

@@ -2,8 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { useParams } from "react-router-dom";
 import { initializeSingleArtwork } from "../../reducers/actionCreators/singleArtworkActions";
-import url from "../../services/config";
-const baseUrl = url + "public/";
 
 export const SingleArtwork = ({
   artwork,
@@ -21,7 +19,7 @@ export const SingleArtwork = ({
       {!artwork ? null : (
         <div>
           <img
-            src={baseUrl + `${artwork.galleryImage}`}
+            src={artwork.galleryImage}
             width="700"
             height="auto" //'550'
             className="singlePicture"

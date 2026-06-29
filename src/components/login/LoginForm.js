@@ -1,31 +1,31 @@
-import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { Link } from 'react-router-dom'
-import logo from '../../images/tripleblue.png'
+import React, { useState } from "react";
+import { connect } from "react-redux";
+import { Link } from "react-router-dom";
+import logo from "../../images/tripleblue.svg";
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
-import { login } from '../../reducers/actionCreators/loginActions'
-import { Form, Button, Col, Container, Row } from 'react-bootstrap'
+import { login } from "../../reducers/actionCreators/loginActions";
+import { Form, Button, Col, Container, Row } from "react-bootstrap";
 
 export const LoginForm = ({ login }) => {
-  const [input, setInput] = useState({ username: '', password: '' })
+  const [input, setInput] = useState({ username: "", password: "" });
 
   const handleLogin = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-    const { username, password } = input
-    console.log('logging in with', username, password)
-    login(username, password)
+    const { username, password } = input;
+    console.log("logging in with", username, password);
+    login(username, password);
 
-    setInput({ username: '', password: '' })
-  }
+    setInput({ username: "", password: "" });
+  };
 
   const handleChange = (event) => {
     const newInput = {
       ...input,
       [event.target.name]: event.target.value,
-    }
-    setInput(newInput)
-  }
+    };
+    setInput(newInput);
+  };
 
   return (
     <div className="loginForm">
@@ -66,10 +66,10 @@ export const LoginForm = ({ login }) => {
                 />
                 <div className="grayInfoText">
                   <p>
-                    No login details:{' '}
+                    No login details:{" "}
                     <Link to="/register" className="register">
                       Register
-                    </Link>{' '}
+                    </Link>{" "}
                     and apply membership
                   </p>
                 </div>
@@ -93,7 +93,7 @@ export const LoginForm = ({ login }) => {
         </Row>
       </Container>
     </div>
-  )
-}
+  );
+};
 
-export default connect(null, { login })(LoginForm)
+export default connect(null, { login })(LoginForm);

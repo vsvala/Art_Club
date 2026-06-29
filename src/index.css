@@ -1,264 +1,277 @@
-@import url('https://fonts.googleapis.com/css?family=Leckerli+One&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Leckerli+One&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  color: #9b9b9b;  
+  color: #9b9b9b;
   text-align: center;
 }
 
-h1{
+h1 {
   padding-top: 40px;
   color: #251147;
-  font-family: 'Amatic SC', cursive;
-  text-align: center;   
-  }
-  .GDPRInfo h1{
-  padding-top:0;
-  padding-bottom: 20px;
-  color: #251147;
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
   text-align: center;
 }
-h2{
-margin-top: 40px;
-padding-bottom:30px;
-  /* color: #338ad3; */
-color: #bebcbc;
-font-family: 'Leckerli One', cursive;
+.GDPRInfo h1 {
+  padding-top: 0;
+  padding-bottom: 20px;
+  color: #251147;
+  font-family: "Amatic SC", cursive;
+  text-align: center;
 }
-h3{
-  margin-top: 30px;  
-   /*  color: #ff1476; */
+h2 {
+  margin-top: 40px;
+  padding-bottom: 30px;
+  /* color: #338ad3; */
   color: #bebcbc;
-  font-family: 'Leckerli One', cursive;
-  }
-  h4{ 
-    margin-bottom: 30px;  
-    color: #338ad3;
-    font-family: 'Leckerli One', cursive;
-    }
-    h5{ 
-      color: #ff1476;
-      font-family: 'Leckerli One', cursive;
-      font-size: 95%;
-      }
+  font-family: "Leckerli One", cursive;
+}
+h3 {
+  margin-top: 30px;
+  /*  color: #ff1476; */
+  color: #bebcbc;
+  font-family: "Leckerli One", cursive;
+}
+h4 {
+  margin-bottom: 30px;
+  color: #338ad3;
+  font-family: "Leckerli One", cursive;
+}
+h5 {
+  color: #ff1476;
+  font-family: "Leckerli One", cursive;
+  font-size: 95%;
+}
 .grayInfoText {
-  color:  #879097;
+  color: #879097;
   font-size: 80%;
-  float:left;
+  float: left;
+}
+
+/* NAVBAR & LINKS */
+.nav-logo {
+  height: 40px;
+  width: auto;
+}
+@media (max-width: 576px) {
+  .nav-logo {
+    height: 25px;
+    width: auto;
+  }
+  .navbar-light .navbar-brand {
+    font-size: 1.6em;
   }
 
-  /* NAVBAR & LINKS */
+  .picture {
+    visibility: hidden;
+  }
+}
+
 .navbar-light .navbar-brand {
   font-size: 2.5em;
   font-weight: 400;
-  font-family: 'Amatic SC', cursive;
+  font-family: "Amatic SC", cursive;
 }
-.adminNav{
-  font-family: 'Leckerli One', cursive;
+.adminNav {
+  font-family: "Leckerli One", cursive;
   color: #ff1476;
- }
-.member{
-    /* color: #fd7945; */
-   color: #251147;
 }
-.admin{
-  color: #ff1476; 
+.member {
+  /* color: #fd7945; */
+  color: #251147;
 }
-
+.admin {
+  color: #ff1476;
+}
 
 /*LINKS*/
-a{
- font-family: 'Leckerli One', cursive;
+a {
+  font-family: "Leckerli One", cursive;
   color: #338ad3;
 }
-a:hover{
+a:hover {
   color: #bebcbc;
   text-decoration: none;
 }
 
-
-.picture{
+.picture {
   margin: 0;
   padding: 0;
   opacity: 0.2;
-  filter: alpha(opacity=20);/* For IE8 and earlier */
+  filter: alpha(opacity=20); /* For IE8 and earlier */
   position: absolute;
   top: 90px;
   left: 16px;
-  z-index:-1;
+  z-index: -1;
 }
 
-
 /* BUTTONS*/
-.btn{
-  float:right;
+.btn {
+  float: right;
   box-shadow: none !important;
 }
 .button {
   color: #338ad3;
   background-color: white;
   border-color: #6c757d;
-  font-family: 'Leckerli One', cursive; 
+  font-family: "Leckerli One", cursive;
 }
 .btn:hover {
   color: #bebcbc;
   border-color: #6c757d;
-  background-color:white; 
+  background-color: white;
 }
 
-
-
- /*IMAGE UPPLOADER */
-.fileUploader{
+/*IMAGE UPPLOADER */
+.fileUploader {
   color: #338ad3;
-  font-family: 'Leckerli One', cursive; 
+  font-family: "Leckerli One", cursive;
 }
 
+/* GALLERY */
+.artworkGallery {
+  float: left;
+}
+.ulList {
+  float: left;
+  list-style-type: none;
+}
+.artworkThumb {
+  float: left;
+}
+.galleryPicture {
+  width: 330px;
+  height: 250px;
+  object-fit: cover;
+}
 
- /* GALLERY */
-.artworkGallery{
-float:left;
-}
-.ulList{
-  float:left;
-  list-style-type:none; 
-  }
-.artworkThumb{
-  float:left;  
-}
-.galleryPicture{
-  width:330px;
-  height:250px;
-}
-   
-
- /* LOGINFORM */
+/* LOGINFORM */
 .loginForm {
   background: #ffffff;
-  height: 500px;
-  margin: 10px auto 0;
+  margin: 60px auto 0;
   width: 500px;
+  max-width: 95%;
   box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
-  margin-top: 60px;
-} 
-.logHeader h3{
+  padding-bottom: 30px;
+}
+.logHeader h3 {
   color: #338ad3;
   margin-bottom: 20px;
   margin-top: 60px;
 }
 
+/* REGISTERFORM */
+.registerForm {
+  background: #ffffff;
+  margin: 60px auto 0;
+  width: 650px;
+  max-width: 95%;
+  box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
+  padding-bottom: 30px;
+}
+.regHeader {
+  margin-top: 60px;
+}
+.regHeader h3 {
+  color: #338ad3;
+  margin-bottom: 20px;
+}
 
-  /* REGISTERFORM */
-  .registerForm {
-    background: #ffffff;
-    height: 500px;
-    margin: 10px auto 0;
-    width: 650px;
-    box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
-    margin-top: 60px;
-  } 
-  .regHeader {
-    margin-top: 60px;
-  }
-  .regHeader h3{
-    color: #338ad3;
-    margin-bottom: 20px;
-  }
+/*CHANGE PASSWORDFORM */
+.passwordForm {
+  background: #ffffff;
+  margin: 60px auto 0;
+  width: 650px;
+  max-width: 95%;
+  box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
+  padding-bottom: 30px;
+}
+.regHeader {
+  margin-top: 60px;
+}
+.regHeader h3 {
+  color: #338ad3;
+  margin-bottom: 20px;
+}
 
-    /*CHANGE PASSWORDFORM */
-    .passwordForm {
-      background: #ffffff;
-      height: 450px;
-      margin: 10px auto 0;
-      width: 650px;
-      box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
-      margin-top: 60px;
-    } 
-    .regHeader {
-      margin-top: 60px;
-    }
-    .regHeader h3{
-      color: #338ad3;
-      margin-bottom: 20px;
-    }
-  
+/* ARTWORKFORM */
+.artworkForm {
+  background: #ffffff;
+  margin: 60px auto 0;
+  width: 750px;
+  max-width: 95%;
+  box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
+  padding-bottom: 30px;
+}
+.artworkHeader h3 {
+  color: #338ad3;
+  margin-bottom: 20px;
+  margin-top: 60px;
+}
+.addedArt {
+  margin-top: 100px;
+}
 
+/* EVENTFORM */
+.eventForm {
+  background: #ffffff;
+  margin: 60px auto 0;
+  width: 750px;
+  max-width: 95%;
+  box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
+  padding-bottom: 30px;
+}
+.eventHeader h3 {
+  color: #338ad3;
+  margin-bottom: 20px;
+  margin-top: 60px;
+}
+.loadEventPictureText {
+  float: left;
+  margin-left: 75px;
+}
 
-   /* ARTWORKFORM */
-   .artworkForm {
-    background: #ffffff;
-    height: 600px;
-    margin: 10px auto 0;
-    width: 750px;
-    box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
-    margin-top: 60px;
-  } 
-  .artworkHeader h3{
-    color: #338ad3;
-    margin-bottom: 20px;
-    margin-top: 60px;
-  }
-  .addedArt{
-   margin-top: 100px;
-  }
+/* UPDATE USER INFROMATION FORM */
+.updateInfoLabels {
+  text-align: left;
+}
 
-   /* EVENTFORM */
-   .eventForm {
-    background: #ffffff;
-    height: 560px;
-    margin: 10px auto 0;
-    width: 750px;
-    box-shadow: 2px 0px 13px 4px rgb(214, 213, 213, 0.9);
-    margin-top: 60px;
-  } 
-  .eventHeader h3{
-    color: #338ad3;
-    margin-bottom: 20px;
-    margin-top: 60px;
-  }
-  .loadEventPictureText{
-    float:left;
-    margin-left: 75px;
-  }
-
-
-   /* UPDATE USER INFROMATION FORM */
-  .updateInfoLabels {
-     text-align: left;
-  }
-
-   /* HOME */
-  .nonMember h3{
-  color: #ff1476; 
+/* HOME */
+.nonMember h3 {
+  color: #ff1476;
   margin-top: 40px;
-  }
-  .home h2{
-    color: #338ad3;
-    }
+}
+.home h2 {
+  color: #338ad3;
+}
 
-    .singleArtistHeader h3{
-      color: #338ad3;
-      margin-top: 40px;
-      padding-bottom:20px;
-    }
+.singleArtistHeader h3 {
+  color: #338ad3;
+  margin-top: 40px;
+  padding-bottom: 20px;
+}
 
-    .singleUserPicture{
-      float:left;
-      }
+.singleUserPicture {
+  float: left;
+}
 
-      .ImageInfoText{
-        color:  #879097;
-        font-size: 80%;
-        float:left;
-        margin-top: 10px;
-        padding-left:90px;
-      }
+.ImageInfoText {
+  color: #879097;
+  font-size: 80%;
+  float: left;
+  margin-top: 10px;
+  padding-left: 90px;
+}
 
-      .singleArtwork{
-        padding-top:30px;
-        }
+.singleArtwork {
+  padding-top: 30px;
+}
+
+.frontLogo {
+  width: 500px;
+  height: auto;
+  max-width: 80%;
+}

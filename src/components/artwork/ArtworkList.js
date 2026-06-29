@@ -4,12 +4,10 @@ import { initializeArtworks,  deleteArtwork } from '../../reducers/actionCreator
 import filterActions from '../../reducers/actionCreators/filterActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
-import url from '../../services/config'
 import { Form } from 'react-bootstrap'
 import { voteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import {  Button } from 'react-bootstrap'
-const baseUrl = url + 'public/'
 
 /* eslint-disable */
 //const BASE_URL= process.env.PUBLIC_URL  //'http://localhost:3001/'
@@ -73,7 +71,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
           .map(a =>
             <ul key={a.id}  className='ulList'>
               <li><img
-                src={ baseUrl+`${ a.galleryImage }`}
+                src={a.galleryImage}
                 // width='300'
                 // height='auto'
                 className='galleryPicture'

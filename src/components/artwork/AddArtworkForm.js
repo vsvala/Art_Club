@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
-import { createArtwork } from '../../reducers/actionCreators/artworkActions'
-import { Form, Button, Col, Row, Container } from 'react-bootstrap'
-import { getArtists } from '../../reducers/actionCreators/userActions'
-import FormData from 'form-data'
-import ReadMoreReact from 'read-more-react'
-import { notify } from '../../reducers/actionCreators/notificationActions'
+import React, { useState, useEffect } from "react";
+import { connect } from "react-redux";
+import { createArtwork } from "../../reducers/actionCreators/artworkActions";
+import { Form, Button, Col, Row, Container } from "react-bootstrap";
+import { getArtists } from "../../reducers/actionCreators/userActions";
+import FormData from "form-data";
+import ReadMoreReact from "read-more-react";
+import { notify } from "../../reducers/actionCreators/notificationActions";
 
 export const AddArtworkForm = ({
   createArtwork,
@@ -16,70 +16,70 @@ export const AddArtworkForm = ({
   //history
 }) => {
   useEffect(() => {
-    console.log('id', id)
-    getArtists()
-  }, [])
+    console.log("id", id);
+    getArtists();
+  }, []);
 
-  const userToShow = users && users.find((u) => u.id === id)
+  const userToShow = users && users.find((u) => u.id === id);
 
   const [input, setInput] = useState({
-    image: '',
-    artist: '',
-    name: '',
-    year: '',
-    size: '',
-    medium: '',
+    image: "",
+    artist: "",
+    name: "",
+    year: "",
+    size: "",
+    medium: "",
     selectedFile: null,
-  })
-  const [galleryImage, setFile] = useState({})
+  });
+  const [galleryImage, setFile] = useState({});
 
   const handleSubmit = (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
     if (galleryImage.galleryImage === undefined) {
-      notify('Remember to choose image!', 5)
-    } else if (event.target.artist.value < 3) {
-      notify('Artist name has to have at least 3 characters', 5)
-    } else if (event.target.name.value < 1) {
-      notify('Artwork name has to have at least 1 characters', 5)
-    } else if (event.target.year.value < 4) {
-      notify('Year field has to have at least 4 numbers', 5)
-    } else if (event.target.size.value < 3) {
-      notify('size field has to have at least 3 characters', 5)
-    } else if (event.target.medium.value < 8) {
-      notify('Medium field has to have at least 3 characters', 5)
+      notify("Remember to choose image!", 5);
+    } else if (event.target.artist.value.length < 3) {
+      notify("Artist name has to have at least 3 characters", 5);
+    } else if (event.target.name.value.length < 1) {
+      notify("Artwork name has to have at least 1 characters", 5);
+    } else if (event.target.year.value.length < 4) {
+      notify("Year field has to have at least 4 numbers", 5);
+    } else if (event.target.size.value.length < 3) {
+      notify("size field has to have at least 3 characters", 5);
+    } else if (event.target.medium.value.length < 8) {
+      notify("Medium field has to have at least 3 characters", 5);
     } else {
-      console.log('file', galleryImage, galleryImage.galleryImage.name)
+      console.log("file", galleryImage, galleryImage.galleryImage.name);
       //createsFormdata object
-      const data = new FormData()
-      data.append('galleryImage', galleryImage.galleryImage)
-      data.append('artist', event.target.artist.value)
-      data.append('name', event.target.name.value)
-      data.append('year', event.target.year.value)
-      data.append('size', event.target.size.value)
-      data.append('medium', event.target.medium.value)
-      data.append('userId', id)
+      const data = new FormData();
+      data.append("galleryImage", galleryImage.galleryImage);
+      data.append("artist", event.target.artist.value);
+      data.append("name", event.target.name.value);
+      data.append("year", event.target.year.value);
+      data.append("size", event.target.size.value);
+      data.append("medium", event.target.medium.value);
+      data.append("userId", id);
 
-      console.log('submitdata', data)
+      console.log("submitdata", data);
 
-      createArtwork(data)
+      createArtwork(data);
       // history.push('/users/:id/myPage')
     }
-  }
+  };
 
   const handleChange = (event) => {
     const newInput = {
       ...input,
       [event.target.name]: event.target.value,
-    }
-    setInput(newInput)
-    console.log(event)
-  }
+    };
+    setInput(newInput);
+    console.log(event);
+  };
 
   const fileSelectedHandler = (event) => {
-    setFile({ galleryImage: event.target.files[0] })
-    console.log('event', event.target.files[0])
-  }
+    setFile({ galleryImage: event.target.files[0] });
+    console.log("event", event.target.files[0]);
+  };
 
   return (
     <div className="artworkForm">
@@ -133,8 +133,8 @@ export const AddArtworkForm = ({
               />
               <div className="grayInfoText">
                 <p>
-                  You can upload max 10 images to the gallery. Added artworks{' '}
-                  {userToShow && userToShow.artworks.length}/10{' '}
+                  You can upload max 10 images to the gallery. Added artworks{" "}
+                  {userToShow && userToShow.artworks.length}/10{" "}
                 </p>
               </div>
               <br />
@@ -163,25 +163,25 @@ export const AddArtworkForm = ({
       <div className="ImageInfoText">
         <ReadMoreReact
           text={
-            'Image instructions! width 600px, height 500px, max_fileSize:1024*1024*5, resolution: 72dpi, format:jpg '
+            "Image instructions! width 600px, height 500px, max_fileSize:1024*1024*5, resolution: 72dpi, format:jpg "
           }
           min={5}
           ideal={10}
           max={100}
-          readMoreText={'Read more'}
+          readMoreText={"Read more"}
         />
       </div>
     </div>
-  )
-}
+  );
+};
 
 const mapStateToProps = (state) => {
-  console.log('users state frm addArtworFrom', state.users.users)
+  console.log("users state frm addArtworFrom", state.users.users);
   return {
     users: state.users.users,
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps, { createArtwork, getArtists, notify })(
   AddArtworkForm,
-)
+);

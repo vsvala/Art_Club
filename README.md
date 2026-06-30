@@ -13,7 +13,7 @@ A full stack web application for an art club, where users can browse artists and
 **For visitors**
 - Browse artists and their artwork galleries
 - Search and filter artworks
-- View links to exhibitions and current painting weather
+- View links to exhibitions and current painting weather for any city
 - Apply for club membership
 
 **For members**
@@ -39,6 +39,7 @@ A full stack web application for an art club, where users can browse artists and
 | Image storage | Cloudinary |
 | Auth | JWT (JSON Web Tokens), bcrypt |
 | Testing | Jest, React Testing Library, Cypress |
+| Weather API | Open-Meteo (no API key required) |
 
 ---
 
@@ -147,6 +148,22 @@ src/
 ├── services/       # Axios API service modules
 └── utils/          # Validation helpers
 ```
+
+---
+
+## Weather Data
+
+The Links page shows current weather for any city using the [Open-Meteo](https://open-meteo.com/) API — no API key required.
+
+Weather is fetched in two steps directly from the frontend:
+
+1. **Geocoding** — city name → coordinates and country  
+   `https://geocoding-api.open-meteo.com/v1/search?name=Helsinki&count=1`
+
+2. **Forecast** — coordinates → current temperature  
+   `https://api.open-meteo.com/v1/forecast?latitude=60.17&longitude=24.94&current=temperature_2m`
+
+The page loads with Helsinki as the default city. The user can search for any city by name.
 
 ---
 

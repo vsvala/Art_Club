@@ -46,10 +46,14 @@ h5 {
   font-family: 'Leckerli One', cursive;
   font-size: 95%;
 }
+ul {
+  list-style: none;
+}
 .grayInfoText {
   color: #879097;
   font-size: 80%;
   float: left;
+  padding-top: 20px;
 }
 
 /* NAVBAR & LINKS */

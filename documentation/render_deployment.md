@@ -1,156 +1,195 @@
-# Render.com — Tuotantoon laitto ohjeet
+# Render.com — Deployment Instructions
 
-## 1. Yleiskatsaus
+## 1. Overview
 
-ArtClub käyttää Render.com-palvelua sekä frontendin (React SPA) että backendin (Node.js/Express) isännöintiin. Tietokanta on MongoDB Atlas ja kuvat tallennetaan Cloudinaryyn.
+ArtClub uses a **single** Render.com Web Service: the backend (Node.js/Express) serves the React production build as static files. No separate Static Site service is needed. The database is MongoDB Atlas and images are stored in Cloudinary.
+
+```
+Browser
+  │
+  ▼
+Render Web Service (Art_Club_back)
+  ├── GET /api/*   → Express REST API
+  └── GET /*       → React build (index.html)
+```
 
 ---
 
-## 2. Esivalmistelut
+## 2. Prerequisites
 
-Ennen Renderiin vientiä varmista, että sinulla on:
+Before deploying to Render, make sure you have:
 
-- [ ] GitHub-tili ja repositoriot:
+- [ ] GitHub account and repositories:
   - Frontend: `https://github.com/vsvala/Art_Club`
   - Backend: `https://github.com/vsvala/Art_Club_back`
-- [ ] [Render.com](https://render.com)-tili
-- [ ] [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) -tili ja cluster pystyssä
-- [ ] [Cloudinary](https://cloudinary.com)-tili pystyssä
+- [ ] [Render.com](https://render.com) account
+- [ ] [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) account with a cluster set up
+- [ ] [Cloudinary](https://cloudinary.com) account set up
 
 ---
 
-## 3. MongoDB Atlas — tietokannan valmistelu
+## 3. MongoDB Atlas — Database Setup
 
-1. Kirjaudu [MongoDB Atlas](https://cloud.mongodb.com) -palveluun.
-2. Luo uusi **cluster** (Free tier riittää).
-3. Luo tietokantakäyttäjä: **Database Access** → Add New Database User.
-4. Salli yhteydet kaikista IP-osoitteista: **Network Access** → Add IP Address → `0.0.0.0/0`.
-5. Kopioi yhteysmerkkijono: **Connect** → Drivers → kopioi `mongodb+srv://...`-merkkijono.
-
----
-
-## 4. Backendin vienti Renderiin
-
-1. Kirjaudu [Render.com](https://render.com)-palveluun.
-2. Klikkaa **New** → **Web Service**.
-3. Yhdistä GitHub-tili ja valitse backend-repositorio (`Art_Club_back`).
-4. Täytä asetukset:
-
-| Kenttä | Arvo |
-|---|---|
-| Name | `artclub-backend` (tai haluamasi nimi) |
-| Region | Frankfurt EU (tai lähin) |
-| Branch | `master` |
-| Runtime | Node |
-| Build Command | `npm install` |
-| Start Command | `npm start` |
-
-5. Lisää ympäristömuuttujat kohdassa **Environment**:
-
-| Muuttuja | Arvo |
-|---|---|
-| `PORT` | `3001` |
-| `MONGODB_URI` | `mongodb+srv://käyttäjä:salasana@cluster.mongodb.net/artclub` |
-| `TEST_MONGODB_URI` | `mongodb+srv://käyttäjä:salasana@cluster.mongodb.net/artclub_test` |
-| `SECRET` | Pitkä satunnainen merkkijono (JWT-salausavain) |
-| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
-| `CLOUDINARY_API_KEY` | Cloudinary API key |
-| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
-
-6. Klikkaa **Create Web Service**.
-7. Odota, että build valmistuu. Render näyttää backendin URL:n muodossa `https://artclub-backend.onrender.com`.
+1. Log in to [MongoDB Atlas](https://cloud.mongodb.com).
+2. Create a new **cluster** (Free tier is sufficient).
+3. Create a database user: **Database Access** → Add New Database User.
+4. Allow connections from all IP addresses: **Network Access** → Add IP Address → `0.0.0.0/0`.
+5. Copy the connection string: **Connect** → Drivers → copy the `mongodb+srv://...` string.
 
 ---
 
-## 5. Frontendin vienti Renderiin
+## 4. Building the Frontend and Copying to Backend
 
-### 5.1 Tuotantobuild paikallisesti
+The frontend is built locally and copied into the backend repository, from which Render deploys it.
+
+### 4.1 Create the production build
 
 ```bash
 cd Art_Club
 npm run build
 ```
 
-Tämä luo `build/`-kansion, joka sisältää optimoidun tuotantosovelluksen.
+This creates the `build/` folder with the optimized production application.
 
-### 5.2 Render Static Site
-
-1. Klikkaa **New** → **Static Site**.
-2. Yhdistä GitHub-tili ja valitse frontend-repositorio (`Art_Club`).
-3. Täytä asetukset:
-
-| Kenttä | Arvo |
-|---|---|
-| Name | `artclub-frontend` (tai haluamasi nimi) |
-| Branch | `master` |
-| Build Command | `npm install && npm run build` |
-| Publish Directory | `build` |
-
-4. Lisää ympäristömuuttujat kohdassa **Environment**:
-
-| Muuttuja | Arvo |
-|---|---|
-| `REACT_APP_BACKEND_URL` | `https://artclub-backend.onrender.com` (backendin URL Renderistä) |
-
-5. Klikkaa **Create Static Site**.
-
-### 5.3 SPA-reitityksen korjaus (tärkeä!)
-
-React Router vaatii, että kaikki reitit ohjataan `index.html`-tiedostoon. Luo projektin juureen tiedosto `public/_redirects`:
-
-```
-/*    /index.html   200
-```
-
-Tämä varmistaa, että esim. `/artworks` tai `/login` toimii myös suoralla URL-osoitteella.
-
----
-
-## 6. Ympäristömuuttujat (.env tiedosto paikalliseen kehitykseen)
-
-Luo projektin juureen `.env`-tiedosto (älä commitoi tätä GitHubiin):
-
-```
-REACT_APP_BACKEND_URL=http://localhost:3001
-```
-
-`.env`-tiedosto on jo `.gitignore`-listalla `create-react-app`-projekteissa.
-
----
-
-## 7. Päivitykset tuotantoon
-
-Render seuraa automaattisesti valittua GitHub-haaraa. Jokainen `git push master` käynnistää automaattisen uudelleenbuildin ja deployauksen.
+### 4.2 Copy the build to the backend
 
 ```bash
-git add .
-git commit -m "Muutos"
+cp -r build ../Art_Club_back/
+```
+
+### 4.3 Push the backend (with build included)
+
+```bash
+cd ../Art_Club_back
+git add build
+git commit -m "update frontend build"
 git push origin master
 ```
 
-Render rakentaa uuden version ja ottaa sen käyttöön automaattisesti noin 2–5 minuutissa.
+> Render automatically triggers a new deploy after each push.
+
+### 4.4 Shortcut: deploy script
+
+`package.json` includes a `deploy` script that runs all the steps above in one command:
+
+```bash
+cd Art_Club
+npm run deploy
+```
+
+This builds the frontend, copies the build to the backend, and pushes it to GitHub in one go.
 
 ---
 
-## 8. Tarkistuslista ennen julkaisua
+## 5. Deploying the Backend to Render
 
-- [ ] Backend-ympäristömuuttujat asetettu Renderiin
-- [ ] `MONGODB_URI` osoittaa oikeaan Atlas-clusteriin
-- [ ] MongoDB Atlas sallii yhteydet kaikista IP-osoitteista (`0.0.0.0/0`)
-- [ ] Cloudinary-avaimet asetettu backendiin
-- [ ] `REACT_APP_BACKEND_URL` osoittaa Renderin backend-URL:iin
-- [ ] `public/_redirects`-tiedosto on olemassa SPA-reititystä varten
-- [ ] Tuotantobuild toimii paikallisesti (`npm run build`)
-- [ ] Sovellus toimii Renderin osoitteessa selaimessa
+This is done **once** — Render then watches the repository automatically.
 
----
+1. Log in to [Render.com](https://render.com).
+2. Click **New** → **Web Service**.
+3. Connect your GitHub account and select the backend repository (`Art_Club_back`).
+4. Fill in the settings:
 
-## 9. Yleisiä ongelmia
-
-| Ongelma | Ratkaisu |
+| Field | Value |
 |---|---|
-| Sivu ei lataudu suoralla URL:lla | Lisää `public/_redirects`-tiedosto |
-| Backend ei yhdistä tietokantaan | Tarkista `MONGODB_URI` ja MongoDB Atlas -verkkoasetukset |
-| Kuvien lataus epäonnistuu | Tarkista Cloudinary-avaimet backendissä |
-| CORS-virhe selaimessa | Varmista, että backendissä on CORS-asetukset frontendin URL:lle |
-| Free tier nukkuu | Render Free -taso nukahtaa 15 min inaktiivisuuden jälkeen — ensimmäinen pyyntö voi kestää 30–60 s |
+| Name | `artclub` (or your preferred name) |
+| Region | Frankfurt EU (or nearest) |
+| Branch | `master` |
+| Runtime | Node |
+| Build Command | `npm install` |
+| Start Command | `npm start` |
+
+5. Add environment variables under **Environment**:
+
+| Variable | Value |
+|---|---|
+| `PORT` | `10000` (Render sets this automatically — not required) |
+| `MONGODB_URI` | `mongodb+srv://user:password@cluster.mongodb.net/artclub` |
+| `TEST_MONGODB_URI` | `mongodb+srv://user:password@cluster.mongodb.net/artclub_test` |
+| `SECRET` | Long random string (JWT signing key) |
+| `CLOUDINARY_CLOUD_NAME` | Cloudinary cloud name |
+| `CLOUDINARY_API_KEY` | Cloudinary API key |
+| `CLOUDINARY_API_SECRET` | Cloudinary API secret |
+
+6. Click **Create Web Service**.
+7. Wait for the build to finish. Render will show the service URL as `https://artclub-xxxx.onrender.com`.
+
+---
+
+## 6. Backend Requirements for Serving Static Files
+
+The backend (`Art_Club_back`) `app.js` or `index.js` must include these lines for the React build to work correctly:
+
+```js
+const path = require('path')
+
+// Serve the React build files
+app.use(express.static(path.join(__dirname, 'build')))
+
+// ... all /api/* routes go here ...
+
+// Catch-all: let React Router handle browser-side routes
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'))
+})
+```
+
+> API routes (`/api/...`) must be defined **before** the catch-all route.
+
+---
+
+## 7. Deploying Updates
+
+When you change the frontend or backend:
+
+```bash
+# Option 1: use the deploy script (recommended)
+cd Art_Club
+npm run deploy
+
+# Option 2: manual steps
+cd Art_Club
+npm run build
+cp -r build ../Art_Club_back/
+cd ../Art_Club_back
+git add build
+git commit -m "update frontend build"
+git push origin master
+```
+
+Render builds and deploys the new version automatically in about 2–5 minutes.
+
+If you only change the backend (no frontend changes):
+
+```bash
+cd Art_Club_back
+git add .
+git commit -m "backend change"
+git push origin master
+```
+
+---
+
+## 8. Pre-deployment Checklist
+
+- [ ] Backend environment variables set in Render
+- [ ] `MONGODB_URI` points to the correct Atlas cluster
+- [ ] MongoDB Atlas allows connections from all IP addresses (`0.0.0.0/0`)
+- [ ] Cloudinary keys set in the backend
+- [ ] Backend serves static files (`express.static('build')`) and includes the catch-all route
+- [ ] Frontend build copied to backend and pushed to GitHub
+- [ ] Application works at the Render URL in the browser
+
+---
+
+## 9. Common Issues
+
+| Problem | Solution |
+|---|---|
+| Page doesn't load on direct URL | Check that the backend has the catch-all route `app.get('*', ...)` |
+| API calls return index.html | Catch-all is defined before API routes — move it to the end |
+| Backend can't connect to database | Check `MONGODB_URI` and MongoDB Atlas network settings |
+| Image upload fails | Check Cloudinary keys in the backend |
+| CORS error in browser | Frontend and backend are on the same service — CORS shouldn't be an issue. If it is, check API route CORS settings |
+| Free tier sleeping | Render Free tier sleeps after 15 min of inactivity — first request may take 30–60 s |
+| Old build showing | Remember to copy the new build to the backend and push it |

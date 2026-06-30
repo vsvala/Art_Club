@@ -1,63 +1,99 @@
-import React, { useState } from 'react'
-//import { getWeather } from '../../reducers/actionCreators/linkActions'
-//import { Link } from 'react-router-dom'
+import React, { useState, useEffect } from 'react'
+
 import { connect } from 'react-redux'
 import userActions from '../reducers/actionCreators/userActions'
 import { Form, Button, Row, Col } from 'react-bootstrap'
+import {} from '../reducers/actionCreators/notificationActions'
+import { getWeatherIcon, getWeatherText } from '../utils/weatherUtils'
 
 const LinksAndWeather = () => {
-  //{ user } { getWeather }
-  const [city, setCity] = useState('Helsinki')
+  const [city, setCity] = useState('')
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState('')
+
   const [weatherData, setWeatherData] = useState(null)
 
-  const fetchWeather = async (event) => {
-    if (event) event.preventDefault()
-    const res = await fetch(`/api/weather?city=${city}`)
-    // `http://localhost:3001/api/weather?city=${city}`
-    const json = await res.json()
-    console.log('Weather data:', json)
-    setWeatherData(json)
+  const fetchWeather = async (cityName) => {
+    const trimmedCity = cityName.trim()
+    if (!trimmedCity) return
+    setLoading(true)
+    setError('')
+    try {
+      const res = await fetch(
+        `/api/weather?city=${encodeURIComponent(trimmedCity)}`,
+      )
+      const json = await res.json()
+      if (!res.ok) throw new Error(json.message || 'Weather request failed')
+      setWeatherData(json)
+    } catch (err) {
+      setError('Failed to fetch weather data. Please try again.')
+    } finally {
+      setLoading(false)
+      setCity('')
+    }
   }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+    const trimmedCity = city.trim()
+    if (!trimmedCity) {
+      setError('Please enter a city name.')
+      return
+    }
+    fetchWeather(trimmedCity)
+  }
+
   const handleChange = (event) => {
     setCity(event.target.value)
   }
+
+  useEffect(() => {
+    fetchWeather('Helsinki')
+  }, [])
 
   return (
     <>
       <section id="center">
         <div style={{ padding: 20 }}>
           <div className="links">
-            <h2>Exhibitions and painting weather</h2>
-            {/* <div className="search-city">
-           <input value={city} onChange={e => setCity(e.target.value)} />
-              <button onClick={fetchWeather}>Hae sää</button>
-            </div> */}
-            {weatherData && (
-              <div>
-                <p>
-                  {weatherData.city}: {weatherData.temperature} °C
-                </p>
-              </div>
-            )}
+            <h2>Painting weather</h2>
+            {loading && <p>Loading weather...</p>}
+            {error && <p>{error}</p>}
+            {weatherData &&
+              !loading &&
+              (() => {
+                const weatherStyle = {
+                  fontFamily: "'Leckerli One', cursive",
+                  fontSize: '1.1rem',
+                }
+                return (
+                  <div>
+                    <p style={{ ...weatherStyle, color: '#bac0c4' }}>
+                      {weatherData.city}, {weatherData.country}
+                    </p>
+                    <p style={{ ...weatherStyle, color: '#338ad3' }}>
+                      {weatherData.temperature} °C{' '}
+                      {getWeatherIcon(weatherData.weather_code)}{' '}
+                      {getWeatherText(weatherData.weather_code)}
+                    </p>
+                  </div>
+                )
+              })()}
             <Row>
               <Col md={{ span: 10, offset: 1 }}></Col>
-              <Form onSubmit={fetchWeather}>
+              <Form onSubmit={handleSubmit}>
                 <Form.Group>
                   {/* <Form.Label>username</Form.Label> */}
                   <Form.Control
                     type="text"
-                    placeholder="City"
+                    placeholder={'Search city'}
                     name="city"
                     value={city}
                     onChange={handleChange}
                     autoFocus
                   />
                   <br />
-                  <Button
-                    className="button"
-                    variant="light"
-                    type="submit"
-                  >
+                  <Button className="button" variant="light" type="submit">
                     Search
                   </Button>
                 </Form.Group>

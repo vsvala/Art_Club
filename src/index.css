@@ -1,5 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Leckerli+One&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Amatic+SC&display=swap");
+@import url('https://fonts.googleapis.com/css?family=Leckerli+One&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
 
 body {
   margin: 0;
@@ -12,14 +12,14 @@ body {
 h1 {
   padding-top: 40px;
   color: #251147;
-  font-family: "Amatic SC", cursive;
+  font-family: 'Amatic SC', cursive;
   text-align: center;
 }
 .GDPRInfo h1 {
   padding-top: 0;
   padding-bottom: 20px;
   color: #251147;
-  font-family: "Amatic SC", cursive;
+  font-family: 'Amatic SC', cursive;
   text-align: center;
 }
 h2 {
@@ -27,22 +27,23 @@ h2 {
   padding-bottom: 30px;
   /* color: #338ad3; */
   color: #bebcbc;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
 }
 h3 {
-  margin-top: 30px;
+  margin-top: 10px;
+  padding-bottom: 20px;
   /*  color: #ff1476; */
   color: #bebcbc;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
 }
 h4 {
   margin-bottom: 30px;
   color: #338ad3;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
 }
 h5 {
   color: #ff1476;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
   font-size: 95%;
 }
 .grayInfoText {
@@ -73,10 +74,10 @@ h5 {
 .navbar-light .navbar-brand {
   font-size: 2.5em;
   font-weight: 400;
-  font-family: "Amatic SC", cursive;
+  font-family: 'Amatic SC', cursive;
 }
 .adminNav {
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
   color: #ff1476;
 }
 .member {
@@ -89,7 +90,7 @@ h5 {
 
 /*LINKS*/
 a {
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
   color: #338ad3;
 }
 a:hover {
@@ -110,14 +111,13 @@ a:hover {
 
 /* BUTTONS*/
 .btn {
-  float: right;
   box-shadow: none !important;
 }
 .button {
   color: #338ad3;
   background-color: white;
   border-color: #6c757d;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
 }
 .btn:hover {
   color: #bebcbc;
@@ -128,7 +128,7 @@ a:hover {
 /*IMAGE UPPLOADER */
 .fileUploader {
   color: #338ad3;
-  font-family: "Leckerli One", cursive;
+  font-family: 'Leckerli One', cursive;
 }
 
 /* GALLERY */
@@ -274,4 +274,19 @@ a:hover {
   width: 500px;
   height: auto;
   max-width: 80%;
+}
+.search-city {
+  margin-top: 20px;
+  margin-bottom: 40px;
+}
+
+.form-control {
+  display: block;
+  width: 200px;
+  margin: 0 auto;
+}
+.button-search {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
 }

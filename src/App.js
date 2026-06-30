@@ -1,4 +1,3 @@
-/* global process */
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Navbar, Nav, Button } from "react-bootstrap";

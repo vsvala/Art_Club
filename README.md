@@ -181,12 +181,13 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Testing](documentation/tests.md)
 - [Render.com Deployment](documentation/render_deployment.md)
 - [Security & Maintenance](documentation/security_maintenance.md)
+- [CI/CD Pipeline](documentation/ci_cd.md)
 
 ---
 
 ## Roadmap
 - [ ] Update and do more test fo front
-- [ ] CI/CD pipeline with github actions
+- [x] CI/CD pipeline with github actions
 - [ ] Real-time weather data from Open-Meteo API to Links page
 - [ ] More curated links for artists (exhibitions, galleries) to Lin nks page
 

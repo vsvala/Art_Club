@@ -38,7 +38,7 @@ A full stack web application for an art club, where users can browse artists and
 | Database | MongoDB, MongoDB Atlas |
 | Image storage | Cloudinary |
 | Auth | JWT (JSON Web Tokens), bcrypt |
-| Testing | Jest, React Testing Library, Cypress |
+| Testing | Jest, React Testing Library, Playwright |
 | Weather API | Open-Meteo (no API key required) |
 
 ---
@@ -178,7 +178,7 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Manual](documentation/manual.md)
 - [Software Requirements Specification](documentation/software_requirements_specification.md)
 - [Design Architecture](documentation/design_architecture.md)
-- [Testing](documentation/testing.md)
+- [Testing](documentation/tests.md)
 - [Render.com Deployment](documentation/render_deployment.md)
 - [Security & Maintenance](documentation/security_maintenance.md)
 

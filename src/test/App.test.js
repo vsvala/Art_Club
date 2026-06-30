@@ -1,28 +1,13 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import store from './../reducers/store'
-import App from './../App'
+import { render } from '@testing-library/react'
 import { Provider } from 'react-redux'
-import { configure } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import store from '../reducers/store'
+import App from '../App'
 
-configure({ adapter: new Adapter() })
-
-describe('<App /> ', () => {
-  let app
-  beforeAll(() => {
-    app = mount(
-      <Provider store={store}>
-        <App />
-      </Provider>,
-    )
-  })
-
-  afterAll(() => {
-    app.unmount()
-  })
-
-  it('renders self without crushing', () => {
-    expect(app.find('App').length).toBe(1)
-  })
+test('App renderöityy kaatumatta', () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  )
 })

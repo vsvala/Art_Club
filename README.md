@@ -1,5 +1,7 @@
 # ArtClub — Full Stack Web Application
 
+[![CI/CD Pipeline](https://github.com/vsvala/Art_Club/actions/workflows/ci.yml/badge.svg)](https://github.com/vsvala/Art_Club/actions/workflows/ci.yml)
+
 A full stack web application for an art club, where users can browse artists and artworks, apply for membership, and manage their own profile and gallery. Originally built as an independent 10 ECTS project for the University of Helsinki's Full Stack Open program, this application has since been revived, updated, and continued as an ongoing personal hobby project.
 
 **Live demo:** [artclub-q41z.onrender.com](https://artclub-q41z.onrender.com/)

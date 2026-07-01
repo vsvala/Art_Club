@@ -35,7 +35,7 @@ jobs:
 
       # Epäonnistuu vain High- tai Critical-tason haavoittuvuuksista
       - name: Security audit
-        run: npm audit --audit-level=high
+        run: npm audit --audit-level=high --omit=dev
 
       # Tallentaa build/-kansion GitHub Actionsin välivarastoon jotta
       # deploy-job voi ladata sen ilman uutta buildia

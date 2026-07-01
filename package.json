@@ -37,7 +37,7 @@
     "deep-freeze": "0.0.1",
     "eslint-config-prettier": "^10.1.8",
     "json-server": "^1.0.0-beta.15",
-    "msw": "^1.3.5"
+    "msw": "^2.14.6"
   },
   "browserslist": {
     "production": [

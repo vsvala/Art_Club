@@ -1,0 +1,28 @@
+version: '3.9'
+
+services:
+  backend:
+    build:
+      context: ../Art_Club_back
+      dockerfile: Dockerfile
+    ports:
+      - '3001:3001'
+    environment:
+      - MONGODB_URI=${MONGODB_URI}
+      - SECRET=${SECRET}
+      - PORT=3001
+      - NODE_ENV=development
+      #volumes mounttaa isäntäkoneen kansion konttiin (uploads pysyvät)
+    volumes:
+      - ../Art_Club_back/uploads:/app/uploads
+
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:80'
+    # depends_on varmistaa käynnistysjärjestyksen (backend ensin)
+
+    depends_on:
+      - backend

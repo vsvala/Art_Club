@@ -183,6 +183,7 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Testing](documentation/tests.md)
 - [Render.com Deployment](documentation/render_deployment.md)
 - [Security & Maintenance](documentation/security_maintenance.md)
+- [Security Policy](.github/SECURITY.md)
 - [CI/CD Pipeline](documentation/ci_cd.md)
 
 ---

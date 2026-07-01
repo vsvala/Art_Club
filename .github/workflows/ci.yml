@@ -75,7 +75,7 @@ jobs:
   # --- Vaihe 3: Deploy backendiin ---
   # Ajetaan vain master-pushilla, ei PR:issä eikä jos commitviestissä on #skip
   deploy:
-    needs: [ci-build-and-test]
+    needs: [ci-build-and-test, docker-publish]
     runs-on: ubuntu-latest
     if: |
       github.ref == 'refs/heads/master' &&

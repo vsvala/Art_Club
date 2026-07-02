@@ -8,7 +8,26 @@ The ArtClub frontend uses three levels of automated testing:
 |---|---|---|
 | Unit tests | Jest + React Testing Library | `src/test/` |
 | Integration tests | Jest + MSW (Mock Service Worker) | `src/test/integration/` |
-| E2E tests | Playwright | `e2e/` |
+| E2E tests (planned) | Playwright | `e2e/` |
+
+---
+
+## Tekemättä — Prioriteettijärjestyksessä
+
+1. **Integraatio: Like/vote-flow** — infrastruktuuri (MSW, store) on jo paikallaan, puuttuu vain `voteArtwork`-dispatch + assert
+2. **Reducer-testit: puuttuvat reducerit** — `eventReducer`, `filterReducer`, `notificationReducer`, `singleArtworkReducer` testaamatta; `deep-freeze` ei käytössä missään
+3. **Komponentti: Home** — tärkeä aloitussivu, ei yhtään testiä
+4. **Komponentti: ArtworkList** — gallerian pääkomponentti; filtteri-logiikka ja admin-nappi testaamatta
+5. **Komponentti: ArtworkDelete** — poistonappi ja kuva testaamatta
+6. **RegisterUserForm: validointitestit** — virheellinen email, salasanat ei täsmää, onnistunut lähetys
+7. **LoginForm: redirect jos jo kirjautunut** — `loggedUser` storessa → redirect; testitiedosto muuten valmis
+8. **E2E: Playwright-setup** — asenna `@playwright/test`, luo `playwright.config.js`, hakemisto `e2e/`
+9. **E2E: Public pages smoke test** — kaikki julkiset reitit latautuvat kaatumatta
+10. **E2E: Auth guards** — suojatut reitit ohjaavat `/login`-sivulle kirjautumattomalle
+11. **E2E: Login- ja logout-flow** — kirjautuminen onnistuu, navbar päivittyy, logout toimii
+12. **E2E: Gallery filter** — hakukenttä suodattaa teosten listaa
+13. **E2E: Registration validation** — lomakevalidointi toimii selaimessa
+14. **E2E: Add artwork** — täysi flow: login → lomake → teos näkyy galleriassa
 
 ---
 
@@ -21,7 +40,7 @@ The ArtClub frontend uses three levels of automated testing:
 | **@testing-library/jest-dom** | Adds DOM-specific matchers such as `toBeInTheDocument`, `toHaveValue`, and `toBeVisible`. |
 | **deep-freeze** | Freezes Redux state objects before passing them to reducers, causing an error if a reducer mutates state directly instead of returning a new object. |
 | **MSW (Mock Service Worker)** | Intercepts `fetch`/`axios` requests at the network level and returns mock responses. Used in integration tests so no real backend is needed. |
-| **Playwright** | Launches a real browser (Chromium) and drives it programmatically for end-to-end tests. |
+| **Playwright (planned)** | Planned browser-based E2E framework for critical route and auth smoke tests. |
 
 ---
 
@@ -36,15 +55,6 @@ npm run test-coverage
 
 # Run a single test file
 npm test -- validations.test.js
-
-# Run Playwright E2E tests
-npx playwright test
-
-# Run E2E tests with browser visible (useful for debugging)
-npx playwright test --headed
-
-# View E2E HTML report
-npx playwright show-report
 ```
 
 The Jest coverage report is written to `coverage/`. Open `coverage/lcov-report/index.html` in a browser for a full interactive view.
@@ -57,15 +67,15 @@ The Jest coverage report is written to `coverage/`. Open `coverage/lcov-report/i
 
 Tests the `emailValid(email)` pure function from `src/utils/validations.js`.
 
-| Test case | Input | Expected |
-|---|---|---|
-| Valid address | `test@example.com` | `true` |
-| Valid with subdomain | `a@b.fi` | `true` |
-| Missing @ | `testaddress` | `false` |
-| Missing domain | `test@` | `false` |
-| Empty string | `''` | `false` |
-| Only @ | `@` | `false` |
-| Space in address | `te st@a.com` | `false` |
+| Test case | Input | Expected | Status |
+|---|---|---|---|
+| Valid address | `test@example.com` | `true` | ✅ |
+| Valid with subdomain | `a@b.fi` | `true` | ✅ |
+| Missing @ | `testaddress` | `false` | ✅ |
+| Missing domain | `test@` | `false` | ✅ |
+| Empty string | `''` | `false` | ✅ |
+| Only @ | `@` | `false` | ✅ |
+| Space in address | `te st@a.com` | `false` | ✅ |
 
 ### Reducers — `src/test/reducers/`
 
@@ -83,6 +93,17 @@ test('adds a new artwork', () => {
   expect(newState.artworks).toHaveLength(1)
 })
 ```
+
+| Reducer | Status |
+|---|---|
+| `artworkReducer` | ✅ |
+| `loginReducer` | ✅ |
+| `userReducer` | ✅ |
+| `eventReducer` | ❌ |
+| `filterReducer` | ❌ |
+| `notificationReducer` | ❌ |
+| `singleArtworkReducer` | ❌ |
+| `deep-freeze` käytössä | ❌ |
 
 ### Component tests — `src/test/components/`
 
@@ -102,39 +123,39 @@ test('login form shows error with wrong credentials', async () => {
 ```
 
 **Notification**
-- Returns `null` when notification string is empty
-- Shows message when notification is set
-- Uses correct CSS class / Bootstrap style
+- ✅ Returns `null` when notification string is empty
+- ✅ Shows message when notification is set
+- ✅ Uses correct CSS class / Bootstrap style
 
 **PrivateRoute**
-- If `condition === false` → navigates to `redirectPath`
-- If `condition === true` → renders `<Outlet />` (child component is visible)
+- ✅ If `condition === false` → navigates to `redirectPath`
+- ✅ If `condition === true` → renders `<Outlet />` (child component is visible)
 
 **Home**
-- Unauthenticated user → shows Login and Register links
-- `nonMember` user → shows "awaiting approval" message
-- Member / admin → shows welcome message
+- ❌ Unauthenticated user → shows Login and Register links
+- ❌ `nonMember` user → shows "awaiting approval" message
+- ❌ Member / admin → shows welcome message
 
 **LoginForm**
-- Renders without crashing
-- Email and password fields are present
-- Submit button is present
-- If `loggedUser` is already set in store → redirects (location changes)
+- ✅ Renders without crashing
+- ✅ Email and password fields are present
+- ✅ Submit button is present
+- ❌ If `loggedUser` is already set in store → redirects (location changes)
 
 **RegisterUserForm**
-- All required fields are present (name, username, email, password, confirm password)
-- Invalid email → shows validation error / does not submit
-- Passwords do not match → shows error
-- Valid form → `createUser` action creator is called with correct parameters (mock dispatch)
+- ✅ All required fields are present (name, username, email, password, confirm password)
+- ❌ Invalid email → shows validation error / does not submit
+- ❌ Passwords do not match → shows error
+- ❌ Valid form → `createUser` action creator is called with correct parameters (mock dispatch)
 
 **ArtworkList**
-- Renders list of artworks when Redux store contains data
-- Filter field filters artworks by name
-- Admin sees delete buttons, regular member does not
+- ❌ Renders list of artworks when Redux store contains data
+- ❌ Filter field filters artworks by name
+- ❌ Admin sees delete buttons, regular member does not
 
 **ArtworkDelete**
-- Shows artwork image
-- Delete button calls the correct callback after click
+- ❌ Shows artwork image
+- ❌ Delete button calls the correct callback after click
 
 ---
 
@@ -186,7 +207,7 @@ test('fetches artworks from API', async () => {
 })
 ```
 
-### Login flow
+### Login flow ✅
 
 1. Mock `POST /api/login` to return `{ token, username, role, id }`
 2. Dispatch `login({ username, password })`
@@ -194,13 +215,13 @@ test('fetches artworks from API', async () => {
    - `store.getState().loggedUser.username === 'testi'`
    - `localStorage.getItem('loggedArtclubUser')` is set
 
-### Like (vote) flow
+### Like (vote) flow ❌
 
 1. Mock `PUT /api/artworks/:id` to return an updated artwork
 2. Dispatch `voteArtwork(artworkId)`
 3. Assert that the artwork's `likes` increased in the store
 
-### Logout flow
+### Logout flow ✅
 
 1. Set store: `loggedUser` has data
 2. Dispatch `logout()`
@@ -208,7 +229,7 @@ test('fetches artworks from API', async () => {
    - `store.getState().loggedUser` equals `{}`
    - `localStorage.getItem('loggedArtclubUser') === null`
 
-### Load artworks
+### Load artworks ✅
 
 1. Mock `GET /api/artworks` to return a list of artworks
 2. Dispatch `initializeArtworks()`
@@ -216,9 +237,9 @@ test('fetches artworks from API', async () => {
 
 ---
 
-## E2E Tests (Playwright)
+## E2E Tests (Playwright) — Planned ❌
 
-E2E tests run a real browser against the live development server. They catch bugs that unit and integration tests miss: routing, auth guards, form submission through the full stack, and navbar state changes.
+Playwright E2E tests are a planned next step and are not yet versioned in this repository. The plan below defines the intended setup and first smoke scenarios.
 
 ### Setup
 
@@ -246,7 +267,7 @@ export default defineConfig({
 })
 ```
 
-### Public pages smoke test — `e2e/public-pages.spec.js`
+### Public pages smoke test — `e2e/public-pages.spec.js` ❌
 
 Verifies that all public routes load without crashing. The fastest test to write and the first one to break if there is a build or routing error.
 
@@ -270,7 +291,7 @@ for (const route of publicRoutes) {
 }
 ```
 
-### Auth guards — `e2e/auth-guards.spec.js`
+### Auth guards — `e2e/auth-guards.spec.js` ❌
 
 Verifies that `PrivateRoute` works correctly in a real browser. Critical for security — if a guard breaks, protected pages become publicly accessible.
 
@@ -290,7 +311,7 @@ test('protected route redirects unauthenticated user to login', async ({ page })
 
 Also test the admin guard: navigating to `/admin/users` as a non-admin should redirect away.
 
-### Login flow — `e2e/login.spec.js`
+### Login flow — `e2e/login.spec.js` ❌
 
 The most important user journey. Requires the dev backend or `json-server` to be running.
 
@@ -319,7 +340,7 @@ test('login succeeds and shows member navigation', async ({ page }) => {
 2. Assert that an error message is shown (Notification component)
 3. URL remains `/login`
 
-### Logout flow — `e2e/login.spec.js`
+### Logout flow — `e2e/login.spec.js` ❌
 
 1. Log in (as in the login test above)
 2. Click "Logout" button
@@ -328,7 +349,7 @@ test('login succeeds and shows member navigation', async ({ page }) => {
    - "Login" button reappears
    - Navigating to `/users/addArtwork` redirects back to `/login`
 
-### Gallery filter — `e2e/gallery.spec.js`
+### Gallery filter — `e2e/gallery.spec.js` ❌
 
 Tests that artwork filtering works end-to-end in the browser (exercises Redux filter state through the real UI).
 
@@ -349,7 +370,7 @@ test('filter narrows the artwork list', async ({ page }) => {
 })
 ```
 
-### Registration validation — `e2e/register.spec.js`
+### Registration validation — `e2e/register.spec.js` ❌
 
 Unit tests cover `emailValid()` in isolation. This E2E test confirms that validation is actually wired up to the form.
 
@@ -359,7 +380,7 @@ Unit tests cover `emailValid()` in isolation. This E2E test confirms that valida
 | Passwords do not match | `pass1` / `pass2` | Error message shown |
 | Valid form | All fields correct | Navigated away or success message shown |
 
-### Add artwork — `e2e/add-artwork.spec.js`
+### Add artwork — `e2e/add-artwork.spec.js` ❌
 
 Tests the full flow: login → form → successful submission. Catches integration bugs across the entire stack.
 
@@ -392,4 +413,3 @@ The ESLint configuration is defined in `package.json` under the `"eslintConfig"`
 | Critical components | 70 %+ |
 | Integration (key flows) | login, logout, vote, init |
 | E2E | all routes, auth guards, login/logout |
-

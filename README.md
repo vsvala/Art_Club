@@ -4,7 +4,18 @@
 
 A full stack web application for an art club, where users can browse artists and artworks, apply for membership, and manage their own profile and gallery. Originally built as an independent 10 ECTS project for the University of Helsinki's Full Stack Open program, this application has since been revived, updated, and continued as an ongoing personal hobby project.
 
-**Live demo:** [artclub-q41z.onrender.com](https://artclub-q41z.onrender.com/)
+## What This Project Demonstrates
+
+- End-to-end feature delivery across frontend, backend integration, and production deployment
+- Role-based access control (visitor/member/admin) with protected routing and JWT session flow
+- Production-oriented workflow with CI/CD, Docker image publishing, and automated deployment pipeline
+- Practical API integrations (Cloudinary image storage and Open-Meteo weather data)
+
+> **[Live demo →](https://artclub-q41z.onrender.com/)**
+
+### Demo access
+
+Demo credentials are available on request for recruiters and reviewers. Please contact me by email for access details.
 
 **Backend repository:** [Art_Club_back](https://github.com/vsvala/Art_Club_back)
 
@@ -13,12 +24,14 @@ A full stack web application for an art club, where users can browse artists and
 ## Features
 
 **For visitors**
+
 - Browse artists and their artwork galleries
 - Search and filter artworks
 - View links to exhibitions and current painting weather for any city
 - Apply for club membership
 
 **For members**
+
 - Create and update a personal profile page with a short introduction
 - Upload up to 10 images to a personal gallery
 - View all member artwork in the main gallery
@@ -26,6 +39,7 @@ A full stack web application for an art club, where users can browse artists and
 - View club events
 
 **For admins**
+
 - List registered users and approve memberships
 - Create and manage club events
 
@@ -33,15 +47,15 @@ A full stack web application for an art club, where users can browse artists and
 
 ## Tech Stack
 
-| Layer | Technologies |
-|---|---|
-| Frontend | React 18, Redux, React Router v6, React Bootstrap |
-| Backend | Node.js, Express, REST API |
-| Database | MongoDB, MongoDB Atlas |
-| Image storage | Cloudinary |
-| Auth | JWT (JSON Web Tokens), bcrypt |
-| Testing | Jest, React Testing Library, Playwright |
-| Weather API | Open-Meteo (no API key required) |
+| Layer         | Technologies                                      |
+| ------------- | ------------------------------------------------- |
+| Frontend      | React 18, Redux, React Router v6, React Bootstrap |
+| Backend       | Node.js, Express, REST API                        |
+| Database      | MongoDB, MongoDB Atlas                            |
+| Image storage | Cloudinary                                        |
+| Auth          | JWT (JSON Web Tokens), bcrypt                     |
+| Testing       | Jest, React Testing Library, Playwright           |
+| Weather API   | Open-Meteo (no API key required)                  |
 
 ---
 
@@ -99,6 +113,8 @@ npm run test-coverage  # Run tests with coverage report
 npm run lint        # Check code style with ESLint
 ```
 
+Current automated test scope in this repository focuses on unit and integration tests. E2E tests are tracked as a planned follow-up.
+
 ---
 
 ## Architecture
@@ -128,27 +144,51 @@ The frontend is a single-page application that communicates with the backend exc
 
 **User roles**
 
-| Role | Access |
-|---|---|
-| Visitor | Public pages, membership application |
-| Member | Own profile & gallery, events, artwork likes |
-| Admin | All member data, membership approval, event management |
+| Role    | Access                                                 |
+| ------- | ------------------------------------------------------ |
+| Visitor | Public pages, membership application                   |
+| Member  | Own profile & gallery, events, artwork likes           |
+| Admin   | All member data, membership approval, event management |
 
 ---
 
 ## Project Structure
+
+This is a **frontend-only repository**. The backend lives in [Art_Club_back](https://github.com/vsvala/Art_Club_back).
 
 ```
 src/
 ├── components/
 │   ├── artwork/    # Artwork list, single view, add/delete forms
 │   ├── artist/     # Artist list and profile views
-│   ├── user/       # Member profile, update forms, MyPage
+│   ├── user/       # Member profile, update and password forms
 │   ├── event/      # Event list and creation form
-│   └── common/     # Shared components (notifications, GDPR, routing)
-├── reducers/       # Redux state management
-├── services/       # Axios API service modules
-└── utils/          # Validation helpers
+│   ├── login/      # Login and registration forms
+│   └── common/     # Shared UI: notifications, GDPR, PrivateRoute, DeleteButton
+├── reducers/
+│   ├── store.js              # Redux store with combined reducers
+│   ├── artworkReducer.js     # Artwork state
+│   ├── userReducer.js        # User/member state
+│   ├── eventReducer.js       # Event state
+│   ├── loginReducer.js       # Logged-in user session
+│   ├── notificationReducer.js
+│   ├── filterReducer.js      # Artwork search/filter
+│   ├── singleArtworkReducer.js
+│   └── actionCreators/       # Thunk action creators per domain
+├── services/                 # Axios modules for each backend resource
+│   ├── artworks.js
+│   ├── users.js
+│   ├── events.js
+│   ├── login.js
+│   ├── tokenCheck.js         # JWT re-validation on page load
+│   └── config.js             # Base URL and auth header setup
+├── utils/
+│   ├── validations.js        # Form input validation rules
+│   └── weatherUtils.js       # Open-Meteo API helpers
+├── test/                     # Jest + React Testing Library tests
+├── images/                   # Static image assets
+├── App.js                    # Root component and route definitions
+└── index.js                  # React entry point
 ```
 
 ---
@@ -189,10 +229,12 @@ A full list of used libraries with descriptions and links: [documentation/librar
 ---
 
 ## Roadmap
-- [ ] Update and do more test fo front
+
+- [ ] Expand frontend test coverage for critical user flows
 - [x] CI/CD pipeline with github actions
-- [ ] Real-time weather data from Open-Meteo API to Links page
-- [ ] More curated links for artists (exhibitions, galleries) to Lin nks page
+- [x] Real-time weather data from Open-Meteo API to Links page
+- [ ] Add curated links for artists (exhibitions, galleries) to Links page
+- [ ] Add Playwright E2E smoke tests (public routes and authentication flow)
 
 ---
 

@@ -164,7 +164,7 @@ const App = (props) => {
                     </Button>
                   ) : (
                     <Button className="button" variant="light" type="button">
-                      <Link to="/login">Sign in</Link>
+                      <Link to="/login">Login</Link>
                     </Button>
                   )}
                 </Nav.Link>

@@ -5,10 +5,12 @@
   "proxy": "http://localhost:3001",
   "scripts": {
     "server": "json-server -p3001 db.json",
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "CI=true react-scripts test --env=jsdom",
     "test-coverage": "CI=true react-scripts test --env=jsdom --coverage",
+    "test-e2e": "playwright test",
+    "test-e2e:report": "playwright show-report",
     "codecov": "./node_modules/.bin/codecov",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -30,8 +32,10 @@
     "redux-thunk": "^3.1.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
+    "@types/node": "^26.1.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "deep-freeze": "0.0.1",

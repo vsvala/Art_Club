@@ -230,11 +230,11 @@ A full list of used libraries with descriptions and links: [documentation/librar
 
 ## Roadmap
 
-- [ ] Expand frontend test coverage for critical user flows
+- [x] Expand frontend test coverage for critical user flows
 - [x] CI/CD pipeline with github actions
 - [x] Real-time weather data from Open-Meteo API to Links page
 - [ ] Add curated links for artists (exhibitions, galleries) to Links page
-- [ ] Add Playwright E2E smoke tests (public routes and authentication flow)
+- [x ] Add Playwright E2E smoke tests (public routes and authentication flow)
 
 ---
 

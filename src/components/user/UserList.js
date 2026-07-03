@@ -20,7 +20,7 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
   return (
     <div className="userList">
       <h2>Users</h2>
-      <Table bordered hover size='sm'>
+      <Table bordered hover size="sm" responsive>
         <thead>
           <tr>
             <th>name</th>
@@ -33,12 +33,15 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
         </thead>
 
         <tbody>
-          { userArray && userArray.map(user =>
-            <User user={user}
-              key={user.id}
-              artworks={user.artworks}
-              onClick={removeUser}/>
-          )}
+          {userArray &&
+            userArray.map((user) => (
+              <User
+                user={user}
+                key={user.id}
+                artworks={user.artworks}
+                onClick={removeUser}
+              />
+            ))}
         </tbody>
       </Table>
     </div>
@@ -47,11 +50,8 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
 
 const mapStateToProps = (state) => {
   return {
-    userArray: state.users.users
+    userArray: state.users.users,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { getUsers, deleteUser }
-)(UserList)
+export default connect(mapStateToProps, { getUsers, deleteUser })(UserList)

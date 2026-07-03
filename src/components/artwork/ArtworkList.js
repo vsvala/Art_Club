@@ -1,6 +1,9 @@
 import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
-import { initializeArtworks, deleteArtwork } from '../../reducers/actionCreators/artworkActions'
+import {
+  initializeArtworks,
+  deleteArtwork,
+} from '../../reducers/actionCreators/artworkActions'
 import filterActions from '../../reducers/actionCreators/filterActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
@@ -8,7 +11,15 @@ import { Form, Button } from 'react-bootstrap'
 import { voteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 
-export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, loggedUser, filter, setArtworkName, voteArtwork }) => {
+export const ArtworkList = ({
+  deleteArtwork,
+  initializeArtworks,
+  artworks,
+  loggedUser,
+  filter,
+  setArtworkName,
+  voteArtwork,
+}) => {
   useEffect(() => {
     initializeArtworks()
   }, [])
@@ -20,7 +31,7 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
   const addLike = (artwork) => {
     return () => {
-      const likedArtwork = artworks.find(n => n.id === artwork.id)
+      const likedArtwork = artworks.find((n) => n.id === artwork.id)
       const artworkObject = { ...likedArtwork, likes: artwork.likes + 1 }
       voteArtwork(artworkObject)
     }
@@ -36,40 +47,67 @@ export const ArtworkList = ({ deleteArtwork, initializeArtworks, artworks, logge
 
   return (
     <div className="artworkList">
-      <div style={{ float: 'right' }}>
+      <h2 className="galleryTitle">Gallery</h2>
+      <div className="galleryHeader">
         <Form.Control
-          placeholder='Search artwork or artist'
-          className='filterInput'
+          placeholder="Search artwork or artist"
+          className="filterInput"
           value={filter.name}
-          onChange={handleArtworkNameChange} />
+          onChange={handleArtworkNameChange}
+        />
       </div>
 
-      <div style={{ marginLeft: '25%' }}>
-        <h2>Gallery</h2>
-      </div>
+      <div className="artworkGallery">
+        {artworks &&
+          artworks
+            .sort((a, b) => b.likes - a.likes)
+            .filter(
+              (artwork) =>
+                artwork.name
+                  .toLowerCase()
+                  .includes(filter.artworkName.toLowerCase()) ||
+                artwork.artist
+                  .toLowerCase()
+                  .includes(filter.artworkName.toLowerCase()),
+            )
+            .map((a) => (
+              <ul key={a.id} className="ulList">
+                <li>
+                  <img
+                    src={a.galleryImage}
+                    className="galleryPicture"
+                    alt="img"
+                  />
+                </li>
+                <li className="artwork">
+                  {' '}
+                  <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
+                </li>
+                <li>
+                  {a.year}, {a.size}, {a.medium}
+                </li>
+                <p>
+                  {a.likes} likes{' '}
+                  {loggedUser && (
+                    <Button
+                      className="button"
+                      onClick={addLike(a)}
+                      variant="outline-secondary"
+                    >
+                      like
+                    </Button>
+                  )}
+                </p>
 
-      <div>
-        { artworks && artworks.sort((a, b) => b.likes - a.likes)
-          .filter(artwork =>
-            artwork.name.toLowerCase().includes(filter.artworkName.toLowerCase())
-            || artwork.artist.toLowerCase().includes(filter.artworkName.toLowerCase())
-          )
-          .map(a =>
-            <ul key={a.id} className='ulList'>
-              <li><img
-                src={a.galleryImage}
-                className='galleryPicture'
-                alt='img'
-              /></li>
-              <li className="artwork"> <Link to={`/artworks/${a.id}`}> {a.name} </Link> by { a.artist }</li>
-              <li>{ a.year }, { a.size }, { a.medium }</li>
-              <p>{a.likes} likes  {loggedUser &&  <Button className="button" onClick={addLike(a)} variant="outline-secondary">like</Button>}</p>
-
-              {loggedUser && loggedUser.role === 'admin'
-                ? <li className="delete"><DeleteButton id={a.id} onClick={removeArtwork} /></li>
-                : <em></em>}
-            </ul>
-          )}
+                {loggedUser && loggedUser.role === 'admin' ? (
+                  <li className="delete">
+                    <DeleteButton id={a.id} onClick={removeArtwork} />
+                  </li>
+                ) : (
+                  <em></em>
+                )}
+              </ul>
+            ))}
       </div>
     </div>
   )
@@ -80,12 +118,15 @@ const mapStateToProps = (state) => {
     artworks: state.artworks.artworks,
     loggedUser: state.loggedUser.loggedUser,
     filter: {
-      artworkName: state.filter.artworkName
-    }
+      artworkName: state.filter.artworkName,
+    },
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { initializeArtworks, deleteArtwork, ...filterActions, notify, voteArtwork }
-)(ArtworkList)
+export default connect(mapStateToProps, {
+  initializeArtworks,
+  deleteArtwork,
+  ...filterActions,
+  notify,
+  voteArtwork,
+})(ArtworkList)

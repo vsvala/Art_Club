@@ -24,15 +24,14 @@ export const SingleUser = ({
   return (
     <div className="singleUser">
       <div className="user">
-        {!singleUser ?
-          null
-          :
+        {!singleUser ? null : (
           <div>
             <h2>{singleUser.name}</h2>
 
-            {loggedUser && (loggedUser.role === 'member' || loggedUser.role === 'admin')
-              ? <div>
-                <Table bordered>
+            {loggedUser &&
+            (loggedUser.role === 'member' || loggedUser.role === 'admin') ? (
+              <div>
+                <Table bordered responsive>
                   <thead>
                     <tr>
                       <th>name</th>
@@ -50,40 +49,49 @@ export const SingleUser = ({
                       <td>{singleUser.username}</td>
                       <td>{singleUser.email}</td>
                       <td>{singleUser.role}</td>
-                      <td>{singleUser.artworks && singleUser.artworks.length}/10
-                        <Link to="/users/addArtwork" className='member'>  Add</Link></td>
-                      <td><Link to='/users/update' className='member'>Update information</Link></td>
-                      <td><Link to='/users/intro' className='member'>Write introduction</Link></td>
+                      <td>
+                        {singleUser.artworks && singleUser.artworks.length}/10
+                        <Link to="/users/addArtwork" className="member">
+                          {' '}
+                          Add
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to="/users/update" className="member">
+                          Update information
+                        </Link>
+                      </td>
+                      <td>
+                        <Link to="/users/intro" className="member">
+                          Write introduction
+                        </Link>
+                      </td>
                     </tr>
                   </tbody>
                 </Table>
-                <br/>
-                { singleUser.intro ?
-                  <h4>Introduction text</h4>
-                  : null
-                }
+                <br />
+                {singleUser.intro ? <h4>Introduction text</h4> : null}
               </div>
-              : <em></em>}
+            ) : (
+              <em></em>
+            )}
 
             {singleUser.intro && singleUser.intro}
-            <br/>
-            <br/>
+            <br />
+            <br />
             <h4>Artworks</h4>
-            {singleUser.artworks <= 0 && singleUser.artworks <= 0 ?
+            {singleUser.artworks <= 0 && singleUser.artworks <= 0 ? (
               <p>No images uploaded yet</p>
-              : null
-            }
-          </div>}
+            ) : null}
+          </div>
+        )}
 
-        <div className='addedArtworks'>
-          {singleUser && singleUser.artworks && singleUser
-            .artworks
-            .map(a =>
-              <ArtworkDelete
-                key={a.id}
-                artwork={a}
-              />
-            )}
+        <div className="addedArtworks">
+          {singleUser &&
+            singleUser.artworks &&
+            singleUser.artworks.map((a) => (
+              <ArtworkDelete key={a.id} artwork={a} />
+            ))}
         </div>
       </div>
     </div>
@@ -93,11 +101,13 @@ export const SingleUser = ({
 const mapStateToProps = (state) => {
   return {
     singleUser: state.singleUser.singleUser,
-    loggedUser: state.loggedUser.loggedUser
+    loggedUser: state.loggedUser.loggedUser,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { notify, ...userActions, initializeSingleUser, deleteArtwork }
-)(SingleUser)
+export default connect(mapStateToProps, {
+  notify,
+  ...userActions,
+  initializeSingleUser,
+  deleteArtwork,
+})(SingleUser)

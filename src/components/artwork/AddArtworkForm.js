@@ -77,7 +77,7 @@ export const AddArtworkForm = ({
 
   return (
     <div className="artworkForm">
-      <Container>
+      <Container style={{ marginBottom: '40px' }}>
         <Row>
           <Col md={{ span: 10, offset: 1 }}>
             <div className="artworkHeader">
@@ -147,6 +147,7 @@ export const AddArtworkForm = ({
         </Form>
 
         <input
+          style={{ paddingTop: '10px' }}
           type="file"
           className="fileUploader"
           name="galleryImage"

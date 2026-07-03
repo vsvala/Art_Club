@@ -13,7 +13,7 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
     <div className="artistList">
       <h2>Artists</h2>
 
-      <Table hover size='sm'>
+      <Table hover size="sm" responsive>
         <thead>
           <tr>
             <th>name</th>

@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { initializeSingleUser } from "../../reducers/actionCreators/userActions";
-import userActions from "../../reducers/actionCreators/userActions";
-import { Link, useParams } from "react-router-dom";
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
+import userActions from '../../reducers/actionCreators/userActions'
+import { Link, useParams } from 'react-router-dom'
 
 export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
-  const { id } = useParams();
+  const { id } = useParams()
 
   useEffect(() => {
-    initializeSingleUser(id);
-  }, [id]);
+    initializeSingleUser(id)
+  }, [id])
 
   return (
     <div className="singleUser">
@@ -29,14 +29,15 @@ export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
                     <br />
                     <img
                       src={`${a.galleryImage}`}
-                      width="300"
+                      width="100%"
                       height="auto"
                       className="singlepicture"
                       alt="img"
                     />
                   </li>
                   <li className="artwork">
-                    <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
+                    <Link to={`/artworks/${a.id}`}> {a.name} </Link> by{' '}
+                    {a.artist}
                   </li>
                   <li>
                     {a.year}, {a.size}, {a.medium}
@@ -47,16 +48,16 @@ export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
         )}
       </div>
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     singleUser: state.singleUser.singleUser,
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, {
   ...userActions,
   initializeSingleUser,
-})(SingleArtist);
+})(SingleArtist)

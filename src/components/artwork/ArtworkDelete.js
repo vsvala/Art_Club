@@ -1,21 +1,25 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { deleteArtwork } from "../../reducers/actionCreators/artworkActions";
-import { Button } from "react-bootstrap";
+import React from 'react'
+import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
+import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
+import { Button } from 'react-bootstrap'
 
 const ArtworkDelete = ({ artwork, deleteArtwork }) => {
   const removeArtwork = (id) => {
     return () => {
-      if (window.confirm("Do you want to delete this artwork?")) {
-        deleteArtwork(id);
+      if (window.confirm('Do you want to delete this artwork?')) {
+        deleteArtwork(id)
       }
-    };
-  };
+    }
+  }
 
   return (
     <div className="artworkThumb">
-      <ul style={{ listStyleType: "none" }}>
+      <ul
+        style={{
+          listStyleType: 'none',
+        }}
+      >
         <li>
           <img
             src={artwork.galleryImage}
@@ -43,7 +47,7 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
         <br />
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default connect(null, { deleteArtwork })(ArtworkDelete);
+export default connect(null, { deleteArtwork })(ArtworkDelete)

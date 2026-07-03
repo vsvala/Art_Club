@@ -70,60 +70,68 @@ export const EventForm = ({ createEvent }) => {
         <Form onSubmit={handleSubmit}>
           <Col md={{ span: 10, offset: 1 }}>
             <Form.Group>
-              <Row>
-                Start and end :
-                <DatePicker
-                  selected={state.startDate}
-                  selectsStart
-                  startDate={state.startDate}
-                  endDate={state.endDate}
-                  onChange={handleChangeStart}
-                  showTimeSelect
-                  showWeekNumbers
-                  timeFormat="H:mm"
-                  timeIntervals={30}
-                  dateFormat="d.M.yyyy H:mm"
-                  timeCaption="time"
-                />
-                <DatePicker
-                  selected={state.endDate}
-                  selectsEnd
-                  startDate={state.startDate}
-                  endDate={state.endDate}
-                  onChange={handleChangeEnd}
-                  minDate={state.startDate}
-                  showTimeSelect
-                  showWeekNumbers
-                  timeFormat="H:mm"
-                  timeIntervals={30}
-                  dateFormat="d.M.yyyy H:mm"
-                  timeCaption="time"
-                />
+              <Row className="g-2 align-items-center">
+                <Col xs={12}>Start and end:</Col>
+                <Col xs={12} md={6}>
+                  <DatePicker
+                    selected={state.startDate}
+                    selectsStart
+                    startDate={state.startDate}
+                    endDate={state.endDate}
+                    onChange={handleChangeStart}
+                    showTimeSelect
+                    showWeekNumbers
+                    timeFormat="H:mm"
+                    timeIntervals={30}
+                    dateFormat="d.M.yyyy H:mm"
+                    timeCaption="time"
+                    wrapperClassName="w-100"
+                  />
+                </Col>
+                <Col xs={12} md={6}>
+                  <DatePicker
+                    selected={state.endDate}
+                    selectsEnd
+                    startDate={state.startDate}
+                    endDate={state.endDate}
+                    onChange={handleChangeEnd}
+                    minDate={state.startDate}
+                    showTimeSelect
+                    showWeekNumbers
+                    timeFormat="H:mm"
+                    timeIntervals={30}
+                    dateFormat="d.M.yyyy H:mm"
+                    timeCaption="time"
+                    wrapperClassName="w-100"
+                  />
+                </Col>
+                <Col xs={12} md={6}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Title"
+                    name="title"
+                    onChange={handleChange}
+                    autoFocus
+                  />
+                </Col>
+                <Col xs={12} md={6}>
+                  <Form.Control
+                    type="text"
+                    placeholder="Place"
+                    name="place"
+                    onChange={handleChange}
+                  />
+                </Col>
+                <Col xs={12}>
+                  <Form.Control
+                    as="textarea"
+                    rows="3"
+                    placeholder="Description"
+                    name="description"
+                    onChange={handleChange}
+                  />
+                </Col>
               </Row>
-              <br />
-              <Form.Control
-                type="text"
-                placeholder="Title"
-                name="title"
-                onChange={handleChange}
-                autoFocus
-              />
-              <br />
-              <Form.Control
-                type="text"
-                placeholder="Place"
-                name="place"
-                onChange={handleChange}
-              />
-              <br />
-              <Form.Control
-                as="textarea"
-                rows="3"
-                type="text"
-                placeholder="Description"
-                name="description"
-                onChange={handleChange}
-              />
               <div className="grayInfoText">
                 <p>Upload event picture, size width:200px, height:300px</p>
               </div>

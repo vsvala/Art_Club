@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 
 import { connect } from 'react-redux'
 import userActions from '../reducers/actionCreators/userActions'
-import { Form, Button, Row, Col } from 'react-bootstrap'
+import { Form, Button } from 'react-bootstrap'
 import {} from '../reducers/actionCreators/notificationActions'
 import { getWeatherIcon, getWeatherText } from '../utils/weatherUtils'
 
@@ -79,17 +79,16 @@ const LinksAndWeather = () => {
                   </div>
                 )
               })()}
-            <Row>
-              <Col md={{ span: 10, offset: 1 }}></Col>
+            <div className="search-city">
               <Form onSubmit={handleSubmit}>
                 <Form.Group>
-                  {/* <Form.Label>username</Form.Label> */}
                   <Form.Control
                     type="text"
-                    placeholder={'Search city'}
+                    placeholder="Search city"
                     name="city"
                     value={city}
                     onChange={handleChange}
+                    className="weather-search"
                     autoFocus
                   />
                   <br />
@@ -98,7 +97,7 @@ const LinksAndWeather = () => {
                   </Button>
                 </Form.Group>
               </Form>
-            </Row>
+            </div>
           </div>
 
           <div className="links">

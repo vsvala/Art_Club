@@ -1,16 +1,13 @@
-import React, { useEffect } from "react";
-import { connect } from "react-redux";
-import { useParams } from "react-router-dom";
-import { initializeSingleArtwork } from "../../reducers/actionCreators/singleArtworkActions";
+import React, { useEffect } from 'react'
+import { connect } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { initializeSingleArtwork } from '../../reducers/actionCreators/singleArtworkActions'
 
-export const SingleArtwork = ({
-  artwork,
-  initializeSingleArtwork,
-}) => {
-  const { id } = useParams();
+export const SingleArtwork = ({ artwork, initializeSingleArtwork }) => {
+  const { id } = useParams()
   useEffect(() => {
-    initializeSingleArtwork(id);
-  }, [id]);
+    initializeSingleArtwork(id)
+  }, [id])
 
   return (
     <div className="singleArtwork">
@@ -18,27 +15,27 @@ export const SingleArtwork = ({
         <div>
           <img
             src={artwork.galleryImage}
-            width="700"
+            style={{ maxWidth: '100%' }}
             height="auto"
             className="singlePicture"
             alt="img"
           />
           <p>
             {artwork.name} by {artwork.artist}, year: {artwork.year}, size:
-            {artwork.size}, medium:{artwork.medium}{" "}
+            {artwork.size}, medium:{artwork.medium}{' '}
           </p>
         </div>
       )}
     </div>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     artwork: state.singleArtwork.singleArtwork,
-  };
-};
+  }
+}
 
 export default connect(mapStateToProps, {
   initializeSingleArtwork,
-})(SingleArtwork);
+})(SingleArtwork)

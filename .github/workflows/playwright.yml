@@ -52,8 +52,12 @@ jobs:
           PORT: 3001
         run: npm run start:test &
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
       - name: Install frontend dependencies
-        run: npm ci
+        run: npm install
 
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
@@ -62,7 +66,7 @@ jobs:
         env:
           BROWSER: none
           CI: false
-        run: npm start &
+        run: npm run dev
 
       - name: Wait for servers
         run: npx wait-on http://localhost:3000 http://localhost:3001/api/health --timeout 60000

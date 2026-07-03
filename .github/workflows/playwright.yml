@@ -49,8 +49,9 @@ jobs:
         env:
           MONGODB_URI: mongodb://localhost:27017/artclub_test
           SECRET: ${{ secrets.TEST_SECRET }}
+          TEST_SECRET: ${{ secrets.TEST_SECRET }}
           PORT: 3001
-        run: npm run start:test &
+        run: nohup npm run start:test > backend.log 2>&1 &
 
       - uses: actions/setup-node@v4
         with:
@@ -69,7 +70,12 @@ jobs:
         run: nohup npm run dev > frontend.log 2>&1 &
 
       - name: Wait for servers
-        run: npx wait-on http://localhost:3000 http://localhost:3001/api/health --timeout 60000
+        run: npx wait-on http://localhost:3000 tcp:3001 --timeout 120000
+
+      - name: Show backend logs on failure
+        if: failure()
+        working-directory: backend
+        run: tail -n 200 backend.log || true
 
       - name: Run Playwright tests
         run: npx playwright test

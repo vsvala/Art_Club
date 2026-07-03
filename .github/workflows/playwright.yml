@@ -36,7 +36,7 @@ jobs:
           path: backend
 
       - name: Install backend dependencies
-        run: npm install && npm install bcrypt@latest
+        run: npm install
         working-directory: backend
 
       - name: Start backend

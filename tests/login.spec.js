@@ -1,7 +1,9 @@
 import { test, expect } from '@playwright/test'
 import { loginWith } from './helper'
 
-const API = 'http://localhost:3001/api'
+const API = process.env.PLAYWRIGHT_API_URL || 'http://127.0.0.1:3001/api'
+const FRONTEND_URL =
+  process.env.PLAYWRIGHT_FRONTEND_URL || 'http://127.0.0.1:3000'
 
 test.describe('Art Club app', () => {
   test.beforeEach(async ({ page, request }) => {
@@ -24,7 +26,7 @@ test.describe('Art Club app', () => {
         role: 'admin',
       },
     })
-    await page.goto('http://localhost:3000')
+    await page.goto(FRONTEND_URL)
   })
 
   test('front page can be opened', async ({ page }) => {

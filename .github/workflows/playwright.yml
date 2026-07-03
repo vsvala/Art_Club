@@ -72,13 +72,20 @@ jobs:
       - name: Wait for servers
         run: npx wait-on http://localhost:3000 tcp:3001 --timeout 120000
 
+      - name: Run Playwright tests
+        env:
+          PLAYWRIGHT_API_URL: http://127.0.0.1:3001/api
+          PLAYWRIGHT_FRONTEND_URL: http://127.0.0.1:3000
+        run: npx playwright test
+
       - name: Show backend logs on failure
         if: failure()
         working-directory: backend
         run: tail -n 200 backend.log || true
 
-      - name: Run Playwright tests
-        run: npx playwright test
+      - name: Show frontend logs on failure
+        if: failure()
+        run: tail -n 200 frontend.log || true
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}

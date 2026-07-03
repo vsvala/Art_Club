@@ -27,6 +27,7 @@ import PrivateRoute from './components/common/PrivateRoute'
 import Notification from './components/common/Notification'
 import GDPRInfo from './components/common/GDPRInfo'
 import TermsOfUse from './components/common/TermsOfUse'
+import NotFound from './components/common/NotFound'
 
 const App = (props) => {
   useEffect(() => {
@@ -243,6 +244,7 @@ const App = (props) => {
               <Route path="/privacy" element={<GDPRInfo />} />
               <Route path="/terms" element={<TermsOfUse />} />
               <Route path="/nonMember" element={<NonMember />} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </div>
         </React.Fragment>

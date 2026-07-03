@@ -241,6 +241,42 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ---
 
+## Future Improvements
+
+### Security & Auth
+
+- **Input validation** — add express-validator or joi to validate field formats (email, max lengths, required fields) at the API boundary instead of relying on Mongoose errors
+- **Token refresh** — implement refresh token pattern so users stay logged in securely beyond the current 10 h JWT expiry
+
+### Architecture
+
+- **Service layer** — move business logic out of controllers into a dedicated service layer (`services/artworkService.js` etc.) for better testability and separation of concerns
+- **Consistent error handling** — unify inline error handling and `next(error)` patterns so all API error responses follow the same shape
+- **Pagination** — `GET /api/artworks` returns all records; add `?page` and `?limit` query params for scalability
+
+### Scalability
+
+- **Pagination** is listed above under Architecture — foundational for handling large datasets
+- **Image optimization** — serve resized/compressed variants from Cloudinary instead of original uploads (reduce bandwidth per request)
+- **Caching** — add response caching (e.g. Redis or HTTP cache headers) for frequently read, rarely changed data such as the public artwork and artist lists
+- **Database indexing** — add indexes on frequently queried fields (e.g. `artworks.artist`, `users.role`) to keep MongoDB queries fast as the dataset grows
+- **Rate limiting** — add express-rate-limit to the API to protect against abuse and unintended load spikes
+- **Horizontal scaling** — stateless JWT auth already allows running multiple backend instances behind a load balancer; move session/token state fully out of memory if needed
+
+### Production readiness
+
+- Add Sentry error tracking for production error visibility
+- Add audit logging for admin actions and security-relevant events (role changes, user deletions)
+- Migrate JWT from localStorage to httpOnly cookies (see below)
+
+### JWT storage
+
+JWT tokens are currently stored in `localStorage`, which is accessible to JavaScript and therefore vulnerable to XSS attacks. A more secure alternative is to use httpOnly cookies, which cannot be read by JavaScript at all.
+
+Migrating to cookie-based auth requires changes on both sides: the backend would set and read the token via a cookie instead of the `Authorization` header, and the frontend would stop managing the token manually. This is a larger refactor and has been left as a future improvement.
+
+---
+
 ## License
 
 [MIT](https://github.com/vsvala/Art_Club/blob/master/documentation/MIT_license.md)

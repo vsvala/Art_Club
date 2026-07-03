@@ -4,9 +4,9 @@
 
 The project uses two separate GitHub repositories:
 
-| Repo | Role |
-|---|---|
-| `Art_Club` (frontend) | React SPA — tests, builds, pushes the build to the backend repo |
+| Repo                      | Role                                                             |
+| ------------------------- | ---------------------------------------------------------------- |
+| `Art_Club` (frontend)     | React SPA — tests, builds, pushes the build to the backend repo  |
 | `Art_Club_back` (backend) | Node.js/Express — tests, deploys to Render, creates version tags |
 
 In production, the frontend is served as a static build from the backend. The CI/CD pipeline automates building the frontend and deploying the combined app to Render.com.
@@ -48,18 +48,20 @@ File: `.github/workflows/ci.yml`
 ### Jobs
 
 #### `ci-build-and-test`
+
 Runs on every push and pull request.
 
-| Step | Command |
-|---|---|
-| Install | `npm ci` |
-| Lint | `npm run lint` |
-| Test | `npm test` |
-| Build | `npm run build` |
-| Security audit | `npm audit --audit-level=high` |
+| Step            | Command                           |
+| --------------- | --------------------------------- |
+| Install         | `npm ci`                          |
+| Lint            | `npm run lint`                    |
+| Test            | `npm test`                        |
+| Build           | `npm run build`                   |
+| Security audit  | `npm audit --audit-level=high`    |
 | Upload artifact | saves `build/` for the deploy job |
 
 #### `deploy-to-backend`
+
 Runs only on push to `master` (not on pull requests). Skipped if commit message contains `#skip`.
 
 1. Downloads the `build/` artifact from the previous job
@@ -92,22 +94,54 @@ Spins up a real MongoDB instance as a service container so integration tests hit
 | `TEST_MONGODB_URI` | `mongodb://localhost:27017/art_club_test` |
 | `SECRET` | `secrets.SECRET` (JWT signing secret) |
 
-| Step | Command |
-|---|---|
-| Install | `npm ci` |
-| Lint | `npm run lint` |
-| Test | `npm test -- --forceExit` |
+| Step           | Command                        |
+| -------------- | ------------------------------ |
+| Install        | `npm ci`                       |
+| Lint           | `npm run lint`                 |
+| Test           | `npm test -- --forceExit`      |
 | Security audit | `npm audit --audit-level=high` |
 
 `--forceExit` ensures Jest exits after tests complete even if the MongoDB connection is still open.
 
 #### `deploy`
+
 Runs only on push to `master`. Skipped if commit message contains `#skip`.
 
 Sends an HTTP POST to the Render deploy hook URL, which triggers a new production build on Render.com.
 
 #### `tag_release`
+
 Runs after `deploy` succeeds. Automatically bumps the patch version and pushes a git tag (e.g. `v1.0.4 → v1.0.5`) using [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action).
+
+---
+
+## Playwright E2E Workflow (`Art_Club`)
+
+File: `.github/workflows/playwright.yml`
+
+**Triggers:** push or pull request to `master`
+
+This workflow runs separately from the build/deploy pipeline above. It handles only end-to-end browser tests and does not push the frontend build to the backend repo.
+
+### Job
+
+#### `test`
+
+Runs the backend and frontend in test mode, waits for both services to become available, then executes the Playwright suite.
+
+| Step                          | Purpose                                                                     |
+| ----------------------------- | --------------------------------------------------------------------------- |
+| Checkout backend              | Pulls `Art_Club_back` into the workflow workspace                           |
+| Install backend dependencies  | Uses `npm ci` when a lockfile exists, otherwise falls back to `npm install` |
+| Start backend                 | Starts the backend in `NODE_ENV=test` with `TEST_MONGODB_URI` and `SECRET`  |
+| Install frontend dependencies | Installs the frontend packages                                              |
+| Install Playwright Browsers   | Downloads the browser binaries needed for E2E                               |
+| Start frontend                | Runs the React dev server in the background                                 |
+| Wait for servers              | Waits for the frontend and backend to be reachable                          |
+| Run Playwright tests          | Executes `npx playwright test` against the live app                         |
+| Upload report                 | Stores the HTML report as a GitHub Actions artifact                         |
+
+For the local version of these E2E tests, see [Testing](documentation/tests.md).
 
 ---
 
@@ -115,16 +149,16 @@ Runs after `deploy` succeeds. Automatically bumps the patch version and pushes a
 
 ### `Art_Club` repo (frontend)
 
-| Secret | Description | Where to get it |
-|---|---|---|
+| Secret               | Description                                                        | Where to get it                                                                                                     |
+| -------------------- | ------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------- |
 | `BACKEND_REPO_TOKEN` | GitHub Personal Access Token with `repo` scope for `Art_Club_back` | GitHub → Settings → Developer settings → Personal access tokens → Generate new token (classic), select `repo` scope |
 
 ### `Art_Club_back` repo (backend)
 
-| Secret | Description | Where to get it |
-|---|---|---|
-| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook URL | Render dashboard → Your service → Settings → Deploy Hook |
-| `SECRET` | JWT signing secret used in tests | Any strong random string — same value as in your production environment |
+| Secret                   | Description                      | Where to get it                                                         |
+| ------------------------ | -------------------------------- | ----------------------------------------------------------------------- |
+| `RENDER_DEPLOY_HOOK_URL` | Render deploy hook URL           | Render dashboard → Your service → Settings → Deploy Hook                |
+| `SECRET`                 | JWT signing secret used in tests | Any strong random string — same value as in your production environment |
 
 ---
 

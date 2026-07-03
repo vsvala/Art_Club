@@ -226,15 +226,18 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Security Policy](.github/SECURITY.md)
 - [CI/CD Pipeline](documentation/ci_cd.md)
 
+Playwright E2E tests run separately in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
+
 ---
 
 ## Roadmap
 
+- [ ] Fix mobile UI responsiveness across all pages
+- [ ] Add curated links for artists (exhibitions, galleries) to Links page
 - [x] Expand frontend test coverage for critical user flows
 - [x] CI/CD pipeline with github actions
 - [x] Real-time weather data from Open-Meteo API to Links page
-- [ ] Add curated links for artists (exhibitions, galleries) to Links page
-- [x ] Add Playwright E2E smoke tests (public routes and authentication flow)
+- [x] Add Playwright E2E smoke tests (public routes and authentication flow)
 
 ---
 

@@ -47,7 +47,6 @@ jobs:
       - name: Start backend
         working-directory: backend
         env:
-          MONGODB_URI: mongodb://127.0.0.1:27017/artclub_test
           TEST_MONGODB_URI: mongodb://127.0.0.1:27017/artclub_test
           SECRET: ${{ secrets.TEST_SECRET }}
           TEST_SECRET: ${{ secrets.TEST_SECRET }}

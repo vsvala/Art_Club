@@ -26,7 +26,7 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 18
 
       - name: Checkout backend
         uses: actions/checkout@v4
@@ -36,14 +36,19 @@ jobs:
           path: backend
 
       - name: Install backend dependencies
-        run: npm install
+        run: |
+          if [ -f package-lock.json ]; then
+            npm ci
+          else
+            npm install
+          fi
         working-directory: backend
 
       - name: Start backend
         working-directory: backend
         env:
           MONGODB_URI: mongodb://localhost:27017/artclub_test
-          SECRET: ${{ secrets.SECRET }}
+          SECRET: ${{ secrets.TEST_SECRET }}
           PORT: 3001
         run: npm run start:test &
 

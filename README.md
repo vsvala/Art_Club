@@ -236,6 +236,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 ## Roadmap
 
 - [ ] Show welcome greeting with user name and role on home page after login
+- [ ] Show waitinng aproved page after registeration
 - [ ] Add curated links for artists (exhibitions, galleries) to Links page
 - [ ] Clean up event date/time formatting for consistent display
 - [ ] Re-render updated data immediately after admin actions (user role changes, deletions)

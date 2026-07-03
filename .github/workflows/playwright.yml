@@ -66,7 +66,7 @@ jobs:
         env:
           BROWSER: none
           CI: false
-        run: npm run dev
+        run: nohup npm run dev > frontend.log 2>&1 &
 
       - name: Wait for servers
         run: npx wait-on http://localhost:3000 http://localhost:3001/api/health --timeout 60000

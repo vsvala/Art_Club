@@ -7,10 +7,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from 'react-router-dom'
 
-export const EventForm = ({
-  createEvent,
-  id,
-}) => {
+export const EventForm = ({ createEvent }) => {
   const navigate = useNavigate()
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({})
@@ -28,7 +25,6 @@ export const EventForm = ({
     data.append('start', state.startDate)
     data.append('end', state.endDate)
     data.append('description', input.description)
-    data.append('userId', id)
 
     createEvent(data)
     navigate('/users/events')

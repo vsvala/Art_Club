@@ -57,7 +57,6 @@ export const AddArtworkForm = ({
       data.append('year', event.target.year.value)
       data.append('size', event.target.size.value)
       data.append('medium', event.target.medium.value)
-      data.append('userId', id)
 
       createArtwork(data)
       navigate(`/users/${id}/myPage`)

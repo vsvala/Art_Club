@@ -152,6 +152,7 @@ export const AddArtworkForm = ({
           className="fileUploader"
           name="galleryImage"
           id="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
           onChange={fileSelectedHandler}
         />
         <div className="ImageInfoText">

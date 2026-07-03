@@ -5,13 +5,13 @@ const baseUrl = url + 'api/events'
 
 let token = null
 
-const setToken = newToken => {
-  token = newToken ? `bearer ${newToken}` : null
+const setToken = (newToken) => {
+  token = newToken ? `Bearer ${newToken}` : null
 }
 
 const getConfig = () => {
   return {
-    headers: { 'Authorization': token }
+    headers: { Authorization: token },
   }
 }
 

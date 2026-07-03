@@ -144,6 +144,7 @@ export const EventForm = ({
           className="fileUploader"
           name="eventImage"
           id="file"
+          accept="image/jpeg,image/png,image/gif,image/webp"
           onChange={fileSelectedHandler}
         />
       </Container>

@@ -206,7 +206,7 @@ const App = (props) => {
               <Route
                 element={
                   <PrivateRoute
-                    condition={!!loggedUser}
+                    condition={isMember || isAdmin}
                     redirectPath="/login"
                   />
                 }

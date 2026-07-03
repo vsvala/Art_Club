@@ -4,13 +4,13 @@ const baseUrl = '/api/artworks'
 
 let token = null
 
-const setToken = newToken => {
-  token = newToken ? `bearer ${newToken}` : null
+const setToken = (newToken) => {
+  token = newToken ? `Bearer ${newToken}` : null
 }
 
 const getConfig = () => {
   return {
-    headers: { 'Authorization': token }
+    headers: { Authorization: token },
   }
 }
 
@@ -73,4 +73,11 @@ const deleteArtwork = async (id) => {
   }
 }
 
-export default { getAll, create, update, setToken, deleteArtwork, getSingleArtwork }
+export default {
+  getAll,
+  create,
+  update,
+  setToken,
+  deleteArtwork,
+  getSingleArtwork,
+}

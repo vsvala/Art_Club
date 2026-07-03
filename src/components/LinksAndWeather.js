@@ -107,7 +107,7 @@ const LinksAndWeather = () => {
             <ul>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={
                     'https://www.myhelsinki.fi/?s&post_type%5B%5D=place&place_category%5B%5D=galleries'
@@ -118,7 +118,7 @@ const LinksAndWeather = () => {
               </li>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={'https://www.amosrex.fi/'}
                 >
@@ -127,7 +127,7 @@ const LinksAndWeather = () => {
               </li>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={'https://www.kiasma.fi/'}
                 >
@@ -136,7 +136,7 @@ const LinksAndWeather = () => {
               </li>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={'https://www.ateneum.fi/'}
                 >
@@ -145,7 +145,7 @@ const LinksAndWeather = () => {
               </li>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={'https://www.hamhelsinki.fi/'}
                 >
@@ -154,7 +154,7 @@ const LinksAndWeather = () => {
               </li>
               <li>
                 <a
-                  target="blank"
+                  target="_blank"
                   rel="noopener noreferrer"
                   href={'https://www.sinebrychoffintaidemuseo.fi/'}
                 >

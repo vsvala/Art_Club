@@ -5,12 +5,12 @@ const baseUrl = url + 'api/users'
 
 let token = null
 
-const setToken = newToken => {
-  token = newToken ? `bearer ${newToken}` : null
+const setToken = (newToken) => {
+  token = newToken ? `Bearer ${newToken}` : null
 }
 const getConfig = () => {
   return {
-    headers: { 'Authorization': token }
+    headers: { Authorization: token },
   }
 }
 
@@ -79,7 +79,11 @@ const update = async (content) => {
 
 const updateIntro = async (content, id) => {
   try {
-    const response = await axios.put(baseUrl + `/intro/${id}`, content, getConfig())
+    const response = await axios.put(
+      baseUrl + `/intro/${id}`,
+      content,
+      getConfig(),
+    )
     return response.data
   } catch (error) {
     return { error: 'Users introduction text could not be updated' }
@@ -88,7 +92,11 @@ const updateIntro = async (content, id) => {
 
 const updateUser = async (content) => {
   try {
-    const response = await axios.put(baseUrl + `/info/${content.id}`, content, getConfig())
+    const response = await axios.put(
+      baseUrl + `/info/${content.id}`,
+      content,
+      getConfig(),
+    )
     return response.data
   } catch (error) {
     return { error: 'User info could not be updated' }
@@ -101,7 +109,11 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   }
   if (newPassword === confirm) {
     try {
-      const response = await axios.put(baseUrl + '/password', { oldPassword, newPassword }, getConfig())
+      const response = await axios.put(
+        baseUrl + '/password',
+        { oldPassword, newPassword },
+        getConfig(),
+      )
       return response.data
     } catch (error) {
       return { error: 'Old password is incorrect!' }
@@ -120,4 +132,15 @@ const deleteUser = async (id) => {
   }
 }
 
-export default { getAll, getSingleUser, update, updateIntro, updateUser, create, deleteUser, setToken, updatePassword, getAllArtists }
+export default {
+  getAll,
+  getSingleUser,
+  update,
+  updateIntro,
+  updateUser,
+  create,
+  deleteUser,
+  setToken,
+  updatePassword,
+  getAllArtists,
+}

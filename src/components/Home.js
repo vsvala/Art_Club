@@ -10,6 +10,19 @@ export const Home = (props) => {
     updateLoggedUser()
   }, [])
 
+  useEffect(() => {
+    if (process.env.NODE_ENV !== 'production') {
+      return
+    }
+
+    const params = new URLSearchParams(window.location.search)
+    if (params.get('sentry_test') === '1') {
+      Sentry.captureException(
+        new Error('Sentry production source map test error'),
+      )
+    }
+  }, [])
+
   const sendSentryTestError = () => {
     Sentry.captureException(new Error('Sentry frontend test error'))
   }

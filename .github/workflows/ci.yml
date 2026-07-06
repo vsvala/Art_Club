@@ -38,8 +38,13 @@ jobs:
       - name: Build
         env:
           REACT_APP_SENTRY_RELEASE: ${{ github.sha }}
-          REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN }}
-        run: npm run build
+          REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN || vars.REACT_APP_SENTRY_DSN }}
+        run: |
+          if [ -z "$REACT_APP_SENTRY_DSN" ]; then
+            echo "::error::REACT_APP_SENTRY_DSN is missing. Set it in repository Secrets or Variables."
+            exit 1
+          fi
+          npm run build
 
       - name: Upload sourcemaps to Sentry
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'

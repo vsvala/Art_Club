@@ -229,6 +229,12 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Security Policy](.github/SECURITY.md)
 - [CI/CD Pipeline](documentation/ci_cd.md)
 
+### Observability
+
+- Sentry is enabled in the frontend for production error tracking.
+- CI uploads release metadata and sourcemaps on `master` pushes so stack traces can be mapped to original source.
+- Setup details: [CI/CD Pipeline](documentation/ci_cd.md)
+
 Playwright E2E tests run separately in [.github/workflows/playwright.yml](.github/workflows/playwright.yml).
 
 ---
@@ -273,7 +279,6 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### Production readiness
 
-- Add Sentry error tracking for production error visibility
 - Add audit logging for admin actions and security-relevant events (role changes, user deletions)
 - Migrate JWT from localStorage to httpOnly cookies (see below)
 

@@ -74,7 +74,7 @@ test.describe('Art Club app', () => {
       await page.getByPlaceholder('Medium').fill('oil on canvas')
       await page
         .locator('input[type="file"]')
-        .setInputFiles('tests/test-image.png')
+        .setInputFiles('e2e-tests/test-image.png')
       await page.getByRole('button', { name: 'Send' }).click()
       await page.waitForURL('**/myPage')
 

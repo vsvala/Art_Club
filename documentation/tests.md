@@ -8,7 +8,7 @@ The ArtClub frontend uses three levels of automated testing:
 | ----------------- | -------------------------------- | ----------------------- |
 | Unit tests        | Jest + React Testing Library     | `src/test/`             |
 | Integration tests | Jest + MSW (Mock Service Worker) | `src/test/integration/` |
-| E2E tests         | Playwright (Chromium)            | `tests/`                |
+| E2E tests         | Playwright (Chromium)            | `e2e-tests/`            |
 
 ---
 
@@ -17,10 +17,10 @@ The ArtClub frontend uses three levels of automated testing:
 | Tool                          | Purpose                                                                                                                                              |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Jest**                      | Test runner, assertions, and mocking. Bundled with `react-scripts` — no separate install needed.                                                     |
-| **@testing-library/react**    | Renders React components into a real DOM and queries them the way a user would, without testing internal implementation details.                      |
+| **@testing-library/react**    | Renders React components into a real DOM and queries them the way a user would, without testing internal implementation details.                     |
 | **@testing-library/jest-dom** | Adds DOM-specific matchers such as `toBeInTheDocument`, `toHaveValue`, and `toBeVisible`.                                                            |
-| **deep-freeze**               | Freezes Redux state objects before passing them to reducers, causing an error if a reducer mutates state directly instead of returning a new object.  |
-| **MSW (Mock Service Worker)** | Intercepts `fetch`/`axios` requests at the network level and returns mock responses. Used in integration tests so no real backend is needed.          |
+| **deep-freeze**               | Freezes Redux state objects before passing them to reducers, causing an error if a reducer mutates state directly instead of returning a new object. |
+| **MSW (Mock Service Worker)** | Intercepts `fetch`/`axios` requests at the network level and returns mock responses. Used in integration tests so no real backend is needed.         |
 | **Playwright**                | Launches a real Chromium browser and drives it programmatically for end-to-end tests.                                                                |
 
 ---
@@ -86,25 +86,30 @@ Covered reducers: `artworkReducer`, `userReducer`, `loginReducer`, `eventReducer
 Uses `@testing-library/react` with Redux store and `MemoryRouter`.
 
 **Notification**
+
 - Returns `null` when notification string is empty
 - Shows message when notification is set
 
 **PrivateRoute**
+
 - `condition === false` → redirects to `redirectPath`
 - `condition === true` → renders child component
 
 **Home**
+
 - Unauthenticated user → shows Login and Register links
 - `nonMember` user → shows "awaiting approval" message
 - Member / admin → shows welcome message
 
 **LoginForm**
+
 - Renders without crashing
 - Username and password fields are present
 - Submit button is present
 - If `loggedUser` is already set in store → redirects
 
 **RegisterUserForm**
+
 - All required fields are present (name, username, email, password, confirm password)
 - Invalid email → shows validation error
 - Passwords do not match → shows error
@@ -132,7 +137,7 @@ E2E tests run a real Chromium browser against the live development server. They 
 ### Configuration
 
 - Config: `playwright.config.js`
-- Test directory: `tests/`
+- Test directory: `e2e-tests/`
 - Browser: Chromium
 - Retries: 2 on CI, 0 locally
 - Reporter: HTML
@@ -157,37 +162,37 @@ Seeded test users:
 
 Cloudinary is bypassed in test mode — artwork uploads save a placeholder URL instead of calling the Cloudinary API.
 
-### Helper — `tests/helper.js`
+### Helper — `e2e-tests/helper.js`
 
 `loginWith(page, username, password)` — navigates to the login page, fills in credentials, and submits the form.
 
 ### Test files
 
-#### `tests/public-pages.spec.js`
+#### `e2e-tests/public-pages.spec.js`
 
 Verifies that all public routes load without errors (no error title). Tested routes: `/`, `/artworks`, `/artists`, `/links`, `/register`, `/login`.
 
-#### `tests/auth-guards.spec.js`
+#### `e2e-tests/auth-guards.spec.js`
 
 Verifies that protected routes redirect unauthenticated users to `/login`. Tested routes:
 
-| Route                | Guard              |
-| -------------------- | ------------------ |
-| `/users/addArtwork`  | logged in          |
-| `/users/events`      | logged in          |
-| `/admin/users`       | admin only         |
-| `/admin/addEvent`    | admin only         |
+| Route               | Guard      |
+| ------------------- | ---------- |
+| `/users/addArtwork` | logged in  |
+| `/users/events`     | logged in  |
+| `/admin/users`      | admin only |
+| `/admin/addEvent`   | admin only |
 
-#### `tests/login.spec.js`
+#### `e2e-tests/login.spec.js`
 
-| Test                               | What is verified                                                    |
-| ---------------------------------- | ------------------------------------------------------------------- |
-| front page can be opened           | `Welcome To Art Club!` heading is visible                           |
-| user can log in as member          | After login: Add artwork, Logout, and MyPage links are visible      |
-| user can log out                   | After logout: Login link reappears in navbar                        |
-| user can log in as admin           | After login: Users and Logout links are visible                     |
-| admin can navigate to users list   | Clicking Users link shows the Users heading                         |
-| admin can add and delete artwork   | Full form submission → artwork appears in gallery → delete removes it |
+| Test                             | What is verified                                                      |
+| -------------------------------- | --------------------------------------------------------------------- |
+| front page can be opened         | `Welcome To Art Club!` heading is visible                             |
+| user can log in as member        | After login: Add artwork, Logout, and MyPage links are visible        |
+| user can log out                 | After logout: Login link reappears in navbar                          |
+| user can log in as admin         | After login: Users and Logout links are visible                       |
+| admin can navigate to users list | Clicking Users link shows the Users heading                           |
+| admin can add and delete artwork | Full form submission → artwork appears in gallery → delete removes it |
 
 ---
 

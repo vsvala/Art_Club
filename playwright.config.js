@@ -13,7 +13,7 @@ import { defineConfig, devices } from '@playwright/test'
  * @see https://playwright.dev/docs/test-configuration
  */
 export default defineConfig({
-  testDir: './tests',
+  testDir: './e2e-tests',
   /* Run tests in files in parallel */
   //all tests be executed one at a time. With the default configuration, the execution happens in parallel, and since our tests use a database, parallel execution causes problems.
   fullyParallel: false,

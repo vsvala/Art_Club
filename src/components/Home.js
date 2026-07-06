@@ -17,9 +17,14 @@ export const Home = (props) => {
 
     const params = new URLSearchParams(window.location.search)
     if (params.get('sentry_test') === '1') {
-      Sentry.captureException(
+      const eventId = Sentry.captureException(
         new Error('Sentry production source map test error'),
       )
+
+      Sentry.flush(5000).then((ok) => {
+        // Console output is intentional for one-off production validation with ?sentry_test=1.
+        console.log('[Sentry test] eventId:', eventId, 'flush:', ok)
+      })
     }
   }, [])
 

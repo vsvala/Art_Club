@@ -34,7 +34,23 @@ jobs:
         run: npm run test-coverage
 
       - name: Build
+        env:
+          REACT_APP_SENTRY_RELEASE: ${{ github.sha }}
+          REACT_APP_SENTRY_DSN: ${{ secrets.REACT_APP_SENTRY_DSN }}
         run: npm run build
+
+      - name: Upload sourcemaps to Sentry
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        env:
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          SENTRY_ORG: ${{ secrets.SENTRY_ORG }}
+          SENTRY_PROJECT: ${{ secrets.SENTRY_PROJECT }}
+          RELEASE: ${{ github.sha }}
+        run: |
+          npx sentry-cli releases new "$RELEASE"
+          npx sentry-cli releases set-commits "$RELEASE" --auto
+          npx sentry-cli sourcemaps upload --release "$RELEASE" --url-prefix "~/static/js" build/static/js
+          npx sentry-cli releases finalize "$RELEASE"
 
       # Epäonnistuu vain High- tai Critical-tason haavoittuvuuksista
       - name: Security audit

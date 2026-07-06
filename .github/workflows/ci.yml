@@ -15,6 +15,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node
         uses: actions/setup-node@v4
@@ -48,7 +50,7 @@ jobs:
           RELEASE: ${{ github.sha }}
         run: |
           npx --yes @sentry/cli releases new "$RELEASE"
-          npx --yes @sentry/cli releases set-commits "$RELEASE" --auto
+          npx --yes @sentry/cli releases set-commits "$RELEASE" --auto --ignore-missing
           npx --yes @sentry/cli sourcemaps upload --release "$RELEASE" --url-prefix "~/static/js" build/static/js
           npx --yes @sentry/cli releases finalize "$RELEASE"
 

@@ -10,34 +10,6 @@ export const Home = (props) => {
     updateLoggedUser()
   }, [])
 
-  useEffect(() => {
-    const params = new URLSearchParams(window.location.search)
-    if (params.get('sentry_test') !== '1') {
-      return
-    }
-
-    const env = process.env.NODE_ENV || 'unknown'
-    const hasDsn = Boolean(process.env.REACT_APP_SENTRY_DSN)
-
-    // Console output is intentional for one-off validation with ?sentry_test=1.
-    console.log('[Sentry test] trigger detected', { env, hasDsn })
-
-    if (!hasDsn) {
-      console.warn(
-        '[Sentry test] REACT_APP_SENTRY_DSN is missing in this build',
-      )
-      return
-    }
-
-    const eventId = Sentry.captureException(
-      new Error('Sentry production source map test error'),
-    )
-
-    Sentry.flush(5000).then((ok) => {
-      console.log('[Sentry test] eventId:', eventId, 'flush:', ok)
-    })
-  }, [])
-
   const sendSentryTestError = () => {
     Sentry.captureException(new Error('Sentry frontend test error'))
   }

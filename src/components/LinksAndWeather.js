@@ -1,7 +1,4 @@
 import React, { useState, useEffect } from 'react'
-
-import { connect } from 'react-redux'
-import userActions from '../reducers/actionCreators/userActions'
 import { Form, Button } from 'react-bootstrap'
 import {} from '../reducers/actionCreators/notificationActions'
 import { getWeatherIcon, getWeatherText } from '../utils/weatherUtils'
@@ -168,4 +165,4 @@ const LinksAndWeather = () => {
   )
 }
 
-export default connect(null, { ...userActions })(LinksAndWeather)
+export default LinksAndWeather

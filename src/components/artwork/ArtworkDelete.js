@@ -6,9 +6,9 @@ import { Button } from 'react-bootstrap'
 
 const ArtworkDelete = ({ artwork, deleteArtwork }) => {
   const removeArtwork = (id) => {
-    return async () => {
+    return () => {
       if (window.confirm('Do you want to delete this artwork?')) {
-        await deleteArtwork(id)
+        deleteArtwork(id)
       }
     }
   }

@@ -22,12 +22,8 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
         </thead>
 
         <tbody>
-          { artistsToShow && artistsToShow.map(user =>
-            <Artist user={user}
-              key={user.id}
-              artworks={user.artworks}
-            />
-          )}
+          {artistsToShow &&
+            artistsToShow.map((user) => <Artist user={user} key={user.id} />)}
         </tbody>
       </Table>
     </div>
@@ -36,11 +32,8 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
 
 const mapStateToProps = (state) => {
   return {
-    artistsToShow: state.users.users
+    artistsToShow: state.users.users,
   }
 }
 
-export default connect(
-  mapStateToProps,
-  { getArtists }
-)(ArtistList)
+export default connect(mapStateToProps, { getArtists })(ArtistList)

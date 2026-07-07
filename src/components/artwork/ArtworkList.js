@@ -52,9 +52,9 @@ export const ArtworkList = ({
   }
 
   const removeArtwork = (id) => {
-    return async () => {
+    return () => {
       if (window.confirm('Do you want to delete this artwork?')) {
-        await deleteArtwork(id)
+        deleteArtwork(id)
       }
     }
   }

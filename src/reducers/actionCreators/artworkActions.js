@@ -22,13 +22,16 @@ export const initializeArtworks = () => {
 export const createArtwork = (content) => {
   return async (dispatch) => {
     const artwork = await artworkService.create(content)
-    if (artwork.error || artwork === undefined) {
+    if (artwork.error || !artwork) {
       dispatch({ type: 'NOTIFY', data: 'Saving failed!' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+      return { success: false, error: artwork?.error || 'Saving failed!' }
     } else {
       dispatch({ type: 'CREATE_ARTWORK', data: artwork })
       dispatch({ type: 'NOTIFY', data: 'Artwork added' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+
+      return { success: true, data: artwork }
     }
   }
 }

@@ -16,6 +16,23 @@ export const SingleUser = ({
 }) => {
   const { id: paramId } = useParams()
   const resolvedId = userId || paramId
+  const normalizeId = (value) =>
+    value !== undefined && value !== null ? String(value) : ''
+  const isOwner =
+    loggedUser && resolvedId
+      ? normalizeId(loggedUser.id) === normalizeId(resolvedId)
+      : false
+  const canViewAccountInfo = Boolean(
+    loggedUser && (isOwner || loggedUser.role === 'admin'),
+  )
+  const accountInfoUser = isOwner
+    ? {
+        ...singleUser,
+        username: singleUser?.username || loggedUser?.username,
+        email: singleUser?.email || loggedUser?.email,
+        role: singleUser?.role || loggedUser?.role,
+      }
+    : singleUser
 
   useEffect(() => {
     initializeSingleUser(resolvedId)
@@ -28,8 +45,7 @@ export const SingleUser = ({
           <div>
             <h2>{singleUser.name}</h2>
 
-            {loggedUser &&
-            (loggedUser.role === 'member' || loggedUser.role === 'admin') ? (
+            {canViewAccountInfo ? (
               <div>
                 <Table bordered responsive>
                   <thead>
@@ -45,10 +61,10 @@ export const SingleUser = ({
                   </thead>
                   <tbody>
                     <tr>
-                      <td>{singleUser.name}</td>
-                      <td>{singleUser.username}</td>
-                      <td>{singleUser.email}</td>
-                      <td>{singleUser.role}</td>
+                      <td>{accountInfoUser.name}</td>
+                      <td>{accountInfoUser.username}</td>
+                      <td>{accountInfoUser.email}</td>
+                      <td>{accountInfoUser.role}</td>
                       <td>
                         {singleUser.artworks && singleUser.artworks.length}/10
                         <Link to="/users/addArtwork" className="member">

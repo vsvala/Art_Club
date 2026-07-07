@@ -156,6 +156,7 @@ a:hover {
 .galleryHeader h2 {
   margin-bottom: 0;
 }
+
 .artworkGallery {
   display: flex;
   flex-wrap: wrap;

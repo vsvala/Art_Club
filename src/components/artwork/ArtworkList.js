@@ -52,9 +52,9 @@ export const ArtworkList = ({
   }
 
   const removeArtwork = (id) => {
-    return () => {
+    return async () => {
       if (window.confirm('Do you want to delete this artwork?')) {
-        deleteArtwork(id)
+        await deleteArtwork(id)
       }
     }
   }
@@ -64,6 +64,7 @@ export const ArtworkList = ({
       <h2 className="galleryTitle">Gallery</h2>
       <div className="galleryHeader">
         <Form.Control
+          style={{ margin: '0 auto', maxWidth: '300px' }}
           placeholder="Search artwork or artist"
           className="filterInput"
           value={filter.name}

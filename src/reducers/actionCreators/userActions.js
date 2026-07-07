@@ -20,10 +20,12 @@ export const updateUser = (content) => {
     if (response.error || response === undefined) {
       dispatch({ type: 'NOTIFY', data: response.error })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+      return { success: false, error: response?.error || 'Update failed!' }
     } else {
       dispatch({ type: 'UPDATE_USER', data: response })
       dispatch({ type: 'NOTIFY', data: 'Information updated' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+      return { success: true, data: response }
     }
   }
 }
@@ -79,4 +81,11 @@ export const initializeSingleUser = (id) => {
   }
 }
 
-export default { createUser, getUsers, deleteUser, updateRole, initializeSingleUser, getArtists }
+export default {
+  createUser,
+  getUsers,
+  deleteUser,
+  updateRole,
+  initializeSingleUser,
+  getArtists,
+}

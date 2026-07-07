@@ -1,24 +1,27 @@
-import React, { useState } from "react";
-import { notify } from "../../reducers/actionCreators/notificationActions";
-import { Form, Button } from "react-bootstrap";
-import { connect } from "react-redux";
-import { updateLoggedUser } from "../../reducers/actionCreators/loginActions";
+import React, { useState } from 'react'
+import { notify } from '../../reducers/actionCreators/notificationActions'
+import { Form, Button } from 'react-bootstrap'
+import { connect } from 'react-redux'
+import { updateLoggedUser } from '../../reducers/actionCreators/loginActions'
+import { useNavigate } from 'react-router-dom'
 
 export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
-  const [intro, setIntro] = useState(singleUser.intro);
+  const [intro, setIntro] = useState(singleUser.intro)
+  const navigate = useNavigate()
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    const input = { intro: intro };
+    event.preventDefault()
+    const input = { intro: intro }
     if (input.intro.length > 1000) {
       notify(
-        "Text is too long! Introduction text maximum length is 1000 characters",
+        'Text is too long! Introduction text maximum length is 1000 characters',
         5,
-      );
+      )
     } else {
-      updateLoggedUser(input, id);
+      updateLoggedUser(input, id)
+      navigate(`/users/${id}/myPage`)
     }
-  };
+  }
 
   return (
     <Form onSubmit={handleSubmit} className="intro">
@@ -41,16 +44,15 @@ export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
         Send
       </Button>
     </Form>
-  );
-};
+  )
+}
 
 const mapStateToProps = (state) => {
   return {
     singleUser: state.singleUser.singleUser,
-  };
-};
+  }
+}
 
-export default connect(
-  mapStateToProps,
-  { updateLoggedUser, notify },
-)(UserIntroForm);
+export default connect(mapStateToProps, { updateLoggedUser, notify })(
+  UserIntroForm,
+)

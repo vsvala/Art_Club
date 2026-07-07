@@ -6,18 +6,13 @@ import { emailValid } from '../../utils/validations'
 import { useNavigate } from 'react-router-dom'
 import { connect } from 'react-redux'
 
-export const UpdateUserForm = ({
-  updateUser,
-  id,
-  notify,
-  singleUser,
-}) => {
+export const UpdateUserForm = ({ updateUser, id, notify, singleUser }) => {
   const navigate = useNavigate()
   const [name, setName] = useState(singleUser.name)
   const [email, setEmail] = useState(singleUser.email)
   const [username, setUsername] = useState(singleUser.username)
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     const user = {
@@ -33,8 +28,10 @@ export const UpdateUserForm = ({
     } else if (user.username.length < 3) {
       notify('Username has to have at least 3 characters', 5)
     } else {
-      updateUser(user)
-      navigate('/')
+      const response = await updateUser(user)
+      if (response.success) {
+        navigate(`/users/${id}/myPage`)
+      }
     }
   }
 

@@ -34,7 +34,7 @@ export const AddArtworkForm = ({
   })
   const [galleryImage, setFile] = useState({})
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault()
 
     if (galleryImage.galleryImage === undefined) {
@@ -43,10 +43,10 @@ export const AddArtworkForm = ({
       notify('Artist name has to have at least 2 characters', 5)
     } else if (event.target.name.value.length <= 2) {
       notify('Artwork name has to have at least 2 characters', 5)
-    } else if (event.target.year.value.length <= 4) {
+    } else if (event.target.year.value.length <= 3) {
       notify('Year field has to have at least 4 numbers', 5)
-    } else if (event.target.size.value.length <= 3) {
-      notify('size field has to have at least 3 characters', 5)
+    } else if (event.target.size.value.length <= 2) {
+      notify('Size field has to have at least 3 characters', 5)
     } else if (event.target.medium.value.length <= 3) {
       notify('Medium field has to have at least 3 characters', 5)
     } else {
@@ -58,8 +58,10 @@ export const AddArtworkForm = ({
       data.append('size', event.target.size.value)
       data.append('medium', event.target.medium.value)
 
-      createArtwork(data)
-      navigate(`/users/${id}/myPage`)
+      const result = await createArtwork(data)
+      if (result?.success) {
+        navigate(`/users/${id}/myPage`)
+      }
     }
   }
 

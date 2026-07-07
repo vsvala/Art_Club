@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo } from 'react'
 import { connect } from 'react-redux'
 import {
   initializeArtworks,
@@ -16,7 +16,7 @@ export const ArtworkList = ({
   initializeArtworks,
   artworks,
   loggedUser,
-  filter,
+  artworkName,
   setArtworkName,
   voteArtwork,
 }) => {
@@ -24,19 +24,19 @@ export const ArtworkList = ({
     initializeArtworks()
   }, [])
 
-  const visibleArtworks = Array.isArray(artworks)
-    ? [...artworks]
-        .sort((a, b) => b.likes - a.likes)
-        .filter(
-          (artwork) =>
-            artwork.name
-              .toLowerCase()
-              .includes(filter.artworkName.toLowerCase()) ||
-            artwork.artist
-              .toLowerCase()
-              .includes(filter.artworkName.toLowerCase()),
-        )
-    : []
+  const visibleArtworks = useMemo(() => {
+    const normalizedArtworkName = (artworkName || '').toLowerCase()
+
+    return Array.isArray(artworks)
+      ? [...artworks]
+          .sort((a, b) => b.likes - a.likes)
+          .filter(
+            (artwork) =>
+              artwork.name.toLowerCase().includes(normalizedArtworkName) ||
+              artwork.artist.toLowerCase().includes(normalizedArtworkName),
+          )
+      : []
+  }, [artworks, artworkName])
 
   const handleArtworkNameChange = (event) => {
     event.preventDefault()
@@ -67,7 +67,7 @@ export const ArtworkList = ({
           style={{ margin: '0 auto', maxWidth: '300px' }}
           placeholder="Search artwork or artist"
           className="filterInput"
-          value={filter.name}
+          value={artworkName}
           onChange={handleArtworkNameChange}
         />
       </div>
@@ -116,9 +116,7 @@ const mapStateToProps = (state) => {
   return {
     artworks: state.artworks.artworks,
     loggedUser: state.loggedUser.loggedUser,
-    filter: {
-      artworkName: state.filter.artworkName,
-    },
+    artworkName: state.filter.artworkName,
   }
 }
 

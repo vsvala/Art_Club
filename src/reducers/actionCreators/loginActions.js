@@ -6,15 +6,27 @@ import tokenCheckService from '../../services/tokenCheck'
 
 export const initLoggedUser = () => {
   return async (dispatch) => {
-    let loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
+    const loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
     if (loggedUser) {
-      let token = loggedUser.token
+      const token = loggedUser.token
+      if (!token) {
+        window.localStorage.removeItem('loggedInUser')
+        dispatch({ type: 'LOGOUT' })
+        return
+      }
+
       const response = await tokenCheckService.userCheck(token)
       if (response.message === 'success') {
         await artworkService.setToken(loggedUser.token)
         await userService.setToken(loggedUser.token)
         await eventService.setToken(loggedUser.token)
         dispatch({ type: 'INIT_USER', data: loggedUser })
+      } else {
+        window.localStorage.removeItem('loggedInUser')
+        await userService.setToken(null)
+        await artworkService.setToken(null)
+        await eventService.setToken(null)
+        dispatch({ type: 'LOGOUT' })
       }
     }
   }
@@ -36,7 +48,10 @@ export const updateLoggedUser = (content, id) => {
 
 export const login = (username, password) => {
   return async (dispatch) => {
-    const response = await loginService.login({ username: username, password: password })
+    const response = await loginService.login({
+      username: username,
+      password: password,
+    })
     if (response.error) {
       dispatch({ type: 'NOTIFY', data: response.error })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
@@ -47,7 +62,10 @@ export const login = (username, password) => {
       dispatch({ type: 'LOGIN', data: { ...response } })
       dispatch({ type: 'NOTIFY', data: 'Logged in succesfully!' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
-      window.localStorage.setItem('loggedInUser', JSON.stringify({ ...response }))
+      window.localStorage.setItem(
+        'loggedInUser',
+        JSON.stringify({ ...response }),
+      )
     }
   }
 }

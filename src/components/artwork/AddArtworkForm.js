@@ -39,15 +39,15 @@ export const AddArtworkForm = ({
 
     if (galleryImage.galleryImage === undefined) {
       notify('Remember to choose image!', 5)
-    } else if (event.target.artist.value.length < 3) {
-      notify('Artist name has to have at least 3 characters', 5)
-    } else if (event.target.name.value.length < 1) {
-      notify('Artwork name has to have at least 1 characters', 5)
-    } else if (event.target.year.value.length < 4) {
+    } else if (event.target.artist.value.length <= 2) {
+      notify('Artist name has to have at least 2 characters', 5)
+    } else if (event.target.name.value.length <= 2) {
+      notify('Artwork name has to have at least 2 characters', 5)
+    } else if (event.target.year.value.length <= 4) {
       notify('Year field has to have at least 4 numbers', 5)
-    } else if (event.target.size.value.length < 3) {
+    } else if (event.target.size.value.length <= 3) {
       notify('size field has to have at least 3 characters', 5)
-    } else if (event.target.medium.value.length < 8) {
+    } else if (event.target.medium.value.length <= 3) {
       notify('Medium field has to have at least 3 characters', 5)
     } else {
       const data = new FormData()

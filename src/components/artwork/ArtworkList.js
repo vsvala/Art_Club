@@ -24,6 +24,20 @@ export const ArtworkList = ({
     initializeArtworks()
   }, [])
 
+  const visibleArtworks = Array.isArray(artworks)
+    ? [...artworks]
+        .sort((a, b) => b.likes - a.likes)
+        .filter(
+          (artwork) =>
+            artwork.name
+              .toLowerCase()
+              .includes(filter.artworkName.toLowerCase()) ||
+            artwork.artist
+              .toLowerCase()
+              .includes(filter.artworkName.toLowerCase()),
+        )
+    : []
+
   const handleArtworkNameChange = (event) => {
     event.preventDefault()
     setArtworkName(event.target.value)
@@ -58,56 +72,40 @@ export const ArtworkList = ({
       </div>
 
       <div className="artworkGallery">
-        {artworks &&
-          artworks
-            .sort((a, b) => b.likes - a.likes)
-            .filter(
-              (artwork) =>
-                artwork.name
-                  .toLowerCase()
-                  .includes(filter.artworkName.toLowerCase()) ||
-                artwork.artist
-                  .toLowerCase()
-                  .includes(filter.artworkName.toLowerCase()),
-            )
-            .map((a) => (
-              <ul key={a.id} className="ulList">
-                <li>
-                  <img
-                    src={a.galleryImage}
-                    className="galleryPicture"
-                    alt="img"
-                  />
-                </li>
-                <li className="artwork">
-                  {' '}
-                  <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
-                </li>
-                <li>
-                  {a.year}, {a.size}, {a.medium}
-                </li>
-                <p>
-                  {a.likes} likes{' '}
-                  {loggedUser && (
-                    <Button
-                      className="button"
-                      onClick={addLike(a)}
-                      variant="outline-secondary"
-                    >
-                      like
-                    </Button>
-                  )}
-                </p>
+        {visibleArtworks.map((a) => (
+          <ul key={a.id} className="ulList">
+            <li>
+              <img src={a.galleryImage} className="galleryPicture" alt="img" />
+            </li>
+            <li className="artwork">
+              {' '}
+              <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
+            </li>
+            <li>
+              {a.year}, {a.size}, {a.medium}
+            </li>
+            <p>
+              {a.likes} likes{' '}
+              {loggedUser && (
+                <Button
+                  className="button"
+                  onClick={addLike(a)}
+                  variant="outline-secondary"
+                >
+                  like
+                </Button>
+              )}
+            </p>
 
-                {loggedUser && loggedUser.role === 'admin' ? (
-                  <li className="delete">
-                    <DeleteButton id={a.id} onClick={removeArtwork} />
-                  </li>
-                ) : (
-                  <em></em>
-                )}
-              </ul>
-            ))}
+            {loggedUser && loggedUser.role === 'admin' ? (
+              <li className="delete">
+                <DeleteButton id={a.id} onClick={removeArtwork} />
+              </li>
+            ) : (
+              <em></em>
+            )}
+          </ul>
+        ))}
       </div>
     </div>
   )

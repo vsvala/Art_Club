@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import * as Sentry from '@sentry/react'
+//import * as Sentry from '@sentry/react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { updateLoggedUser } from '../reducers/actionCreators/loginActions'
@@ -10,9 +10,9 @@ export const Home = (props) => {
     updateLoggedUser()
   }, [])
 
-  const sendSentryTestError = () => {
-    Sentry.captureException(new Error('Sentry frontend test error'))
-  }
+  // const sendSentryTestError = () => {
+  //   Sentry.captureException(new Error('Sentry frontend test error'))
+  // }
 
   return (
     <div>
@@ -51,7 +51,8 @@ export const Home = (props) => {
             </Link>{' '}
             to apply membership
           </p>
-          {process.env.NODE_ENV === 'development' ? (
+          {/* to test sentry error reporting, uncomment the button below 
+           {process.env.NODE_ENV === 'development' ? (
             <button
               type="button"
               className="button"
@@ -60,7 +61,7 @@ export const Home = (props) => {
             >
               Send Sentry test error
             </button>
-          ) : null}
+          ) : null} */}
         </div>
       )}
     </div>

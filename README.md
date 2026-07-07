@@ -242,11 +242,12 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 ## Roadmap
 
 - [ ] Show welcome greeting with user name and role on home page after login
-- [ ] Show waitinng aproved page after registeration
 - [ ] Add curated links for artists (exhibitions, galleries) to Links page
 - [ ] Clean up event date/time formatting for consistent display
-- [ ] Re-render updated data immediately after admin actions (user role changes, deletions)
 - [ ] Add password visibility toggle to password fields
+
+- [x] Re-render updated data immediately after member myPage updates
+- [x] Re-render updated data immediately after admin actions (user role changes, deletions)
 - [x] Fix mobile UI responsiveness across all pages
 - [x] Expand frontend test coverage for critical user flows
 - [x] CI/CD pipeline with github actions

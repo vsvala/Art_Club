@@ -22,10 +22,12 @@ export const createEvent = (content) => {
     if (event.error || event === undefined) {
       dispatch({ type: 'NOTIFY', data: 'Saving failed!' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+      return { success: false, error: event?.error || 'Saving failed!' }
     } else {
       dispatch({ type: 'CREATE_EVENT', data: event })
       dispatch({ type: 'NOTIFY', data: 'Event created' })
       setTimeout(() => dispatch({ type: 'CLEAR' }), 3000)
+      return { success: true, data: event }
     }
   }
 }

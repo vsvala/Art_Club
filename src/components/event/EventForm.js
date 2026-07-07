@@ -6,8 +6,9 @@ import FormData from 'form-data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from 'react-router-dom'
+import { notify } from '../../reducers/actionCreators/notificationActions'
 
-export const EventForm = ({ createEvent }) => {
+export const EventForm = ({ createEvent, notify }) => {
   const navigate = useNavigate()
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({})
@@ -18,18 +19,32 @@ export const EventForm = ({ createEvent }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault()
-    const data = new FormData()
-    data.append('eventImage', eventImage.eventImage)
-    data.append('title', input.title)
-    data.append('place', input.place)
-    data.append('start', state.startDate)
-    data.append('end', state.endDate)
-    data.append('description', input.description)
 
-    createEvent(data)
-    navigate('/users/events')
+    if (eventImage.eventImage === undefined) {
+      notify('Remember to choose image!', 5)
+    } else if (input.title.length <= 2) {
+      notify('Title has to have at least 3 characters', 5)
+    } else if (input.place.length <= 3) {
+      notify('Place has to have at least 3 characters', 5)
+    } else if (input.description.length <= 5) {
+      notify('Description has to have at least 6 characters', 5)
+    } else {
+      const data = new FormData()
+      data.append('eventImage', eventImage.eventImage)
+      data.append('title', input.title)
+      data.append('place', input.place)
+      data.append('start', state.startDate)
+      data.append('end', state.endDate)
+      data.append('description', input.description)
+
+      const createEventResult = await createEvent(data)
+      if (createEventResult.success) {
+        navigate('/users/events')
+      } else {
+        notify(createEventResult?.error || 'Saving failed!', 5)
+      }
+    }
   }
-
   const handleChange = (event) => {
     const newInput = {
       ...input,
@@ -156,4 +171,4 @@ export const EventForm = ({ createEvent }) => {
   )
 }
 
-export default connect(null, { createEvent })(EventForm)
+export default connect(null, { createEvent, notify })(EventForm)

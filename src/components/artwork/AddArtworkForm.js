@@ -61,6 +61,8 @@ export const AddArtworkForm = ({
       const result = await createArtwork(data)
       if (result?.success) {
         navigate(`/users/${id}/myPage`)
+      } else {
+        notify(result?.error || 'Saving failed!', 5)
       }
     }
   }

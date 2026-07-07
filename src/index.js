@@ -12,8 +12,10 @@ const root = createRoot(document.getElementById('root'))
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
   environment: process.env.NODE_ENV || 'development',
+  enabled: process.env.NODE_ENV === 'production',
   release: process.env.REACT_APP_SENTRY_RELEASE,
   tracesSampleRate: 0.1,
+  beforeSend: (event) => (process.env.NODE_ENV === 'production' ? event : null),
   dataCollection: {
     // To disable sending user data and HTTP bodies, uncomment the lines below. For more info visit:
     // https://docs.sentry.io/platforms/javascript/guides/react/configuration/options/#dataCollection

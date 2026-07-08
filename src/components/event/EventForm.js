@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import { connect } from 'react-redux'
 import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
-import FormData from 'form-data'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from 'react-router-dom'
@@ -17,6 +16,17 @@ export const EventForm = ({ createEvent, notify }) => {
     endDate: new Date(),
   })
 
+  const formatDate = (date) => {
+    const weekdays = ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la']
+    const weekday = weekdays[date.getDay()]
+    const day = String(date.getDate()).padStart(2, '0')
+    const month = String(date.getMonth() + 1).padStart(2, '0')
+    const year = date.getFullYear()
+    const hours = String(date.getHours()).padStart(2, '0')
+    const minutes = String(date.getMinutes()).padStart(2, '0')
+
+    return `${weekday} ${day}.${month}.${year} klo ${hours}:${minutes}`
+  }
   const handleSubmit = async (event) => {
     event.preventDefault()
 
@@ -33,8 +43,8 @@ export const EventForm = ({ createEvent, notify }) => {
       data.append('eventImage', eventImage.eventImage)
       data.append('title', input.title)
       data.append('place', input.place)
-      data.append('start', state.startDate)
-      data.append('end', state.endDate)
+      data.append('start', formatDate(state.startDate))
+      data.append('end', formatDate(state.endDate))
       data.append('description', input.description)
 
       const createEventResult = await createEvent(data)

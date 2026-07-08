@@ -98,8 +98,7 @@ REACT_APP_BACKEND_URL=http://localhost:3001
 ### Running locally
 
 ```bash
-# Start the development server
-npm start
+npm run dev
 ```
 
 Opens at [http://localhost:3000](http://localhost:3000). The frontend proxies API requests to `http://localhost:3001` by default.
@@ -243,15 +242,9 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
-# todo
-
-- [ ] Show welcome greeting with user name and role on home page after login
-- [ ] Clean up event date/time formatting for consistent display
-
-# done
-
+- [x] Clean up event date/time formatting for consistent display
+- [x] Show welcome greeting with user name and role on home page after login
 - [x] Add password visibility toggle to password fields
-
 - [x] Re-render updated data immediately after member myPage updates
 - [x] Re-render updated data immediately after admin actions (user role changes, deletions)
 - [x] Fix mobile UI responsiveness across all pages

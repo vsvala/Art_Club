@@ -227,6 +227,7 @@ A full list of used libraries with descriptions and links: [documentation/librar
 - [Testing](documentation/tests.md)
 - [Render.com Deployment](documentation/render_deployment.md)
 - [Security & Maintenance](documentation/security_maintenance.md)
+- [Performance & Scaling](documentation/scaling.md)
 - [Security Policy](.github/SECURITY.md)
 - [CI/CD Pipeline](documentation/ci_cd.md)
 
@@ -242,6 +243,8 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
+- [x] Route-level code splitting with React.lazy to reduce initial bundle size
+- [x] Native image lazy loading in the artwork gallery
 - [x] Clean up event date/time formatting for consistent display
 - [x] Show welcome greeting with user name and role on home page after login
 - [x] Add password visibility toggle to password fields

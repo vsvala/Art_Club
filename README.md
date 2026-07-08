@@ -109,14 +109,16 @@ Opens at [http://localhost:3000](http://localhost:3000). The frontend proxies AP
 ## Available Scripts
 
 ```bash
-npm start           # Start development server
-npm run build       # Build for production
-npm test            # Run tests
-npm run test-coverage  # Run tests with coverage report
-npm run lint        # Check code style with ESLint
+npm run dev             # Start development server
+npm run build           # Build for production
+npm test                # Run unit and integration tests
+npm run test-coverage   # Run tests with coverage report
+npm run test-e2e        # Run Playwright E2E tests
+npm run test-e2e:report # Open last Playwright test report
+npm run lint            # Check code style with ESLint
 ```
 
-Current automated test scope in this repository focuses on unit and integration tests. E2E tests are tracked as a planned follow-up.
+Current automated test scope includes unit, integration, and Playwright E2E smoke tests. E2E tests run in a separate CI workflow ([playwright.yml](.github/workflows/playwright.yml)).
 
 ---
 
@@ -167,7 +169,7 @@ src/
 │   ├── user/       # Member profile, update and password forms
 │   ├── event/      # Event list and creation form
 │   ├── login/      # Login and registration forms
-│   └── common/     # Shared UI: notifications, GDPR, PrivateRoute, DeleteButton
+│   └── common/     # Shared UI: AppNavigation, notifications, GDPR, PrivateRoute, DeleteButton
 ├── reducers/
 │   ├── store.js              # Redux store with combined reducers
 │   ├── artworkReducer.js     # Artwork state
@@ -241,10 +243,14 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
+# todo
+
 - [ ] Show welcome greeting with user name and role on home page after login
-- [ ] Add curated links for artists (exhibitions, galleries) to Links page
 - [ ] Clean up event date/time formatting for consistent display
-- [ ] Add password visibility toggle to password fields
+
+# done
+
+- [x] Add password visibility toggle to password fields
 
 - [x] Re-render updated data immediately after member myPage updates
 - [x] Re-render updated data immediately after admin actions (user role changes, deletions)

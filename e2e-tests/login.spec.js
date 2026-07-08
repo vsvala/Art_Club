@@ -46,7 +46,7 @@ test.describe('Art Club app', () => {
     await loginWith(page, 'testmember', 'member123')
     await page.getByRole('link', { name: 'Add artwork' }).click()
     await page.getByRole('button', { name: 'Logout' }).click()
-    await expect(page.getByRole('link', { name: 'Login' })).toBeVisible()
+    await expect(page.getByRole('button', { name: 'Login' })).toBeVisible()
   })
 
   test('user can log in as admin', async ({ page }) => {

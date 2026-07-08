@@ -188,7 +188,8 @@ src/
 │   └── config.js             # Base URL and auth header setup
 ├── utils/
 │   ├── validations.js        # Form input validation rules
-│   └── weatherUtils.js       # Open-Meteo API helpers
+│   ├── weatherUtils.js       # Open-Meteo API helpers
+│   └── cloudinary-optimize.js # Cloudinary URL transformation helper
 ├── test/                     # Jest + React Testing Library tests
 ├── images/                   # Static image assets
 ├── App.js                    # Root component and route definitions
@@ -243,6 +244,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
+- [x] Cloudinary image optimisation — serve resized/compressed variants via URL parameters (w_n, f_auto, q_auto) to reduce bandwidth per request
 - [x] Route-level code splitting with React.lazy to reduce initial bundle size
 - [x] Native image lazy loading in the artwork gallery
 - [x] Clean up event date/time formatting for consistent display
@@ -274,7 +276,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 ### Scalability
 
 - **Pagination** is listed above under Architecture — foundational for handling large datasets
-- **Image optimization** — serve resized/compressed variants from Cloudinary instead of original uploads (reduce bandwidth per request)
+- ~~**Image optimization** — serve resized/compressed variants from Cloudinary instead of original uploads (reduce bandwidth per request)~~
 - **Caching** — add response caching (e.g. Redis or HTTP cache headers) for frequently read, rarely changed data such as the public artwork and artist lists
 - **Database indexing** — add indexes on frequently queried fields (e.g. `artworks.artist`, `users.role`) to keep MongoDB queries fast as the dataset grows
 - **Rate limiting** — add express-rate-limit to the API to protect against abuse and unintended load spikes

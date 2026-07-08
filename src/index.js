@@ -7,8 +7,15 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap-icons/font/bootstrap-icons.css'
 import './index.css'
 import { createRoot } from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const root = createRoot(document.getElementById('root'))
+
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: { staleTime: 5 * 60 * 1000 }, // data tuore 5 min
+  },
+})
 
 Sentry.init({
   dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -26,10 +33,12 @@ Sentry.init({
 })
 
 root.render(
-  <Provider store={store}>
-    <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
-      <App />
-    </Sentry.ErrorBoundary>
-  </Provider>,
+  <QueryClientProvider client={queryClient}>
+    <Provider store={store}>
+      <Sentry.ErrorBoundary fallback={<p>Something went wrong.</p>}>
+        <App />
+      </Sentry.ErrorBoundary>
+    </Provider>
+  </QueryClientProvider>,
 )
 //App is a child of Provider to make connect to work and store is Providers attribute

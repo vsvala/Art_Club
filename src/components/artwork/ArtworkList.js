@@ -1,30 +1,27 @@
-import React, { useEffect, useMemo } from 'react'
-import { connect } from 'react-redux'
+import React, { useMemo } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import artworkService from '../../services/artworks'
 import {
-  initializeArtworks,
   deleteArtwork,
+  voteArtwork,
 } from '../../reducers/actionCreators/artworkActions'
 import filterActions from '../../reducers/actionCreators/filterActions'
 import { Link } from 'react-router-dom'
 import DeleteButton from '../common/DeleteButton'
 import { Form, Button } from 'react-bootstrap'
-import { voteArtwork } from '../../reducers/actionCreators/artworkActions'
-import { notify } from '../../reducers/actionCreators/notificationActions'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-export const ArtworkList = ({
-  deleteArtwork,
-  initializeArtworks,
-  artworks,
-  loggedUser,
-  artworkName,
-  setArtworkName,
-  voteArtwork,
-}) => {
-  useEffect(() => {
-    initializeArtworks()
-  }, [])
+export const ArtworkList = () => {
+  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
+  const artworkName = useSelector((state) => state.filter.artworkName)
 
+  const { data: artworks = [], isLoading } = useQuery({
+    queryKey: ['artworks'],
+    queryFn: artworkService.getAll,
+  })
   const visibleArtworks = useMemo(() => {
     const normalizedArtworkName = (artworkName || '').toLowerCase()
 
@@ -41,25 +38,23 @@ export const ArtworkList = ({
 
   const handleArtworkNameChange = (event) => {
     event.preventDefault()
-    setArtworkName(event.target.value)
+    dispatch(filterActions.setArtworkName(event.target.value))
   }
 
-  const addLike = (artwork) => {
-    return () => {
-      const likedArtwork = artworks?.find((n) => n.id === artwork.id)
-      const artworkObject = { ...likedArtwork, likes: artwork.likes + 1 }
-      voteArtwork(artworkObject)
+  const addLike = (artwork) => async () => {
+    await dispatch(voteArtwork({ ...artwork, likes: artwork.likes + 1 }))
+    queryClient.invalidateQueries(['artworks'])
+  }
+
+  const removeArtwork = (id) => async () => {
+    if (window.confirm('Do you want to delete this artwork?')) {
+      await dispatch(deleteArtwork(id))
+      queryClient.invalidateQueries(['artworks'])
     }
   }
 
-  const removeArtwork = (id) => {
-    return () => {
-      if (window.confirm('Do you want to delete this artwork?')) {
-        deleteArtwork(id)
-      }
-    }
-  }
-  const canDeleteArtwork = Boolean(loggedUser && loggedUser.role === 'admin')
+  const canDeleteArtwork = loggedUser?.role === 'admin'
+  if (isLoading) return <p>Ladataan...</p>
 
   return (
     <div className="artworkList">
@@ -119,18 +114,4 @@ export const ArtworkList = ({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    artworks: state.artworks.artworks,
-    loggedUser: state.loggedUser.loggedUser,
-    artworkName: state.filter.artworkName,
-  }
-}
-
-export default connect(mapStateToProps, {
-  initializeArtworks,
-  deleteArtwork,
-  ...filterActions,
-  notify,
-  voteArtwork,
-})(ArtworkList)
+export default ArtworkList

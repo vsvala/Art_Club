@@ -1,16 +1,7 @@
 import eventService from '../../services/events'
-import tokenCheckService from '../../services/tokenCheck'
 
 export const initializeEvents = () => {
   return async (dispatch) => {
-    const loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    if (loggedUser && loggedUser.token) {
-      const token = loggedUser.token
-      const response = await tokenCheckService.userCheck(token)
-      if (response.message === 'success') {
-        await eventService.setToken(loggedUser.token)
-      }
-    }
     const content = await eventService.getAll()
     dispatch({ type: 'INIT_EVENTS', data: content })
   }

@@ -33,15 +33,14 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
         </thead>
 
         <tbody>
-          {userArray &&
-            userArray.map((user) => (
-              <User
-                user={user}
-                key={user.id}
-                artworks={user.artworks}
-                onClick={removeUser}
-              />
-            ))}
+          {userArray?.map((user) => (
+            <User
+              user={user}
+              key={user.id}
+              artworks={user.artworks}
+              onClick={removeUser}
+            />
+          ))}
         </tbody>
       </Table>
     </div>

@@ -45,7 +45,7 @@ export const ArtworkList = ({
 
   const addLike = (artwork) => {
     return () => {
-      const likedArtwork = artworks.find((n) => n.id === artwork.id)
+      const likedArtwork = artworks?.find((n) => n.id === artwork.id)
       const artworkObject = { ...likedArtwork, likes: artwork.likes + 1 }
       voteArtwork(artworkObject)
     }
@@ -58,6 +58,7 @@ export const ArtworkList = ({
       }
     }
   }
+  const canDeleteArtwork = Boolean(loggedUser && loggedUser.role === 'admin')
 
   return (
     <div className="artworkList">
@@ -98,7 +99,7 @@ export const ArtworkList = ({
               )}
             </p>
 
-            {loggedUser && loggedUser.role === 'admin' ? (
+            {canDeleteArtwork ? (
               <li className="delete">
                 <DeleteButton id={a.id} onClick={removeArtwork} />
               </li>

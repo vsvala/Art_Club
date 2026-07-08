@@ -4,6 +4,8 @@ const baseUrl = url + 'public/'
 import { Button } from 'react-bootstrap'
 
 const Event = ({ e, loggedUser, removeEvent }) => {
+  const isLoggedAsAdmin = loggedUser && loggedUser.role === 'admin'
+
   return (
     <div className="event">
       <td>
@@ -22,7 +24,7 @@ const Event = ({ e, loggedUser, removeEvent }) => {
         <p>Place: {e.place}</p>
         <p>Description: {e.description}</p>
       </td>
-      {loggedUser && loggedUser.role === 'admin' ? (
+      {isLoggedAsAdmin ? (
         <td>
           {' '}
           <Button

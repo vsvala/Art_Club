@@ -22,28 +22,26 @@ export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
             {singleUser.intro}
 
             <br />
-            {singleUser.artworks &&
-              singleUser.artworks.map((a) => (
-                <ul key={a.id} className="ulList">
-                  <li>
-                    <br />
-                    <img
-                      src={`${a.galleryImage}`}
-                      width="100%"
-                      height="auto"
-                      className="singlepicture"
-                      alt="img"
-                    />
-                  </li>
-                  <li className="artwork">
-                    <Link to={`/artworks/${a.id}`}> {a.name} </Link> by{' '}
-                    {a.artist}
-                  </li>
-                  <li>
-                    {a.year}, {a.size}, {a.medium}
-                  </li>
-                </ul>
-              ))}
+            {singleUser.artworks?.map((a) => (
+              <ul key={a.id} className="ulList">
+                <li>
+                  <br />
+                  <img
+                    src={`${a.galleryImage}`}
+                    width="100%"
+                    height="auto"
+                    className="singlepicture"
+                    alt="img"
+                  />
+                </li>
+                <li className="artwork">
+                  <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
+                </li>
+                <li>
+                  {a.year}, {a.size}, {a.medium}
+                </li>
+              </ul>
+            ))}
           </div>
         )}
       </div>

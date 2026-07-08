@@ -34,6 +34,9 @@ export const SingleUser = ({
       }
     : singleUser
 
+  const artworkCount = singleUser?.artworks?.length ?? 0
+  const canAddArtwork = artworkCount < 10
+
   useEffect(() => {
     initializeSingleUser(resolvedId)
   }, [resolvedId])
@@ -66,11 +69,13 @@ export const SingleUser = ({
                       <td>{accountInfoUser.email}</td>
                       <td>{accountInfoUser.role}</td>
                       <td>
-                        {singleUser.artworks && singleUser.artworks.length}/10
-                        <Link to="/users/addArtwork" className="member">
-                          {' '}
-                          Add
-                        </Link>
+                        {artworkCount}/10
+                        {canAddArtwork === true ? (
+                          <Link to="/users/addArtwork" className="member">
+                            {' '}
+                            Add
+                          </Link>
+                        ) : null}
                       </td>
                       <td>
                         <Link to="/users/update" className="member">
@@ -96,18 +101,14 @@ export const SingleUser = ({
             <br />
             <br />
             <h4>Artworks</h4>
-            {singleUser.artworks <= 0 && singleUser.artworks <= 0 ? (
-              <p>No images uploaded yet</p>
-            ) : null}
+            {artworkCount === 0 ? <p>No images uploaded yet</p> : null}
           </div>
         )}
 
         <div className="addedArtworks">
-          {singleUser &&
-            singleUser.artworks &&
-            singleUser.artworks.map((a) => (
-              <ArtworkDelete key={a.id} artwork={a} />
-            ))}
+          {singleUser?.artworks?.map((a) => (
+            <ArtworkDelete key={a.id} artwork={a} />
+          ))}
         </div>
       </div>
     </div>

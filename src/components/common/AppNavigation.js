@@ -5,6 +5,56 @@ import { Link } from 'react-router-dom'
 
 export const Navigation = (props) => {
   const { loggedUser, isMember, isAdmin, nonMember, logout } = props
+  const canSeeMemberLinks = isMember || isAdmin
+  const isLoggedIn = isMember || isAdmin || nonMember
+
+  const publicLinks = [
+    { to: '/', label: 'Home' },
+    { to: '/artworks', label: 'Gallery' },
+    { to: '/artists', label: 'Artists' },
+    { to: '/links', label: 'Links' },
+  ]
+
+  const memberLinks = canSeeMemberLinks
+    ? [
+        { to: '/users/addArtwork', label: 'Add artwork', className: 'member' },
+        {
+          to: `/users/${loggedUser?.id}/myPage`,
+          label: 'MyPage',
+          className: 'member',
+        },
+        { to: '/users/events', label: 'Events', className: 'member' },
+        {
+          to: '/users/password',
+          label: 'Change password',
+          className: 'member',
+        },
+      ]
+    : []
+
+  const adminLinks = isAdmin
+    ? [
+        { to: '/admin/addEvent', label: 'Add event', className: 'admin' },
+        { to: '/admin/users', label: 'Users', className: 'admin' },
+      ]
+    : []
+
+  const registerLink = !loggedUser ? (
+    <Nav.Link href="#" as="span">
+      <Link to="/register">Register&nbsp;</Link>&nbsp;
+    </Nav.Link>
+  ) : null
+
+  const authButton = isLoggedIn ? (
+    <Button className="button" onClick={logout} variant="light" type="button">
+      Logout
+    </Button>
+  ) : (
+    <Button as={Link} to="/login" className="button" variant="light" type="button">
+      Login
+    </Button>
+  )
+
   return (
     <div className="NavBar">
       <Navbar
@@ -22,107 +72,35 @@ export const Navigation = (props) => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link as={Link} to="/">
-              Home
-            </Nav.Link>
-            <Nav.Link as={Link} to="/artworks">
-              Gallery
-            </Nav.Link>
+            {publicLinks.map((item) => (
+              <Nav.Link href="#" as="span" key={item.to}>
+                <Link to={item.to}>{item.label}</Link>&nbsp;
+              </Nav.Link>
+            ))}
 
-            <Nav.Link as={Link} to="/artists">
-              Artists
-            </Nav.Link>
-
-            <Nav.Link as={Link} to="/links">
-              Links
-            </Nav.Link>
-
-            <Nav.Link as="span">
-              {isMember || isAdmin ? (
-                <Link to="/users/addArtwork" className="member">
-                  Add artwork
+            {memberLinks.map((item) => (
+              <Nav.Link href="#" as="span" key={item.to}>
+                <Link to={item.to} className={item.className}>
+                  {item.label}
                 </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
+                &nbsp;
+              </Nav.Link>
+            ))}
 
-            <Nav.Link as="span">
-              {isMember || isAdmin ? (
-                <Link to={`/users/${loggedUser.id}/myPage`} className="member">
-                  MyPage
+            {adminLinks.map((item) => (
+              <Nav.Link href="#" as="span" key={item.to}>
+                <Link to={item.to} className={item.className}>
+                  {item.label}
                 </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
-
-            <Nav.Link as="span">
-              {isMember || isAdmin ? (
-                <Link to="/users/events" className="member">
-                  Events
-                </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
-
-            <Nav.Link as="span">
-              {isMember || isAdmin ? (
-                <Link to="/users/password" className="member">
-                  Change password
-                </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
-
-            <Nav.Link as="span">
-              {isAdmin ? (
-                <Link to="/admin/addEvent" className="admin">
-                  Add event
-                </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
-
-            <Nav.Link as="span">
-              {isAdmin ? (
-                <Link to="/admin/users" className="admin">
-                  Users
-                </Link>
-              ) : (
-                <em></em>
-              )}
-            </Nav.Link>
+                &nbsp;
+              </Nav.Link>
+            ))}
           </Nav>
 
-          <Nav.Link as="span">
-            {!loggedUser ? <Link to="/register">Register</Link> : <em></em>}
-          </Nav.Link>
+          {registerLink}
 
-          <Nav.Link as="span">
-            {isMember || isAdmin || nonMember ? (
-              <Button
-                className="button"
-                onClick={logout}
-                variant="light"
-                type="button"
-              >
-                Logout
-              </Button>
-            ) : (
-              <Button
-                as={Link}
-                to="/login"
-                className="button"
-                variant="light"
-                type="button"
-              >
-                Login
-              </Button>
-            )}
+          <Nav.Link href="#" as="span">
+            {authButton}
           </Nav.Link>
         </Navbar.Collapse>
       </Navbar>

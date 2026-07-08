@@ -21,6 +21,9 @@ export const Home = (props) => {
         </div>
       ) : (
         <div className="home">
+          {props.loggedUser && (
+            <p className="homeUsername">{props.loggedUser.username}</p>
+          )}
           <h1>Welcome To Art Club!</h1>
           <br />
           <img src={logo} className="frontLogo" alt="Art club LOGO" />

@@ -15,6 +15,9 @@ h1 {
   font-family: 'Amatic SC', cursive;
   text-align: center;
 }
+.home h1 {
+  padding-top: 0;
+}
 .GDPRInfo h1 {
   padding-top: 0;
   padding-bottom: 20px;
@@ -226,15 +229,6 @@ a:hover {
   margin: 0;
 }
 
-/* Align form action buttons with the right edge of 80% wide fields */
-.loginForm .formActionAlign,
-.registerForm .formActionAlign,
-.passwordForm .formActionAlign {
-  width: 80%;
-  margin: 0 auto;
-  text-align: right;
-}
-
 /* LOGINFORM */
 .loginForm {
   background: #ffffff;
@@ -333,6 +327,11 @@ a:hover {
 }
 .home h2 {
   color: #338ad3;
+}
+.homeUsername {
+  color: #338ad3;
+  font-family: 'Leckerli One', cursive;
+  padding-top: 40px;
 }
 
 .singleArtistHeader h3 {

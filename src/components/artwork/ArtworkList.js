@@ -77,7 +77,12 @@ export const ArtworkList = ({
         {visibleArtworks.map((a) => (
           <ul key={a.id} className="ulList">
             <li>
-              <img src={a.galleryImage} className="galleryPicture" alt="img" />
+              <img
+                src={a.galleryImage}
+                className="galleryPicture"
+                alt="img"
+                loading="lazy"
+              />
             </li>
             <li className="artwork">
               {' '}

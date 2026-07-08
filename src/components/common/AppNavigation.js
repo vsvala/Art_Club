@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Nav, Button } from 'react-bootstrap'
 import logo from '../../images/tripleblue.svg'
-import { Link } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 
 export const Navigation = (props) => {
   const { loggedUser, isMember, isAdmin, nonMember, logout } = props
@@ -23,25 +23,28 @@ export const Navigation = (props) => {
         <Navbar.Collapse id="responsive-navbar-nav">
           <Nav className="me-auto">
             <Nav.Link href="#" as="span">
-              <Link to="/">Home </Link>&nbsp;
+              <NavLink to="/" end>
+                Home{' '}
+              </NavLink>
+              &nbsp;
             </Nav.Link>
             <Nav.Link href="#" as="span">
-              <Link to="/artworks">Gallery</Link> &nbsp;
+              <NavLink to="/artworks">Gallery</NavLink> &nbsp;
             </Nav.Link>
 
             <Nav.Link href="#" as="span">
-              <Link to="/artists">Artists</Link> &nbsp;
+              <NavLink to="/artists">Artists</NavLink> &nbsp;
             </Nav.Link>
 
             <Nav.Link href="#" as="span">
-              <Link to="/links">Links</Link> &nbsp;
+              <NavLink to="/links">Links</NavLink> &nbsp;
             </Nav.Link>
 
             <Nav.Link href="#" as="span">
               {isMember || isAdmin ? (
-                <Link to="/users/addArtwork" className="member">
+                <NavLink to="/users/addArtwork" className="member">
                   Add artwork
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}
@@ -50,9 +53,12 @@ export const Navigation = (props) => {
 
             <Nav.Link href="#" as="span">
               {isMember || isAdmin ? (
-                <Link to={`/users/${loggedUser?.id}/myPage`} className="member">
+                <NavLink
+                  to={`/users/${loggedUser?.id}/myPage`}
+                  className="member"
+                >
                   MyPage
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}
@@ -61,9 +67,9 @@ export const Navigation = (props) => {
 
             <Nav.Link href="#" as="span">
               {isMember || isAdmin ? (
-                <Link to="/users/events" className="member">
+                <NavLink to="/users/events" className="member">
                   Events
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}
@@ -72,9 +78,9 @@ export const Navigation = (props) => {
 
             <Nav.Link href="#" as="span">
               {isMember || isAdmin ? (
-                <Link to="/users/password" className="member">
+                <NavLink to="/users/password" className="member">
                   Change password
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}
@@ -83,9 +89,9 @@ export const Navigation = (props) => {
 
             <Nav.Link href="#" as="span">
               {isAdmin ? (
-                <Link to="/admin/addEvent" className="admin">
+                <NavLink to="/admin/addEvent" className="admin">
                   Add event
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}
@@ -94,9 +100,9 @@ export const Navigation = (props) => {
 
             <Nav.Link href="#" as="span">
               {isAdmin ? (
-                <Link to="/admin/users" className="admin">
+                <NavLink to="/admin/users" className="admin">
                   Users
-                </Link>
+                </NavLink>
               ) : (
                 <em></em>
               )}{' '}

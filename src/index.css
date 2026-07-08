@@ -97,7 +97,8 @@ ul {
   color: #338ad3;
   text-decoration: none;
 }
-.navbar-light .navbar-nav .nav-link:hover {
+
+.navbar-light .navbar-nav a.active {
   color: #bebcbc;
   text-decoration: none;
 }
@@ -107,15 +108,16 @@ ul {
 }
 .member {
   /* color: #fd7945; */
-  color: #251147;
+  color: #2b1355;
 }
 .navbar .member,
 .navbar .member:visited {
-  color: #251147;
+  color: #2b1355;
 }
 .navbar .member:hover,
-.navbar .member:focus {
-  color: #3a2a66;
+.navbar .member:focus,
+.navbar .member:active {
+  color: #bebcbc;
 }
 .admin {
   color: #ff1476;

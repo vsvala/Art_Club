@@ -6,7 +6,6 @@ import artworkReducer from './artworkReducer'
 import eventReducer from './eventReducer'
 import loginReducer from './loginReducer'
 import filterReducer from './filterReducer'
-import singleArtworkReducer from './singleArtworkReducer'
 
 const reducer = combineReducers({
   notification: notificationReducer,
@@ -16,7 +15,6 @@ const reducer = combineReducers({
   loggedUser: loginReducer,
   filter: filterReducer,
   singleUser: userReducer,
-  singleArtwork: singleArtworkReducer,
   //singleArtist: userReducer
 })
 

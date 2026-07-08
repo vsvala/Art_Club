@@ -1,29 +1,30 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
-import {
-  initializeEvents,
-  deleteEvent,
-} from '../../reducers/actionCreators/eventActions'
+import React from 'react'
+import { useQuery, useQueryClient } from '@tanstack/react-query'
+import { useSelector, useDispatch } from 'react-redux'
+import eventService from '../../services/events'
+import { deleteEvent } from '../../reducers/actionCreators/eventActions'
 import { Table, Button } from 'react-bootstrap'
 
-export const EventList = ({
-  initializeEvents,
-  deleteEvent,
-  events,
-  loggedUser,
-}) => {
-  useEffect(() => {
-    initializeEvents()
-  }, [])
+export const EventList = () => {
+  const dispatch = useDispatch()
+  const queryClient = useQueryClient()
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
 
-  const removeEvent = (id) => {
-    return () => {
-      if (window.confirm('Do you want to delete this event')) {
-        deleteEvent(id)
-      }
+  const { data: events = [], isLoading } = useQuery({
+    queryKey: ['events'],
+    queryFn: eventService.getAll,
+  })
+
+  const removeEvent = (id) => async () => {
+    if (window.confirm('Do you want to delete this event')) {
+      await dispatch(deleteEvent(id))
+      queryClient.invalidateQueries(['events'])
     }
   }
+
   const isLoggedAsAdmin = loggedUser && loggedUser.role === 'admin'
+
+  if (isLoading) return <p>Ladataan...</p>
 
   return (
     <div className="eventList">
@@ -71,13 +72,4 @@ export const EventList = ({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    events: state.events.events,
-    loggedUser: state.loggedUser.loggedUser,
-  }
-}
-
-export default connect(mapStateToProps, { initializeEvents, deleteEvent })(
-  EventList,
-)
+export default EventList

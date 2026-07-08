@@ -24,8 +24,9 @@ Express REST API (Node.js)
 | Teknologia | Versio | Käyttötarkoitus |
 |---|---|---|
 | React | 18.x | UI-komponentit |
-| Redux | 5.x | Globaali tilanhallinata |
+| Redux | 5.x | UI- ja sessiotilan hallinta |
 | Redux Thunk | 3.x | Asynkroniset Redux-toiminnot |
+| TanStack React Query | 5.x | Palvelintilan haku, välimuisti ja taustasynkronointi |
 | React Router v6 | 6.x | Reititys |
 | Axios | 1.x | HTTP-kutsut backendiin |
 | React Bootstrap | 2.x | UI-komponenttikirjasto |
@@ -94,34 +95,39 @@ src/
 │   ├── users.js
 │   ├── tokenCheck.js
 │   └── config.js
-└── utils/                  # Apufunktiot (esim. validointi)
+└── utils/
+    ├── validations.js          # Lomakekenttien validointisäännöt
+    ├── weatherUtils.js         # Open-Meteo API -apufunktiot
+    └── cloudinary-optimize.js  # Cloudinary URL-muunnosapuri (w_n, f_auto, q_auto)
 ```
 
-### 2.3 Tilanhallinnan malli (Redux)
+### 2.3 Tilanhallinnan malli
+
+Sovellus käyttää kahta tilanhallintatapaa eri tarkoituksiin:
+
+**React Query — palvelintila (server state)**
+
+`ArtworkList` hakee teosdata suoraan React Queryn `useQuery`-hookilla. React Query hoitaa välimuistiin tallennuksen, taustasynkronoinnin ja virheenkäsittelyn automaattisesti. Välimuistin `staleTime` on 5 minuuttia — tänä aikana uudelleennavigaatio ei laukaise uutta verkko­pyyntöä.
 
 ```
-Komponentti
-    │ dispatch(action creator)
+Komponentti (useQuery)
+    │ queryFn: artworkService.getAll
     ▼
-Action Creator (Thunk)
-    │ kutsuu services/-moduulia
-    │ (Axios → backend REST API)
+React Query cache ['artworks']
+    │ hakee backendistä vain tarvittaessa
     ▼
-Reducer
-    │ palauttaa uuden tilan
-    ▼
-Redux Store
-    │ mapStateToProps / useSelector
-    ▼
-Komponentti päivittyy
+Komponentti saa datan (data, isLoading)
 ```
 
-Redux-store sisältää seuraavat osat:
+Mutaatiot (tykkäys, poisto) toteutetaan edelleen Redux-thunkeina. Mutaation jälkeen `queryClient.invalidateQueries(['artworks'])` käynnistää uuden haun, jotta galleria päivittyy.
+
+**Redux — UI- ja sessiotila**
+
+Redux hallinnoi tilaa, joka ei ole suoraan palvelimelta haettavaa dataa:
 
 | Osa | Kuvaus |
 |---|---|
 | `loggedUser` | Kirjautuneen käyttäjän tiedot ja JWT-token |
-| `artworks` | Kaikkien teosten lista |
 | `singleArtwork` | Yksittäisen teoksen tiedot |
 | `filter` | Gallerian hakusuodatin |
 | `users` | Käyttäjälista (admin) |

@@ -50,9 +50,9 @@ Demo credentials are available on request for recruiters and reviewers. Please c
 
 ## Tech Stack
 
-| Layer         | Technologies                                      |
-| ------------- | ------------------------------------------------- |
-| Frontend      | React 18, Redux, React Router v6, React Bootstrap |
+| Layer         | Technologies                                                        |
+| ------------- | ------------------------------------------------------------------- |
+| Frontend      | React 18, Redux, TanStack React Query, React Router v6, React Bootstrap |
 | Backend       | Node.js, Express, REST API                        |
 | Database      | MongoDB, MongoDB Atlas                            |
 | Image storage | Cloudinary                                        |
@@ -137,6 +137,8 @@ Express REST API (Node.js)
 ```
 
 The frontend is a single-page application that communicates with the backend exclusively via a REST API. Images are uploaded directly to Cloudinary; only the image URLs are stored in MongoDB.
+
+State management is split by concern: **TanStack React Query** handles server state (fetching, caching, and background refetching of artwork data), while **Redux** manages UI and session state (logged-in user, filter input, notifications, events).
 
 ### Authentication & authorization
 
@@ -245,6 +247,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 ## Roadmap
 
 - [x] Cloudinary image optimisation — serve resized/compressed variants via URL parameters (w_n, f_auto, q_auto) to reduce bandwidth per request
+- [x] Migrate ArtworkList data fetching to TanStack React Query (automatic caching, background refetch, 5-minute staleTime)
 - [x] Route-level code splitting with React.lazy to reduce initial bundle size
 - [x] Native image lazy loading in the artwork gallery
 - [x] Clean up event date/time formatting for consistent display

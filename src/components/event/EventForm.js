@@ -6,9 +6,11 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../../reducers/actionCreators/notificationActions'
+import { useQueryClient } from '@tanstack/react-query'
 
 export const EventForm = ({ createEvent, notify }) => {
   const navigate = useNavigate()
+  const queryClient = useQueryClient()
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({})
   const [state, setState] = useState({
@@ -49,6 +51,7 @@ export const EventForm = ({ createEvent, notify }) => {
 
       const createEventResult = await createEvent(data)
       if (createEventResult.success) {
+        queryClient.invalidateQueries(['events']) // kerrotaan React Querylle: cache vanhentunut
         navigate('/users/events')
       } else {
         notify(createEventResult?.error || 'Saving failed!', 5)

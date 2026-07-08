@@ -5,10 +5,7 @@ const initialState = {
 const artworkReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'INIT_ARTWORKS': {
-      return {
-        ...state,
-        artworks: Array.isArray(action.data) ? action.data : [],
-      }
+      return { ...state, artworks: action.data }
     }
 
     case 'CREATE_ARTWORK': {
@@ -20,8 +17,9 @@ const artworkReducer = (state = initialState, action) => {
     }
 
     case 'VOTE': {
-      const old = state.artworks.filter((a) => a.id !== action.id)
       const liked = state.artworks.find((a) => a.id === action.id)
+      if (!liked) return state
+      const old = state.artworks.filter((a) => a.id !== action.id)
       return {
         ...state,
         artworks: [...old, { ...liked, likes: liked.likes + 1 }],

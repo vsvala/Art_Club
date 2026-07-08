@@ -1,14 +1,18 @@
-import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { useParams } from 'react-router-dom'
-import { initializeSingleArtwork } from '../../reducers/actionCreators/singleArtworkActions'
+import { useQuery } from '@tanstack/react-query'
+import artworkService from '../../services/artworks'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-export const SingleArtwork = ({ artwork, initializeSingleArtwork }) => {
+export const SingleArtwork = () => {
   const { id } = useParams()
-  useEffect(() => {
-    initializeSingleArtwork(id)
-  }, [id])
+  const { data: artwork, isLoading } = useQuery({
+    queryKey: ['artwork', id],
+    queryFn: () => artworkService.getSingleArtwork(id),
+  })
+
+  if (isLoading) return <p>Ladataan...</p>
+  if (!artwork) return null
 
   return (
     <div className="singleArtwork">
@@ -31,12 +35,4 @@ export const SingleArtwork = ({ artwork, initializeSingleArtwork }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    artwork: state.singleArtwork.singleArtwork,
-  }
-}
-
-export default connect(mapStateToProps, {
-  initializeSingleArtwork,
-})(SingleArtwork)
+export default SingleArtwork

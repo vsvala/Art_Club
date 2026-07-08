@@ -1,17 +1,15 @@
-import React from 'react'
+import { React, useState } from 'react'
 import { connect } from 'react-redux'
-import { Form, Button, Row, Col, Container } from 'react-bootstrap'
+import { Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { createUser } from '../../reducers/actionCreators/userActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { emailValid } from '../../utils/validations'
 import { useNavigate } from 'react-router-dom'
 
-export const RegisterUserForm = ({
-  createUser,
-  // id,
-  notify,
-}) => {
+export const RegisterUserForm = ({ createUser, notify }) => {
+  const [showPassword, setShowPassword] = useState(false)
+
   const navigate = useNavigate()
 
   const handleSubmit = (event) => {
@@ -36,7 +34,6 @@ export const RegisterUserForm = ({
       createUser(user)
       navigate('/nonMember')
     }
-
   }
   return (
     //TODO? first name last name
@@ -55,11 +52,7 @@ export const RegisterUserForm = ({
             <Form.Group>
               <Form.Control type="text" name="name" placeholder="Name" />
               <br />
-              <Form.Control
-                type="email"
-                name="email"
-                placeholder="Email"
-              />
+              <Form.Control type="email" name="email" placeholder="Email" />
               <br />
               <Form.Control
                 type="text"
@@ -67,11 +60,23 @@ export const RegisterUserForm = ({
                 placeholder="Username"
               />
               <br />
-              <Form.Control
-                type="password"
-                name="password"
-                placeholder="Password"
-              />
+              <InputGroup>
+                <Form.Control
+                  type={showPassword ? 'text' : 'password'}
+                  name="password"
+                  placeholder="Password"
+                  required
+                />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="btn btn-outline-secondary"
+                >
+                  <i
+                    className={`bi ${showPassword ? 'bi-eye-slash' : 'bi-eye'}`}
+                  ></i>
+                </button>
+              </InputGroup>
               <div className="grayInfoText">
                 <p>
                   I accept{' '}
@@ -85,9 +90,11 @@ export const RegisterUserForm = ({
                 </p>
               </div>
               <br />
-              <Button className="button" variant="light" type="submit">
-                Apply
-              </Button>
+              <div className="formActionAlign">
+                <Button className="button" variant="light" type="submit">
+                  Apply
+                </Button>
+              </div>
               <br />
             </Form.Group>
           </Form>

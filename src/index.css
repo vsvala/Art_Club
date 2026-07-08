@@ -54,6 +54,7 @@ ul {
   font-size: 80%;
   float: left;
   padding-top: 20px;
+  padding-left: 10%;
 }
 
 /* NAVBAR & LINKS */
@@ -104,6 +105,14 @@ ul {
 .member {
   /* color: #fd7945; */
   color: #251147;
+}
+.navbar .member,
+.navbar .member:visited {
+  color: #251147;
+}
+.navbar .member:hover,
+.navbar .member:focus {
+  color: #3a2a66;
 }
 .admin {
   color: #ff1476;
@@ -196,8 +205,34 @@ a:hover {
 .loginForm .form-control,
 .registerForm .form-control,
 .passwordForm .form-control {
-  max-width: 380px;
+  width: 80%;
   margin: 0 auto;
+}
+
+/* Keep password InputGroup rows (with eye icon) same width as other fields */
+.loginForm .input-group,
+.registerForm .input-group,
+.passwordForm .input-group {
+  width: 80%;
+  margin: 0 auto;
+}
+
+/* Inside InputGroup, use normal flex sizing instead of the global 80% rule */
+.loginForm .input-group .form-control,
+.registerForm .input-group .form-control,
+.passwordForm .input-group .form-control {
+  flex: 1 1 auto;
+  width: 1%;
+  margin: 0;
+}
+
+/* Align form action buttons with the right edge of 80% wide fields */
+.loginForm .formActionAlign,
+.registerForm .formActionAlign,
+.passwordForm .formActionAlign {
+  width: 80%;
+  margin: 0 auto;
+  text-align: right;
 }
 
 /* LOGINFORM */

@@ -1,22 +1,15 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 //import * as Sentry from '@sentry/react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { updateLoggedUser } from '../reducers/actionCreators/loginActions'
 import logo from '../images/tripleblue.svg'
 
 export const Home = (props) => {
-  useEffect(() => {
-    updateLoggedUser()
-  }, [])
-
-  // const sendSentryTestError = () => {
-  //   Sentry.captureException(new Error('Sentry frontend test error'))
-  // }
+  const isNonMember = props.loggedUser && props.loggedUser.role === 'nonMember'
 
   return (
     <div>
-      {props.loggedUser && props.loggedUser.role === 'nonMember' ? (
+      {isNonMember ? (
         <div className="nonMember">
           <h2>Art club</h2>
           <h3>Your membership application will be processed soon... </h3>
@@ -68,10 +61,14 @@ export const Home = (props) => {
   )
 }
 
+// const sendSentryTestError = () => {
+//   Sentry.captureException(new Error('Sentry frontend test error'))
+// }
+
 const mapStateToProps = (state) => {
   return {
     loggedUser: state.loggedUser.loggedUser,
   }
 }
 
-export default connect(mapStateToProps, { updateLoggedUser })(Home)
+export default connect(mapStateToProps)(Home)

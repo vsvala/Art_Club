@@ -19,10 +19,11 @@
   "dependencies": {
     "@sentry/react": "^10.63.0",
     "axios": "^1.9.0",
-    "bootstrap": "^5.3.3",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.1",
     "form-data": "^2.4.0",
     "react": "^18.3.1",
-    "react-bootstrap": "^2.10.9",
+    "react-bootstrap": "^2.10.10",
     "react-datepicker": "^7.0.0",
     "react-dom": "^18.3.1",
     "react-redux": "^9.1.2",

@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { connect } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { initializeSingleArtwork } from '../../reducers/actionCreators/singleArtworkActions'
+import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
 export const SingleArtwork = ({ artwork, initializeSingleArtwork }) => {
   const { id } = useParams()
@@ -14,7 +15,7 @@ export const SingleArtwork = ({ artwork, initializeSingleArtwork }) => {
       {!artwork ? null : (
         <div>
           <img
-            src={artwork.galleryImage}
+            src={cloudinaryOptimize(artwork.galleryImage, 1200)}
             style={{ maxWidth: '100%' }}
             height="auto"
             className="singlePicture"

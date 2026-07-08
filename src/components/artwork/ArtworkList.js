@@ -10,6 +10,7 @@ import DeleteButton from '../common/DeleteButton'
 import { Form, Button } from 'react-bootstrap'
 import { voteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
+import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
 export const ArtworkList = ({
   deleteArtwork,
@@ -78,7 +79,7 @@ export const ArtworkList = ({
           <ul key={a.id} className="ulList">
             <li>
               <img
-                src={a.galleryImage}
+                src={cloudinaryOptimize(a.galleryImage, 400)}
                 className="galleryPicture"
                 alt="img"
                 loading="lazy"

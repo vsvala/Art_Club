@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
 import userActions from '../../reducers/actionCreators/userActions'
 import { Link, useParams } from 'react-router-dom'
+import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
 export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
   const { id } = useParams()
@@ -27,7 +28,7 @@ export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
                 <li>
                   <br />
                   <img
-                    src={`${a.galleryImage}`}
+                    src={cloudinaryOptimize(a.galleryImage, 800)}
                     width="100%"
                     height="auto"
                     className="singlepicture"

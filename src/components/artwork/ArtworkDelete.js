@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Button } from 'react-bootstrap'
+import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
 const ArtworkDelete = ({ artwork, deleteArtwork }) => {
   const removeArtwork = (id) => {
@@ -22,7 +23,7 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
       >
         <li>
           <img
-            src={artwork.galleryImage}
+            src={cloudinaryOptimize(artwork.galleryImage, 400)}
             className="galleryPicture"
             alt="img"
           />

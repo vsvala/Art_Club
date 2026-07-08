@@ -1,16 +1,7 @@
 import artworkService from '../../services/artworks'
-import tokenCheckService from '../../services/tokenCheck'
 
 export const initializeArtworks = () => {
   return async (dispatch) => {
-    const loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    if (loggedUser && loggedUser.token) {
-      const token = loggedUser.token
-      const response = await tokenCheckService.userCheck(token)
-      if (response.message === 'success') {
-        await artworkService.setToken(loggedUser.token)
-      }
-    }
     const content = await artworkService.getAll()
     dispatch({
       type: 'INIT_ARTWORKS',

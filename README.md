@@ -50,15 +50,15 @@ Demo credentials are available on request for recruiters and reviewers. Please c
 
 ## Tech Stack
 
-| Layer         | Technologies                                                        |
-| ------------- | ------------------------------------------------------------------- |
+| Layer         | Technologies                                                            |
+| ------------- | ----------------------------------------------------------------------- |
 | Frontend      | React 18, Redux, TanStack React Query, React Router v6, React Bootstrap |
-| Backend       | Node.js, Express, REST API                        |
-| Database      | MongoDB, MongoDB Atlas                            |
-| Image storage | Cloudinary                                        |
-| Auth          | JWT (JSON Web Tokens), bcrypt                     |
-| Testing       | Jest, React Testing Library, Playwright           |
-| Weather API   | Open-Meteo (no API key required)                  |
+| Backend       | Node.js, Express, REST API, express-validator                           |
+| Database      | MongoDB, MongoDB Atlas                                                  |
+| Image storage | Cloudinary                                                              |
+| Auth          | JWT (JSON Web Tokens), bcrypt                                           |
+| Testing       | Jest, React Testing Library, Playwright                                 |
+| Weather API   | Open-Meteo (no API key required)                                        |
 
 ---
 
@@ -203,15 +203,18 @@ src/
 
 The Links page shows current weather for any city using the [Open-Meteo](https://open-meteo.com/) API — no API key required.
 
-Weather is fetched in two steps directly from the frontend:
+Weather is fetched through the backend weather proxy endpoint:
 
-1. **Geocoding** — city name → coordinates and country  
-   `https://geocoding-api.open-meteo.com/v1/search?name=Helsinki&count=1`
+```
+GET /api/weather?city=Helsinki
+```
 
-2. **Forecast** — coordinates → current temperature  
-   `https://api.open-meteo.com/v1/forecast?latitude=60.17&longitude=24.94&current=temperature_2m`
+The backend handles the two-step call to Open-Meteo:
 
-The page loads with Helsinki as the default city. The user can search for any city by name.
+1. **Geocoding** — city name → coordinates and country
+2. **Forecast** — coordinates → current temperature, weather code
+
+The frontend receives a single JSON response with `city`, `country`, `temperature`, and `weather_code`. The page loads with Helsinki as the default city. The user can search for any city by name.
 
 ---
 
@@ -245,6 +248,12 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
+- [] implemented paginationn to users and events page if if they grow bigger
+- [x] Backend service layer — extracted business logic from controllers into dedicated service layer (`artworkService.js`, `userService.js`, `eventService.js`)
+- [x] Artworks pagination — `GET /api/artworks?page=1&limit=10` with `total` and `hasMore` metadata
+- [x] Input validation with `express-validator` on all backend write endpoints (register, password change, profile, artwork, event)
+- [x] Centralized error handling — all errors routed through a single `errorHandler` middleware with consistent `{ error: "..." }` JSON responses
+- [x] Weather data proxied through backend `/api/weather?city=` endpoint — frontend no longer calls Open-Meteo directly
 - [x] Cloudinary image optimisation — serve resized/compressed variants via URL parameters (w_n, f_auto, q_auto) to reduce bandwidth per request
 - [x] Migrate ArtworkList data fetching to TanStack React Query (automatic caching, background refetch, 5-minute staleTime)
 - [x] Infinite scroll in the artwork gallery — Intersection Observer loads 10 artworks per page as the user scrolls
@@ -267,19 +276,17 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### Security & Auth
 
-- **Input validation** — add express-validator or joi to validate field formats (email, max lengths, required fields) at the API boundary instead of relying on Mongoose errors
 - **Token refresh** — implement refresh token pattern so users stay logged in securely beyond the current 10 h JWT expiry
-
-### Architecture
-
-- **Service layer** — move business logic out of controllers into a dedicated service layer (`services/artworkService.js` etc.) for better testability and separation of concerns
-- **Consistent error handling** — unify inline error handling and `next(error)` patterns so all API error responses follow the same shape
-- ~~**Pagination**~~ — implemented: gallery uses `?page` and `?limit` query params with infinite scroll; remaining endpoints still return full datasets
 
 ### Scalability
 
-- ~~**Pagination**~~ — gallery pagination implemented via infinite scroll; see Architecture above
-- ~~**Image optimization** — serve resized/compressed variants from Cloudinary instead of original uploads (reduce bandwidth per request)~~
+**Done**
+
+- [x] **Pagination** — gallery uses `?page` and `?limit` query params; infinite scroll loads 10 artworks per page via Intersection Observer
+- [x] **Image optimization** — Cloudinary serves resized/compressed variants via URL parameters (`w_n`, `f_auto`, `q_auto`) to reduce bandwidth per request
+
+**Todo**
+
 - **Caching** — add response caching (e.g. Redis or HTTP cache headers) for frequently read, rarely changed data such as the public artwork and artist lists
 - **Database indexing** — add indexes on frequently queried fields (e.g. `artworks.artist`, `users.role`) to keep MongoDB queries fast as the dataset grows
 - **Rate limiting** — add express-rate-limit to the API to protect against abuse and unintended load spikes

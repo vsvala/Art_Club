@@ -13,6 +13,16 @@ const getConfig = () => {
     headers: { Authorization: token },
   }
 }
+const getPage = async (page = 1, limit = 10) => {
+  try {
+    const response = await axios.get(baseUrl, {
+      params: { page, limit },
+    })
+    return response.data // odotetaan: { artworks: [], hasMore: bool }
+  } catch (error) {
+    throw new Error('Could not fetch artworks')
+  }
+}
 
 const getAll = async () => {
   try {
@@ -75,6 +85,7 @@ const deleteArtwork = async (id) => {
 
 export default {
   getAll,
+  getPage,
   create,
   update,
   setToken,

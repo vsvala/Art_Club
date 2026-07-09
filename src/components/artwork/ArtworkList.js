@@ -1,6 +1,5 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState, useEffect, useRef } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
-import { useQuery, useQueryClient } from '@tanstack/react-query'
 import artworkService from '../../services/artworks'
 import {
   deleteArtwork,
@@ -14,14 +13,60 @@ import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
 export const ArtworkList = () => {
   const dispatch = useDispatch()
-  const queryClient = useQueryClient()
   const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
   const artworkName = useSelector((state) => state.filter.artworkName)
 
-  const { data: artworks = [], isLoading } = useQuery({
-    queryKey: ['artworks'],
-    queryFn: artworkService.getAll,
-  })
+  const [page, setPage] = useState(1)
+  const [artworks, setArtworks] = useState([])
+  const [loading, setLoading] = useState(false)
+  const [hasMore, setHasMore] = useState(true)
+  const [error, setError] = useState(null)
+  const sentinelRef = useRef(null)
+
+  useEffect(() => {
+    const loadFirstPage = async () => {
+      setLoading(true)
+      setError(null)
+      try {
+        const data = await artworkService.getPage(1, 10)
+        setArtworks(data.artworks)
+        setHasMore(data.hasMore)
+        setPage(2)
+      } catch (err) {
+        setError(err.message)
+      } finally {
+        setLoading(false)
+      }
+    }
+    loadFirstPage()
+  }, [])
+
+  useEffect(() => {
+    if (!sentinelRef.current || loading || !hasMore) return
+
+    const observer = new IntersectionObserver(
+      async ([entry]) => {
+        if (entry.isIntersecting && !loading && hasMore) {
+          setLoading(true)
+          setError(null)
+          try {
+            const data = await artworkService.getPage(page, 10)
+            setArtworks((prev) => [...prev, ...data.artworks])
+            setHasMore(data.hasMore)
+            setPage((prev) => prev + 1)
+          } catch (err) {
+            setError(err.message)
+          } finally {
+            setLoading(false)
+          }
+        }
+      },
+      { threshold: 0.1 },
+    )
+
+    observer.observe(sentinelRef.current)
+    return () => observer.disconnect()
+  }, [page, loading, hasMore])
   const visibleArtworks = useMemo(() => {
     const normalizedArtworkName = (artworkName || '').toLowerCase()
 
@@ -43,18 +88,22 @@ export const ArtworkList = () => {
 
   const addLike = (artwork) => async () => {
     await dispatch(voteArtwork({ ...artwork, likes: artwork.likes + 1 }))
-    queryClient.invalidateQueries(['artworks'])
+    setArtworks(
+      artworks.map((a) =>
+        a.id === artwork.id ? { ...a, likes: a.likes + 1 } : a,
+      ),
+    )
   }
 
   const removeArtwork = (id) => async () => {
     if (window.confirm('Do you want to delete this artwork?')) {
       await dispatch(deleteArtwork(id))
-      queryClient.invalidateQueries(['artworks'])
+      setArtworks(artworks.filter((a) => a.id !== id))
     }
   }
 
   const canDeleteArtwork = loggedUser?.role === 'admin'
-  if (isLoading) return <p>Ladataan...</p>
+  if (loading && artworks.length === 0) return <p>Ladataan...</p>
 
   return (
     <div className="artworkList">
@@ -68,6 +117,7 @@ export const ArtworkList = () => {
           onChange={handleArtworkNameChange}
         />
       </div>
+      {error && <div className="error">{error}</div>}
 
       <div className="artworkGallery">
         {visibleArtworks.map((a) => (
@@ -110,6 +160,8 @@ export const ArtworkList = () => {
           </ul>
         ))}
       </div>
+      {loading && <p>Ladataan lisää...</p>}
+      {hasMore && <div ref={sentinelRef} style={{ height: '20px' }} />}
     </div>
   )
 }

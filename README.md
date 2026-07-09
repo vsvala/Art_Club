@@ -138,7 +138,7 @@ Express REST API (Node.js)
 
 The frontend is a single-page application that communicates with the backend exclusively via a REST API. Images are uploaded directly to Cloudinary; only the image URLs are stored in MongoDB.
 
-State management is split by concern: **TanStack React Query** handles server state (fetching, caching, and background refetching of artwork data), while **Redux** manages UI and session state (logged-in user, filter input, notifications, events).
+State management is split by concern: **Redux** manages UI and session state (logged-in user, filter input, notifications, events), while **TanStack React Query** handles server state for individual artwork and event data. The main artwork gallery uses a custom infinite scroll implementation built on the browser's **Intersection Observer API**, fetching 10 artworks per page as the user scrolls.
 
 ### Authentication & authorization
 
@@ -173,13 +173,12 @@ src/
 │   └── common/     # Shared UI: AppNavigation, notifications, GDPR, PrivateRoute, DeleteButton
 ├── reducers/
 │   ├── store.js              # Redux store with combined reducers
-│   ├── artworkReducer.js     # Artwork state
+│   ├── artworkReducer.js     # Artwork state (including single artwork)
 │   ├── userReducer.js        # User/member state
 │   ├── eventReducer.js       # Event state
 │   ├── loginReducer.js       # Logged-in user session
 │   ├── notificationReducer.js
 │   ├── filterReducer.js      # Artwork search/filter
-│   ├── singleArtworkReducer.js
 │   └── actionCreators/       # Thunk action creators per domain
 ├── services/                 # Axios modules for each backend resource
 │   ├── artworks.js
@@ -248,6 +247,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 - [x] Cloudinary image optimisation — serve resized/compressed variants via URL parameters (w_n, f_auto, q_auto) to reduce bandwidth per request
 - [x] Migrate ArtworkList data fetching to TanStack React Query (automatic caching, background refetch, 5-minute staleTime)
+- [x] Infinite scroll in the artwork gallery — Intersection Observer loads 10 artworks per page as the user scrolls
 - [x] Route-level code splitting with React.lazy to reduce initial bundle size
 - [x] Native image lazy loading in the artwork gallery
 - [x] Clean up event date/time formatting for consistent display
@@ -274,11 +274,11 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 - **Service layer** — move business logic out of controllers into a dedicated service layer (`services/artworkService.js` etc.) for better testability and separation of concerns
 - **Consistent error handling** — unify inline error handling and `next(error)` patterns so all API error responses follow the same shape
-- **Pagination** — `GET /api/artworks` returns all records; add `?page` and `?limit` query params for scalability
+- ~~**Pagination**~~ — implemented: gallery uses `?page` and `?limit` query params with infinite scroll; remaining endpoints still return full datasets
 
 ### Scalability
 
-- **Pagination** is listed above under Architecture — foundational for handling large datasets
+- ~~**Pagination**~~ — gallery pagination implemented via infinite scroll; see Architecture above
 - ~~**Image optimization** — serve resized/compressed variants from Cloudinary instead of original uploads (reduce bandwidth per request)~~
 - **Caching** — add response caching (e.g. Redis or HTTP cache headers) for frequently read, rarely changed data such as the public artwork and artist lists
 - **Database indexing** — add indexes on frequently queried fields (e.g. `artworks.artist`, `users.role`) to keep MongoDB queries fast as the dataset grows

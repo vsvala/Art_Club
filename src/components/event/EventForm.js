@@ -17,6 +17,7 @@ export const EventForm = ({ createEvent, notify }) => {
     startDate: new Date(),
     endDate: new Date(),
   })
+  const [errors, setErrors] = useState({})
 
   const formatDate = (date) => {
     const weekdays = ['su', 'ma', 'ti', 'ke', 'to', 'pe', 'la']
@@ -29,35 +30,60 @@ export const EventForm = ({ createEvent, notify }) => {
 
     return `${weekday} ${day}.${month}.${year} klo ${hours}:${minutes}`
   }
+
+  const validateForm = () => {
+    const newErrors = {}
+
+    if (!eventImage.eventImage) {
+      newErrors.image = 'Remember to choose image!'
+    }
+    if (input.title.length <= 2) {
+      newErrors.title = 'Title has to have at least 3 characters'
+    }
+    if (input.place.length <= 2) {
+      newErrors.place = 'Place has to have at least 3 characters'
+    }
+    if (input.description.length <= 5) {
+      newErrors.description = 'Description has to have at least 6 characters'
+    }
+    if (!state.startDate) {
+      newErrors.start = 'Start date is required'
+    }
+    if (!state.endDate) {
+      newErrors.end = 'End date is required'
+    }
+    if (state.endDate && state.startDate && state.endDate < state.startDate) {
+      newErrors.end = 'End date mustsame or after start date'
+    }
+
+    setErrors(newErrors)
+    return Object.keys(newErrors).length === 0
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault()
 
-    if (eventImage.eventImage === undefined) {
-      notify('Remember to choose image!', 5)
-    } else if (input.title.length <= 2) {
-      notify('Title has to have at least 3 characters', 5)
-    } else if (input.place.length <= 3) {
-      notify('Place has to have at least 3 characters', 5)
-    } else if (input.description.length <= 5) {
-      notify('Description has to have at least 6 characters', 5)
-    } else {
-      const data = new FormData()
-      data.append('eventImage', eventImage.eventImage)
-      data.append('title', input.title)
-      data.append('place', input.place)
-      data.append('start', formatDate(state.startDate))
-      data.append('end', formatDate(state.endDate))
-      data.append('description', input.description)
+    if (!validateForm()) {
+      return
+    }
 
-      const createEventResult = await createEvent(data)
-      if (createEventResult.success) {
-        queryClient.invalidateQueries(['events']) // kerrotaan React Querylle: cache vanhentunut
-        navigate('/users/events')
-      } else {
-        notify(createEventResult?.error || 'Saving failed!', 5)
-      }
+    const data = new FormData()
+    data.append('eventImage', eventImage.eventImage)
+    data.append('title', input.title)
+    data.append('place', input.place)
+    data.append('start', formatDate(state.startDate))
+    data.append('end', formatDate(state.endDate))
+    data.append('description', input.description)
+
+    const createEventResult = await createEvent(data)
+    if (createEventResult.success) {
+      queryClient.invalidateQueries(['events'])
+      navigate('/users/events')
+    } else {
+      notify(createEventResult?.error || 'Saving failed!', 5)
     }
   }
+
   const handleChange = (event) => {
     const newInput = {
       ...input,
@@ -115,6 +141,11 @@ export const EventForm = ({ createEvent, notify }) => {
                     timeCaption="time"
                     wrapperClassName="w-100"
                   />
+                  {errors.start && (
+                    <small className="text-danger d-block mt-1">
+                      {errors.start}
+                    </small>
+                  )}
                 </Col>
                 <Col xs={12} md={6}>
                   <DatePicker
@@ -132,23 +163,39 @@ export const EventForm = ({ createEvent, notify }) => {
                     timeCaption="time"
                     wrapperClassName="w-100"
                   />
+                  {errors.end && (
+                    <small className="text-danger d-block mt-1">
+                      {errors.end}
+                    </small>
+                  )}
                 </Col>
+
                 <Col xs={12} md={6}>
                   <Form.Control
                     type="text"
                     placeholder="Title"
                     name="title"
+                    value={input.title}
                     onChange={handleChange}
                     autoFocus
+                    isInvalid={errors.title ? true : false}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.title}
+                  </Form.Control.Feedback>
                 </Col>
                 <Col xs={12} md={6}>
                   <Form.Control
                     type="text"
                     placeholder="Place"
                     name="place"
+                    value={input.place}
                     onChange={handleChange}
+                    isInvalid={errors.place ? true : false}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.place}
+                  </Form.Control.Feedback>
                 </Col>
                 <Col xs={12}>
                   <Form.Control
@@ -156,8 +203,13 @@ export const EventForm = ({ createEvent, notify }) => {
                     rows="3"
                     placeholder="Description"
                     name="description"
+                    value={input.description}
                     onChange={handleChange}
+                    isInvalid={errors.description ? true : false}
                   />
+                  <Form.Control.Feedback type="invalid">
+                    {errors.description}
+                  </Form.Control.Feedback>
                 </Col>
               </Row>
               <div className="grayInfoText">
@@ -170,6 +222,7 @@ export const EventForm = ({ createEvent, notify }) => {
             </Form.Group>
           </Col>
         </Form>
+
         <br />
         <input
           type="file"
@@ -179,6 +232,9 @@ export const EventForm = ({ createEvent, notify }) => {
           accept="image/jpeg,image/png,image/gif,image/webp"
           onChange={fileSelectedHandler}
         />
+        {errors.image && (
+          <small className="text-danger d-block mt-2">{errors.image}</small>
+        )}
       </Container>
     </div>
   )

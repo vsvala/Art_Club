@@ -76,7 +76,17 @@ export const AddArtworkForm = ({
   }
 
   const fileSelectedHandler = (event) => {
-    setFile({ galleryImage: event.target.files[0] })
+    const file = event.target.files[0]
+    const MAX_SIZE = 5 * 1024 * 1024
+
+    if (file && file.size > MAX_SIZE) {
+      notify('Image file must be under 5 MB', 5)
+      event.target.value = ''
+      setFile({})
+      return
+    }
+
+    setFile({ galleryImage: file })
   }
 
   return (

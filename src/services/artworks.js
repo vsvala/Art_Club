@@ -18,7 +18,7 @@ const getPage = async (page = 1, limit = 10) => {
     const response = await axios.get(baseUrl, {
       params: { page, limit },
     })
-    return response.data // odotetaan: { artworks: [], hasMore: bool }
+    return response.data // expected: { artworks: [], hasMore: bool }
   } catch (error) {
     throw new Error('Could not fetch artworks')
   }

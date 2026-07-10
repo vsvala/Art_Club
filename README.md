@@ -250,7 +250,15 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### todo
 
-- [ ] Better error feedback for each field for rest of froms
+- [ ] Better error feedback for each field for rest of forms
+- [ ] Outdated build tool — migrate from Create React App (last commit 2022) to Vite
+- [ ] Unify Redux patterns — some components still use connect() instead of hooks
+- [ ] typescript to use
+
+### done
+
+- [x] add .env.example
+- [x] fix services use error.response?.status instead of comparing error object to status codes
 
 ### Backend
 
@@ -313,8 +321,18 @@ Migrating to cookie-based auth requires changes on both sides: the backend would
 - **Redis caching** — add Redis for frequently read, rarely changed data (artwork and artist lists) if database load becomes a bottleneck
 - **Pagination for users and events** — add `?page` / `?limit` support if those lists grow large enough to need it
 
+### API documentation
+
+- **OpenAPI/Swagger** — the backend REST API currently has no formal documentation; adding an OpenAPI 3.0 spec (e.g. via `swagger-jsdoc` + `swagger-ui-express`) would make endpoints browsable and simplify frontend–backend collaboration
+
+### Testing
+
+- **Component test coverage** — current coverage is ~40%; key components still untested: `ArtworkList`, `AddArtworkForm`, `UserList`, `EventList`, `SingleArtwork`. Target: 70%+ (check with `npm run test-coverage`)
+- **Service-level error handling tests** — no tests yet for failed API calls in the service files (`artworks.js`, `users.js`, etc.)
+
 ### Production readiness
 
+- **Core Web Vitals monitoring** — add `web-vitals` reporting as Sentry events to track LCP, FID, and CLS in production
 - **Audit logging** — log admin actions and security-relevant events (role changes, user deletions)
 
 ---

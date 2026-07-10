@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { RegisterUserForm } from '../../components/login/RegisterUserForm'
 
-// Huom: komponentti lukee arvot event.target.fieldName.value -tyylillä
-// jota JSDOM ei tue fireEvent:llä. Validointilogiikka on testattu
-// erikseen validations.test.js:ssä (emailValid). Täällä testataan
-// UI-rakenne ja kentät.
+// Note: component reads values via event.target.fieldName.value
+// which JSDOM does not support with fireEvent. Validation logic is tested
+// separately in validations.test.js (emailValid). Here we test
+// the UI structure and fields.
 
 const renderForm = (props = {}) =>
   render(
@@ -16,42 +16,42 @@ const renderForm = (props = {}) =>
   )
 
 describe('RegisterUserForm', () => {
-  test('renderöityy kaatumatta', () => {
+  test('renders without crashing', () => {
     renderForm()
     expect(screen.getByText('Register and apply membership')).toBeInTheDocument()
   })
 
-  test('Name-kenttä löytyy', () => {
+  test('Name field is present', () => {
     renderForm()
     expect(screen.getByPlaceholderText('Name')).toBeInTheDocument()
   })
 
-  test('Email-kenttä löytyy', () => {
+  test('Email field is present', () => {
     renderForm()
     expect(screen.getByPlaceholderText('Email')).toBeInTheDocument()
   })
 
-  test('Username-kenttä löytyy', () => {
+  test('Username field is present', () => {
     renderForm()
     expect(screen.getByPlaceholderText('Username')).toBeInTheDocument()
   })
 
-  test('Password-kenttä löytyy', () => {
+  test('Password field is present', () => {
     renderForm()
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
   })
 
-  test('Apply-nappi löytyy', () => {
+  test('Apply button is present', () => {
     renderForm()
     expect(screen.getByRole('button', { name: 'Apply' })).toBeInTheDocument()
   })
 
-  test('Terms of use -linkki löytyy', () => {
+  test('Terms of use link is present', () => {
     renderForm()
     expect(screen.getByText('Terms of use')).toBeInTheDocument()
   })
 
-  test('Privacy Policy -linkki löytyy', () => {
+  test('Privacy Policy link is present', () => {
     renderForm()
     expect(screen.getByText('Privacy Policy')).toBeInTheDocument()
   })

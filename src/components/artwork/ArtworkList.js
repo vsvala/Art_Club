@@ -160,7 +160,7 @@ export const ArtworkList = () => {
           </ul>
         ))}
       </div>
-      {loading && <p>Ladataan lisää...</p>}
+      {loading && <p>Loading more...</p>}
       {hasMore && <div ref={sentinelRef} style={{ height: '20px' }} />}
     </div>
   )

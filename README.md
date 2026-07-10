@@ -250,10 +250,13 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### todo
 
+- [ ] Increase test coverage to 70%+ by adding missing component and service tests
+- [ ] **Set coverage threshold in CI** — coverage run already exists in CI but without a minimum limit it does not prevent quality from dropping; add `--coverageThreshold` to `package.json` or `ci.yml`
+- [ ] Add Codecov report and badge to README
 - [ ] Better error feedback for each field for rest of forms
-- [ ] Outdated build tool — migrate from Create React App (last commit 2022) to Vite
 - [ ] Unify Redux patterns — some components still use connect() instead of hooks
-- [ ] typescript to use
+- [ ] Outdated build tool — migrate from Create React App (last commit 2022) to Vite
+- [ ] Add TypeScript
 
 ### done
 
@@ -306,6 +309,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 - **Token refresh** — implement refresh token pattern so users stay logged in securely beyond the current 10 h JWT expiry
 - **OAuth** — add social login (e.g. Google) via Passport.js so users can sign in without a separate password
+- **Password reset** — password reset flow is completely missing; requires sending emails (e.g. Resend or nodemailer)
 
 ### JWT storage
 

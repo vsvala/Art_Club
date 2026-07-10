@@ -20,7 +20,7 @@ const getPage = async (page = 1, limit = 10) => {
     })
     return response.data // expected: { artworks: [], hasMore: bool }
   } catch (error) {
-    throw new Error('Could not fetch artworks')
+    return { error: 'Could not get artworks from db' }
   }
 }
 

@@ -5,11 +5,11 @@ const baseUrl = url + 'api/login'
 //const baseUrl = '/api/login'
 
 const login = async (credentials) => {
-  try{
+  try {
     const response = await axios.post(baseUrl, credentials)
     return response.data
-  }catch(error){
-    const status=error.response.status
+  } catch (error) {
+    const status = error.response?.status
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {
@@ -21,6 +21,5 @@ const login = async (credentials) => {
     }
   }
 }
-
 
 export default { login }

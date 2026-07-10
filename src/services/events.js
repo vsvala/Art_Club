@@ -29,7 +29,7 @@ const create = async (data) => {
     const response = await axios.post(baseUrl, data, getConfig())
     return response.data
   } catch (error) {
-    const status = error.response.status
+    const status = error.response?.status
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {

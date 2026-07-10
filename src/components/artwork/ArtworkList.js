@@ -27,16 +27,15 @@ export const ArtworkList = () => {
     const loadFirstPage = async () => {
       setLoading(true)
       setError(null)
-      try {
-        const data = await artworkService.getPage(1, 10)
+      const data = await artworkService.getPage(1, 10)
+      if (data.error) {
+        setError(data.error)
+      } else {
         setArtworks(data.artworks)
         setHasMore(data.hasMore)
         setPage(2)
-      } catch (err) {
-        setError(err.message)
-      } finally {
-        setLoading(false)
       }
+      setLoading(false)
     }
     loadFirstPage()
   }, [])
@@ -49,16 +48,15 @@ export const ArtworkList = () => {
         if (entry.isIntersecting && !loading && hasMore) {
           setLoading(true)
           setError(null)
-          try {
-            const data = await artworkService.getPage(page, 10)
+          const data = await artworkService.getPage(page, 10)
+          if (data.error) {
+            setError(data.error)
+          } else {
             setArtworks((prev) => [...prev, ...data.artworks])
             setHasMore(data.hasMore)
             setPage((prev) => prev + 1)
-          } catch (err) {
-            setError(err.message)
-          } finally {
-            setLoading(false)
           }
+          setLoading(false)
         }
       },
       { threshold: 0.1 },

@@ -248,61 +248,69 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
-- [] implemented paginationn to users and events page if if they grow bigger
+### Backend
+
 - [x] Backend service layer — extracted business logic from controllers into dedicated service layer (`artworkService.js`, `userService.js`, `eventService.js`)
 - [x] Artworks pagination — `GET /api/artworks?page=1&limit=10` with `total` and `hasMore` metadata
 - [x] Input validation with `express-validator` on all backend write endpoints (register, password change, profile, artwork, event)
 - [x] Centralized error handling — all errors routed through a single `errorHandler` middleware with consistent `{ error: "..." }` JSON responses
 - [x] Weather data proxied through backend `/api/weather?city=` endpoint — frontend no longer calls Open-Meteo directly
-- [x] Cloudinary image optimisation — serve resized/compressed variants via URL parameters (w_n, f_auto, q_auto) to reduce bandwidth per request
+
+### Frontend
+
 - [x] Migrate ArtworkList data fetching to TanStack React Query (automatic caching, background refetch, 5-minute staleTime)
 - [x] Infinite scroll in the artwork gallery — Intersection Observer loads 10 artworks per page as the user scrolls
 - [x] Route-level code splitting with React.lazy to reduce initial bundle size
 - [x] Native image lazy loading in the artwork gallery
+- [x] Real-time weather data from Open-Meteo API to Links page
 - [x] Clean up event date/time formatting for consistent display
 - [x] Show welcome greeting with user name and role on home page after login
 - [x] Add password visibility toggle to password fields
 - [x] Re-render updated data immediately after member myPage updates
 - [x] Re-render updated data immediately after admin actions (user role changes, deletions)
 - [x] Fix mobile UI responsiveness across all pages
+
+### Scalability
+
+- [x] **Pagination** — gallery uses `?page` and `?limit` query params; infinite scroll loads 10 artworks per page via Intersection Observer
+- [x] **Image optimization** — Cloudinary serves resized/compressed variants via URL parameters (`w_n`, `f_auto`, `q_auto`) to reduce bandwidth per request
+- [x] **HTTP response caching** — all GET endpoints set explicit `Cache-Control` headers; public endpoints use `public, max-age=300`, authenticated endpoints use `private, no-cache`
+- [x] **Connection pooling** — Mongoose uses the MongoDB Node.js driver pool automatically on `mongoose.connect()`; default `maxPoolSize` is 100 simultaneous connections
+- [x] **Rate limiting** — global API limiter (100 req/15 min per IP) on all routes; stricter limits on auth routes (login, registration, password change) in `utils/limiters.js`
+- [x] **Database indexing** — ascending indexes on `artworks.user`, `artworks.artist`, `users.role`; unique index on `users.username` defined in Mongoose schemas
+
+### Testing & CI/CD
+
 - [x] Expand frontend test coverage for critical user flows
-- [x] CI/CD pipeline with github actions
-- [x] Real-time weather data from Open-Meteo API to Links page
+- [x] CI/CD pipeline with GitHub Actions
 - [x] Add Playwright E2E smoke tests (public routes and authentication flow)
 
 ---
 
 ## Future Improvements
 
-### Security & Auth
+### Security
 
 - **Token refresh** — implement refresh token pattern so users stay logged in securely beyond the current 10 h JWT expiry
-
-### Scalability
-
-**Done**
-
-- [x] **Pagination** — gallery uses `?page` and `?limit` query params; infinite scroll loads 10 artworks per page via Intersection Observer
-- [x] **Image optimization** — Cloudinary serves resized/compressed variants via URL parameters (`w_n`, `f_auto`, `q_auto`) to reduce bandwidth per request
-- [x] **HTTP response caching** — all GET endpoints set explicit `Cache-Control` headers; public endpoints (artwork list, artist list) use `public, max-age=300` so browsers and CDN proxies can cache for 5 minutes, while authenticated endpoints use `private, no-cache` to prevent shared caches from storing user-specific data
-- [x] **Connection pooling** — Mongoose uses the MongoDB Node.js driver pool automatically on `mongoose.connect()`; default `maxPoolSize` is 100 simultaneous connections, which covers most small-to-medium apps. Override in `app.js` if higher throughput is needed.
-- [x] **Rate limiting** — `express-rate-limit` applied on all routes: a global API limiter (100 req/15 min per IP) covers every endpoint, with stricter per-route limiters on auth routes (login, registration, password change) in `utils/limiters.js`
-- [x] **Database indexing** — Mongoose schemas define ascending indexes on `artworks.user`, `artworks.artist`, and `users.role`, plus a unique index on `users.username`; MongoDB uses index scans instead of full collection scans as the dataset grows
-
-**Todo**
-- **Horizontal scaling** — stateless JWT auth already allows running multiple backend instances behind a load balancer; move session/token state fully out of memory if needed
-- **Caching** — If needed add response Redis for frequently read, rarely changed data such as the public artwork and artist lists.
-
-### Production readiness
-
-- Add audit logging for admin actions and security-relevant events (role changes, user deletions)
-- Migrate JWT from localStorage to httpOnly cookies (see below)
+- **OAuth** — add social login (e.g. Google) via Passport.js so users can sign in without a separate password
 
 ### JWT storage
+
+- **JWT cookie migration** — move JWT from `localStorage` to httpOnly cookies to eliminate XSS exposure; requires changes on both frontend (stop managing token manually) and backend (set/read via cookie instead of `Authorization` header)
 
 JWT tokens are currently stored in `localStorage`, which is accessible to JavaScript and therefore vulnerable to XSS attacks. A more secure alternative is to use httpOnly cookies, which cannot be read by JavaScript at all.
 
 Migrating to cookie-based auth requires changes on both sides: the backend would set and read the token via a cookie instead of the `Authorization` header, and the frontend would stop managing the token manually. This is a larger refactor and has been left as a future improvement.
+
+### Scalability
+
+- **Horizontal scaling** — stateless JWT auth already allows running multiple backend instances behind a load balancer; move any remaining in-memory state out if needed
+- **Redis caching** — add Redis for frequently read, rarely changed data (artwork and artist lists) if database load becomes a bottleneck
+- **Pagination for users and events** — add `?page` / `?limit` support if those lists grow large enough to need it
+
+### Production readiness
+
+- **Audit logging** — log admin actions and security-relevant events (role changes, user deletions)
 
 ---
 

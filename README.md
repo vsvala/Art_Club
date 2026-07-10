@@ -284,13 +284,15 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 - [x] **Pagination** — gallery uses `?page` and `?limit` query params; infinite scroll loads 10 artworks per page via Intersection Observer
 - [x] **Image optimization** — Cloudinary serves resized/compressed variants via URL parameters (`w_n`, `f_auto`, `q_auto`) to reduce bandwidth per request
+- [x] **HTTP response caching** — all GET endpoints set explicit `Cache-Control` headers; public endpoints (artwork list, artist list) use `public, max-age=300` so browsers and CDN proxies can cache for 5 minutes, while authenticated endpoints use `private, no-cache` to prevent shared caches from storing user-specific data
+- [x] **Connection pooling** — Mongoose uses the MongoDB Node.js driver pool automatically on `mongoose.connect()`; default `maxPoolSize` is 100 simultaneous connections, which covers most small-to-medium apps. Override in `app.js` if higher throughput is needed.
+- [x] **Rate limiting** — `express-rate-limit` applied on all routes: a global API limiter (100 req/15 min per IP) covers every endpoint, with stricter per-route limiters on auth routes (login, registration, password change) in `utils/limiters.js`
 
 **Todo**
 
-- **Caching** — add response caching (e.g. Redis or HTTP cache headers) for frequently read, rarely changed data such as the public artwork and artist lists
 - **Database indexing** — add indexes on frequently queried fields (e.g. `artworks.artist`, `users.role`) to keep MongoDB queries fast as the dataset grows
-- **Rate limiting** — add express-rate-limit to the API to protect against abuse and unintended load spikes
 - **Horizontal scaling** — stateless JWT auth already allows running multiple backend instances behind a load balancer; move session/token state fully out of memory if needed
+- **Caching** — If needed add response Redis for frequently read, rarely changed data such as the public artwork and artist lists.
 
 ### Production readiness
 

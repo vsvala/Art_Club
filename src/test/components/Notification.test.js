@@ -5,14 +5,14 @@ import { createStore, combineReducers } from 'redux'
 import notificationReducer from '../../reducers/notificationReducer'
 import Notification from '../../components/common/Notification'
 
-// Apufunktio: luo testi-store haluamallasi alkutilalla
+// Helper: creates test store with given initial state
 const createTestStore = (notification = '') =>
   createStore(combineReducers({ notification: notificationReducer }), {
     notification,
   })
 
 describe('Notification', () => {
-  test('ei renderöi mitään kun notifikaatio on tyhjä', () => {
+  test('renders nothing when notification is empty', () => {
     const store = createTestStore('')
     const { container } = render(
       <Provider store={store}>
@@ -22,24 +22,24 @@ describe('Notification', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
-  test('näyttää viestin kun notifikaatio on asetettu', () => {
-    const store = createTestStore('Teos lisätty onnistuneesti')
+  test('shows message when notification is set', () => {
+    const store = createTestStore('Artwork added successfully')
     render(
       <Provider store={store}>
         <Notification />
       </Provider>,
     )
-    expect(screen.getByText('Teos lisätty onnistuneesti')).toBeInTheDocument()
+    expect(screen.getByText('Artwork added successfully')).toBeInTheDocument()
   })
 
-  test('näyttää reunuksen kun viesti on näkyvissä', () => {
-    const store = createTestStore('Virhe tapahtui')
+  test('shows border when message is visible', () => {
+    const store = createTestStore('An error occurred')
     render(
       <Provider store={store}>
         <Notification />
       </Provider>,
     )
-    const div = screen.getByText('Virhe tapahtui')
+    const div = screen.getByText('An error occurred')
     expect(div).toHaveStyle('border: solid')
   })
 })

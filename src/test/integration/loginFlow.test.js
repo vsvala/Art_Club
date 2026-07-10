@@ -5,7 +5,7 @@ import { login, logout } from '../../reducers/actionCreators/loginActions'
 import loginReducer from '../../reducers/loginReducer'
 import notificationReducer from '../../reducers/notificationReducer'
 
-// Luo minimaalinen testi-store — vain tarvittavat reducerit
+// Create minimal test store — only required reducers
 const createTestStore = () =>
   createStore(
     combineReducers({
@@ -15,13 +15,13 @@ const createTestStore = () =>
     applyMiddleware(thunk),
   )
 
-// Käynnistä mock-server ennen testejä, sammuta jälkeen
+// Start mock server before tests, stop after
 beforeAll(() => server.listen())
 afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('Login-flow', () => {
-  test('onnistunut login asettaa käyttäjän storeen', async () => {
+  test('successful login sets user in store', async () => {
     const store = createTestStore()
 
     await store.dispatch(login('testi', 'salasana'))
@@ -32,7 +32,7 @@ describe('Login-flow', () => {
     expect(loggedUser.role).toBe('member')
   })
 
-  test('onnistunut login tallentaa käyttäjän localStorageen', async () => {
+  test('successful login saves user to localStorage', async () => {
     const store = createTestStore()
 
     await store.dispatch(login('testi', 'salasana'))
@@ -42,7 +42,7 @@ describe('Login-flow', () => {
     expect(saved.token).toBe(mockUser.token)
   })
 
-  test('onnistunut login asettaa notifikaation', async () => {
+  test('successful login sets notification', async () => {
     const store = createTestStore()
 
     await store.dispatch(login('testi', 'salasana'))
@@ -52,7 +52,7 @@ describe('Login-flow', () => {
 })
 
 describe('Logout-flow', () => {
-  test('logout poistaa käyttäjän storesta', async () => {
+  test('logout removes user from store', async () => {
     const store = createTestStore()
     await store.dispatch(login('testi', 'salasana'))
 
@@ -61,7 +61,7 @@ describe('Logout-flow', () => {
     expect(store.getState().loggedUser.loggedUser).toBeNull()
   })
 
-  test('logout poistaa käyttäjän localStoragesta', async () => {
+  test('logout removes user from localStorage', async () => {
     const store = createTestStore()
     await store.dispatch(login('testi', 'salasana'))
 

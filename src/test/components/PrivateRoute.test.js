@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import PrivateRoute from '../../components/common/PrivateRoute'
 
-// Apufunktio: renderöi PrivateRoute testattavassa Router-rakenteessa
+// Helper: renders PrivateRoute in a testable Router structure
 const renderPrivateRoute = (condition) =>
   render(
     <MemoryRouter initialEntries={['/suojattu']}>
@@ -17,17 +17,17 @@ const renderPrivateRoute = (condition) =>
   )
 
 describe('PrivateRoute', () => {
-  test('näyttää suojatun sivun kun condition on true', () => {
+  test('shows protected page when condition is true', () => {
     renderPrivateRoute(true)
     expect(screen.getByText('Suojattu sivu')).toBeInTheDocument()
   })
 
-  test('ei näytä suojattua sivua kun condition on false', () => {
+  test('does not show protected page when condition is false', () => {
     renderPrivateRoute(false)
     expect(screen.queryByText('Suojattu sivu')).not.toBeInTheDocument()
   })
 
-  test('ohjaa login-sivulle kun condition on false', () => {
+  test('redirects to login page when condition is false', () => {
     renderPrivateRoute(false)
     expect(screen.getByText('Login-sivu')).toBeInTheDocument()
   })

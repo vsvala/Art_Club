@@ -15,7 +15,7 @@ afterEach(() => server.resetHandlers())
 afterAll(() => server.close())
 
 describe('Artwork-flow', () => {
-  test('initializeArtworks lataa teokset storeen', async () => {
+  test('initializeArtworks loads artworks into store', async () => {
     const store = createTestStore()
 
     await store.dispatch(initializeArtworks())
@@ -24,7 +24,7 @@ describe('Artwork-flow', () => {
     expect(artworks).toHaveLength(mockArtworks.length)
   })
 
-  test('ladatut teokset sisältävät oikeat nimet', async () => {
+  test('loaded artworks contain correct names', async () => {
     const store = createTestStore()
 
     await store.dispatch(initializeArtworks())
@@ -34,7 +34,7 @@ describe('Artwork-flow', () => {
     expect(artworks[1].name).toBe('Muotokuva')
   })
 
-  test('ennen latausta store on tyhjä', () => {
+  test('store is empty before loading', () => {
     const store = createTestStore()
     expect(store.getState().artworks.artworks).toHaveLength(0)
   })

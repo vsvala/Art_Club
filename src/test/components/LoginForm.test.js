@@ -3,7 +3,7 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
 import { LoginForm } from '../../components/login/LoginForm'
 
-// Named export — ei tarvita Reduxia, annetaan propsi suoraan
+// Named export — no Redux needed, props passed directly
 const renderLoginForm = (props = {}) =>
   render(
     <MemoryRouter>
@@ -12,27 +12,27 @@ const renderLoginForm = (props = {}) =>
   )
 
 describe('LoginForm', () => {
-  test('renderöityy kaatumatta', () => {
+  test('renders without crashing', () => {
     renderLoginForm()
     expect(screen.getByText('Sign In')).toBeInTheDocument()
   })
 
-  test('username-kenttä löytyy', () => {
+  test('username field is present', () => {
     renderLoginForm()
     expect(screen.getByPlaceholderText('Username')).toBeInTheDocument()
   })
 
-  test('password-kenttä löytyy', () => {
+  test('password field is present', () => {
     renderLoginForm()
     expect(screen.getByPlaceholderText('Password')).toBeInTheDocument()
   })
 
-  test('login-nappi löytyy', () => {
+  test('login button is present', () => {
     renderLoginForm()
     expect(screen.getByRole('button', { name: 'Login' })).toBeInTheDocument()
   })
 
-  test('kutsuu login-funktiota oikeilla arvoilla kun lomake lähetetään', () => {
+  test('calls login function with correct values on form submit', () => {
     const mockLogin = jest.fn()
     renderLoginForm({ login: mockLogin })
 
@@ -47,7 +47,7 @@ describe('LoginForm', () => {
     expect(mockLogin).toHaveBeenCalledWith('testi', 'salasana123')
   })
 
-  test('tyhjentää kentät submitin jälkeen', () => {
+  test('clears fields after submit', () => {
     renderLoginForm()
     const usernameField = screen.getByPlaceholderText('Username')
 

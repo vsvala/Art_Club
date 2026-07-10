@@ -1,31 +1,31 @@
 import { emailValid } from '../utils/validations'
 
 describe('emailValid', () => {
-  test('hyväksyy kelvollisen sähköpostiosoitteen', () => {
+  test('accepts a valid email address', () => {
     expect(emailValid('testi@example.com')).toBe(true)
   })
 
-  test('hyväksyy alidomainin', () => {
+  test('accepts a subdomain email', () => {
     expect(emailValid('a@b.fi')).toBe(true)
   })
 
-  test('hylkää osoitteen ilman @-merkkiä', () => {
+  test('rejects address without @ sign', () => {
     expect(emailValid('testiosoite')).toBe(false)
   })
 
-  test('hylkää osoitteen ilman domainia', () => {
+  test('rejects address without domain', () => {
     expect(emailValid('testi@')).toBe(false)
   })
 
-  test('hylkää tyhjän merkkijonon', () => {
+  test('rejects empty string', () => {
     expect(emailValid('')).toBe(false)
   })
 
-  test('hylkää pelkän @-merkin', () => {
+  test('rejects bare @ sign', () => {
     expect(emailValid('@')).toBe(false)
   })
 
-  test('hylkää osoitteen jossa on välilyönti', () => {
+  test('rejects address with whitespace', () => {
     expect(emailValid('tes ti@a.com')).toBe(false)
   })
 })

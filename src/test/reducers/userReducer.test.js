@@ -4,7 +4,7 @@ const user1 = { id: '1', username: 'maija', role: 'member' }
 const user2 = { id: '2', username: 'pekka', role: 'member' }
 
 describe('userReducer — DELETE_USER', () => {
-  test('poistaa oikean käyttäjän listalta', () => {
+  test('removes the correct user from the list', () => {
     const state = userReducer(
       { users: [user1, user2], singleUser: {}, loggedUser: {} },
       { type: 'DELETE_USER', data: { id: '1' } },
@@ -13,7 +13,7 @@ describe('userReducer — DELETE_USER', () => {
     expect(state.users.find((u) => u.id === '1')).toBeUndefined()
   })
 
-  test('jättää muut käyttäjät koskemattomiksi', () => {
+  test('leaves other users untouched', () => {
     const state = userReducer(
       { users: [user1, user2], singleUser: {}, loggedUser: {} },
       { type: 'DELETE_USER', data: { id: '1' } },
@@ -21,7 +21,7 @@ describe('userReducer — DELETE_USER', () => {
     expect(state.users[0]).toEqual(user2)
   })
 
-  test('ei poista mitään jos id ei täsmää', () => {
+  test('does not remove anything if id does not match', () => {
     const state = userReducer(
       { users: [user1, user2], singleUser: {}, loggedUser: {} },
       { type: 'DELETE_USER', data: { id: '999' } },
@@ -31,7 +31,7 @@ describe('userReducer — DELETE_USER', () => {
 })
 
 describe('userReducer — UPDATE_ROLE', () => {
-  test('päivittää oikean käyttäjän roolin', () => {
+  test('updates the correct user role', () => {
     const state = userReducer(
       { users: [user1, user2], singleUser: {}, loggedUser: {} },
       { type: 'UPDATE_ROLE', data: { id: '2', role: 'admin' } },
@@ -39,7 +39,7 @@ describe('userReducer — UPDATE_ROLE', () => {
     expect(state.users.find((u) => u.id === '2').role).toBe('admin')
   })
 
-  test('ei muuta muiden käyttäjien roolia', () => {
+  test('does not change other users roles', () => {
     const state = userReducer(
       { users: [user1, user2], singleUser: {}, loggedUser: {} },
       { type: 'UPDATE_ROLE', data: { id: '2', role: 'admin' } },
@@ -47,7 +47,7 @@ describe('userReducer — UPDATE_ROLE', () => {
     expect(state.users.find((u) => u.id === '1').role).toBe('member')
   })
 
-  test('palauttaa uuden arrayn eikä mutoi alkuperäistä', () => {
+  test('returns a new array and does not mutate the original', () => {
     const initial = { users: [user1, user2], singleUser: {}, loggedUser: {} }
     const state = userReducer(initial, {
       type: 'UPDATE_ROLE',

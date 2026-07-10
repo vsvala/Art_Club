@@ -38,12 +38,13 @@ const getSingleArtwork = async (id) => {
     const response = await axios.get(baseUrl + `/${id}`)
     return response.data
   } catch (error) {
-    if (error === 400) {
+    if (error.response?.status === 400) {
       return { error: 'Could not get artwork from db' }
     }
-    if (error === 500) {
+    if (error.response?.status === 500) {
       return { error: 'Internal server error' }
     }
+    return { error: 'Could not get artwork from db' }
   }
 }
 
@@ -52,7 +53,8 @@ const create = async (data) => {
     const response = await axios.post(baseUrl, data, getConfig())
     return response.data
   } catch (error) {
-    const status = error.response.status
+    const status = error.response?.status
+    if (!status) return { error: 'Unable to connect to server.' }
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {

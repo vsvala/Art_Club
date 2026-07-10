@@ -19,7 +19,7 @@ const getAll = async () => {
     const response = await axios.get(baseUrl, getConfig())
     return response.data
   } catch (error) {
-    if (error === 400) {
+    if (error.response?.status === 400) {
       return { error: 'Could not get userlist from db' }
     }
   }
@@ -30,7 +30,7 @@ const getAllArtists = async () => {
     const response = await axios.get(baseUrl + '/artists', getConfig())
     return response.data
   } catch (error) {
-    if (error === 400) {
+    if (error.response?.status === 400) {
       return { error: 'Could not get userlist from db' }
     }
   }
@@ -41,12 +41,13 @@ const getSingleUser = async (id) => {
     const response = await axios.get(baseUrl + `/artist/${id}`)
     return response.data
   } catch (error) {
-    if (error === 400) {
+    if (error.response?.status === 400) {
       return { error: 'Could not get user from db' }
     }
-    if (error === 500) {
+    if (error.response?.status === 500) {
       return { error: 'Internal server error' }
     }
+    return { error: 'Could not get user from db' }
   }
 }
 
@@ -55,7 +56,8 @@ const create = async (user) => {
     const response = await axios.post(baseUrl, user)
     return response.data
   } catch (error) {
-    const status = error.response.status
+    const status = error.response?.status
+    if (!status) return { error: 'Unable to connect to server.' }
     if (status === 500) {
       return { error: 'Unable to connect to server.' }
     } else if (status === 400) {

@@ -248,16 +248,21 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ## Roadmap
 
+### todo
+
+- [ ] Better error feedback for each field for rest of froms
+
 ### Backend
 
 - [x] Backend service layer — extracted business logic from controllers into dedicated service layer (`artworkService.js`, `userService.js`, `eventService.js`)
 - [x] Artworks pagination — `GET /api/artworks?page=1&limit=10` with `total` and `hasMore` metadata
 - [x] Input validation with `express-validator` on all backend write endpoints (register, password change, profile, artwork, event)
 - [x] Centralized error handling — all errors routed through a single `errorHandler` middleware with consistent `{ error: "..." }` JSON responses
-- [x] Weather data proxied through backend `/api/weather?city=` endpoint — frontend no longer calls Open-Meteo directly
+- [x] Weather data proxied through backend `/api/weather?city=` endpoint
 
 ### Frontend
 
+- [x] Better error feedback for each field for event from
 - [x] Migrate ArtworkList data fetching to TanStack React Query (automatic caching, background refetch, 5-minute staleTime)
 - [x] Infinite scroll in the artwork gallery — Intersection Observer loads 10 artworks per page as the user scrolls
 - [x] Route-level code splitting with React.lazy to reduce initial bundle size
@@ -270,7 +275,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 - [x] Re-render updated data immediately after admin actions (user role changes, deletions)
 - [x] Fix mobile UI responsiveness across all pages
 
-### Scalability
+### Scalability (backend)
 
 - [x] **Pagination** — gallery uses `?page` and `?limit` query params; infinite scroll loads 10 artworks per page via Intersection Observer
 - [x] **Image optimization** — Cloudinary serves resized/compressed variants via URL parameters (`w_n`, `f_auto`, `q_auto`) to reduce bandwidth per request

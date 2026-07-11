@@ -7,27 +7,30 @@ import tokenCheckService from '../../services/tokenCheck'
 export const initLoggedUser = () => {
   return async (dispatch) => {
     const loggedUser = JSON.parse(window.localStorage.getItem('loggedInUser'))
-    if (loggedUser) {
-      const token = loggedUser.token
-      if (!token) {
-        window.localStorage.removeItem('loggedInUser')
-        dispatch({ type: 'LOGOUT' })
-        return
-      }
+    if (!loggedUser) {
+      dispatch({ type: 'AUTH_READY' })
+      return
+    }
 
-      const response = await tokenCheckService.userCheck(token)
-      if (response.message === 'success') {
-        await artworkService.setToken(loggedUser.token)
-        await userService.setToken(loggedUser.token)
-        await eventService.setToken(loggedUser.token)
-        dispatch({ type: 'INIT_USER', data: loggedUser })
-      } else {
-        window.localStorage.removeItem('loggedInUser')
-        await userService.setToken(null)
-        await artworkService.setToken(null)
-        await eventService.setToken(null)
-        dispatch({ type: 'LOGOUT' })
-      }
+    const token = loggedUser.token
+    if (!token) {
+      window.localStorage.removeItem('loggedInUser')
+      dispatch({ type: 'AUTH_READY' })
+      return
+    }
+
+    const response = await tokenCheckService.userCheck(token)
+    if (response.message === 'success') {
+      await artworkService.setToken(loggedUser.token)
+      await userService.setToken(loggedUser.token)
+      await eventService.setToken(loggedUser.token)
+      dispatch({ type: 'INIT_USER', data: loggedUser })
+    } else {
+      window.localStorage.removeItem('loggedInUser')
+      await userService.setToken(null)
+      await artworkService.setToken(null)
+      await eventService.setToken(null)
+      dispatch({ type: 'AUTH_READY' })
     }
   }
 }

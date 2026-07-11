@@ -1,12 +1,17 @@
 const initialState = {
   loggedUser: null,
-  singleUser: {}
+  singleUser: {},
+  authLoading: true,
 }
 
 const loginReducer = (state = initialState, action) => {
   switch (action.type) {
   case 'INIT_USER': {
-    return { ...state, loggedUser: action.data }
+    return { ...state, loggedUser: action.data, authLoading: false }
+  }
+
+  case 'AUTH_READY': {
+    return { ...state, authLoading: false }
   }
 
   case 'LOGIN': {

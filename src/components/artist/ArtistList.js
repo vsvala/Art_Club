@@ -1,13 +1,16 @@
-import React, { useEffect } from 'react'
+import React from 'react'
+import { useQuery } from '@tanstack/react-query'
 import Artist from './Artist'
-import { connect } from 'react-redux'
 import { Table } from 'react-bootstrap'
-import { getArtists } from '../../reducers/actionCreators/userActions'
+import userService from '../../services/users'
 
-export const ArtistList = ({ artistsToShow, getArtists }) => {
-  useEffect(() => {
-    getArtists()
-  }, [])
+export const ArtistList = () => {
+  const { data: artists = [], isLoading } = useQuery({
+    queryKey: ['artists'],
+    queryFn: userService.getAllArtists,
+  })
+
+  if (isLoading) return <p>Ladataan...</p>
 
   return (
     <div className="artistList">
@@ -22,18 +25,13 @@ export const ArtistList = ({ artistsToShow, getArtists }) => {
         </thead>
 
         <tbody>
-          {artistsToShow &&
-            artistsToShow.map((user) => <Artist user={user} key={user.id} />)}
+          {artists?.map((user) => (
+            <Artist user={user} key={user.id} />
+          ))}
         </tbody>
       </Table>
     </div>
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    artistsToShow: state.users.users,
-  }
-}
-
-export default connect(mapStateToProps, { getArtists })(ArtistList)
+export default ArtistList

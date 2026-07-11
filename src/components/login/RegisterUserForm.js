@@ -1,15 +1,15 @@
 import { React, useState } from 'react'
-import { connect } from 'react-redux'
 import { Form, Button, Row, Col, Container, InputGroup } from 'react-bootstrap'
 import { Link } from 'react-router-dom'
 import { createUser } from '../../reducers/actionCreators/userActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { emailValid } from '../../utils/validations'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 
-export const RegisterUserForm = ({ createUser, notify }) => {
+export const RegisterUserForm = () => {
   const [showPassword, setShowPassword] = useState(false)
-
+  const dispatch = useDispatch()
   const navigate = useNavigate()
 
   const handleSubmit = (event) => {
@@ -23,15 +23,15 @@ export const RegisterUserForm = ({ createUser, notify }) => {
     }
 
     if (!emailValid(user.email)) {
-      notify('Please check your email', 5)
+      dispatch(notify('Please check your email', 5))
     } else if (user.name.length < 3) {
-      notify('Name has to have at least 3 characters', 5)
+      dispatch(notify('Name has to have at least 3 characters', 5))
     } else if (user.username.length < 3) {
-      notify('Username has to have at least 3 characters', 5)
+      dispatch(notify('Username has to have at least 3 characters', 5))
     } else if (user.password.length < 8) {
-      notify('Password has to have at least 8 characters', 5)
+      dispatch(notify('Password has to have at least 8 characters', 5))
     } else {
-      createUser(user)
+      dispatch(createUser(user))
       navigate('/nonMember')
     }
   }
@@ -104,7 +104,4 @@ export const RegisterUserForm = ({ createUser, notify }) => {
   )
 }
 
-export default connect(
-  null,
-  { createUser, notify }, // notification,
-)(RegisterUserForm)
+export default RegisterUserForm

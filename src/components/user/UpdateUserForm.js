@@ -4,9 +4,13 @@ import { updateUser } from '../../reducers/actionCreators/userActions'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { emailValid } from '../../utils/validations'
 import { useNavigate } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 
-export const UpdateUserForm = ({ updateUser, id, notify, singleUser }) => {
+export const UpdateUserForm = ({ id }) => {
+  const singleUser = useSelector((state) => state.singleUser.singleUser)
+
+  const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const [name, setName] = useState(singleUser.name)
   const [email, setEmail] = useState(singleUser.email)
@@ -22,13 +26,13 @@ export const UpdateUserForm = ({ updateUser, id, notify, singleUser }) => {
       username: username,
     }
     if (!emailValid(user.email)) {
-      notify('Please check your email', 5)
+      dispatch(notify('Please check your email', 5))
     } else if (user.name.length < 3) {
-      notify('Name has to have at least 3 characters', 5)
+      dispatch(notify('Name has to have at least 3 characters', 5))
     } else if (user.username.length < 3) {
-      notify('Username has to have at least 3 characters', 5)
+      dispatch(notify('Username has to have at least 3 characters', 5))
     } else {
-      const response = await updateUser(user)
+      const response = await dispatch(updateUser(user))
       if (response.success) {
         navigate(`/users/${id}/myPage`)
       }
@@ -86,11 +90,4 @@ export const UpdateUserForm = ({ updateUser, id, notify, singleUser }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedUser: state.loggedUser.loggedUser,
-    singleUser: state.singleUser.singleUser,
-  }
-}
-
-export default connect(mapStateToProps, { updateUser, notify })(UpdateUserForm)
+export default UpdateUserForm

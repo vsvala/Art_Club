@@ -1,15 +1,17 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Button } from 'react-bootstrap'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-const ArtworkDelete = ({ artwork, deleteArtwork }) => {
+const ArtworkDelete = ({ artwork }) => {
+  const dispatch = useDispatch()
+
   const removeArtwork = (id) => {
     return () => {
       if (window.confirm('Do you want to delete this artwork?')) {
-        deleteArtwork(id)
+        dispatch(deleteArtwork(id))
       }
     }
   }
@@ -51,4 +53,4 @@ const ArtworkDelete = ({ artwork, deleteArtwork }) => {
   )
 }
 
-export default connect(null, { deleteArtwork })(ArtworkDelete)
+export default ArtworkDelete

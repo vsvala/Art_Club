@@ -1,23 +1,18 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
 import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
-import userActions from '../../reducers/actionCreators/userActions'
 import { Link, useParams } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
-import { notify } from '../../reducers/actionCreators/notificationActions'
-import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import ArtworkDelete from '../artwork/ArtworkDelete'
+import { useSelector, useDispatch } from 'react-redux'
 
-export const SingleUser = ({
-  singleUser,
-  userId,
-  initializeSingleUser,
-  loggedUser,
-}) => {
+export const SingleUser = ({ userId }) => {
   const { id: paramId } = useParams()
   const resolvedId = userId || paramId
   const normalizeId = (value) =>
     value !== undefined && value !== null ? String(value) : ''
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
+  const singleUser = useSelector((state) => state.singleUser.singleUser)
+  const dispatch = useDispatch()
   const isOwner =
     loggedUser && resolvedId
       ? normalizeId(loggedUser.id) === normalizeId(resolvedId)
@@ -38,8 +33,8 @@ export const SingleUser = ({
   const canAddArtwork = artworkCount < 10
 
   useEffect(() => {
-    initializeSingleUser(resolvedId)
-  }, [resolvedId])
+    dispatch(initializeSingleUser(resolvedId))
+  }, [resolvedId, dispatch])
 
   return (
     <div className="singleUser">
@@ -115,16 +110,4 @@ export const SingleUser = ({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    singleUser: state.singleUser.singleUser,
-    loggedUser: state.loggedUser.loggedUser,
-  }
-}
-
-export default connect(mapStateToProps, {
-  notify,
-  ...userActions,
-  initializeSingleUser,
-  deleteArtwork,
-})(SingleUser)
+export default SingleUser

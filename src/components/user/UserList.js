@@ -1,18 +1,21 @@
 import React, { useEffect } from 'react'
 import User from './User'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Table } from 'react-bootstrap'
 import { getUsers, deleteUser } from '../../reducers/actionCreators/userActions'
 
-export const UserList = ({ userArray, getUsers, deleteUser }) => {
+export const UserList = () => {
+  const dispatch = useDispatch()
+  const userArray = useSelector((state) => state.users.users)
+
   useEffect(() => {
-    getUsers()
+    dispatch(getUsers())
   }, [])
 
   const removeUser = (id) => {
     return () => {
       if (window.confirm('Do you want to delete this user?')) {
-        deleteUser(id)
+        dispatch(deleteUser(id))
       }
     }
   }
@@ -47,10 +50,4 @@ export const UserList = ({ userArray, getUsers, deleteUser }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    userArray: state.users.users,
-  }
-}
-
-export default connect(mapStateToProps, { getUsers, deleteUser })(UserList)
+export default UserList

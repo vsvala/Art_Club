@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { createArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import { getArtists } from '../../reducers/actionCreators/userActions'
@@ -8,18 +8,15 @@ import ReadMoreReact from 'read-more-react'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { useNavigate } from 'react-router-dom'
 
-export const AddArtworkForm = ({
-  createArtwork,
-  getArtists,
-  users,
-  id,
-  notify,
-}) => {
+export const AddArtworkForm = ({ id }) => {
+  const dispatch = useDispatch()
+  const users = useSelector((state) => state.users.users)
+
   const navigate = useNavigate()
 
   useEffect(() => {
-    getArtists()
-  }, [])
+    dispatch(getArtists())
+  }, [dispatch])
 
   const userToShow = users && users.find((u) => u.id === id)
 
@@ -38,17 +35,17 @@ export const AddArtworkForm = ({
     event.preventDefault()
 
     if (galleryImage.galleryImage === undefined) {
-      notify('Remember to choose image!', 5)
+      dispatch(notify('Remember to choose image!', 5))
     } else if (event.target.artist.value.length <= 2) {
-      notify('Artist name has to have at least 2 characters', 5)
+      dispatch(notify('Artist name has to have at least 2 characters', 5))
     } else if (event.target.name.value.length <= 2) {
-      notify('Artwork name has to have at least 2 characters', 5)
+      dispatch(notify('Artwork name has to have at least 2 characters', 5))
     } else if (event.target.year.value.length <= 3) {
-      notify('Year field has to have at least 4 numbers', 5)
+      dispatch(notify('Year field has to have at least 4 numbers', 5))
     } else if (event.target.size.value.length <= 2) {
-      notify('Size field has to have at least 3 characters', 5)
+      dispatch(notify('Size field has to have at least 3 characters', 5))
     } else if (event.target.medium.value.length <= 3) {
-      notify('Medium field has to have at least 3 characters', 5)
+      dispatch(notify('Medium field has to have at least 3 characters', 5))
     } else {
       const data = new FormData()
       data.append('galleryImage', galleryImage.galleryImage)
@@ -58,11 +55,11 @@ export const AddArtworkForm = ({
       data.append('size', event.target.size.value)
       data.append('medium', event.target.medium.value)
 
-      const result = await createArtwork(data)
+      const result = await dispatch(createArtwork(data))
       if (result?.success) {
         navigate(`/users/${id}/myPage`)
       } else {
-        notify(result?.error || 'Saving failed!', 5)
+        dispatch(notify(result?.error || 'Saving failed!', 5))
       }
     }
   }
@@ -80,7 +77,7 @@ export const AddArtworkForm = ({
     const MAX_SIZE = 5 * 1024 * 1024
 
     if (file && file.size > MAX_SIZE) {
-      notify('Image file must be under 5 MB', 5)
+      dispatch(notify('Image file must be under 5 MB', 5))
       event.target.value = ''
       setFile({})
       return
@@ -185,12 +182,4 @@ export const AddArtworkForm = ({
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    users: state.users.users,
-  }
-}
-
-export default connect(mapStateToProps, { createArtwork, getArtists, notify })(
-  AddArtworkForm,
-)
+export default AddArtworkForm

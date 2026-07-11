@@ -1,5 +1,6 @@
 import React, { useEffect, Suspense, lazy } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+
 //import { Navbar, Nav, Button } from 'react-bootstrap'
 //import logo from './images/tripleblue.svg'
 import picture from './images/pict.png'
@@ -32,12 +33,14 @@ const GDPRInfo = lazy(() => import('./components/common/GDPRInfo'))
 const TermsOfUse = lazy(() => import('./components/common/TermsOfUse'))
 const NotFound = lazy(() => import('./components/common/NotFound'))
 
-const App = (props) => {
-  useEffect(() => {
-    props.initLoggedUser()
-  }, [])
+const App = () => {
+  const dispatch = useDispatch()
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
 
-  const { loggedUser } = props
+  useEffect(() => {
+    dispatch(initLoggedUser())
+  }, [dispatch])
+
   const isMember = loggedUser && loggedUser.role === 'member'
   const isAdmin = loggedUser && loggedUser.role === 'admin'
   const nonMember = loggedUser && loggedUser.role === 'nonMember'
@@ -51,7 +54,7 @@ const App = (props) => {
             isMember={isMember}
             isAdmin={isAdmin}
             nonMember={nonMember}
-            logout={props.logout}
+            logout={() => dispatch(logout())}
           />
 
           <Notification />
@@ -153,10 +156,4 @@ const App = (props) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedUser: state.loggedUser.loggedUser,
-  }
-}
-
-export default connect(mapStateToProps, { logout, initLoggedUser })(App)
+export default App

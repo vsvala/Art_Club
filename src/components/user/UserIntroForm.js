@@ -1,24 +1,28 @@
 import React, { useState } from 'react'
 import { notify } from '../../reducers/actionCreators/notificationActions'
 import { Form, Button } from 'react-bootstrap'
-import { connect } from 'react-redux'
 import { updateLoggedUser } from '../../reducers/actionCreators/loginActions'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
-export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
+export const UserIntroForm = ({ id }) => {
+  const singleUser = useSelector((state) => state.singleUser.singleUser)
   const [intro, setIntro] = useState(singleUser.intro)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   const handleSubmit = (event) => {
     event.preventDefault()
     const input = { intro: intro }
     if (input.intro.length > 1000) {
-      notify(
-        'Text is too long! Introduction text maximum length is 1000 characters',
-        5,
+      dispatch(
+        notify(
+          'Text is too long! Introduction text maximum length is 1000 characters',
+          5,
+        ),
       )
     } else {
-      updateLoggedUser(input, id)
+      dispatch(updateLoggedUser(input, id))
       navigate(`/users/${id}/myPage`)
     }
   }
@@ -47,12 +51,4 @@ export const UserIntroForm = ({ updateLoggedUser, id, singleUser, notify }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    singleUser: state.singleUser.singleUser,
-  }
-}
-
-export default connect(mapStateToProps, { updateLoggedUser, notify })(
-  UserIntroForm,
-)
+export default UserIntroForm

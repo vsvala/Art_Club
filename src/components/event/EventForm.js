@@ -1,16 +1,17 @@
 import React, { useState } from 'react'
-import { connect } from 'react-redux'
-import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { Form, Button, Col, Row, Container } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css'
 import { useNavigate } from 'react-router-dom'
 import { notify } from '../../reducers/actionCreators/notificationActions'
+import { createEvent } from '../../reducers/actionCreators/eventActions'
 import { useQueryClient } from '@tanstack/react-query'
+import { useDispatch } from 'react-redux'
 
-export const EventForm = ({ createEvent, notify }) => {
+export const EventForm = () => {
   const navigate = useNavigate()
   const queryClient = useQueryClient()
+  const dispatch = useDispatch()
   const [input, setInput] = useState({ title: '', place: '', description: '' })
   const [eventImage, setFile] = useState({})
   const [state, setState] = useState({
@@ -75,12 +76,12 @@ export const EventForm = ({ createEvent, notify }) => {
     data.append('end', formatDate(state.endDate))
     data.append('description', input.description)
 
-    const createEventResult = await createEvent(data)
+    const createEventResult = await dispatch(createEvent(data))
     if (createEventResult.success) {
       queryClient.invalidateQueries(['events'])
       navigate('/users/events')
     } else {
-      notify(createEventResult?.error || 'Saving failed!', 5)
+      dispatch(notify(createEventResult?.error || 'Saving failed!', 5))
     }
   }
 
@@ -240,4 +241,4 @@ export const EventForm = ({ createEvent, notify }) => {
   )
 }
 
-export default connect(null, { createEvent, notify })(EventForm)
+export default EventForm

@@ -1,24 +1,25 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
+import { Provider } from 'react-redux'
+import store from '../../reducers/store'
 import { RegisterUserForm } from '../../components/login/RegisterUserForm'
 
-// Note: component reads values via event.target.fieldName.value
-// which JSDOM does not support with fireEvent. Validation logic is tested
-// separately in validations.test.js (emailValid). Here we test
-// the UI structure and fields.
-
-const renderForm = (props = {}) =>
+const renderForm = () =>
   render(
-    <MemoryRouter>
-      <RegisterUserForm createUser={jest.fn()} notify={jest.fn()} {...props} />
-    </MemoryRouter>,
+    <Provider store={store}>
+      <MemoryRouter>
+        <RegisterUserForm />
+      </MemoryRouter>
+    </Provider>,
   )
 
 describe('RegisterUserForm', () => {
   test('renders without crashing', () => {
     renderForm()
-    expect(screen.getByText('Register and apply membership')).toBeInTheDocument()
+    expect(
+      screen.getByText('Register and apply membership'),
+    ).toBeInTheDocument()
   })
 
   test('Name field is present', () => {

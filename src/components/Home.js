@@ -1,12 +1,12 @@
 import React from 'react'
 //import * as Sentry from '@sentry/react'
 import { Link } from 'react-router-dom'
-import { connect } from 'react-redux'
+import { useSelector } from 'react-redux'
 import logo from '../images/tripleblue.svg'
 
-export const Home = (props) => {
-  const isNonMember = props.loggedUser && props.loggedUser.role === 'nonMember'
-
+export const Home = () => {
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
+  const isNonMember = loggedUser && loggedUser.role === 'nonMember'
   return (
     <div>
       {isNonMember ? (
@@ -21,9 +21,7 @@ export const Home = (props) => {
         </div>
       ) : (
         <div className="home">
-          {props.loggedUser && (
-            <p className="homeUsername">{props.loggedUser.username}</p>
-          )}
+          <p className="homeUsername">{loggedUser?.username}</p>
           <h1>Welcome To Art Club!</h1>
           <br />
           <img src={logo} className="frontLogo" alt="Art club LOGO" />
@@ -68,10 +66,4 @@ export const Home = (props) => {
 //   Sentry.captureException(new Error('Sentry frontend test error'))
 // }
 
-const mapStateToProps = (state) => {
-  return {
-    loggedUser: state.loggedUser.loggedUser,
-  }
-}
-
-export default connect(mapStateToProps)(Home)
+export default Home

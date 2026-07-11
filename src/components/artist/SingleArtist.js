@@ -1,16 +1,17 @@
 import React, { useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
-import userActions from '../../reducers/actionCreators/userActions'
 import { Link, useParams } from 'react-router-dom'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
+export const SingleArtist = () => {
   const { id } = useParams()
+  const dispatch = useDispatch()
+  const singleUser = useSelector((state) => state.singleUser.singleUser)
 
   useEffect(() => {
-    initializeSingleUser(id)
-  }, [id])
+    dispatch(initializeSingleUser(id))
+  }, [id, dispatch])
 
   return (
     <div className="singleUser">
@@ -50,13 +51,4 @@ export const SingleArtist = ({ singleUser, initializeSingleUser }) => {
   )
 }
 
-const mapStateToProps = (state) => {
-  return {
-    singleUser: state.singleUser.singleUser,
-  }
-}
-
-export default connect(mapStateToProps, {
-  ...userActions,
-  initializeSingleUser,
-})(SingleArtist)
+export default SingleArtist

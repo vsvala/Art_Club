@@ -11,7 +11,7 @@ jest.mock('../../reducers/actionCreators/loginActions', () => ({
   login: jest.fn(),
 }))
 
-const makeStore = (overrides = {}) =>
+const makeStore = () =>
   createStore(
     (state = { loggedUser: { loggedUser: null }, notification: null }) => state,
     applyMiddleware(thunk),

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { connect } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { Link } from 'react-router-dom'
 import logo from '../../images/tripleblue.svg'
 //import { notification, setError } from './../reducers/actionCreators/notificationActions'
@@ -7,7 +7,9 @@ import { login } from '../../reducers/actionCreators/loginActions'
 import { Form, Button, Col, Container, Row, InputGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 
-export const LoginForm = ({ login, loggedUser }) => {
+const LoginForm = () => {
+  const dispatch = useDispatch()
+  const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
   const [input, setInput] = useState({ username: '', password: '' })
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
@@ -22,8 +24,7 @@ export const LoginForm = ({ login, loggedUser }) => {
     event.preventDefault()
 
     const { username, password } = input
-    login(username, password)
-
+    dispatch(login(username, password))
     setInput({ username: '', password: '' })
   }
 
@@ -115,8 +116,4 @@ export const LoginForm = ({ login, loggedUser }) => {
   )
 }
 
-const mapStateToProps = (state) => ({
-  loggedUser: state.loggedUser.loggedUser,
-})
-
-export default connect(mapStateToProps, { login })(LoginForm)
+export default LoginForm

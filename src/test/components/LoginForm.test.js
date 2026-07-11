@@ -1,17 +1,36 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import { LoginForm } from '../../components/login/LoginForm'
+import LoginForm from '../../components/login/LoginForm'
+import { Provider } from 'react-redux'
+import { createStore, applyMiddleware } from 'redux'
+import { thunk } from 'redux-thunk'
+import { login } from '../../reducers/actionCreators/loginActions'
 
-// Named export — no Redux needed, props passed directly
-const renderLoginForm = (props = {}) =>
+jest.mock('../../reducers/actionCreators/loginActions', () => ({
+  login: jest.fn(),
+}))
+
+const makeStore = (overrides = {}) =>
+  createStore(
+    (state = { loggedUser: { loggedUser: null }, notification: null }) => state,
+    applyMiddleware(thunk),
+  )
+
+const renderLoginForm = (storeOverrides = {}) =>
   render(
-    <MemoryRouter>
-      <LoginForm login={jest.fn()} loggedUser={null} {...props} />
-    </MemoryRouter>,
+    <Provider store={makeStore(storeOverrides)}>
+      <MemoryRouter>
+        <LoginForm />
+      </MemoryRouter>
+    </Provider>,
   )
 
 describe('LoginForm', () => {
+  beforeEach(() => {
+    login.mockReturnValue({ type: 'MOCK_LOGIN' })
+  })
+
   test('renders without crashing', () => {
     renderLoginForm()
     expect(screen.getByText('Sign In')).toBeInTheDocument()
@@ -33,8 +52,9 @@ describe('LoginForm', () => {
   })
 
   test('calls login function with correct values on form submit', () => {
-    const mockLogin = jest.fn()
-    renderLoginForm({ login: mockLogin })
+    login.mockReturnValue({ type: 'MOCK_LOGIN' })
+
+    renderLoginForm()
 
     fireEvent.change(screen.getByPlaceholderText('Username'), {
       target: { name: 'username', value: 'testi' },
@@ -44,7 +64,7 @@ describe('LoginForm', () => {
     })
     fireEvent.click(screen.getByRole('button', { name: 'Login' }))
 
-    expect(mockLogin).toHaveBeenCalledWith('testi', 'salasana123')
+    expect(login).toHaveBeenCalledWith('testi', 'salasana123')
   })
 
   test('clears fields after submit', () => {

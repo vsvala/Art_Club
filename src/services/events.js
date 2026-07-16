@@ -1,5 +1,6 @@
 import axios from 'axios'
 import url from './config'
+import { handleError } from './serviceUtils'
 
 const baseUrl = url + 'api/events'
 
@@ -20,7 +21,7 @@ const getAll = async () => {
     const response = await axios.get(baseUrl, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'Could not get events from db' }
+    return handleError(error, 'Could not get events from db')
   }
 }
 
@@ -30,15 +31,9 @@ const create = async (data) => {
     return response.data
   } catch (error) {
     const status = error.response?.status
-    if (status === 500) {
-      return { error: 'Unable to connect to server.' }
-    } else if (status === 400) {
-      return { error: 'event missing.' }
-    } else if (status === 401) {
-      return { error: 'Username or password is incorrect.' }
-    } else {
-      return { error: 'Unable to connect to server.' }
-    }
+    if (status === 400) return { error: 'event missing.' }
+    if (status === 401) return { error: 'Username or password is incorrect.' }
+    return handleError(error, 'Unable to connect to server.')
   }
 }
 
@@ -47,7 +42,7 @@ const deleteEvent = async (id) => {
     const response = await axios.delete(baseUrl + `/${id}`, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'Event with id "' + id + '" not found!' }
+    return handleError(error, `Event with id "${id}" not found!`)
   }
 }
 

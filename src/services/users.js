@@ -1,5 +1,6 @@
 import axios from 'axios'
 import url from './config'
+import { handleError } from './serviceUtils'
 
 const baseUrl = url + 'api/users'
 
@@ -8,6 +9,7 @@ let token = null
 const setToken = (newToken) => {
   token = newToken ? `Bearer ${newToken}` : null
 }
+
 const getConfig = () => {
   return {
     headers: { Authorization: token },
@@ -19,9 +21,7 @@ const getAll = async () => {
     const response = await axios.get(baseUrl, getConfig())
     return response.data
   } catch (error) {
-    if (error.response?.status === 400) {
-      return { error: 'Could not get userlist from db' }
-    }
+    return handleError(error, 'Could not get userlist from db')
   }
 }
 
@@ -30,9 +30,7 @@ const getAllArtists = async () => {
     const response = await axios.get(baseUrl + '/artists', getConfig())
     return response.data
   } catch (error) {
-    if (error.response?.status === 400) {
-      return { error: 'Could not get userlist from db' }
-    }
+    return handleError(error, 'Could not get userlist from db')
   }
 }
 
@@ -41,13 +39,7 @@ const getSingleUser = async (id) => {
     const response = await axios.get(baseUrl + `/artist/${id}`)
     return response.data
   } catch (error) {
-    if (error.response?.status === 400) {
-      return { error: 'Could not get user from db' }
-    }
-    if (error.response?.status === 500) {
-      return { error: 'Internal server error' }
-    }
-    return { error: 'Could not get user from db' }
+    return handleError(error, 'Could not get user from db')
   }
 }
 
@@ -57,16 +49,9 @@ const create = async (user) => {
     return response.data
   } catch (error) {
     const status = error.response?.status
-    if (!status) return { error: 'Unable to connect to server.' }
-    if (status === 500) {
-      return { error: 'Unable to connect to server.' }
-    } else if (status === 400) {
-      return { error: 'Username must be unique!' }
-    } else if (status === 401) {
-      return { error: 'Username or password is incorrect.' }
-    } else {
-      return { error: 'Unable to connect to server.' }
-    }
+    if (status === 400) return { error: 'Username must be unique!' }
+    if (status === 401) return { error: 'Username or password is incorrect.' }
+    return handleError(error, 'Unable to connect to server.')
   }
 }
 
@@ -75,7 +60,7 @@ const update = async (content) => {
     const response = await axios.put(baseUrl + '/admin', content, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'User role could not be updated' }
+    return handleError(error, 'User role could not be updated')
   }
 }
 
@@ -88,7 +73,7 @@ const updateIntro = async (content, id) => {
     )
     return response.data
   } catch (error) {
-    return { error: 'Users introduction text could not be updated' }
+    return handleError(error, 'Users introduction text could not be updated')
   }
 }
 
@@ -101,7 +86,7 @@ const updateUser = async (content) => {
     )
     return response.data
   } catch (error) {
-    return { error: 'User info could not be updated' }
+    return handleError(error, 'User info could not be updated')
   }
 }
 
@@ -109,19 +94,18 @@ const updatePassword = async ({ oldPassword, newPassword, confirm }) => {
   if (newPassword.length < 8) {
     return { error: 'Password needs to be at least 8 characters long' }
   }
-  if (newPassword === confirm) {
-    try {
-      const response = await axios.put(
-        baseUrl + '/password',
-        { oldPassword, newPassword },
-        getConfig(),
-      )
-      return response.data
-    } catch (error) {
-      return { error: 'Old password is incorrect!' }
-    }
-  } else {
+  if (newPassword !== confirm) {
     return { error: 'Make sure the new password and the confirmation match' }
+  }
+  try {
+    const response = await axios.put(
+      baseUrl + '/password',
+      { oldPassword, newPassword },
+      getConfig(),
+    )
+    return response.data
+  } catch (error) {
+    return handleError(error, 'Old password is incorrect!')
   }
 }
 
@@ -130,7 +114,7 @@ const deleteUser = async (id) => {
     const response = await axios.delete(`${baseUrl}/${id}`, getConfig())
     return response.data
   } catch (error) {
-    return { error: 'User with userid ' + id + ' not found!' }
+    return handleError(error, `User with userid ${id} not found!`)
   }
 }
 

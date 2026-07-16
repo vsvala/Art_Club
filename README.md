@@ -1,6 +1,7 @@
 # ArtClub — Full Stack Web Application
 
 [![CI/CD Pipeline](https://github.com/vsvala/Art_Club/actions/workflows/ci.yml/badge.svg)](https://github.com/vsvala/Art_Club/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/vsvala/Art_Club/graph/badge.svg?token=8KJgFWHHHN)](https://codecov.io/gh/vsvala/Art_Club)
 
 🚧 Actively developed full-stack personal project (ongoing development)
 ![Status](https://img.shields.io/badge/status-active_development-blue)

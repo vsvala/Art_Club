@@ -35,6 +35,13 @@ jobs:
       - name: Run coverage
         run: npm run test-coverage
 
+      - name: Upload coverage to Codecov
+        uses: codecov/codecov-action@v5
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          files: ./coverage/lcov.info
+          fail_ci_if_error: false
+
       - name: Build
         env:
           REACT_APP_SENTRY_RELEASE: ${{ github.sha }}

@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import userService from '../../services/users'
 import { Form, Button, Col, Container, Row } from 'react-bootstrap'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
+import {
+  notify,
+  setError,
+} from '../../reducers/actionCreators/notificationActions'
 
 export const UpdatePassword = () => {
-  const notify = useSelector((state) => state.notification.notify)
-  const setError = useSelector((state) => state.notification.setError)
   const dispatch = useDispatch()
 
   const [input, setInput] = useState({

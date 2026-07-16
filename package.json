@@ -67,6 +67,14 @@
     "underscore": ">=1.13.8",
     "uuid": ">=11.1.1"
   },
+  "jest": {
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx}",
+      "!src/test/**",
+      "!src/index.js",
+      "!src/setupTests.js"
+    ]
+  },
   "babel": {
     "env": {
       "production": {

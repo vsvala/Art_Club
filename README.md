@@ -251,17 +251,15 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### todo
 
-- [ ] Increase test coverage to 70%+ by adding missing component and service tests
-- [ ] Add Codecov report and badge to README
-- [ ] **Set coverage threshold in CI** — _~15 min_
-  - Coverage run already exists in CI, but without a minimum limit it does not prevent quality from dropping
-  - Add `--coverageThreshold` to `package.json` or `ci.yml`
+- [ ] **Set coverage threshold in CI** Coverage run already exists in `ci.yml`, but without a minimum limit it does not prevent quality from dropping
 - [ ] Better error feedback for each field for rest of forms
 - [ ] Outdated build tool — migrate from Create React App (last commit 2022) to Vite
 - [ ] Add TypeScript
 
 ### done
 
+- [x ] Increase test coverage to60%+ by adding missing component and service tests
+- [x] Add Codecov report and badge to README
 - [x] Unify Redux patterns — migrated all remaining components from connect() to useSelector/useDispatch hooks
 - [x] add .env.example
 - [x] fix services use error.response?.status instead of comparing error object to status codes

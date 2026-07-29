@@ -1,0 +1,25 @@
+{
+  // Fails CI on moderate+ severity vulnerabilities, except the allowlisted
+  // ones below. Run `npm run security-audit` locally to check current status.
+  "moderate": true,
+  "high": true,
+  "critical": true,
+  "allowlist": [
+    // All of the below come from react-scripts (CRA), which is unmaintained.
+    // No non-breaking fix exists; a real fix requires migrating off CRA.
+    "GHSA-2p49-hgcm-8545", // svgo: removeScripts plugin leaves scripts intact
+    "GHSA-mh99-v99m-4gvg", // brace-expansion: DoS via unbounded expansion
+    "GHSA-9jgg-88mc-972h", // webpack-dev-server: source exposure (non-Chromium)
+    "GHSA-4v9v-hfq4-rm2v", // webpack-dev-server: source code may be stolen
+    "GHSA-79cf-xcqc-c78w", // webpack-dev-server: cross-origin source exposure
+    "GHSA-mx8g-39q3-5c79", // webpack-dev-server: HMR WebSocket interception
+    "GHSA-f5vj-f2hx-8m93", // webpack-dev-server: CSRF via internal endpoints
+    "GHSA-m28w-2pqf-7qgj", // webpack-dev-server: DoS via malformed Host/Origin
+
+    // react-router-dom is pinned to ^6.28.2; the fix requires a major bump
+    // to v7.17.1+, which is a breaking change tracked separately.
+    "GHSA-wrjc-x8rr-h8h6", // react-router: open redirect via backslash
+    "GHSA-337j-9hxr-rhxg", // react-router: constructor injection in SSR hydration
+    "GHSA-jjmj-jmhj-qwj2" // react-router: open redirect leading to XSS
+  ]
+}

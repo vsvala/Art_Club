@@ -66,9 +66,12 @@ jobs:
           npx --yes @sentry/cli sourcemaps upload --release "$RELEASE" --url-prefix "~/static/js" build/static/js
           npx --yes @sentry/cli releases finalize "$RELEASE"
 
-      # Epäonnistuu vain High- tai Critical-tason haavoittuvuuksista
+      # Epäonnistuu Moderate/High/Critical-haavoittuvuuksista, paitsi
+      # audit-ci.jsonc:ssä hyväksytyistä (react-scripts-ketjun tunnetut,
+      # ei-korjattavat haavoittuvuudet)
       - name: Security audit
-        run: npm audit --audit-level=high --omit=dev
+        run: npm run security-audit
+      #  run: npm audit --audit-level=high --omit=dev
 
       # Tallentaa build/-kansion GitHub Actionsin välivarastoon jotta
       # deploy-job voi ladata sen ilman uutta buildia

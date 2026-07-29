@@ -14,7 +14,8 @@
     "codecov": "./node_modules/.bin/codecov",
     "eject": "react-scripts eject",
     "lint": "eslint .",
-    "deploy": "npm run build && cp -r build ../Art_Club_back/ && cd ../Art_Club_back && git add build && git commit -m 'update frontend build' && git push origin master"
+    "deploy": "npm run build && cp -r build ../Art_Club_back/ && cd ../Art_Club_back && git add build && git commit -m 'update frontend build' && git push origin master",
+    "security-audit": "audit-ci --config audit-ci.jsonc"
   },
   "dependencies": {
     "@sentry/react": "^10.63.0",
@@ -40,6 +41,7 @@
     "@testing-library/jest-dom": "^6.6.3",
     "@testing-library/react": "^16.3.0",
     "@types/node": "^26.1.0",
+    "audit-ci": "^7.1.0",
     "babel-eslint": "^10.0.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "deep-freeze": "0.0.1",

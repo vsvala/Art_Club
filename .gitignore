@@ -26,6 +26,7 @@ yarn-error.log*
 
 update.md
 z_todo/
+settings.json
 
 # Playwright
 node_modules/

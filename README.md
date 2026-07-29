@@ -251,6 +251,7 @@ Playwright E2E tests run separately in [.github/workflows/playwright.yml](.githu
 
 ### todo
 
+- [ ] Autocomplete suggestions to weather search: Start searching once the user has entered at least 2–3 characters, and use debouncing (e.g., 300 ms). to allow display suggestions.
 - [ ] Better error feedback for each field for rest of forms
 - [ ] Outdated build tool — migrate from Create React App (last commit 2022) to Vite
 - [ ] Add TypeScript

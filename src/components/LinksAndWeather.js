@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap'
 import {} from '../reducers/actionCreators/notificationActions'
 import { getWeatherIcon, getWeatherText } from '../utils/weatherUtils'
@@ -7,6 +7,7 @@ const LinksAndWeather = () => {
   const [city, setCity] = useState('')
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState('')
+  const abortControllerRef = useRef(null)
 
   const [weatherData, setWeatherData] = useState(null)
 
@@ -15,20 +16,37 @@ const LinksAndWeather = () => {
     if (!trimmedCity) return
     setLoading(true)
     setError('')
+    if (abortControllerRef.current) {
+      abortControllerRef.current.abort()
+    }
+    const controller = new AbortController()
+    abortControllerRef.current = controller
+
     try {
       const res = await fetch(
         `/api/weather?city=${encodeURIComponent(trimmedCity)}`,
+        { signal: controller.signal },
       )
       const json = await res.json()
       if (!res.ok) throw new Error(json.message || 'Weather request failed')
       setWeatherData(json)
     } catch (err) {
+      if (err.name === 'AbortError') return
       setError('Failed to fetch weather data. Please try again.')
     } finally {
-      setLoading(false)
-      setCity('')
+      if (abortControllerRef.current === controller) {
+        setLoading(false)
+        setCity('')
+      }
     }
   }
+  useEffect(() => {
+    return () => {
+      if (abortControllerRef.current) {
+        abortControllerRef.current.abort()
+      }
+    }
+  }, [])
 
   const handleSubmit = (event) => {
     event.preventDefault()

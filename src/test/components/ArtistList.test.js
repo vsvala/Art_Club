@@ -59,4 +59,27 @@ describe('ArtistList', () => {
     await waitFor(() => screen.getByText('Artists'))
     expect(screen.queryByRole('link')).not.toBeInTheDocument()
   })
+
+  test('shows error message when API returns a non-array error response', async () => {
+    server.use(
+      rest.get('*/api/users/artists', (req, res, ctx) =>
+        res(ctx.json({ error: 'Unable to connect to server.' })),
+      ),
+    )
+    renderArtistList()
+    await waitFor(() =>
+      screen.getByText('Unable to connect to server.'),
+    )
+    expect(screen.getByText('Unable to connect to server.')).toBeInTheDocument()
+    expect(screen.queryByRole('table')).not.toBeInTheDocument()
+  })
+
+  test('shows fallback error message when error response has no message', async () => {
+    server.use(
+      rest.get('*/api/users/artists', (req, res, ctx) => res(ctx.json({}))),
+    )
+    renderArtistList()
+    await waitFor(() => screen.getByText('Could not load artists'))
+    expect(screen.getByText('Could not load artists')).toBeInTheDocument()
+  })
 })

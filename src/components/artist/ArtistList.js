@@ -12,6 +12,15 @@ export const ArtistList = () => {
 
   if (isLoading) return <p>Ladataan...</p>
 
+  if (!Array.isArray(artists)) {
+    return (
+      <div className="artistList">
+        <h2>Artists</h2>
+        <div className="error">{artists?.error || 'Could not load artists'}</div>
+      </div>
+    )
+  }
+
   return (
     <div className="artistList">
       <h2>Artists</h2>
@@ -25,7 +34,7 @@ export const ArtistList = () => {
         </thead>
 
         <tbody>
-          {artists?.map((user) => (
+          {artists.map((user) => (
             <Artist user={user} key={user.id} />
           ))}
         </tbody>

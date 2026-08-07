@@ -1,13 +1,13 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import LoginForm from '../../components/login/LoginForm'
+import LoginForm from '../../../components/login/LoginForm'
 import { Provider } from 'react-redux'
 import { createStore, applyMiddleware } from 'redux'
 import { thunk } from 'redux-thunk'
-import { login } from '../../reducers/actionCreators/loginActions'
+import { login } from '../../../reducers/actionCreators/loginActions'
 
-jest.mock('../../reducers/actionCreators/loginActions', () => ({
+jest.mock('../../../reducers/actionCreators/loginActions', () => ({
   login: jest.fn(),
 }))
 

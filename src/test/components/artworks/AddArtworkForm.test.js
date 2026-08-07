@@ -6,11 +6,11 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import AddArtworkForm from '../../components/artworks/AddArtworkForm'
-import Notification from '../../components/ui/Notification'
-import userReducer from '../../reducers/userReducer'
-import notificationReducer from '../../reducers/notificationReducer'
-import loginReducer from '../../reducers/loginReducer'
+import AddArtworkForm from '../../../components/artworks/AddArtworkForm'
+import Notification from '../../../components/ui/Notification'
+import userReducer from '../../../reducers/userReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
+import loginReducer from '../../../reducers/loginReducer'
 
 const userWith3Artworks = { id: '42', name: 'Maija', artworks: [{}, {}, {}] }
 const userAt10Limit = { id: '42', name: 'Maija', artworks: new Array(10).fill({}) }

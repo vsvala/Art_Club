@@ -6,11 +6,11 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import UserDetail from '../../components/users/UserDetail'
-import userReducer from '../../reducers/userReducer'
-import loginReducer from '../../reducers/loginReducer'
-import artworkReducer from '../../reducers/artworkReducer'
-import notificationReducer from '../../reducers/notificationReducer'
+import UserDetail from '../../../components/users/UserDetail'
+import userReducer from '../../../reducers/userReducer'
+import loginReducer from '../../../reducers/loginReducer'
+import artworkReducer from '../../../reducers/artworkReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 const mockUser = {
   id: '1',

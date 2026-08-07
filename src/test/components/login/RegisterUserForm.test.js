@@ -6,10 +6,10 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { thunk } from 'redux-thunk'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import { RegisterUserForm } from '../../components/login/RegisterUserForm'
-import Notification from '../../components/ui/Notification'
-import notificationReducer from '../../reducers/notificationReducer'
-import userReducer from '../../reducers/userReducer'
+import { RegisterUserForm } from '../../../components/login/RegisterUserForm'
+import Notification from '../../../components/ui/Notification'
+import notificationReducer from '../../../reducers/notificationReducer'
+import userReducer from '../../../reducers/userReducer'
 
 const server = setupServer(
   rest.post('*/api/users', (req, res, ctx) =>

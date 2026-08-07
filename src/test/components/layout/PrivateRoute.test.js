@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { MemoryRouter, Routes, Route } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import PrivateRoute from '../../components/layout/PrivateRoute'
+import PrivateRoute from '../../../components/layout/PrivateRoute'
 
 const makeStore = (authLoading = false) =>
   createStore(() => ({ loggedUser: { loggedUser: null, authLoading } }))

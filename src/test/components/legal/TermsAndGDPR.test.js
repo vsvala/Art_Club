@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import TermsOfUse from '../../components/legal/TermsOfUse'
-import GDPRInfo from '../../components/legal/GDPRInfo'
+import TermsOfUse from '../../../components/legal/TermsOfUse'
+import GDPRInfo from '../../../components/legal/GDPRInfo'
 
 describe('TermsOfUse', () => {
   test('renders main heading', () => {

@@ -6,9 +6,9 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import ArtistDetail from '../../components/artists/ArtistDetail'
-import userReducer from '../../reducers/userReducer'
-import notificationReducer from '../../reducers/notificationReducer'
+import ArtistDetail from '../../../components/artists/ArtistDetail'
+import userReducer from '../../../reducers/userReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 const mockArtist = {
   id: '1',

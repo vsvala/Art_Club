@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import EventCard from '../../components/events/EventCard'
+import EventCard from '../../../components/events/EventCard'
 
 const mockEventCard = {
   id: '1',

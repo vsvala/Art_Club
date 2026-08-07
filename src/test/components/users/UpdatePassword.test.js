@@ -5,9 +5,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { thunk } from 'redux-thunk'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import UpdatePassword from '../../components/users/UpdatePassword'
-import Notification from '../../components/ui/Notification'
-import notificationReducer from '../../reducers/notificationReducer'
+import UpdatePassword from '../../../components/users/UpdatePassword'
+import Notification from '../../../components/ui/Notification'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 const server = setupServer(
   rest.put('*/api/users/password', (req, res, ctx) => res(ctx.json({ success: true }))),

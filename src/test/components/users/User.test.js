@@ -3,8 +3,8 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { MemoryRouter } from 'react-router-dom'
-import User from '../../components/users/User'
-import loginReducer from '../../reducers/loginReducer'
+import User from '../../../components/users/User'
+import loginReducer from '../../../reducers/loginReducer'
 
 const mockUser = {
   id: '1',

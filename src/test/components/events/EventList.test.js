@@ -6,9 +6,9 @@ import { thunk } from 'redux-thunk'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import EventList from '../../components/events/EventList'
-import loginReducer from '../../reducers/loginReducer'
-import eventReducer from '../../reducers/eventReducer'
+import EventList from '../../../components/events/EventList'
+import loginReducer from '../../../reducers/loginReducer'
+import eventReducer from '../../../reducers/eventReducer'
 
 const mockEvents = [
   {

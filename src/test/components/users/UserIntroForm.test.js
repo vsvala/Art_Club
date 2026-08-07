@@ -4,11 +4,11 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import { thunk } from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
-import UserIntroForm from '../../components/users/UserIntroForm'
-import Notification from '../../components/ui/Notification'
-import userReducer from '../../reducers/userReducer'
-import loginReducer from '../../reducers/loginReducer'
-import notificationReducer from '../../reducers/notificationReducer'
+import UserIntroForm from '../../../components/users/UserIntroForm'
+import Notification from '../../../components/ui/Notification'
+import userReducer from '../../../reducers/userReducer'
+import loginReducer from '../../../reducers/loginReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 const mockUser = { id: '1', name: 'Maija', intro: 'Olen taiteilija.' }
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Navigation from '../../components/layout/AppNavigation'
+import Navigation from '../../../components/layout/AppNavigation'
 
 const renderNav = (props = {}) =>
   render(

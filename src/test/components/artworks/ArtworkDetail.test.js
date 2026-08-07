@@ -4,7 +4,7 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import ArtworkDetail from '../../components/artworks/ArtworkDetail'
+import ArtworkDetail from '../../../components/artworks/ArtworkDetail'
 
 const mockArtwork = {
   id: '1',

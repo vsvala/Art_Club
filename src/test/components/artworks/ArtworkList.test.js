@@ -6,11 +6,11 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import ArtworkList from '../../components/artworks/ArtworkList'
-import loginReducer from '../../reducers/loginReducer'
-import filterReducer from '../../reducers/filterReducer'
-import artworkReducer from '../../reducers/artworkReducer'
-import notificationReducer from '../../reducers/notificationReducer'
+import ArtworkList from '../../../components/artworks/ArtworkList'
+import loginReducer from '../../../reducers/loginReducer'
+import filterReducer from '../../../reducers/filterReducer'
+import artworkReducer from '../../../reducers/artworkReducer'
+import notificationReducer from '../../../reducers/notificationReducer'
 
 // jsdom does not implement IntersectionObserver
 global.IntersectionObserver = class {

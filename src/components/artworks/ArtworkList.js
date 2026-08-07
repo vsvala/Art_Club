@@ -40,6 +40,7 @@ export const ArtworkList = () => {
     loadFirstPage()
   }, [])
 
+  //scrolling
   useEffect(() => {
     if (!sentinelRef.current || loading || !hasMore) return
 
@@ -65,6 +66,7 @@ export const ArtworkList = () => {
     observer.observe(sentinelRef.current)
     return () => observer.disconnect()
   }, [page, loading, hasMore])
+
   const visibleArtworks = useMemo(() => {
     const normalizedArtworkName = (artworkName || '').toLowerCase()
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
 import { MemoryRouter } from 'react-router-dom'
-import Artist from '../../components/artist/Artist'
+import Artist from '../../components/artists/Artist'
 
 const mockUser = { id: '1', name: 'Maija Maalari', artworks: [{}, {}] }
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Event from '../../components/event/Event'
+import Event from '../../components/events/Event'
 
 const mockEvent = {
   id: '1',

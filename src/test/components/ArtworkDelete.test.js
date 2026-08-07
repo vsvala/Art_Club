@@ -6,7 +6,7 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import ArtworkDelete from '../../components/artwork/ArtworkDelete'
+import ArtworkDelete from '../../components/artworks/ArtworkDelete'
 import artworkReducer from '../../reducers/artworkReducer'
 import notificationReducer from '../../reducers/notificationReducer'
 

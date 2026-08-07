@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
 import { Link, useParams } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
-import ArtworkDelete from '../artwork/ArtworkDelete'
+import ArtworkDelete from '../artworks/ArtworkDelete'
 import { useSelector, useDispatch } from 'react-redux'
 
 export const SingleUser = ({ userId }) => {

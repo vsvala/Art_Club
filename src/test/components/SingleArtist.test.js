@@ -6,7 +6,7 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import SingleArtist from '../../components/artist/SingleArtist'
+import SingleArtist from '../../components/artists/SingleArtist'
 import userReducer from '../../reducers/userReducer'
 import notificationReducer from '../../reducers/notificationReducer'
 

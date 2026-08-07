@@ -1,8 +1,8 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import Event from '../../components/events/Event'
+import EventCard from '../../components/events/EventCard'
 
-const mockEvent = {
+const mockEventCard = {
   id: '1',
   title: 'Kesänäyttely',
   start: '2026-08-01',
@@ -12,41 +12,41 @@ const mockEvent = {
   eventImage: 'img.jpg',
 }
 
-const renderEvent = (loggedUser = null) =>
+const renderEventCard = (loggedUser = null) =>
   render(
     <table>
       <tbody>
         <tr>
-          <Event e={mockEvent} loggedUser={loggedUser} removeEvent={() => () => {}} />
+          <EventCard e={mockEventCard} loggedUser={loggedUser} removeEvent={() => () => {}} />
         </tr>
       </tbody>
     </table>,
   )
 
-describe('Event', () => {
+describe('EventCard', () => {
   test('renders event title', () => {
-    renderEvent()
+    renderEventCard()
     expect(screen.getByText('Kesänäyttely')).toBeInTheDocument()
   })
 
   test('renders event place and dates', () => {
-    renderEvent()
+    renderEventCard()
     expect(screen.getByText(/Helsinki/)).toBeInTheDocument()
     expect(screen.getByText(/2026-08-01/)).toBeInTheDocument()
   })
 
   test('admin sees delete button', () => {
-    renderEvent({ role: 'admin' })
+    renderEventCard({ role: 'admin' })
     expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument()
   })
 
   test('member does not see delete button', () => {
-    renderEvent({ role: 'member' })
+    renderEventCard({ role: 'member' })
     expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument()
   })
 
   test('logged-out user does not see delete button', () => {
-    renderEvent(null)
+    renderEventCard(null)
     expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument()
   })
 })

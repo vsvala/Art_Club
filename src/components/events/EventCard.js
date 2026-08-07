@@ -1,9 +1,11 @@
+// TODO tempirary not in use,
+
 import React from 'react'
 import url from '../../services/config'
 const baseUrl = url + 'public/'
 import { Button } from 'react-bootstrap'
 
-const Event = ({ e, loggedUser, removeEvent }) => {
+const EventCard = ({ e, loggedUser, removeEvent }) => {
   const isLoggedAsAdmin = loggedUser && loggedUser.role === 'admin'
 
   return (
@@ -43,4 +45,4 @@ const Event = ({ e, loggedUser, removeEvent }) => {
   )
 }
 
-export default Event
+export default EventCard

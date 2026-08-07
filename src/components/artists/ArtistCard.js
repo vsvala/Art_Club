@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const Artist = ({ user }) => {
+const ArtistCard = ({ user }) => {
   return (
     <tr>
       <td>
@@ -12,4 +12,4 @@ const Artist = ({ user }) => {
   )
 }
 
-export default Artist
+export default ArtistCard

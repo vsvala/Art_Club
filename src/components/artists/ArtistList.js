@@ -1,6 +1,6 @@
 import React from 'react'
 import { useQuery } from '@tanstack/react-query'
-import Artist from './Artist'
+import ArtistCard from './ArtistCard'
 import { Table } from 'react-bootstrap'
 import userService from '../../services/users'
 
@@ -35,7 +35,7 @@ export const ArtistList = () => {
 
         <tbody>
           {artists.map((user) => (
-            <Artist user={user} key={user.id} />
+            <ArtistCard user={user} key={user.id} />
           ))}
         </tbody>
       </Table>

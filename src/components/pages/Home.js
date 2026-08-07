@@ -2,7 +2,7 @@ import React from 'react'
 //import * as Sentry from '@sentry/react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import logo from '../images/tripleblue.svg'
+import logo from '../../images/tripleblue.svg'
 
 export const Home = () => {
   const loggedUser = useSelector((state) => state.loggedUser.loggedUser)

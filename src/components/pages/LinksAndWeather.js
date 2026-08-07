@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import { Form, Button } from 'react-bootstrap'
-import {} from '../reducers/actionCreators/notificationActions'
-import { getWeatherIcon, getWeatherText } from '../utils/weatherUtils'
+import {} from '../../reducers/actionCreators/notificationActions'
+import { getWeatherIcon, getWeatherText } from '../../utils/weatherUtils'
 
 const LinksAndWeather = () => {
   const [city, setCity] = useState('')

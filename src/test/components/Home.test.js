@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import { MemoryRouter } from 'react-router-dom'
-import Home from '../../components/Home'
+import Home from '../../components/pages/Home'
 import loginReducer from '../../reducers/loginReducer'
 
 const createTestStore = (loggedUser = null) =>

@@ -7,12 +7,12 @@ import picture from './images/pict.png'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { logout, initLoggedUser } from './reducers/actionCreators/loginActions'
 
-import Home from './components/Home'
-import PrivateRoute from './components/common/PrivateRoute'
-import Notification from './components/common/Notification'
-import AppNavigation from './components/common/AppNavigation'
-const NonMember = lazy(() => import('./components/NonMember'))
-const LinksAndWeather = lazy(() => import('./components/LinksAndWeather'))
+import Home from './components/pages/Home'
+import PrivateRoute from './components/layout/PrivateRoute'
+import Notification from './components/ui/Notification'
+import AppNavigation from './components/layout/AppNavigation'
+const NonMember = lazy(() => import('./components/pages/NonMember'))
+const LinksAndWeather = lazy(() => import('./components/pages/LinksAndWeather'))
 const RegisterUserForm = lazy(
   () => import('./components/login/RegisterUserForm'),
 )
@@ -29,9 +29,9 @@ const UpdateUserForm = lazy(() => import('./components/users/UpdateUserForm'))
 const UserIntroForm = lazy(() => import('./components/users/UserIntroForm'))
 const UserList = lazy(() => import('./components/users/UserList'))
 const UserDetail = lazy(() => import('./components/users/UserDetail'))
-const GDPRInfo = lazy(() => import('./components/common/GDPRInfo'))
-const TermsOfUse = lazy(() => import('./components/common/TermsOfUse'))
-const NotFound = lazy(() => import('./components/common/NotFound'))
+const GDPRInfo = lazy(() => import('./components/legal/GDPRInfo'))
+const TermsOfUse = lazy(() => import('./components/legal/TermsOfUse'))
+const NotFound = lazy(() => import('./components/ui/NotFound'))
 
 const App = () => {
   const dispatch = useDispatch()

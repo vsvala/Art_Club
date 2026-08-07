@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import DeleteButton from '../common/DeleteButton'
+import DeleteButton from '../ui/DeleteButton'
 import { Button } from 'react-bootstrap'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 

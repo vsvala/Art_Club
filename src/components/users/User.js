@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import DeleteButton from '../common/DeleteButton'
+import DeleteButton from '../ui/DeleteButton'
 import { Form } from 'react-bootstrap'
 import { updateRole } from '../../reducers/actionCreators/userActions'
 

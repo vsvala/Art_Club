@@ -6,7 +6,7 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import EventForm from '../../components/events/EventForm'
-import Notification from '../../components/common/Notification'
+import Notification from '../../components/ui/Notification'
 import eventReducer from '../../reducers/eventReducer'
 import notificationReducer from '../../reducers/notificationReducer'
 

@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen } from '@testing-library/react'
-import NonMember from '../../components/NonMember'
+import NonMember from '../../components/pages/NonMember'
 
 describe('NonMember', () => {
   test('shows Art club heading', () => {

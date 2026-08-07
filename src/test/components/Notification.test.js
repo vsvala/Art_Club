@@ -3,7 +3,7 @@ import { render, screen } from '@testing-library/react'
 import { Provider } from 'react-redux'
 import { createStore, combineReducers } from 'redux'
 import notificationReducer from '../../reducers/notificationReducer'
-import Notification from '../../components/common/Notification'
+import Notification from '../../components/ui/Notification'
 
 // Helper: creates test store with given initial state
 const createTestStore = (notification = '') =>

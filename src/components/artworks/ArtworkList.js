@@ -6,10 +6,8 @@ import {
   voteArtwork,
 } from '../../reducers/actionCreators/artworkActions'
 import filterActions from '../../reducers/actionCreators/filterActions'
-import { Link } from 'react-router-dom'
-import DeleteButton from '../common/DeleteButton'
-import { Form, Button } from 'react-bootstrap'
-import cloudinaryOptimize from '../../utils/cloudinary-optimize'
+import { Form } from 'react-bootstrap'
+import ArtworkCard from './ArtworkCard'
 
 export const ArtworkList = () => {
   const dispatch = useDispatch()
@@ -121,43 +119,14 @@ export const ArtworkList = () => {
 
       <div className="artworkGallery">
         {visibleArtworks.map((a) => (
-          <ul key={a.id} className="ulList">
-            <li>
-              <img
-                src={cloudinaryOptimize(a.galleryImage, 400)}
-                className="galleryPicture"
-                alt="img"
-                loading="lazy"
-              />
-            </li>
-            <li className="artwork">
-              {' '}
-              <Link to={`/artworks/${a.id}`}> {a.name} </Link> by {a.artist}
-            </li>
-            <li>
-              {a.year}, {a.size}, {a.medium}
-            </li>
-            <p>
-              {a.likes} likes{' '}
-              {loggedUser && (
-                <Button
-                  className="button"
-                  onClick={addLike(a)}
-                  variant="outline-secondary"
-                >
-                  like
-                </Button>
-              )}
-            </p>
-
-            {canDeleteArtwork ? (
-              <li className="delete">
-                <DeleteButton id={a.id} onClick={removeArtwork} />
-              </li>
-            ) : (
-              <em></em>
-            )}
-          </ul>
+          <ArtworkCard
+            key={a.id}
+            artwork={a}
+            canLike={Boolean(loggedUser)}
+            onLike={addLike(a)}
+            canDelete={canDeleteArtwork}
+            onDelete={removeArtwork}
+          />
         ))}
       </div>
       {loading && <p>Loading more...</p>}

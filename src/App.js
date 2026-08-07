@@ -19,16 +19,16 @@ const RegisterUserForm = lazy(
 const LoginForm = lazy(() => import('./components/login/LoginForm'))
 const AddArtworkForm = lazy(() => import('./components/artworks/AddArtworkForm'))
 const ArtworkList = lazy(() => import('./components/artworks/ArtworkList'))
-const SingleArtwork = lazy(() => import('./components/artworks/SingleArtwork'))
+const ArtworkDetail = lazy(() => import('./components/artworks/ArtworkDetail'))
 const ArtistList = lazy(() => import('./components/artists/ArtistList'))
-const SingleArtist = lazy(() => import('./components/artists/SingleArtist'))
+const ArtistDetail = lazy(() => import('./components/artists/ArtistDetail'))
 const EventForm = lazy(() => import('./components/events/EventForm'))
 const EventList = lazy(() => import('./components/events/EventList'))
 const UpdatePassword = lazy(() => import('./components/users/UpdatePassword'))
 const UpdateUserForm = lazy(() => import('./components/users/UpdateUserForm'))
 const UserIntroForm = lazy(() => import('./components/users/UserIntroForm'))
 const UserList = lazy(() => import('./components/users/UserList'))
-const SingleUser = lazy(() => import('./components/users/SingleUser'))
+const UserDetail = lazy(() => import('./components/users/UserDetail'))
 const GDPRInfo = lazy(() => import('./components/common/GDPRInfo'))
 const TermsOfUse = lazy(() => import('./components/common/TermsOfUse'))
 const NotFound = lazy(() => import('./components/common/NotFound'))
@@ -75,7 +75,7 @@ const App = () => {
                     element={<EventForm id={loggedUser && loggedUser.id} />}
                   />
                   <Route path="/admin/users" element={<UserList />} />
-                  <Route path="/admin/users/:id" element={<SingleUser />} />
+                  <Route path="/admin/users/:id" element={<UserDetail />} />
                 </Route>
 
                 <Route
@@ -100,7 +100,7 @@ const App = () => {
                   <Route
                     path="/users/:id/myPage"
                     element={
-                      <SingleUser userId={loggedUser && loggedUser.id} />
+                      <UserDetail userId={loggedUser && loggedUser.id} />
                     }
                   />
                   <Route
@@ -130,10 +130,10 @@ const App = () => {
 
                 <Route path="/" element={<Home />} />
                 <Route path="/artworks" element={<ArtworkList />} />
-                <Route path="/artworks/:id" element={<SingleArtwork />} />
+                <Route path="/artworks/:id" element={<ArtworkDetail />} />
                 <Route path="/register" element={<RegisterUserForm />} />
                 <Route path="/artists" element={<ArtistList />} />
-                <Route path="/artists/:id" element={<SingleArtist />} />
+                <Route path="/artists/:id" element={<ArtistDetail />} />
                 <Route path="/links" element={<LinksAndWeather />} />
                 <Route path="/privacy" element={<GDPRInfo />} />
                 <Route path="/terms" element={<TermsOfUse />} />

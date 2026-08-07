@@ -6,7 +6,7 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import SingleArtist from '../../components/artists/SingleArtist'
+import ArtistDetail from '../../components/artists/ArtistDetail'
 import userReducer from '../../reducers/userReducer'
 import notificationReducer from '../../reducers/notificationReducer'
 
@@ -35,36 +35,36 @@ const createTestStore = (singleUser = mockArtist) =>
     applyMiddleware(thunk),
   )
 
-const renderSingleArtist = (singleUser = mockArtist) =>
+const renderArtistDetail = (singleUser = mockArtist) =>
   render(
     <Provider store={createTestStore(singleUser)}>
       <MemoryRouter initialEntries={['/artists/1']}>
         <Routes>
-          <Route path="/artists/:id" element={<SingleArtist />} />
+          <Route path="/artists/:id" element={<ArtistDetail />} />
         </Routes>
       </MemoryRouter>
     </Provider>,
   )
 
-describe('SingleArtist', () => {
+describe('ArtistDetail', () => {
   test('renders artist name', () => {
-    renderSingleArtist()
+    renderArtistDetail()
     expect(screen.getByText('Maija Maalari')).toBeInTheDocument()
   })
 
   test('renders intro text', () => {
-    renderSingleArtist()
+    renderArtistDetail()
     expect(screen.getByText('Maalaan akvarelleja.')).toBeInTheDocument()
   })
 
   test('renders all artworks', () => {
-    renderSingleArtist()
+    renderArtistDetail()
     expect(screen.getByText(/Maisema/)).toBeInTheDocument()
     expect(screen.getByText(/Muotokuva/)).toBeInTheDocument()
   })
 
   test('renders artwork links to artwork pages', () => {
-    renderSingleArtist()
+    renderArtistDetail()
     const links = screen.getAllByRole('link')
     const artworkLinks = links.filter((l) => l.href.includes('/artworks/'))
     expect(artworkLinks).toHaveLength(2)
@@ -72,13 +72,13 @@ describe('SingleArtist', () => {
   })
 
   test('renders artwork metadata', () => {
-    renderSingleArtist()
+    renderArtistDetail()
     expect(screen.getByText(/2020/)).toBeInTheDocument()
     expect(screen.getByText(/Oil/)).toBeInTheDocument()
   })
 
   test('renders nothing when singleUser is null', () => {
-    renderSingleArtist(null)
+    renderArtistDetail(null)
     expect(screen.queryByText('Maija Maalari')).not.toBeInTheDocument()
   })
 })

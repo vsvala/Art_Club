@@ -5,7 +5,7 @@ import { Table } from 'react-bootstrap'
 import ArtworkDelete from '../artworks/ArtworkDelete'
 import { useSelector, useDispatch } from 'react-redux'
 
-export const SingleUser = ({ userId }) => {
+export const UserDetail = ({ userId }) => {
   const { id: paramId } = useParams()
   const resolvedId = userId || paramId
   const normalizeId = (value) =>
@@ -110,4 +110,4 @@ export const SingleUser = ({ userId }) => {
   )
 }
 
-export default SingleUser
+export default UserDetail

@@ -6,7 +6,7 @@ import { thunk } from 'redux-thunk'
 import { MemoryRouter, Route, Routes } from 'react-router-dom'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
-import SingleUser from '../../components/users/SingleUser'
+import UserDetail from '../../components/users/UserDetail'
 import userReducer from '../../reducers/userReducer'
 import loginReducer from '../../reducers/loginReducer'
 import artworkReducer from '../../reducers/artworkReducer'
@@ -45,67 +45,67 @@ const createTestStore = (loggedUser, singleUser = mockUser) =>
     applyMiddleware(thunk),
   )
 
-const renderSingleUser = (loggedUser, singleUser = mockUser) =>
+const renderUserDetail = (loggedUser, singleUser = mockUser) =>
   render(
     <Provider store={createTestStore(loggedUser, singleUser)}>
       <MemoryRouter initialEntries={['/users/1/myPage']}>
         <Routes>
-          <Route path="/users/:id/myPage" element={<SingleUser />} />
+          <Route path="/users/:id/myPage" element={<UserDetail />} />
         </Routes>
       </MemoryRouter>
     </Provider>,
   )
 
-describe('SingleUser — owner view', () => {
+describe('UserDetail — owner view', () => {
   const owner = { id: '1', role: 'member' }
 
   test('owner sees account info table', () => {
-    renderSingleUser(owner)
+    renderUserDetail(owner)
     expect(screen.getByText('Update information')).toBeInTheDocument()
     expect(screen.getByText('Write introduction')).toBeInTheDocument()
   })
 
   test('owner sees their email', () => {
-    renderSingleUser(owner)
+    renderUserDetail(owner)
     expect(screen.getByText('maija@test.com')).toBeInTheDocument()
   })
 
   test('shows Add link when under 10 artworks', () => {
-    renderSingleUser(owner)
+    renderUserDetail(owner)
     expect(screen.getByRole('link', { name: 'Add' })).toBeInTheDocument()
   })
 
   test('hides Add link when at 10 artworks', () => {
     const userAt10 = { ...mockUser, artworks: new Array(10).fill({ id: 'x', name: 'T', artist: 'A', year: '2020', size: '10x10', medium: 'Oil', galleryImage: null }) }
-    renderSingleUser(owner, userAt10)
+    renderUserDetail(owner, userAt10)
     expect(screen.queryByRole('link', { name: 'Add' })).not.toBeInTheDocument()
   })
 })
 
-describe('SingleUser — visitor view', () => {
+describe('UserDetail — visitor view', () => {
   const otherUser = { id: '99', role: 'member' }
 
   test('visitor does not see account info table', () => {
-    renderSingleUser(otherUser)
+    renderUserDetail(otherUser)
     expect(screen.queryByText('Update information')).not.toBeInTheDocument()
     expect(screen.queryByText('maija@test.com')).not.toBeInTheDocument()
   })
 
   test('visitor still sees username heading', () => {
-    renderSingleUser(otherUser)
+    renderUserDetail(otherUser)
     expect(screen.getByText('Maija Maalari')).toBeInTheDocument()
   })
 })
 
-describe('SingleUser — artworks section', () => {
+describe('UserDetail — artworks section', () => {
   test('shows "No images uploaded yet" when no artworks', () => {
     const userNoArtworks = { ...mockUser, artworks: [] }
-    renderSingleUser({ id: '1', role: 'member' }, userNoArtworks)
+    renderUserDetail({ id: '1', role: 'member' }, userNoArtworks)
     expect(screen.getByText('No images uploaded yet')).toBeInTheDocument()
   })
 
   test('shows intro text when present', () => {
-    renderSingleUser({ id: '1', role: 'member' })
+    renderUserDetail({ id: '1', role: 'member' })
     expect(screen.getByText('Olen taiteilija.')).toBeInTheDocument()
   })
 })

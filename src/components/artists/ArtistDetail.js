@@ -4,7 +4,7 @@ import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
 import { Link, useParams } from 'react-router-dom'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-export const SingleArtist = () => {
+export const ArtistDetail = () => {
   const { id } = useParams()
   const dispatch = useDispatch()
   const singleUser = useSelector((state) => state.singleUser.singleUser)
@@ -51,4 +51,4 @@ export const SingleArtist = () => {
   )
 }
 
-export default SingleArtist
+export default ArtistDetail

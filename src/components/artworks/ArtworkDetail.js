@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query'
 import artworkService from '../../services/artworks'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-export const SingleArtwork = () => {
+export const ArtworkDetail = () => {
   const { id } = useParams()
   const { data: artwork, isLoading } = useQuery({
     queryKey: ['artwork', id],
@@ -35,4 +35,4 @@ export const SingleArtwork = () => {
   )
 }
 
-export default SingleArtwork
+export default ArtworkDetail

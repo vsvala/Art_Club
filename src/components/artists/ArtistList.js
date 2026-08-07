@@ -16,7 +16,9 @@ export const ArtistList = () => {
     return (
       <div className="artistList">
         <h2>Artists</h2>
-        <div className="error">{artists?.error || 'Could not load artists'}</div>
+        <div className="error">
+          {artists?.error || 'Could not load artists'}
+        </div>
       </div>
     )
   }

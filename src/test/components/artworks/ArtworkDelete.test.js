@@ -34,11 +34,11 @@ const createTestStore = () =>
     applyMiddleware(thunk),
   )
 
-const renderArtworkDelete = (artwork = mockArtwork) =>
+const renderArtworkDelete = (artwork = mockArtwork, canDelete = true) =>
   render(
     <Provider store={createTestStore()}>
       <MemoryRouter>
-        <ArtworkDelete artwork={artwork} />
+        <ArtworkDelete artwork={artwork} canDelete={canDelete} />
       </MemoryRouter>
     </Provider>,
   )
@@ -61,6 +61,11 @@ describe('ArtworkDelete', () => {
     expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument()
   })
 
+  test('hides delete button when canDelete is false', () => {
+    renderArtworkDelete(mockArtwork, false)
+    expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument()
+  })
+
   test('asks for confirmation before deleting', () => {
     window.confirm = jest.fn(() => false)
     renderArtworkDelete()
@@ -74,7 +79,7 @@ describe('ArtworkDelete', () => {
     render(
       <Provider store={store}>
         <MemoryRouter>
-          <ArtworkDelete artwork={mockArtwork} />
+          <ArtworkDelete artwork={mockArtwork} canDelete />
         </MemoryRouter>
       </Provider>,
     )

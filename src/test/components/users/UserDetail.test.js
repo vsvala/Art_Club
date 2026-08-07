@@ -109,3 +109,20 @@ describe('UserDetail — artworks section', () => {
     expect(screen.getByText('Olen taiteilija.')).toBeInTheDocument()
   })
 })
+
+describe('UserDetail — artwork delete permissions', () => {
+  test('owner sees delete button on their own artworks', () => {
+    renderUserDetail({ id: '1', role: 'member' })
+    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument()
+  })
+
+  test('admin sees delete button on another user\'s artworks', () => {
+    renderUserDetail({ id: '99', role: 'admin' })
+    expect(screen.getByRole('button', { name: /delete/i })).toBeInTheDocument()
+  })
+
+  test('non-owner, non-admin visitor does not see delete button', () => {
+    renderUserDetail({ id: '99', role: 'member' })
+    expect(screen.queryByRole('button', { name: /delete/i })).not.toBeInTheDocument()
+  })
+})

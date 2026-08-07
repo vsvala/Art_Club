@@ -5,7 +5,7 @@ import { deleteArtwork } from '../../reducers/actionCreators/artworkActions'
 import { Button } from 'react-bootstrap'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
 
-const ArtworkDelete = ({ artwork }) => {
+const ArtworkDelete = ({ artwork, canDelete = false }) => {
   const dispatch = useDispatch()
 
   const removeArtwork = (id) => {
@@ -37,16 +37,18 @@ const ArtworkDelete = ({ artwork }) => {
         <li>
           {artwork.year}, {artwork.size}, {artwork.medium}
         </li>
-        <li>
-          <Button
-            className="button"
-            onClick={removeArtwork(artwork.id)}
-            variant="outline-secondary"
-            type="submit"
-          >
-            Delete
-          </Button>
-        </li>
+        {canDelete && (
+          <li>
+            <Button
+              className="button"
+              onClick={removeArtwork(artwork.id)}
+              variant="outline-secondary"
+              type="submit"
+            >
+              Delete
+            </Button>
+          </li>
+        )}
         <br />
       </ul>
     </div>

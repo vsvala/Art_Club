@@ -15,7 +15,6 @@ const reducer = combineReducers({
   loggedUser: loginReducer,
   filter: filterReducer,
   singleUser: userReducer,
-  //singleArtist: userReducer
 })
 
 const store = createStore(reducer, applyMiddleware(thunk))

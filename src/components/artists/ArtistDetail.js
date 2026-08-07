@@ -1,17 +1,11 @@
-import React, { useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
+import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import cloudinaryOptimize from '../../utils/cloudinary-optimize'
+import { useSingleUser } from '../../hooks/useSingleUser'
 
 export const ArtistDetail = () => {
   const { id } = useParams()
-  const dispatch = useDispatch()
-  const singleUser = useSelector((state) => state.singleUser.singleUser)
-
-  useEffect(() => {
-    dispatch(initializeSingleUser(id))
-  }, [id, dispatch])
+  const singleUser = useSingleUser(id)
 
   return (
     <div className="singleUser">

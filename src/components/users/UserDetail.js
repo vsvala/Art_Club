@@ -1,9 +1,9 @@
-import React, { useEffect } from 'react'
-import { initializeSingleUser } from '../../reducers/actionCreators/userActions'
+import React from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { Table } from 'react-bootstrap'
 import ArtworkDelete from '../artworks/ArtworkDelete'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useSingleUser } from '../../hooks/useSingleUser'
 
 export const UserDetail = ({ userId }) => {
   const { id: paramId } = useParams()
@@ -11,8 +11,7 @@ export const UserDetail = ({ userId }) => {
   const normalizeId = (value) =>
     value !== undefined && value !== null ? String(value) : ''
   const loggedUser = useSelector((state) => state.loggedUser.loggedUser)
-  const singleUser = useSelector((state) => state.singleUser.singleUser)
-  const dispatch = useDispatch()
+  const singleUser = useSingleUser(resolvedId)
   const isOwner =
     loggedUser && resolvedId
       ? normalizeId(loggedUser.id) === normalizeId(resolvedId)
@@ -20,6 +19,7 @@ export const UserDetail = ({ userId }) => {
   const canViewAccountInfo = Boolean(
     loggedUser && (isOwner || loggedUser.role === 'admin'),
   )
+  const canDeleteArtwork = isOwner || loggedUser?.role === 'admin'
   const accountInfoUser = isOwner
     ? {
         ...singleUser,
@@ -31,10 +31,6 @@ export const UserDetail = ({ userId }) => {
 
   const artworkCount = singleUser?.artworks?.length ?? 0
   const canAddArtwork = artworkCount < 10
-
-  useEffect(() => {
-    dispatch(initializeSingleUser(resolvedId))
-  }, [resolvedId, dispatch])
 
   return (
     <div className="singleUser">
@@ -102,7 +98,7 @@ export const UserDetail = ({ userId }) => {
 
         <div className="addedArtworks">
           {singleUser?.artworks?.map((a) => (
-            <ArtworkDelete key={a.id} artwork={a} />
+            <ArtworkDelete key={a.id} artwork={a} canDelete={canDeleteArtwork} />
           ))}
         </div>
       </div>

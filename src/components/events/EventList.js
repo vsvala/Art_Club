@@ -26,6 +26,15 @@ export const EventList = () => {
 
   if (isLoading) return <p>Ladataan...</p>
 
+  if (!Array.isArray(events)) {
+    return (
+      <div className="eventList">
+        <h2>Events</h2>
+        <div className="error">{events?.error || 'Could not load events'}</div>
+      </div>
+    )
+  }
+
   return (
     <div className="eventList">
       <h2>Events</h2>
@@ -62,7 +71,7 @@ export const EventList = () => {
                   </Button>
                 </td>
               ) : (
-                <em></em>
+                <td></td>
               )}
             </tr>
           ))}

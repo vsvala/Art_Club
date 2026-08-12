@@ -12,25 +12,28 @@ export const ArtworkDetail = () => {
   })
 
   if (isLoading) return <p>Ladataan...</p>
-  if (!artwork) return null
+
+  if (!artwork || artwork.error) {
+    return (
+      <div className="error">{artwork?.error || 'Could not load artwork'}</div>
+    )
+  }
 
   return (
     <div className="singleArtwork">
-      {!artwork ? null : (
-        <div>
-          <img
-            src={cloudinaryOptimize(artwork.galleryImage, 1200)}
-            style={{ maxWidth: '100%' }}
-            height="auto"
-            className="singlePicture"
-            alt="img"
-          />
-          <p>
-            {artwork.name} by {artwork.artist}, year: {artwork.year}, size:
-            {artwork.size}, medium:{artwork.medium}{' '}
-          </p>
-        </div>
-      )}
+      <div>
+        <img
+          src={cloudinaryOptimize(artwork.galleryImage, 1200)}
+          style={{ maxWidth: '100%' }}
+          height="auto"
+          className="singlePicture"
+          alt="img"
+        />
+        <p>
+          {artwork.name} by {artwork.artist}, year: {artwork.year}, size:
+          {artwork.size}, medium:{artwork.medium}{' '}
+        </p>
+      </div>
     </div>
   )
 }
